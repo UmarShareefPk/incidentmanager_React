@@ -8,27 +8,61 @@ import { Redirect } from 'react-router-dom'
      const [username , setUsername] = useState('');
      const [password , setPassword] = useState('');
 
-   function handleClick(e){
-        e.preventDefault();     
-        props.logIn("Test");
-    }
+   function loginClick(e){
+        e.preventDefault();   
+        let credentials = {
+            username,
+            password
+        }  
+        props.logIn(credentials);       
+   }
 
-     console.log(props.signIn);
+    // if (props.token) return <Redirect to='/' /> 
+     
     return (
-        <div>
-            <h1>This is IM login</h1>
-            <h1>User Login : {props.userLogin}</h1>
-            <h1>IsLoggedIn : {props.isLoggedIn? "Yes" : "NO"}</h1>
-            <h1>token : {props.token}</h1>
-            <button onClick={(e)=>handleClick(e)}>Click me</button>
-        </div>
-    )
+      <div className="main">
+        <div className="row ">
+          <div className="col s12 m8 offset-m2 l6 offset-l3 login">
+            <h3> WELCOME!</h3>
+            <br />
+            <h6>User Login</h6>
+            <br />
+            <form>
+              <div className="input-field">
+                <i className="material-icons prefix">person</i>
+                <input type="text" id="username" onChange={(e) => setUsername(e.target.value)} />
+                <label htmlFor="username" >
+                  Your Username
+                </label>
+              </div>
+              <div className="input-field">
+                <i className="material-icons prefix">password</i>
+                <input type="password" id="password"  onChange={(e) => setPassword(e.target.value)} />
+                <label htmlFor="password">Your Password</label>
+              </div>
+              <div className="input-field">
+                <a> Forgot password?</a>
+              </div>
+              <div className="input-field ">              
+                  <p className="red-text">{props.loginError? "Incorret username or password." : "" }</p>
+              </div>
+              <div className="input-field ">
+                <button className="btn indigo darken-2 right" onClick={(e)=>loginClick(e)}>
+                  <span>Login</span>
+                  <i className="material-icons right">send</i>
+                </button>
+              </div>             
+            </form>
+          </div>
+        </div>      
+      </div>
+    );
 }
 
 const mapStateToProps = (state) => {
     return{
         userLogin : state.userLogin.userLogin,
-        isLoggedIn : state.userLogin.isLoggedIn,
+        loginError : state.userLogin.loginError,
         token : state.userLogin.token  
     }
   }

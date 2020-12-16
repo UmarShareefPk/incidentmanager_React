@@ -2,7 +2,7 @@
 
 const initState = {
     userLogin : null,
-    isLoggedIn : false,
+    loginError : false,
     token : null
    }
    
@@ -13,10 +13,17 @@ const initState = {
          return {
            ...state, 
            userLogin : "hehehehe",
-            isLoggedIn : true,
-            token : "Test token"      
+           loginError : false,
+            token : action.loginData.token              
          }     
-   
+         case 'LOGIN_FAIL':
+            console.log(action);          
+            return {
+              ...state, 
+              userLogin : null,
+              loginError : true,
+               token : null  
+            }     
        default:
          return state
      }
