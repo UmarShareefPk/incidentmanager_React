@@ -1,11 +1,12 @@
-import React from 'react'
+import {React, useState} from 'react'
 import { connect } from 'react-redux'
 import { logIn } from '../../store/actions/userLoginActions'
 import { Redirect } from 'react-router-dom'
 
 
-
  function Login(props) {
+     const [username , setUsername] = useState('');
+     const [password , setPassword] = useState('');
 
    function handleClick(e){
         e.preventDefault();     
