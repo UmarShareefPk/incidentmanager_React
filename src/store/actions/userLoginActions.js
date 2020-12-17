@@ -1,9 +1,8 @@
-import axios from 'axios'
-import qs from 'qs'
+import axios from 'axios';
+import qs from 'qs';
 
 export const logIn = (credentials) => {
-    return (dispatch, getState) => {
-      
+    return (dispatch, getState) => {     
 
         axios({
             method: 'post',
@@ -15,12 +14,14 @@ export const logIn = (credentials) => {
                 username: credentials.username,
                 password: credentials.password 
             }),
-          }).then((response)=>{              
+          })
+          .then((response)=>{              
               const loginData = {
                   token : response.data.access_token,
               }
               dispatch({ type: 'LOGIN_PASS', loginData });
-          }).catch((err)=>{
+          })
+          .catch((err)=>{
                    dispatch({ type: 'LOGIN_FAIL'});
                    console.log(err);
           });

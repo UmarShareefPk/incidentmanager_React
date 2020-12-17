@@ -1,7 +1,7 @@
 import {React, useState} from 'react'
 import { connect } from 'react-redux'
 import { logIn } from '../../store/actions/userLoginActions'
-import { Redirect } from 'react-router-dom'
+ import { Redirect } from 'react-router-dom'
 
 
  function Login(props) {
@@ -17,7 +17,7 @@ import { Redirect } from 'react-router-dom'
         props.logIn(credentials);       
    }
 
-    // if (props.token) return <Redirect to='/' /> 
+   if (props.token) return <Redirect to='/incidentListing' /> 
      
     return (
       <div className="main">
@@ -41,7 +41,7 @@ import { Redirect } from 'react-router-dom'
                 <label htmlFor="password">Your Password</label>
               </div>
               <div className="input-field">
-                <a> Forgot password?</a>
+                <a href="/"> Forgot password?</a>
               </div>
               <div className="input-field ">              
                   <p className="red-text">{props.loginError? "Incorret username or password." : "" }</p>

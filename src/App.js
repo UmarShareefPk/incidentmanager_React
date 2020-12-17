@@ -1,12 +1,31 @@
 import './App.css';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Login from './components/Login/Login';
+import NavBar from './components/NavBar';
+import IncidentLisiting from './components/Incidents/IncidentLisiting';
+import IncidentDetail from './components/Incidents/IncidentDetail';
+import { connect } from "react-redux";
 
-function App() {
+function App(props) {
+  console.log(props.userLogin);
   return (
-    <div className="App">
-       <Login />
-    </div>
+    <BrowserRouter>
+      <div className="App">
+      {props.userLogin ?  <NavBar /> : <NavBar /> }    
+        <Switch>
+          <Route exact path="/" component={Login} />
+          <Route exact path="/Incident/:id" component={IncidentDetail} />
+          <Route exact path="/incidentListing" component={IncidentLisiting} />         
+        </Switch>
+      </div>
+    </BrowserRouter>
   );
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return{     
+    userLogin : state.userLogin.userLogin    
+  }
+}
+
+export default connect(mapStateToProps)(App);

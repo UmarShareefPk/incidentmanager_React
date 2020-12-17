@@ -1,0 +1,50 @@
+
+
+
+    .pagination li.active {
+        background-color: #1A237E;
+    }
+  
+    
+    .title{
+        color:#1A237E;
+    }
+
+    /* .titleBar{
+        border-bottom: 1px solid  #1A237E;
+    } */
+
+    .titleBar ul li{
+       display: inline;
+    }
+
+    .titleBar .row{
+        margin-top: -100px;
+    } 
+
+/* Small devices  */
+@media (min-width: 300px) {
+    
+}
+
+/* (tablets, 768px and up) */
+@media (min-width: 700px) {}
+
+/* Large Tablets  */
+@media (min-width: 1000px) {
+   
+}
+
+/* Computer */
+@media (min-width: 1500px) {
+       .incidentsTbl th{
+           color: #1A237E;
+           white-space: nowrap;
+           width: 14%;
+       }    
+
+       /* .incidentsTbl .header{
+           position: sticky;
+           top:0;
+       }          */
+}
