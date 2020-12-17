@@ -2,14 +2,16 @@ import React from 'react'
 
 export default function PageActions(props) {
     return (
-        <section className="container titleBar">
+        <section className="container">
+     
+
         <div className="row ">
           <div className="col s12">
             <div className="left">
               <h4 className="title">{props.Title}</h4>
             </div>
             <div className="right">
-              <ul>
+              <ul className="actionsBtns">
                 <li>
                   <a className="btn-floating green">
                     <i className="material-icons">refresh</i>

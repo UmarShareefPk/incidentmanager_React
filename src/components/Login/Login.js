@@ -20,7 +20,7 @@ import { logIn } from '../../store/actions/userLoginActions'
    if (props.token) return <Redirect to='/incidentListing' /> 
      
     return (
-      <div className="main">
+      <div className="loginMain">
         <div className="row ">
           <div className="col s12 m8 offset-m2 l6 offset-l3 login">
             <h3> WELCOME!</h3>

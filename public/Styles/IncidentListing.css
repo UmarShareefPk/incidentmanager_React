@@ -14,13 +14,11 @@
         border-bottom: 1px solid  #1A237E;
     } */
 
-    .titleBar ul li{
+ ul.actionsBtns li{
        display: inline;
     }
 
-    .titleBar .row{
-        margin-top: -100px;
-    } 
+
 
 /* Small devices  */
 @media (min-width: 300px) {

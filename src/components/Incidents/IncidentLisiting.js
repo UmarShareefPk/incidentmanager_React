@@ -7,7 +7,7 @@ export default function IncidentLisiting() {
     return (
       <>
         <PageActions Title={"Incidents"} />
-
+        
         <section>
           <div className="container">
             <div className="row">
