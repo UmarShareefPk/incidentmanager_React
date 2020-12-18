@@ -8,13 +8,21 @@ import rootReducer from './store/reducers/rootReducer'
 import { Provider } from 'react-redux'
 import thunk from 'redux-thunk'
 
-const store = createStore(rootReducer,
+
+const persistedState = localStorage.getItem('reduxState') 
+                       ? JSON.parse(localStorage.getItem('reduxState'))
+                       : {}
+
+const store = createStore(rootReducer,  persistedState,
   compose(
     applyMiddleware(thunk)   
   )
 );
 
-//ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));
+store.subscribe(()=>{
+  localStorage.setItem('reduxState', JSON.stringify(store.getState()))
+});
+
 
 ReactDOM.render(
   <Provider store={store}>

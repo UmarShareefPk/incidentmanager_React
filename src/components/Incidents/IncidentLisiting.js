@@ -4,11 +4,18 @@ import Pages from '../Pages'
 import Incident from './Incident'
 import PageActions from "../PageActions";
 import { incidentsWithPage } from "../../store/actions/incidentsActions";
+//import { $ } from "jquery";
 
  function IncidentLisiting(props) {
    
     const [PageNumber, setPageNumber] = useState(1);
     const [PageSize, setPageSize] = useState(5);
+
+    useEffect(() => {      
+        //  $('select').formSelect();    
+        return () => {          
+        }
+    })
 
     useEffect(() => {
         const parameters = {
@@ -45,8 +52,7 @@ import { incidentsWithPage } from "../../store/actions/incidentsActions";
                   {
                       props.Incidents.map(incident=>{
                           return (
-                            <Incident key={incident.Id} incident= {incident} />
-                          )
+                            <Incident key={incident.Id} incident= {incident} />                          )
                       })
                   }           
                   </tbody>

@@ -1,8 +1,10 @@
 import axios from 'axios';
-import qs from 'qs';
+
 
 export const incidentsWithPage = (parameters) => {
-    return (dispatch, getState) => {    
+    return (dispatch, getState) => {  
+     
+        axios.defaults.headers = {'Authorization': `Bearer ${getState().userLogin.token + ""}`};
         const url = "https://localhost:44398/api/Incidents/GetIncidentsWithPage?"+
                     "PageSize=" + parameters.PageSize +"&PageNumber=" + parameters.PageNumber + "&SortBy=q&SortDirection=q";
         axios.get(url)
