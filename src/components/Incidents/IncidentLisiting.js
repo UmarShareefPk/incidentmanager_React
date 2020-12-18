@@ -1,13 +1,29 @@
-import React from 'react'
+import { React, useState, useEffect } from 'react'
+import { connect } from 'react-redux'
 import Pages from '../Pages'
 import Incident from './Incident'
 import PageActions from "../PageActions";
+import { incidentsWithPage } from "../../store/actions/incidentsActions";
 
-export default function IncidentLisiting() {
+ function IncidentLisiting(props) {
+   
+    
+    useEffect(() => {
+        const parameters = {
+            PageNumber : 1,
+            PageSize : 5
+        }   
+        console.log("IncidentListing use effect");     
+        props.incidentsWithPage(parameters);
+        return () => {
+            
+        }
+    }, [props.PageNumber , props.PageSize])
+
+    console.log(props.Incidents);
     return (
       <>
-        <PageActions Title={"Incidents"} />
-        
+        <PageActions Title={"Incidents"} />        
         <section>
           <div className="container">
             <div className="row">
@@ -24,17 +40,16 @@ export default function IncidentLisiting() {
                       <th>Status</th>
                     </tr>
                   </thead>
-
                   <tbody>
-                    <Incident />
-                    <Incident />
-                    <Incident />
-                    <Incident />
-                    <Incident />
-                    <Incident />
-                    <Incident />
-                    <Incident />
-                    
+                  {
+                      props.Incidents.map(incident=>{
+                          return (
+                            <Incident incident= {incident} />
+                          )
+                      })
+                  }
+                   
+                              
                   </tbody>
                 </table>
                 <Pages />
@@ -45,3 +60,20 @@ export default function IncidentLisiting() {
       </>
     );
 }
+
+const mapStateToProps = (state) => {
+    return{
+        Incidents : state.incidents.Incidents,
+        TotalIncidents : state.incidents.TotalIncidents,
+        PageNumber : state.incidents.PageNumber,
+        PageSize : state.incidents.PageSize
+    }
+  }
+  
+  const mapDispatchToProps = (dispatch) => {
+    return {
+        incidentsWithPage: (parameters) => dispatch(incidentsWithPage(parameters))
+    }
+  }
+  
+  export default connect(mapStateToProps, mapDispatchToProps)(IncidentLisiting);

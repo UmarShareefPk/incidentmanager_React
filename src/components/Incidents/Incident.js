@@ -1,19 +1,20 @@
 import React from 'react'
 
-export default function Incident() {
+export default function Incident({incident}) {
+    console.log(incident);
     return (
       <tr>
-        <td>First incident</td>
+        <td>{incident.Title}</td>
         <td
           className="description"
           title="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque perferendis ipsum repudiandae nulla sequi culpa! Sint nulla fugit quidem tenetur magni corrupti expedita magnam vitae, at totam voluptatum iusto aliquam."
         >
-          Lorem ipsum dolor...
+          {incident.Description}
         </td>
-        <td>Umar Shareef</td>
-        <td>Yasir Rasheed</td>
-        <td>12/9/2020</td>
-        <td>12/31/2020</td>
+        <td>{incident.AssignedTo}</td>
+        <td>{incident.CreatedBy}</td>
+        <td>{incident.CreatedAT}</td>
+        <td>{incident.CreatedAT}</td> 
         <td>Open</td>
       </tr>
     );
