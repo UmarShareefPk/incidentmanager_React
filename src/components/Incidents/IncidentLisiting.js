@@ -7,20 +7,21 @@ import { incidentsWithPage } from "../../store/actions/incidentsActions";
 
  function IncidentLisiting(props) {
    
-    
+    const [PageNumber, setPageNumber] = useState(1);
+    const [PageSize] = useState(5);
+
     useEffect(() => {
         const parameters = {
-            PageNumber : 1,
-            PageSize : 5
-        }   
-        console.log("IncidentListing use effect");     
+            PageNumber : PageNumber,
+            PageSize : PageSize
+        }        
         props.incidentsWithPage(parameters);
         return () => {
             
         }
-    }, [props.PageNumber , props.PageSize])
+    }, [PageNumber, PageSize])
 
-    console.log(props.Incidents);
+    
     return (
       <>
         <PageActions Title={"Incidents"} />        
@@ -44,15 +45,13 @@ import { incidentsWithPage } from "../../store/actions/incidentsActions";
                   {
                       props.Incidents.map(incident=>{
                           return (
-                            <Incident incident= {incident} />
+                            <Incident key={incident.Id} incident= {incident} />
                           )
                       })
-                  }
-                   
-                              
+                  }           
                   </tbody>
                 </table>
-                <Pages />
+                <Pages  TotalPages={props.TotalIncidents} PostsPerPage={PageSize} setPageNumber={setPageNumber}  />
               </div>
             </div>
           </div>
@@ -64,9 +63,7 @@ import { incidentsWithPage } from "../../store/actions/incidentsActions";
 const mapStateToProps = (state) => {
     return{
         Incidents : state.incidents.Incidents,
-        TotalIncidents : state.incidents.TotalIncidents,
-        PageNumber : state.incidents.PageNumber,
-        PageSize : state.incidents.PageSize
+        TotalIncidents : state.incidents.TotalIncidents      
     }
   }
   

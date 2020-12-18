@@ -1,21 +1,14 @@
-import {React, useEffect} from 'react'
+import {React} from 'react'
 import { NavLink } from 'react-router-dom';
 
 
 export default function NavBar() {
 
-    useEffect(() => {
-        console.log("useeffect");
-        return () => {
-          console.log("useeffect end");
-      }
-  });
-
     return (
       <nav className="nav-wrapper indigo darken-4">
         <div className="container">
           <div className="left">
-            <NavLink to="" className="brand-logo">             
+            <NavLink to="/incidentListing" className="brand-logo">             
               Incident Manager
             </NavLink>
           </div>
@@ -24,6 +17,7 @@ export default function NavBar() {
           </a>
           <ul className="right hide-on-med-and-down">
             <li>
+            
               <a>Incidents</a>
             </li>
             <li>

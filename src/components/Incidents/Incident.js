@@ -1,7 +1,7 @@
 import React from 'react'
 
 export default function Incident({incident}) {
-    console.log(incident);
+    
     return (
       <tr>
         <td>{incident.Title}</td>

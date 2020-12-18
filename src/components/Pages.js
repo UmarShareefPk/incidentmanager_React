@@ -1,48 +1,48 @@
-import React from 'react'
+import {React, useState} from 'react'
+import { NavLink } from 'react-router-dom';
 
-export default function Pages() {
+export default function Pages({TotalPages, PostsPerPage, setPageNumber }) {
+
+    const [currentPage, setCurrentPage] = useState(1);
+
+    let pages = [];
+    for(let i = 1; i <= Math.ceil(TotalPages / PostsPerPage) ; i++ )
+    {
+        pages.push(i);
+    }
+
+    const pageNumberClick = (p) =>{
+        if(p <1 || p > pages.length)
+            return;
+
+        setPageNumber(p);
+        setCurrentPage(p);
+    }
+
+    pages = pages.map((p,index)=>{
+        let pclass = currentPage === p ? "waves-effect active" : "waves-effect" 
+        return (             
+            <li className={pclass} key={p}  onClick={() => pageNumberClick(p)}>              
+              <a > {p} </a>
+            </li>        
+        );
+    });
+
     return (
       <ul className="pagination right">
-        <li className="disabled">
-          <a href="#!">
+         <li className = {currentPage === 1? "waves-effect disabled" : "waves-effect"} >
+          <a href="#!" onClick= { () => pageNumberClick(currentPage - 1)}>
             <i className="material-icons">chevron_left</i>
           </a>
         </li>
-        <li className="active">
-          <a href="#!">1</a>
-        </li>
-        <li className="waves-effect">
-          <a href="#!">2</a>
-        </li>
-        <li className="waves-effect">
-          <a href="#!">3</a>
-        </li>
-        <li className="waves-effect">
-          <a href="#!">4</a>
-        </li>
-        <li className="waves-effect">
-          <a href="#!">5</a>
-        </li>
-        <li className="waves-effect">
-          <a href="#!">6</a>
-        </li>
-        <li className="waves-effect">
-          <a href="#!">7</a>
-        </li>
-        <li className="waves-effect">
-          <a href="#!">8</a>
-        </li>
-        <li className="waves-effect">
-          <a href="#!">9</a>
-        </li>
-        <li className="waves-effect">
-          <a href="#!">10</a>
-        </li>
-        <li className="waves-effect">
-          <a href="#!">
+        
+        {pages}
+        
+        <li className = {currentPage === pages.length? "waves-effect disabled" : "waves-effect"}>
+          <a href="#!"  onClick= { () => pageNumberClick(currentPage + 1)}>
             <i className="material-icons">chevron_right</i>
           </a>
-        </li>
+        </li> 
       </ul>
     );
 }
