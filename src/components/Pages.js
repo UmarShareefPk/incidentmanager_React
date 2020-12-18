@@ -1,9 +1,10 @@
 import {React, useState} from 'react'
 import { NavLink } from 'react-router-dom';
 
-export default function Pages({TotalPages, PostsPerPage, setPageNumber }) {
+export default function Pages({TotalPages, PostsPerPage, setPageNumber, setPageSize }) {
 
     const [currentPage, setCurrentPage] = useState(1);
+    const [currentSize, setCurrentSize] = useState(5);
 
     let pages = [];
     for(let i = 1; i <= Math.ceil(TotalPages / PostsPerPage) ; i++ )
@@ -19,6 +20,14 @@ export default function Pages({TotalPages, PostsPerPage, setPageNumber }) {
         setCurrentPage(p);
     }
 
+    const pageSizeChanged = (pSize) => {
+        setPageSize(pSize);
+        setCurrentSize(pSize);
+        setCurrentPage(1);
+        setPageNumber(1);
+
+    }
+
     pages = pages.map((p,index)=>{
         let pclass = currentPage === p ? "waves-effect active" : "waves-effect" 
         return (             
@@ -29,20 +38,39 @@ export default function Pages({TotalPages, PostsPerPage, setPageNumber }) {
     });
 
     return (
-      <ul className="pagination right">
-         <li className = {currentPage === 1? "waves-effect disabled" : "waves-effect"} >
-          <a href="#!" onClick= { () => pageNumberClick(currentPage - 1)}>
-            <i className="material-icons">chevron_left</i>
-          </a>
-        </li>
-        
-        {pages}
-        
-        <li className = {currentPage === pages.length? "waves-effect disabled" : "waves-effect"}>
-          <a href="#!"  onClick= { () => pageNumberClick(currentPage + 1)}>
-            <i className="material-icons">chevron_right</i>
-          </a>
-        </li> 
-      </ul>
+      <div className="row pagesRow">
+        <div className="input-field col s12 m4 l4">
+                            <select value={currentSize} onChange={(e) => pageSizeChanged(e.target.value)}>						
+                                <option value="5">5</option>
+                                <option value="10">10</option>
+                                <option value="15">15</option>
+                                <option value="20">20</option>
+                                <option value="25">25</option>
+                                <option value="30">30</option>
+                                <option value="35">35</option>
+                                <option value="40">40</option>
+                                <option value="45">45</option>
+                                <option value="50">50</option>
+                            </select>	
+                        <label>Page Size</label>						
+        </div>
+        <div className="input-field col s12 m8 l8">
+            <ul className="pagination right">
+            <li
+                className={  currentPage === 1 ? "waves-effect disabled" : "waves-effect" } >
+                <a href="#!" onClick={() => pageNumberClick(currentPage - 1)}>
+                <i className="material-icons">chevron_left</i>
+                </a>
+            </li>
+            {pages}
+            <li
+                className={ currentPage === pages.length ? "waves-effect disabled" : "waves-effect" } >
+                <a href="#!" onClick={() => pageNumberClick(currentPage + 1)}>
+                <i className="material-icons">chevron_right</i>
+                </a>
+            </li>
+            </ul>
+        </div>
+      </div>
     );
 }

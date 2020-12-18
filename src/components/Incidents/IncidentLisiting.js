@@ -8,7 +8,7 @@ import { incidentsWithPage } from "../../store/actions/incidentsActions";
  function IncidentLisiting(props) {
    
     const [PageNumber, setPageNumber] = useState(1);
-    const [PageSize] = useState(5);
+    const [PageSize, setPageSize] = useState(5);
 
     useEffect(() => {
         const parameters = {
@@ -51,7 +51,7 @@ import { incidentsWithPage } from "../../store/actions/incidentsActions";
                   }           
                   </tbody>
                 </table>
-                <Pages  TotalPages={props.TotalIncidents} PostsPerPage={PageSize} setPageNumber={setPageNumber}  />
+                <Pages  TotalPages={props.TotalIncidents} PostsPerPage={PageSize} setPageNumber={setPageNumber} setPageSize={setPageSize}  />
               </div>
             </div>
           </div>
