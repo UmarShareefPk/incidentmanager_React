@@ -11,7 +11,7 @@ function App(props) {
   return (
     <BrowserRouter>
       <div className="App">
-      {props.userLogin ?  <NavBar /> : <NavBar /> }    
+      {props.userLogin ?  <NavBar /> : null }    
         <Switch>
           <Route exact path="/" component={Login} />
           <Route exact path="/Incident/:id" component={IncidentDetail} />

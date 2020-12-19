@@ -2,14 +2,15 @@ import React from 'react'
 
 export default function PageActions(props) {
     return (
-        <section className="container">
-     
-
+      <section className="container">
         <div className="row ">
-          <div className="col s12">
+          <div className="col s5 l3">
             <div className="left">
               <h4 className="title">{props.Title}</h4>
             </div>
+          </div>
+          
+          <div className="col s7 l9 hide">
             <div className="right">
               <ul className="actionsBtns">
                 <li>
@@ -32,5 +33,5 @@ export default function PageActions(props) {
           </div>
         </div>
       </section>
-    )
+    );
 }

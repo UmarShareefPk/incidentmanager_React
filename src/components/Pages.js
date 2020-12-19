@@ -1,7 +1,7 @@
-import {React, useState} from 'react'
+import {React, useState, useEffect} from 'react'
 
 
-export default function Pages({TotalPages, PostsPerPage, setPageNumber, setPageSize }) {
+export default function Pages({TotalPages, PostsPerPage, setPageNumber, setPageSize , search }) {
 
     const [currentPage, setCurrentPage] = useState(1);
     const [currentSize, setCurrentSize] = useState(5);
@@ -28,8 +28,13 @@ export default function Pages({TotalPages, PostsPerPage, setPageNumber, setPageS
 
     }
 
+    useEffect(() => {
+        setCurrentPage(1);
+        setPageNumber(1);
+    }, [search])
+
     pages = pages.map((p,index)=>{
-        let pclass = currentPage === p ? "waves-effect active" : "waves-effect" 
+        let pclass = currentPage === p ? "waves-effect active" : "waves-effect";        
         return (             
             <li className={pclass} key={p}  onClick={() => pageNumberClick(p)}>              
               <a > {p} </a>

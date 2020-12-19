@@ -10,6 +10,7 @@ import { incidentsWithPage } from "../../store/actions/incidentsActions";
    
     const [PageNumber, setPageNumber] = useState(1);
     const [PageSize, setPageSize] = useState(5);
+    const [Search, setSearch] = useState("");
 
     useEffect(() => {      
         //  $('select').formSelect();    
@@ -20,21 +21,33 @@ import { incidentsWithPage } from "../../store/actions/incidentsActions";
     useEffect(() => {
         const parameters = {
             PageNumber : PageNumber,
-            PageSize : PageSize
+            PageSize : PageSize,
+            Search : Search
         }        
         props.incidentsWithPage(parameters);
         return () => {
             
         }
-    }, [PageNumber, PageSize])
+    }, [PageNumber, PageSize, Search])
 
+    const searchTextChange =   (text) => {      
+            setSearch(text);
+            setPageNumber(1);
+    }
     
     return (
       <>
-        <PageActions Title={"Incidents"} />        
+        <PageActions Title={"Incidents"} /> 
+
         <section>
           <div className="container">
             <div className="row">
+              <div className="col s12 l12">
+                <div className="input-field">                
+                  <input type="text" id="search" value={Search}  onChange={(e) => searchTextChange(e.target.value)} />
+                  <label htmlFor="search">Search</label>
+                </div>
+              </div>
               <div className="col s12 l12">
                 <table className="responsive-table highlight incidentsTbl">
                   <thead>
@@ -57,7 +70,7 @@ import { incidentsWithPage } from "../../store/actions/incidentsActions";
                   }           
                   </tbody>
                 </table>
-                <Pages  TotalPages={props.TotalIncidents} PostsPerPage={PageSize} setPageNumber={setPageNumber} setPageSize={setPageSize}  />
+                <Pages  TotalPages={props.TotalIncidents} PostsPerPage={PageSize} setPageNumber={setPageNumber} setPageSize={setPageSize} search={Search} />
               </div>
             </div>
           </div>

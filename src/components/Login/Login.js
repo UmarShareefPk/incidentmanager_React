@@ -17,7 +17,7 @@ import { logIn } from '../../store/actions/userLoginActions'
         props.logIn(credentials);       
    }
 
-   if (props.token) return <Redirect to='/incidentListing' /> 
+  //  if (props.token) return <Redirect to='/incidentListing' /> 
      
     return (
       <div className="loginMain">

@@ -6,7 +6,8 @@ export const incidentsWithPage = (parameters) => {
      
         axios.defaults.headers = {'Authorization': `Bearer ${getState().userLogin.token + ""}`};
         const url = "https://localhost:44398/api/Incidents/GetIncidentsWithPage?"+
-                    "PageSize=" + parameters.PageSize +"&PageNumber=" + parameters.PageNumber + "&SortBy=q&SortDirection=q";
+                    "PageSize=" + parameters.PageSize +"&PageNumber=" + parameters.PageNumber 
+                    + "&SortBy=q&SortDirection=q&Search=" + parameters.Search;
         axios.get(url)
           .then((response)=>{            
              const data = response.data;
