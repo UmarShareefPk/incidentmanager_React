@@ -1,10 +1,15 @@
-import {React, useState, useEffect} from 'react'
+import {React, useState, useEffect, useRef} from 'react';
+import M from 'materialize-css';
+
+
 
 
 export default function Pages({TotalPages, PostsPerPage, setPageNumber, setPageSize , search }) {
 
     const [currentPage, setCurrentPage] = useState(1);
     const [currentSize, setCurrentSize] = useState(5);
+
+    const ddlRef = useRef();
 
     let pages = [];
     for(let i = 1; i <= Math.ceil(TotalPages / PostsPerPage) ; i++ )
@@ -31,6 +36,12 @@ export default function Pages({TotalPages, PostsPerPage, setPageNumber, setPageS
     useEffect(() => {
         setCurrentPage(1);
         setPageNumber(1);
+        console.log(M) ;  
+        M.FormSelect.init(ddlRef.current);
+        // var elems = document.querySelectorAll('select');
+        // var instances = M.FormSelect.init(elems, options);
+        
+        
     }, [search])
 
     pages = pages.map((p,index)=>{
@@ -41,11 +52,14 @@ export default function Pages({TotalPages, PostsPerPage, setPageNumber, setPageS
             </li>        
         );
     });
-
+  
     return (
+        
       <div className="row pagesRow">
         <div className="input-field col s12 m4 l4">
-                            <select value={currentSize} onChange={(e) => pageSizeChanged(e.target.value)}>						
+                            <select value={currentSize} onChange={(e) => pageSizeChanged(e.target.value)}
+                             ref={ddlRef}
+                            >						
                                 <option value="5">5</option>
                                 <option value="10">10</option>
                                 <option value="15">15</option>

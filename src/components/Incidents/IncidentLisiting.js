@@ -42,12 +42,23 @@ import { incidentsWithPage } from "../../store/actions/incidentsActions";
         <section>
           <div className="container">
             <div className="row">
-              <div className="col s12 l12">
+
+              <div className="col s6 l6">
                 <div className="input-field">                
                   <input type="text" id="search" value={Search}  onChange={(e) => searchTextChange(e.target.value)} />
                   <label htmlFor="search">Search</label>
                 </div>
               </div>
+              
+              <div className="col s6 l6">
+                <div className="input-field">              
+                  <button className="btn green darken-2 right" >
+                    <span>Add New</span>
+                    <i className="material-icons right">create</i>
+                  </button>
+                </div>
+              </div>
+
               <div className="col s12 l12">
                 <table className="responsive-table highlight incidentsTbl">
                   <thead>
