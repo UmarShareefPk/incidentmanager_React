@@ -1,26 +1,28 @@
 //import userLogin from '../../models/UserLogin';
 
 const initState = {
-    userLogin : null,
+    user_Name : null,
+    userId : null,
     loginError : false,
     token : null
+   
    }
    
    const usersReducer = (state = initState, action) => {
      switch(action.type){
-       case 'LOGIN_PASS':
-         console.log(action);
+       case 'LOGIN_PASS':    
          return {
            ...state, 
-           userLogin : "hehehehe",
+           user_Name : action.loginData.Name,
+           userId : action.loginData.User_Id,
            loginError : false,
             token : action.loginData.token              
          }     
-         case 'LOGIN_FAIL':
-            console.log(action);          
+         case 'LOGIN_FAIL':                    
             return {
               ...state, 
-              userLogin : null,
+              user_Name : null,
+              userId :null,
               loginError : true,
                token : null  
             }     

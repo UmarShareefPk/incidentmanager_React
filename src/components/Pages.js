@@ -37,10 +37,7 @@ export default function Pages({TotalPages, PostsPerPage, setPageNumber, setPageS
         setCurrentPage(1);
         setPageNumber(1);
         console.log(M) ;  
-        M.FormSelect.init(ddlRef.current);
-        // var elems = document.querySelectorAll('select');
-        // var instances = M.FormSelect.init(elems, options);
-        
+        M.FormSelect.init(ddlRef.current);       
         
     }, [search])
 

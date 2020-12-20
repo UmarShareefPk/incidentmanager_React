@@ -32,7 +32,7 @@ import {  useHistory  } from 'react-router-dom'
     }
 
     const addNewClick = ()=>{
-      let path = '/AddNew'; 
+      let path = '/AddNew';      
       history.push(path);
     }
     

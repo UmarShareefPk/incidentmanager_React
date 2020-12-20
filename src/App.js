@@ -8,7 +8,7 @@ import IncidentDetail from './components/Incidents/IncidentDetail';
 import { connect } from "react-redux";
 
 function App(props) {
-  console.log(props.userLogin);
+ 
   return (
     <BrowserRouter>
       <div className="App">

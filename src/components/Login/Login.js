@@ -61,6 +61,8 @@ import { logIn } from '../../store/actions/userLoginActions'
 
 const mapStateToProps = (state) => {
     return{
+        user_Name :state.userLogin.user_Name,
+        userId :state.userLogin.userId,
         userLogin : state.userLogin.userLogin,
         loginError : state.userLogin.loginError,
         token : state.userLogin.token  

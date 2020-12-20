@@ -18,6 +18,8 @@ export const logIn = (credentials) => {
           .then((response)=>{              
               const loginData = {
                   token : response.data.access_token,
+                  Name :  response.data.Name,
+                  User_Id :  response.data.User_Id
               }
               dispatch({ type: 'LOGIN_PASS', loginData });
           })

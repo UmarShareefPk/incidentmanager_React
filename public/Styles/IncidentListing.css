@@ -15,6 +15,16 @@ nav .badge{
         color:#1A237E;
     }
 
+    .datepicker-date-display, .timepicker-digital-display{
+        background-color:#1A237E; ;
+    }
+
+    /* .datepicker-done, .datepicker-cancel, .timepicker-close{
+        color: #1A237E
+    } */
+
+   
+
     /* .titleBar{
         border-bottom: 1px solid  #1A237E;
     } */

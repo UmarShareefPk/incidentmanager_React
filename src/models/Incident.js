@@ -1,6 +1,7 @@
-export class Incident {
+export default  class Incident {
     
-    constructor(Id ,CreatedBy ,AssignedTo ,CreatedAT ,Title ,Description ,AdditionalData ,Attachment1 ,Attachment2 ,Attachment3 ,StartTime ) {
+    constructor(Id ,CreatedBy ,AssignedTo ,CreatedAT ,Title ,Description ,AdditionalData ,Attachment1 
+        ,Attachment2 ,Attachment3 ,StartTime, DueDate, Status ) {
          
         this.Id = Id;
         this.CreatedBy =  CreatedBy;
@@ -13,5 +14,7 @@ export class Incident {
         this.Attachment2 = Attachment2;
         this.Attachment3 = Attachment3;
         this.StartTime = StartTime;
+        this.DueDate = DueDate;
+        this.Status = Status;
     }
   }
