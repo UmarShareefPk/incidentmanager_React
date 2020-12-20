@@ -4,6 +4,7 @@ import Login from './components/Login/Login';
 import NavBar from './components/NavBar';
 import IncidentLisiting from './components/Incidents/IncidentLisiting';
 import IncidentDetail from './components/Incidents/IncidentDetail';
+ import  AddNew  from "./components/Incidents/AddNew";
 import { connect } from "react-redux";
 
 function App(props) {
@@ -15,7 +16,8 @@ function App(props) {
         <Switch>
           <Route exact path="/" component={Login} />
           <Route exact path="/Incident/:id" component={IncidentDetail} />
-          <Route exact path="/incidentListing" component={IncidentLisiting} />         
+          <Route exact path="/incidentListing" component={IncidentLisiting} />   
+          <Route exact path="/AddNew" component={AddNew} />         
         </Switch>
       </div>
     </BrowserRouter>

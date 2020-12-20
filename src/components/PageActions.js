@@ -4,7 +4,7 @@ export default function PageActions(props) {
     return (
       <section className="container">
         <div className="row ">
-          <div className="col s5 l3">
+          <div className="col s12 l5">
             <div className="left">
               <h4 className="title">{props.Title}</h4>
             </div>

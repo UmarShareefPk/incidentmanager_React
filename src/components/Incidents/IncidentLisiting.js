@@ -1,10 +1,10 @@
-import { React, useState, useEffect } from 'react'
+import { React, useState, useEffect} from 'react'
 import { connect } from 'react-redux'
 import Pages from '../Pages'
 import Incident from './Incident'
 import PageActions from "../PageActions";
 import { incidentsWithPage } from "../../store/actions/incidentsActions";
-//import { $ } from "jquery";
+import {  useHistory  } from 'react-router-dom'
 
  function IncidentLisiting(props) {
    
@@ -12,12 +12,8 @@ import { incidentsWithPage } from "../../store/actions/incidentsActions";
     const [PageSize, setPageSize] = useState(5);
     const [Search, setSearch] = useState("");
 
-    useEffect(() => {      
-        //  $('select').formSelect();    
-        return () => {          
-        }
-    })
-
+    const history = useHistory();
+    
     useEffect(() => {
         const parameters = {
             PageNumber : PageNumber,
@@ -33,6 +29,11 @@ import { incidentsWithPage } from "../../store/actions/incidentsActions";
     const searchTextChange =   (text) => {      
             setSearch(text);
             setPageNumber(1);
+    }
+
+    const addNewClick = ()=>{
+      let path = '/AddNew'; 
+      history.push(path);
     }
     
     return (
@@ -52,7 +53,7 @@ import { incidentsWithPage } from "../../store/actions/incidentsActions";
               
               <div className="col s6 l6">
                 <div className="input-field">              
-                  <button className="btn green darken-2 right" >
+                  <button className="btn green darken-4 right" onClick={()=>addNewClick()} >
                     <span>Add New</span>
                     <i className="material-icons right">create</i>
                   </button>
