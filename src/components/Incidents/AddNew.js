@@ -13,6 +13,7 @@ import { allUsers } from '../../store/actions/usersActions'
     const startTimeTimeRef = useRef();
     const startTimeDateRef = useRef();
     const assigneeRef = useRef();
+    
    
 
     const history = useHistory();
@@ -21,26 +22,27 @@ import { allUsers } from '../../store/actions/usersActions'
     const [description, setDescription] = useState("");
     const [additionalDetails, setAdditionalDetails] = useState("");  
     const [files , setFiles] = useState(null);
+    const [assignee, setAssignee] = useState(null);  
+    const [assigneeName, setAssigneeName] = useState("");  
+    const [assigneeList, setAssigneeList] = useState(allAssignees);
 
     useEffect(() => {      
         M.Datepicker.init(startTimeDateRef.current);
         M.Timepicker.init(startTimeTimeRef.current);
         M.Datepicker.init(dueDateDateRef.current);
-        M.Timepicker.init(dueDateTimeRef.current); 
-        M.FormSelect.init(assigneeRef.current);
-      
-        getAllAssignees();  
-       
-        return () => {
-          
+        M.Timepicker.init(dueDateTimeRef.current);
+        var options = {
+          closeOnClick : false
         }
-
+        M.Dropdown.init(assigneeRef.current, options);
+        getAllAssignees();
     }, []);
 
    const onFileChange = (event) => {    
      if (event.target.files.length > 3) {
        //alert("You can only attach upto 3 files. All extra files will be ignored.");
      }
+     console.log(event.target.files);
      setFiles(event.target.files);
    };
 
@@ -50,31 +52,51 @@ import { allUsers } from '../../store/actions/usersActions'
      //console.log(history);
    };
 
-   const saveClick = (event) => {
-     event.preventDefault();    
 
-     let newIncident = new Incident(
-       null,
-       userId,
-       assigneeRef.current.value,
-       null,
-       title,
-       description,
-       additionalDetails,
-       files,
-       null,
-       null,
-       new Date(
-         startTimeDateRef.current.value + " " + startTimeTimeRef.current.value
-       ),
-       new Date(
-         dueDateDateRef.current.value + " " + dueDateTimeRef.current.value
-       ),
-       "N"
-     );
-     console.log(newIncident);
-   }; 
-   M.FormSelect.init(assigneeRef.current);
+   const assigneeSelected = (userId) => {       
+    let currentAssignee = allAssignees.find(assignee => {
+        return assignee.Id === userId
+    })
+    console.log(currentAssignee);
+    var assigneeDropdown = M.Dropdown.getInstance(assigneeRef.current);
+    assigneeDropdown.close();
+    setAssignee(userId);
+    setAssigneeName(currentAssignee.FirstName + " " + currentAssignee.LastName);
+   }
+
+   const searchAssignee = (event) => {    
+     let newList = [];
+     if(event.target.value !== "")
+        newList = allAssignees.filter(assignee => {    
+        return assignee.FirstName.toUpperCase().startsWith(event.target.value.toUpperCase()) 
+            || assignee.LastName.toUpperCase().startsWith(event.target.value.toUpperCase());
+      });
+    
+     if(newList !== undefined && newList.length !== 0){ //check if there is atlease one assignee       
+      newList = [].concat(newList); 
+     }
+     else{//if search found nothing, show all assignees
+        newList = allAssignees.slice(0,allAssignees.length);       
+     } 
+     setAssigneeList(newList);   
+   }
+
+   const saveClick = (event) => {
+    event.preventDefault();  
+   
+    let newIncident = new Incident( null, userId, assignee, null, title, description, additionalDetails, files, null, null,
+      new Date(
+        startTimeDateRef.current.value + " " + startTimeTimeRef.current.value
+      ),
+      new Date(
+        dueDateDateRef.current.value + " " + dueDateTimeRef.current.value
+      ),
+      "N"
+    );
+    console.log(newIncident);
+  }; 
+
+ 
     return (
       <>
         <PageActions Title={"Add new Incident"} />
@@ -91,27 +113,37 @@ import { allUsers } from '../../store/actions/usersActions'
                           id="title"
                           onChange={(e) => setTitle(e.target.value)}
                         />
-                        <label htmlFor="title" >
-                          Title
-                        </label>
+                        <label htmlFor="title">Title</label>
                       </div>
                     </div>
 
-                    <div className="input-field col s12 l6">
-                      <select ref={assigneeRef} onClick={(e)=> alert(e.target)} >
-                         <option  value="hehe"> Khan baba</option>
-                        {
-                            allAssignees.map(user => {                               
-                                return (
-                                    <option key={user.Id} value={user.Id}>{user.FirstName + " " + user.LastName}</option>
-                                )
-                            })
-                        }                    
-                      </select>
-                      <label>Assignee</label>
+                    <div className="input-field col s12 l6">                    
+                      <input
+                        readOnly
+                        type="text"
+                        className="dropdown-trigger"
+                        id="assignee"
+                        data-target="dropdown1"
+                        placeholder=""
+                        ref={assigneeRef}
+                        value={assigneeName}
+                      />                    
+                      
+                       <label htmlFor="assignee">Assignee </label> 
                     </div>
+                      <ul id="dropdown1" className="dropdown-content">
+                        <li>
+                          <input type="text"  placeholder="Search Assignee" onChange={searchAssignee}     />
+                        </li>
+                        {assigneeList.map((user) => {
+                          return (
+                            <li  key={user.Id} onClick= {()=>assigneeSelected(user.Id)}>
+                              <a className="indigo-text" href="#!">  {user.FirstName + " " + user.LastName}    </a>
+                            </li>
+                          );
+                        })}
+                      </ul>                   
                   </div>
-
                   <div className="input-field">
                     <textarea
                       id="description"
@@ -231,13 +263,11 @@ import { allUsers } from '../../store/actions/usersActions'
     );
 }
 
-const mapStateToProps = (state) => {    
-    
+const mapStateToProps = (state) => {        
     return{
         allAssignees : state.users.users,
         user_Name :state.userLogin.user_Name, // Logged in User's name
-        userId :state.userLogin.userId,  // logged in User Id
-       
+        userId :state.userLogin.userId,  // logged in User Id       
     }
   }
   
