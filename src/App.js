@@ -11,8 +11,8 @@ function App(props) {
  
   return (
     <BrowserRouter>
-      <div className="App">
-      {props.userLogin ?  <NavBar /> : null }    
+      <div className="App">     
+      {props.user_Name ?  <NavBar /> : null }    
         <Switch>
           <Route exact path="/" component={Login} />
           <Route exact path="/Incident/:id" component={IncidentDetail} />
@@ -26,7 +26,7 @@ function App(props) {
 
 const mapStateToProps = (state) => {
   return{     
-    userLogin : state.userLogin.userLogin    
+    user_Name : state.userLogin.user_Name    
   }
 }
 

@@ -19,3 +19,20 @@ export const incidentsWithPage = (parameters) => {
     
     }
   }
+
+  export const addNewIncident = (formData) => {
+    return (dispatch, getState) => {  
+     
+        axios.defaults.headers = {'Authorization': `Bearer ${getState().userLogin.token + ""}`};
+        const url = "https://localhost:44398/api/Incidents/AddIncident"
+        axios.post(url, formData)
+          .then((response)=>{            
+             const data = response.data;
+            //  dispatch({ type: 'INCIDENTS_WITH_PAGE', data });
+          })
+          .catch((err)=>{                 
+                   console.log(err);
+          });
+    
+    }
+  }

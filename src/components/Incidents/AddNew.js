@@ -2,11 +2,11 @@ import {React , useRef, useEffect, useState} from 'react';
 import PageActions from "../PageActions";
 import M from 'materialize-css';
 import {  useHistory  } from 'react-router-dom';
-import Incident from "../../models/Incident";
 import { connect } from 'react-redux';
-import { allUsers } from '../../store/actions/usersActions'
+import { allUsers } from '../../store/actions/usersActions';
+import { addNewIncident } from '../../store/actions/incidentsActions';
 
- function AddNew({getAllAssignees, allAssignees, userId}) {
+ function AddNew({getAllAssignees, allAssignees, userId, addNewIncident}) {
 
     const dueDateTimeRef= useRef();
     const dueDateDateRef= useRef();
@@ -84,16 +84,43 @@ import { allUsers } from '../../store/actions/usersActions'
    const saveClick = (event) => {
     event.preventDefault();  
    
-    let newIncident = new Incident( null, userId, assignee, null, title, description, additionalDetails, files, null, null,
-      new Date(
-        startTimeDateRef.current.value + " " + startTimeTimeRef.current.value
-      ),
-      new Date(
-        dueDateDateRef.current.value + " " + dueDateTimeRef.current.value
-      ),
-      "N"
-    );
-    console.log(newIncident);
+    // let newIncident = new Incident( null, userId, assignee, null, title, description, additionalDetails, files, null, null,
+    //   new Date(
+    //     startTimeDateRef.current.value + " " + startTimeTimeRef.current.value
+    //   ),
+    //   new Date(
+    //     dueDateDateRef.current.value + " " + dueDateTimeRef.current.value
+    //   ),
+    //   "N"
+    // );
+
+    let startTime  = new Date( startTimeDateRef.current.value + " " + startTimeTimeRef.current.value);
+    startTime = startTime.getMonth() + "/" + startTime.getDate() + "/" +  startTime.getFullYear() 
+                + " " + startTime.getHours() + ":" + startTime.getMinutes() + ":" + startTime.getSeconds(); 
+
+    let dueDate  = new Date( dueDateDateRef.current.value + " " + dueDateTimeRef.current.value);
+    dueDate = dueDate.getMonth() + "/" + dueDate.getDate() + "/" +  dueDate.getFullYear() 
+                + " " + dueDate.getHours() + ":" + dueDate.getMinutes() + ":" + dueDate.getSeconds(); 
+   
+    const formData = new FormData(); 
+    for(let i = 0; i < files.length ; i++){
+      formData.append( 
+        "Attachment" + i+1, 
+        files[i], 
+        files[i].name 
+      );
+    }   
+     formData.append("CreatedBy", userId); 
+     formData.append("AssignedTo", assignee);
+     formData.append("Title", title); 
+     formData.append("Description", description); 
+     formData.append("AdditionalDeta", additionalDetails); 
+     formData.append("StartTime", startTime ); 
+     formData.append("DueDate",  dueDate ); 
+     formData.append("Status", "N"); 
+
+     addNewIncident(formData);
+
   }; 
 
  
@@ -273,7 +300,8 @@ const mapStateToProps = (state) => {
   
   const mapDispatchToProps = (dispatch) => {
     return {
-        getAllAssignees: () => dispatch(allUsers())
+        getAllAssignees: () => dispatch(allUsers()),
+        addNewIncident : (formData) => dispatch(addNewIncident(formData))
     }
   }
   
