@@ -25,6 +25,7 @@ import { addNewIncident } from '../../store/actions/incidentsActions';
     const [assignee, setAssignee] = useState(null);  
     const [assigneeName, setAssigneeName] = useState("");  
     const [assigneeList, setAssigneeList] = useState(allAssignees);
+    const [formError, setFormError] = useState("");
 
     useEffect(() => {      
         M.Datepicker.init(startTimeDateRef.current);
@@ -81,34 +82,42 @@ import { addNewIncident } from '../../store/actions/incidentsActions';
      setAssigneeList(newList);   
    }
 
+   const validateForm = () => {
+
+    if(title === "" || description ==="" || dueDateDateRef.current.value === "" || dueDateTimeRef.current.value === ""
+        || startTimeDateRef.current.value === "" || startTimeTimeRef.current.value === ""  )
+        return false;
+    return true;
+
+   }
+
    const saveClick = (event) => {
-    event.preventDefault();  
-   
-    // let newIncident = new Incident( null, userId, assignee, null, title, description, additionalDetails, files, null, null,
-    //   new Date(
-    //     startTimeDateRef.current.value + " " + startTimeTimeRef.current.value
-    //   ),
-    //   new Date(
-    //     dueDateDateRef.current.value + " " + dueDateTimeRef.current.value
-    //   ),
-    //   "N"
-    // );
+    event.preventDefault();     
+    if(!validateForm()){
+      setFormError("Please complete required fields before saving.")
+      return;
+    }
+    
+    setFormError("");
 
     let startTime  = new Date( startTimeDateRef.current.value + " " + startTimeTimeRef.current.value);
-    startTime = startTime.getMonth() + "/" + startTime.getDate() + "/" +  startTime.getFullYear() 
+    startTime = (startTime.getMonth() + 1) + "/" + startTime.getDate() + "/" +  startTime.getFullYear() 
                 + " " + startTime.getHours() + ":" + startTime.getMinutes() + ":" + startTime.getSeconds(); 
 
     let dueDate  = new Date( dueDateDateRef.current.value + " " + dueDateTimeRef.current.value);
-    dueDate = dueDate.getMonth() + "/" + dueDate.getDate() + "/" +  dueDate.getFullYear() 
+    dueDate = (dueDate.getMonth() + 1) + "/" + dueDate.getDate() + "/" +  dueDate.getFullYear() 
                 + " " + dueDate.getHours() + ":" + dueDate.getMinutes() + ":" + dueDate.getSeconds(); 
    
     const formData = new FormData(); 
-    for(let i = 0; i < files.length ; i++){
-      formData.append( 
-        "Attachment" + i+1, 
-        files[i], 
-        files[i].name 
-      );
+
+    if(files){
+        for(let i = 0; i < files.length ; i++){
+          formData.append( 
+            "Attachment" + i+1, 
+            files[i], 
+            files[i].name 
+          );
+        }
     }   
      formData.append("CreatedBy", userId); 
      formData.append("AssignedTo", assignee);
@@ -119,7 +128,14 @@ import { addNewIncident } from '../../store/actions/incidentsActions';
      formData.append("DueDate",  dueDate ); 
      formData.append("Status", "N"); 
 
+     
+     //setTitle("");
+
      addNewIncident(formData);
+
+     setTitle("");
+     setDescription("");
+     
 
   }; 
 
@@ -134,10 +150,13 @@ import { addNewIncident } from '../../store/actions/incidentsActions';
                 <form>
                   <div className="row">
                     <div className="col s12 l6">
-                      <div className="input-field">
+                      <div className="input-field ">
                         <input
+                        className="validate"
+                          required
                           type="text"
                           id="title"
+                          value={title}
                           onChange={(e) => setTitle(e.target.value)}
                         />
                         <label htmlFor="title">Title</label>
@@ -146,9 +165,10 @@ import { addNewIncident } from '../../store/actions/incidentsActions';
 
                     <div className="input-field col s12 l6">                    
                       <input
-                        readOnly
+                        readOnly                    
+                        required
                         type="text"
-                        className="dropdown-trigger"
+                        className="dropdown-trigger validate"
                         id="assignee"
                         data-target="dropdown1"
                         placeholder=""
@@ -173,8 +193,10 @@ import { addNewIncident } from '../../store/actions/incidentsActions';
                   </div>
                   <div className="input-field">
                     <textarea
+                      required
+                      value={description}
                       id="description"
-                      className="materialize-textarea"
+                      className="materialize-textarea validate"
                       onChange={(e) => setDescription(e.target.value)}
                     ></textarea>
                     <label htmlFor="description" className="">
@@ -184,6 +206,7 @@ import { addNewIncident } from '../../store/actions/incidentsActions';
 
                   <div className="input-field">
                     <textarea
+                      value={additionalDetails}
                       id="additionalDetails"
                       className="materialize-textarea"
                       onChange={(e) => setAdditionalDetails(e.target.value)}
@@ -196,9 +219,10 @@ import { addNewIncident } from '../../store/actions/incidentsActions';
                   <div className="row">
                     <div className="input-field col s6">
                       <input
+                        required
                         type="text"
                         id="startTimeDate"
-                        className="datepicker"
+                        className="datepicker validate"
                         ref={startTimeDateRef}
                       />
                       <label htmlFor="startTimeDate" className="">
@@ -208,9 +232,10 @@ import { addNewIncident } from '../../store/actions/incidentsActions';
 
                     <div className="input-field col s6">
                       <input
+                        required
                         type="text"
                         id="startTimeTime"
-                        className="timepicker"
+                        className="timepicker validate"
                         ref={startTimeTimeRef}
                       />
                       <label htmlFor="startTimeime" className="">
@@ -222,9 +247,10 @@ import { addNewIncident } from '../../store/actions/incidentsActions';
                   <div className="row">
                     <div className="input-field col s6">
                       <input
+                        required
                         type="text"
                         id="dueDateDate"
-                        className="datepicker"
+                        className="datepicker validate"
                         ref={dueDateDateRef}
                       />
                       <label htmlFor="dueDateDate" className="">
@@ -234,9 +260,10 @@ import { addNewIncident } from '../../store/actions/incidentsActions';
 
                     <div className="input-field col s6">
                       <input
+                        required
                         type="text"
                         id="dueDateTime"
-                        className="timepicker"
+                        className="timepicker validate" 
                         ref={dueDateTimeRef}
                       />
                       <label htmlFor="dueDateTime" className="">
@@ -263,7 +290,12 @@ import { addNewIncident } from '../../store/actions/incidentsActions';
                       />
                     </div>
                   </div>
+                  
+                  <div className="input-field">
+                      <p className="red-text center">{formError ? formError : "" }</p>
+                  </div>
 
+                  
                   <div className="input-field ">
                     <button
                       className="btn green darken-2 left"
