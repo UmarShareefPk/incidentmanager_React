@@ -35,9 +35,8 @@ export default function Pages({TotalPages, PostsPerPage, setPageNumber, setPageS
 
     useEffect(() => {
         setCurrentPage(1);
-        setPageNumber(1);
-        console.log(M) ;  
-        M.FormSelect.init(ddlRef.current);       
+        setPageNumber(1);        
+        M.FormSelect.init(ddlRef.current);      
         
     }, [search])
 

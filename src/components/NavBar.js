@@ -1,8 +1,8 @@
 import {React} from 'react'
 import { NavLink } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-
-export default function NavBar() {
+function NavBar({user_Name}) {
 
     return (
       <nav className="nav-wrapper indigo darken-4">
@@ -16,14 +16,15 @@ export default function NavBar() {
             <i className="material-icons">menu</i>
           </a>
           <ul className="right hide-on-med-and-down">
-            <li>
-            
-              <a>Incidents</a>
+            <li>     
+              <NavLink to="/incidentListing" >             
+                 Incidents
+              </NavLink> 
             </li>
             <li>
-              <a>
-                Users <i className="material-icons"></i>{" "}
-              </a>
+              <NavLink to="/UsersList" >             
+                   Users 
+                </NavLink>              
             </li>
             <li>
               <a>Contact</a>
@@ -36,14 +37,23 @@ export default function NavBar() {
             <li>
               <span className="badge white-text new pink">5</span>
             </li>
+            <li>
+                <button type="button" title={user_Name} className="btn-floating  pink userWelcome" >
+                  {user_Name.split(/\s/).reduce((response,word)=> response+=word.slice(0,1),'')} 
+                 </button>
+            </li>
           </ul>
           {/* for mobile */}
           <ul className="sidenav grey lighten-2" id="mobile-menu">
             <li>
-              <a className="sidenav-close">Incidents</a>
+              <NavLink to="/incidentListing"  className="sidenav-close">             
+                  Incidents
+                </NavLink>               
             </li>
             <li>
-              <a className="sidenav-close">Users</a>
+                <NavLink to="/UsersList" className="sidenav-close">             
+                       Users
+                  </NavLink>            
             </li>
             <li>
               <a className="sidenav-close">Contact</a>
@@ -59,3 +69,14 @@ export default function NavBar() {
       </nav>
     );
 }
+
+
+const mapStateToProps = (state) => {        
+  return{      
+      user_Name :state.userLogin.user_Name, // Logged in User's name
+      userId :state.userLogin.userId,  // logged in User Id       
+  }
+}
+
+
+export default connect(mapStateToProps, null)(NavBar);

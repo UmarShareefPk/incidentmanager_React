@@ -3,6 +3,10 @@ ul.sidenav li{
     text-align: left;
 }
 
+.userWelcome{
+    margin-top: -7px;
+}
+
 /* Small devices  */
 @media (min-width: 300px) {
     

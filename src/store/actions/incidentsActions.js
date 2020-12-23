@@ -15,8 +15,7 @@ export const incidentsWithPage = (parameters) => {
           })
           .catch((err)=>{                 
                    console.log(err);
-          });
-    
+          });    
     }
   }
 
