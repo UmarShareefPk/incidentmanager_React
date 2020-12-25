@@ -1,9 +1,17 @@
-import React from 'react'
+import React from 'react';
+import {  useHistory  } from 'react-router-dom';
 
 export default function Incident({incident}) {
+
+  const history = useHistory();
+
+  const openIncident = (id) => {
+    let path = '/Incident/' + id;      
+      history.push(path);
+  }
     
     return (
-      <tr>
+      <tr onClick = { () => openIncident(incident.Id) }>
         <td>{incident.Title}</td>
         <td
           className="description"

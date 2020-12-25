@@ -2,7 +2,8 @@
 
 const initState = {
     Incidents : [],
-    TotalIncidents : 0
+    TotalIncidents : 0,
+    IncidentSelected : null
    }
    
    const incidentsReducer = (state = initState, action) => {
@@ -14,6 +15,13 @@ const initState = {
            Incidents : action.data.Incidents,
            TotalIncidents : action.data.Total_Incidents            
          }     
+
+         case 'INCIDENTS_BY_ID':
+          // console.log(action);
+           return {
+             ...state, 
+             IncidentSelected : action.data                       
+           }     
          
        default:
          return state

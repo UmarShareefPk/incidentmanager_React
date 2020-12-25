@@ -35,3 +35,20 @@ export const incidentsWithPage = (parameters) => {
     
     }
   }
+
+  export const getIncidentById = (incidentId) => {
+    return (dispatch, getState) => {  
+     
+        axios.defaults.headers = {'Authorization': `Bearer ${getState().userLogin.token + ""}`};
+        const url = "https://localhost:44398/api/Incidents/IncidentById?Id=" + incidentId; 
+        axios.get(url)
+          .then((response)=>{            
+             const data = response.data;             
+              dispatch({ type: 'INCIDENTS_BY_ID', data });
+          })
+          .catch((err)=>{                 
+                   console.log(err);
+          });
+    
+    }
+  }

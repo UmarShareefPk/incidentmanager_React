@@ -42,8 +42,7 @@ import { addNewIncident } from '../../store/actions/incidentsActions';
    const onFileChange = (event) => {    
      if (event.target.files.length > 3) {
        //alert("You can only attach upto 3 files. All extra files will be ignored.");
-     }
-     console.log(event.target.files);
+     }     
      setFiles(event.target.files);
    };
 
