@@ -27,6 +27,11 @@ import { addNewIncident } from '../../store/actions/incidentsActions';
     const [assigneeList, setAssigneeList] = useState(allAssignees);
     const [formError, setFormError] = useState("");
 
+    useEffect(() => {
+      console.log("Set hook");
+      setAssigneeList(allAssignees);
+    }, [allAssignees])
+
     useEffect(() => {      
         M.Datepicker.init(startTimeDateRef.current);
         M.Timepicker.init(startTimeTimeRef.current);
@@ -181,7 +186,7 @@ import { addNewIncident } from '../../store/actions/incidentsActions';
                         <li>
                           <input type="text"  placeholder="Search Assignee" onChange={searchAssignee}     />
                         </li>
-                        {assigneeList.map((user) => {
+                        {!assigneeList? null : assigneeList.map((user) => {
                           return (
                             <li  key={user.Id} onClick= {()=>assigneeSelected(user.Id)}>
                               <a className="indigo-text" href="#!">  {user.FirstName + " " + user.LastName}    </a>

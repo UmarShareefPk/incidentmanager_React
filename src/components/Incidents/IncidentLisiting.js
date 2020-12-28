@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import Pages from '../Pages'
 import Incident from './Incident'
 import PageActions from "../PageActions";
-import { incidentsWithPage } from "../../store/actions/incidentsActions";
+import { incidentsWithPage, cancel } from "../../store/actions/incidentsActions";
 import {  useHistory  } from 'react-router-dom'
 
  function IncidentLisiting(props) {
@@ -11,18 +11,20 @@ import {  useHistory  } from 'react-router-dom'
     const [PageNumber, setPageNumber] = useState(1);
     const [PageSize, setPageSize] = useState(5);
     const [Search, setSearch] = useState("");
-
+    const [loading, setLoading] = useState(true);
     const history = useHistory();
-    
+   
     useEffect(() => {
         const parameters = {
             PageNumber : PageNumber,
             PageSize : PageSize,
-            Search : Search
+            Search : Search            
         }        
+        setLoading(true);
         props.incidentsWithPage(parameters);
+        setLoading(false);
         return () => {
-            
+          cancel();        // cancel axios  
         }
     }, [PageNumber, PageSize, Search])
 
@@ -39,7 +41,8 @@ import {  useHistory  } from 'react-router-dom'
     return (
       <>
         <PageActions Title={"Incidents"} /> 
-
+        { loading? <h1>Loading</h1> : null}
+        { props.TotalIncidents === 0? <h1>Zero</h1> : null}
         <section>
           <div className="container">
             <div className="row">

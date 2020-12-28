@@ -4,26 +4,33 @@ import M from 'materialize-css';
 import { connect } from 'react-redux';
 import { allUsers } from '../../store/actions/usersActions';
 import { getIncidentById } from '../../store/actions/incidentsActions';
+import Comment from './Comment';
 
- function IncidentDetails({match , incidentData, getIncidentById, allAssignees}) {
+ function IncidentDetails({match , incidentData, getIncidentById, allAssignees, getAllAssignees}) {
 
-  
-    console.log(incidentData);
-   
     const [assignee, setAssignee] = useState(null);  
     const [assigneeName, setAssigneeName] = useState("");  
     const [assigneeList, setAssigneeList] = useState(allAssignees);
-
+    console.log("after assignee list");
     const assigneeRef = useRef();
     const statusRef = useRef();
 
-    useEffect(() => {
+    useEffect(() => {        
+        setAssigneeList(allAssignees);       
+      }, [allAssignees])
+
+      useEffect(() => {          
         var options = {
             closeOnClick : false
           }
         M.Dropdown.init(assigneeRef.current, options);
-        M.FormSelect.init(statusRef.current);
+        M.FormSelect.init(statusRef.current);        
+      })
+  
+
+    useEffect(() => {       
         getIncidentById(match.params.id);
+        getAllAssignees();
         
     }, []);
 
@@ -53,6 +60,15 @@ import { getIncidentById } from '../../store/actions/incidentsActions';
            newList = allAssignees.slice(0,allAssignees.length);       
         } 
         setAssigneeList(newList);   
+      }
+
+      if(!incidentData || !allAssignees ){
+          console.log(incidentData , allAssignees, assigneeList);
+          return (<h1> Loading</h1>)
+      }
+
+      if(allAssignees && ! assigneeList){
+          setAssigneeList(allAssignees);
       }
 
     return (
@@ -91,7 +107,7 @@ import { getIncidentById } from '../../store/actions/incidentsActions';
                                     <li>
                                     <input type="text"  placeholder="Search Assignee" onChange={searchAssignee}     />
                                     </li>
-                                    {assigneeList.map((user) => {
+                                    {!assigneeList? null : assigneeList.map((user) => {
                                     return (
                                         <li  key={user.Id} onClick= {()=>assigneeSelected(user.Id)}>
                                         <a className="indigo-text" href="#!">  {user.FirstName + " " + user.LastName}    </a>
@@ -115,10 +131,10 @@ import { getIncidentById } from '../../store/actions/incidentsActions';
                              <div className="input-field inline  align-right">
                                
                                 <select ref={statusRef}>
-                                    <option value="" disabled selected>Choose your option</option>                                
-                                    <option value="I">In Progress</option>
-                                    <option value="C">Closed</option>
-                                    <option value="A">Approved</option>
+                                    <option  defaultValue="" disabled selected>Choose your option</option>                                
+                                    <option defaultValue="I">In Progress</option>
+                                    <option defaultValue="C">Closed</option>
+                                    <option defaultValue="A">Approved</option>
                                 </select> 
                              </div>                                    
                          </div>
@@ -133,20 +149,14 @@ import { getIncidentById } from '../../store/actions/incidentsActions';
                                 <p>{incidentData.AdditionalData}</p>
                              </div>                                    
                          </div>
-                     </div>    
-                      
+                     </div>                         
                   
                    
                 </div>
 
                 <div className="col s12 l4  offset-l1"> {/* Comment Section */}
                     <h5> Comments</h5>
-                    <div class="card">          
-                        <div class="card-content">
-                            <span class="card-title">Umar Shareef Wrote</span>
-                            <p>This is a test comment and is static.</p>
-                        </div>                        
-                    </div>
+                    <Comment />
                 </div>
             </div> {/* end row */}
           </div>
@@ -159,7 +169,7 @@ import { getIncidentById } from '../../store/actions/incidentsActions';
 const mapStateToProps = (state) => {        
     return{
         allAssignees : state.users.users,
-        incidentData :state.incidents.IncidentSelected      
+        incidentData : state.incidents.IncidentSelected      
     }
   }
   
