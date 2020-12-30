@@ -1,0 +1,26 @@
+
+ul.sidenav li{
+    text-align: left;
+}
+
+.userWelcome{
+    margin-top: -7px;
+}
+
+/* Small devices  */
+@media (min-width: 300px) {
+    
+}
+
+/* (tablets, 768px and up) */
+@media (min-width: 700px) {}
+
+/* Large Tablets  */
+@media (min-width: 1000px) {
+   
+}
+
+/* Computer */
+@media (min-width: 1500px) {
+      
+}

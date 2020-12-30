@@ -20,7 +20,6 @@ export default function Pages({TotalPages, PostsPerPage, setPageNumber, setPageS
     const pageNumberClick = (p) =>{
         if(p <1 || p > pages.length)
             return;
-
         setPageNumber(p);
         setCurrentPage(p);
     }
@@ -30,14 +29,12 @@ export default function Pages({TotalPages, PostsPerPage, setPageNumber, setPageS
         setCurrentSize(pSize);
         setCurrentPage(1);
         setPageNumber(1);
-
     }
 
     useEffect(() => {
         setCurrentPage(1);
         setPageNumber(1);        
-        M.FormSelect.init(ddlRef.current);      
-        
+        M.FormSelect.init(ddlRef.current); 
     }, [search])
 
     pages = pages.map((p,index)=>{
@@ -54,8 +51,7 @@ export default function Pages({TotalPages, PostsPerPage, setPageNumber, setPageS
       <div className="row pagesRow">
         <div className="input-field col s12 m4 l4">
                             <select value={currentSize} onChange={(e) => pageSizeChanged(e.target.value)}
-                             ref={ddlRef}
-                            >						
+                             ref={ddlRef}  >						
                                 <option value="5">5</option>
                                 <option value="10">10</option>
                                 <option value="15">15</option>

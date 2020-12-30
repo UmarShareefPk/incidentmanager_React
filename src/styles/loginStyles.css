@@ -1,0 +1,54 @@
+
+         .material-icons.prefix.active {
+            color:#1A237E ;
+         }
+        
+        /* Small devices  */
+        @media (min-width: 300px) {
+            .login{               
+                padding: 8vh !important;             
+                background-color: white;
+            }
+        }
+
+        /* (tablets, 768px and up) */
+        @media (min-width: 700px) {}
+
+        /* Large Tablets  */
+        @media (min-width: 1000px) {
+            html { 
+            /* background: url('/IM/images/bg.jpg') no-repeat center center fixed;  */
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+            background-color: white;
+            }
+            .login{
+                margin-top: 10vh;
+                padding: 8vh !important;
+                border: 2px solid black;
+                background-color: white;
+            }
+        }
+
+        /* Computer */
+        @media (min-width: 1500px) {
+            .loginMain { 
+            /* background: url('/IM/images/bg.jpg') no-repeat center center fixed;  */
+
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+            background-color: #1A237E;
+            height: 100vh;
+            }
+
+            .login{
+                margin-top: 10vh;
+                padding: 8vh !important;
+                border: 2px solid black;
+                background-color: white;
+            }      
+        }

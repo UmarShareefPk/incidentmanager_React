@@ -1,0 +1,73 @@
+nav .badge{
+    position: relative;
+    top: 20px;
+    right: 20px;
+    }
+   
+    ::-webkit-scrollbar {
+        width: 7px;
+      }
+
+      /* Track */
+      ::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 5px white; 
+        border-radius: 10px;
+      }
+      
+      /* Handle */
+      ::-webkit-scrollbar-thumb {
+        background: #1A237E; 
+        border-radius: 10px;
+      }
+
+      /* Handle on hover */
+      ::-webkit-scrollbar-thumb:hover {
+        background: darkslategray; 
+      }
+   
+
+      span.im-createTime{
+        font-size: 12px;
+      }
+
+      ul.commentFiles{
+       text-align: center;
+      }
+      ul.commentFiles li {
+        list-style: none;
+        display: inline;
+        padding-left: 25px;
+        cursor: pointer;
+      }
+
+      ul.incidentFiles{
+       text-align: center;
+      }
+      ul.incidentFiles li {
+        list-style: none;
+        display: inline;
+        padding-left: 25px;
+        cursor: pointer;
+     
+      }
+
+      .darkslategrayText{
+        color: darkslategray;
+      }
+      
+      .updateBtn{
+        margin-right: 5px;
+      }
+
+      .commentHeader{
+        padding-bottom: 20px;
+      }
+
+      .inline-icon {
+        vertical-align: bottom;
+        font-size: 22px !important;
+      }
+
+      .actions-icon{
+        cursor: pointer;
+      }
