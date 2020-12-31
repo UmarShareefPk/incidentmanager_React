@@ -91,7 +91,7 @@ function IncidentDetails({
   }
 
   const titleEditClick = () =>{
-    setEditTitle(true);
+    setEditTitle(!editTitle);
   }
   const titleEditCancel = () =>{
     setEditTitle(false);
@@ -103,7 +103,8 @@ function IncidentDetails({
 
 
   const descriptionEditClick = () =>{
-    setEditDescription(true);
+    setEditDescription(!editDescription);
+   
   }
   const descriptionEditCancel = () =>{
     setEditDescription(false);
@@ -115,7 +116,7 @@ function IncidentDetails({
 
 
   const additionalDetailsEditClick = () =>{
-    setEditAdditionalDetails(true);
+    setEditAdditionalDetails(!editAdditionalDetails);
   }
   const additionalDetailsEditCancel = () =>{
     setEditAdditionalDetails(false);
@@ -127,7 +128,7 @@ function IncidentDetails({
 
 
   const dueDateEditClick = () =>{
-    setEditDueDate(true);
+    setEditDueDate(!editDueDate);
   }
   const dueDateEditCancel = () =>{
     setEditDueDate(false);
@@ -139,7 +140,7 @@ function IncidentDetails({
 
 
   const startDateEditClick = () =>{
-    setEditStartDate(true);
+    setEditStartDate(!editStartDate);
   }
   const startDateEditCancel = () =>{
     setEditStartDate(false);
@@ -197,7 +198,7 @@ function IncidentDetails({
               <div className="row">
                 <div className="col s12 l6">
 
-                  <p className="left-align indigo-text darken-4"> {/* Description  */}
+                  <p className="heading left-align indigo-text darken-4"> {/* Description  */}
                           Description :
                           <i className="inline-icon material-icons actions-icon" onClick={descriptionEditClick}>
                             edit
@@ -243,7 +244,7 @@ function IncidentDetails({
                     </>
                   )
                 }
-                  <p className="left-align indigo-text darken-4"> {/*   Additional Details */}
+                  <p className="heading left-align indigo-text darken-4"> {/*   Additional Details */}
                     Additional Details :
                     <i className="inline-icon material-icons" onClick={additionalDetailsEditClick}>edit</i>
                   </p>
@@ -280,7 +281,7 @@ function IncidentDetails({
                         </button>
                       </div>) 
                   }
-                  <p className="left-align indigo-text darken-4"> {/*  Attachments */}
+                  <p className="heading left-align indigo-text darken-4"> {/*  Attachments */}
                     <i className="material-icons inline-icon">attachment</i>
                     Attachments:
                   </p>
@@ -309,7 +310,7 @@ function IncidentDetails({
                     <tbody>
                       <tr>
                         <td>
-                          <h7 className="left indigo-text darken-4">
+                          <h7 className="heading left indigo-text darken-4">
                             Assignee{" "}
                           </h7>
                         </td>
@@ -355,7 +356,7 @@ function IncidentDetails({
                       </tr>
                       <tr>
                         <td>
-                          <h7 className="left indigo-text darken-4">Status </h7>
+                          <h7 className="heading left indigo-text darken-4">Status </h7>
                         </td>
                         <td>
                           <select ref={statusRef}>
@@ -370,7 +371,7 @@ function IncidentDetails({
                       </tr>
                       <tr>
                         <td>
-                          <h7 className="left indigo-text darken-4">
+                          <h7 className="heading left indigo-text darken-4">
                             Due Date
                             <i className="actions-icon inline-icon material-icons" onClick={dueDateEditClick}>edit</i>
                           </h7>
@@ -427,8 +428,8 @@ function IncidentDetails({
                       </tr>
                       <tr>
                         <td>
-                          <h7 className="left indigo-text darken-4">                            
-                            Start Time
+                          <h7 className="heading left indigo-text darken-4">                            
+                               Start Time
                             <i className="actions-icon inline-icon material-icons"   onClick={startDateEditClick}>edit</i>
                           </h7>
                         </td>

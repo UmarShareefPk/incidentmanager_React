@@ -1,7 +1,7 @@
-nav .badge{
-    position: relative;
-    top: 20px;
-    right: 20px;
+    nav .badge{
+        position: relative;
+        top: 20px;
+        right: 20px;
     }
    
     ::-webkit-scrollbar {
@@ -64,10 +64,16 @@ nav .badge{
       }
 
       .inline-icon {
-        vertical-align: bottom;
-        font-size: 22px !important;
+        vertical-align: sub;
+        font-size: 21px !important;
+        margin-left: 10px;
+        font-weight: normal;
       }
 
       .actions-icon{
         cursor: pointer;
+      }
+
+      .heading{
+          font-weight: bold;
       }
