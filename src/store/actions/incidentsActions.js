@@ -8,16 +8,13 @@ export const incidentsWithPage = (parameters) => {
         axios.defaults.headers = {'Authorization': `Bearer ${getState().userLogin.token + ""}`};
         const url = "https://localhost:44398/api/Incidents/GetIncidentsWithPage?"+
                     "PageSize=" + parameters.PageSize +"&PageNumber=" + parameters.PageNumber 
-                    + "&SortBy=q&SortDirection=q&Search=" + parameters.Search;
-        //axios.get(url)
+                    + "&SortBy=q&SortDirection=q&Search=" + parameters.Search;     
         axios({
           method: 'GET',
-          url: url,
-          //params: { q: query, page: pageNumber },
+          url: url,         
           cancelToken: new axios.CancelToken(c => cancel = c)
         })
-          .then((response)=>{     
-            console.log(parameters.Search)  ;     
+          .then((response)=>{ 
              const data = response.data;
               dispatch({ type: 'INCIDENTS_WITH_PAGE', data });
           })
@@ -28,8 +25,7 @@ export const incidentsWithPage = (parameters) => {
   }
 
   export const addNewIncident = (formData) => {
-    return (dispatch, getState) => {  
-     
+    return (dispatch, getState) => {      
         axios.defaults.headers = {'Authorization': `Bearer ${getState().userLogin.token + ""}`};
         const url = "https://localhost:44398/api/Incidents/AddIncident"
         axios.post(url, formData)
@@ -39,8 +35,21 @@ export const incidentsWithPage = (parameters) => {
           })
           .catch((err)=>{                 
                    console.log(err);
-          });
-    
+          });   
+    }
+  }
+
+  export const updateIncident = (parameters) => {
+    return (dispatch, getState) => {      
+        axios.defaults.headers = {'Authorization': `Bearer ${getState().userLogin.token + ""}`};
+        const url = "https://localhost:44398/api/Incidents/UpdateIncident"
+        axios.post(url, parameters)
+          .then((response)=>{  
+            //  dispatch({ type: 'INCIDENTS_WITH_PAGE', data });
+          })
+          .catch((err)=>{                 
+                   console.log(err);
+          });   
     }
   }
 
@@ -57,7 +66,12 @@ export const incidentsWithPage = (parameters) => {
           })
           .catch((err)=>{                 
                    console.log("By Id",err);
-          });
-    
+          });   
     }
   }
+
+  export const removeIncidentData = () => {       
+         return   { type: 'REMOVE_INCIDENT_DATA', data : null};
+         
+  }
+

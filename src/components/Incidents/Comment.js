@@ -1,7 +1,6 @@
 import { React, useEffect, useState, useRef } from "react";
 import moment from "moment";
 
-console.log(moment);
 export default function Comment({comment}) {
 
   const [editComment, setEditComment] = useState(false);

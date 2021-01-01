@@ -26,6 +26,14 @@ nav .badge{
       }
    
 
+      .datepicker-date-display, .timepicker-digital-display{
+        background-color:#1A237E; ;
+    }
+
+    li>a, .dropdown-content li>span {
+     color: #1A237E; 
+    }
+
       span.im-createTime{
         font-size: 12px;
       }
@@ -70,4 +78,13 @@ nav .badge{
 
       .actions-icon{
         cursor: pointer;
+      }
+
+      .bigTextScroll{
+        max-height: 20vh;
+        overflow-y: scroll;
+      }
+
+      .heading {
+        font-weight: bold;
       }

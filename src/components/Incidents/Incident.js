@@ -1,11 +1,15 @@
 import React from 'react';
 import {  useHistory  } from 'react-router-dom';
+import { removeIncidentData } from "../../store/actions/incidentsActions";
+import { connect  } from 'react-redux'
 
-export default function Incident({incident}) {
+function Incident({incident, dispatch}) {
 
   const history = useHistory();
 
   const openIncident = (id) => {
+    console.log(removeIncidentData());
+    dispatch(removeIncidentData()); // So that user does not see old data that is stored in redux (and local storage)
     let path = '/Incident/' + id;      
       history.push(path);
   }
@@ -27,3 +31,5 @@ export default function Incident({incident}) {
       </tr>
     );
 }
+
+export default connect()(Incident);

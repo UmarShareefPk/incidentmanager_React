@@ -22,6 +22,12 @@ const initState = {
              ...state, 
              IncidentSelected : action.data                       
            }     
+           case 'REMOVE_INCIDENT_DATA':            
+             return {
+               ...state, 
+               IncidentSelected : null                      
+             }     
+           
          
        default:
          return state

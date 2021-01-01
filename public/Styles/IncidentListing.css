@@ -1,10 +1,4 @@
 
-nav .badge{
-    position: relative;
-    top: 20px;
-    right: 37px;
-    z-index: 1;
-    }
 
     .pagination li.active {
         background-color: #1A237E;
@@ -39,23 +33,17 @@ nav .badge{
 
 /* Small devices  */
 @media (min-width: 300px) {
-    nav .brand-logo {
-        font-size: 21px;
-    }
+   
 }
 
 /* (tablets, 768px and up) */
 @media (min-width: 700px) {
-    nav .brand-logo {
-        font-size: 21px;
-    }
+    
 }
 
 /* Large Tablets  */
 @media (min-width: 1000px) {
-    nav .brand-logo {
-        font-size: 30px;
-    }
+   
 }
 
 /* Computer */
@@ -65,12 +53,5 @@ nav .badge{
            white-space: nowrap;
            width: 14%;
        }    
-
-       nav .brand-logo {
-        font-size: 30px;
-    }
-       /* .incidentsTbl .header{
-           position: sticky;
-           top:0;
-       }          */
+      
 }
