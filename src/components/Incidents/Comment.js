@@ -1,9 +1,43 @@
 import { React, useEffect, useState, useRef } from "react";
 import moment from "moment";
 
-export default function Comment({comment}) {
+export default function Comment({incidentId , comments, saveNewComment, userId , getNameById}) {
 
+  const [comment, setComment] = useState("");
+  const [files, setFiles] = useState(null);
   const [editComment, setEditComment] = useState(false);
+
+
+  const onFileChange = (event) => {    
+    if (event.target.files.length > 3) {
+      //alert("You can only attach upto 3 files. All extra files will be ignored.");
+    }     
+    setFiles(event.target.files);
+  };
+
+  const saveComment = () => {
+    if(comment.trim() === ""){
+      alert("Please add comment first.");
+      return;
+    }
+    const formData = new FormData(); 
+
+    if(files){
+        for(let i = 0; i < files.length ; i++){
+          formData.append( 
+            "Attachment" + i+1, 
+            files[i], 
+            files[i].name 
+          );
+        }
+    }   
+     formData.append("CommentText", comment.trim()); 
+     formData.append("IncidentId", incidentId);
+     formData.append("UserId", userId);
+
+
+     saveNewComment(formData);
+  }
 
   const commentEditClick = () =>{
     setEditComment(!editComment);
@@ -19,12 +53,14 @@ export default function Comment({comment}) {
     return (
       <>
          <h5 className="heading left-align">Comments</h5>
-                  <div className="card">
+         {!comments? (<h1>No Comments</h1>) : comments.map(comment =>{
+           return (
+            <div className="card">
                     <div className="card-content">
                       <div className="row">
                         <div className="col s12">
                           <p className="commentHeader">
-                             <a>Umar Shareef</a> added a comment. - {moment("Fri Jun 01 2021 02:45:49").fromNow() } {moment("Fri Jun 01 2021 02:45:49").format("MMMM DD YYYY, h:mm:ss a")}
+                             <a>{getNameById(comment.UserId)}</a> added a comment. - <span title= {moment("comment.CreateDate").format("MMMM DD YYYY, h:mm:ss a")}>{moment(comment.CreateDate).fromNow() } </span> 
                             <span className="right">
                               <i
                                 title="Edit Comment"
@@ -43,11 +79,7 @@ export default function Comment({comment}) {
                           </p>
                           {!editComment ? 
                           (  <p className="darkslategrayText">
-                              Lorem ipsum dolor sit amet consectetur adipisicing
-                              elit. Maiores tempora quibusdam cum iure alias
-                              fugiat. Qui ipsum labore fuga recusandae quo est
-                              aliquid sunt repellendus soluta odio, consequatur
-                              inventore animi!
+                                  {comment.CommentText}
                             </p>)
                           :
                           (
@@ -98,16 +130,19 @@ export default function Comment({comment}) {
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </div>           )
+         })}
+                
+                
                  <h6 className="heading indigo-text darken-4 left-align">Add Comment</h6>
                     <div className="input-field"> 
-                       <textarea id="comment" className="materialize-textarea"></textarea> 
+                       <textarea id="comment" className="materialize-textarea" value={comment} onChange= {(e)=>setComment(e.target.value)}></textarea> 
                        <label for="comment" className="">Comment</label>                    
                     </div>
                     <div className="file-field input-field">
                       <div className="btn indigo darken-2">
                         <i className="material-icons ">attachment</i>
-                        <input type="file" id="attachment" multiple />
+                        <input type="file" id="attachment" multiple   onChange={onFileChange} />
                       </div>
                       <div className="file-path-wrapper">
                         <input className="file-path validate" type="text" placeholder="Upload upto 3 files" />
@@ -116,17 +151,13 @@ export default function Comment({comment}) {
 
                     <div className="input-field center ">         
               
-                      <button className="left btn green darken-2 updateBtn">
+                      <button className="left btn green darken-2 updateBtn" onClick={saveComment}>
                           <span>Add</span>
                           <i className="material-icons right">save</i>
-                         
+                          
                         </button>
           
-                      <button className="btn hide yellow darken-2 updateBtn ">
-                        <span>Cancel</span>
-                        <i className="material-icons right">cancel</i>
-                        
-                      </button>
+                     
                     </div>
             </>
     );

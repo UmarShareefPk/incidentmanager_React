@@ -23,8 +23,6 @@ nav .badge{
         color: #1A237E
     } */
 
-   
-
     /* .titleBar{
         border-bottom: 1px solid  #1A237E;
     } */
@@ -35,6 +33,14 @@ nav .badge{
 
 .input-field button {
     margin-right: 10px;
+}
+
+.tbl-description{
+    width:15%;
+}
+
+.tbl-title {
+    width:20%;
 }
 
 /* Small devices  */

@@ -137,8 +137,8 @@ import { addNewIncident } from '../../store/actions/incidentsActions';
 
      addNewIncident(formData);
 
-     setTitle("");
-     setDescription("");
+    // setTitle("");
+     //setDescription("");
      
 
   }; 

@@ -3,8 +3,10 @@ import { connect } from 'react-redux'
 import Pages from '../Pages'
 import Incident from './Incident'
 import PageActions from "../PageActions";
+import { allUsers } from "../../store/actions/usersActions";
 import { incidentsWithPage, cancel } from "../../store/actions/incidentsActions";
-import {  useHistory  } from 'react-router-dom'
+import {  useHistory  } from 'react-router-dom';
+
 
  function IncidentLisiting(props) {
    
@@ -13,6 +15,12 @@ import {  useHistory  } from 'react-router-dom'
     const [Search, setSearch] = useState("");
     const [loading, setLoading] = useState(true);
     const history = useHistory();
+
+    useEffect(() => {
+      props.getAllAssignees();      
+    }, []);
+
+
    
     useEffect(() => {
         const parameters = {
@@ -36,6 +44,16 @@ import {  useHistory  } from 'react-router-dom'
     const addNewClick = ()=>{
       let path = '/AddNew';      
       history.push(path);
+    }
+
+    const getUserNameById = (id) => {   
+      let user = props.allAssignees.find((assignee) => {
+        return assignee.Id === id;
+      });   
+      if(!user){    
+        return id;
+      }
+      return user.FirstName + " " + user.LastName
     }
     
     return (
@@ -80,7 +98,7 @@ import {  useHistory  } from 'react-router-dom'
                   {
                       props.Incidents.map(incident=>{
                           return (
-                            <Incident key={incident.Id} incident= {incident} />                          )
+                            <Incident key={incident.Id} incident= {incident} getUserNameById={getUserNameById} />                          )
                       })
                   }           
                   </tbody>
@@ -96,6 +114,7 @@ import {  useHistory  } from 'react-router-dom'
 
 const mapStateToProps = (state) => {
     return{
+        allAssignees: state.users.users,
         Incidents : state.incidents.Incidents,
         TotalIncidents : state.incidents.TotalIncidents      
     }
@@ -103,7 +122,8 @@ const mapStateToProps = (state) => {
   
   const mapDispatchToProps = (dispatch) => {
     return {
-        incidentsWithPage: (parameters) => dispatch(incidentsWithPage(parameters))
+        incidentsWithPage: (parameters) => dispatch(incidentsWithPage(parameters)),
+        getAllAssignees: () => dispatch(allUsers()),
     }
   }
   

@@ -3,7 +3,7 @@ import PageActions from "../PageActions";
 import M from "materialize-css";
 import { connect } from "react-redux";
 import { allUsers } from "../../store/actions/usersActions";
-import { getIncidentById, updateIncident } from "../../store/actions/incidentsActions";
+import { getIncidentById, updateIncident, addNewComment } from "../../store/actions/incidentsActions";
 import Comment from "./Comment";
 import "../../styles/incidentDetails.css";
 import moment from "moment";
@@ -15,14 +15,17 @@ function IncidentDetails({
   allAssignees,
   getAllAssignees,
   userId,
-  updateIncident
+  updateIncident,
+  addNewComment
 }) {
-  
+ 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [additionalDetails, setAdditionalDetails] = useState(""); 
   const [assignee, setAssignee] = useState(null);
   const [status, setStatus] = useState('N');
+  const [dueDate, setDueDate] = useState('');
+  const [startTime, setStartTime] = useState('');
   
   const [assigneeName, setAssigneeName] = useState("");
   const [assigneeList, setAssigneeList] = useState(allAssignees);
@@ -57,12 +60,14 @@ function IncidentDetails({
     if(incidentData){
       setTitle(incidentData.Title);
       setDescription(incidentData.Description);
-      setAdditionalDetails(incidentData.AdditionalDetails); 
+      setAdditionalDetails(incidentData.AdditionalData); 
       let currentAssignee =  allAssignees.find((assignee) => {
         return assignee.Id === incidentData.AssignedTo;
       });
       setAssigneeName(currentAssignee.FirstName + " " + currentAssignee.LastName);  
       setStatus(incidentData.Status);
+      setDueDate(incidentData.DueDate);
+      setStartTime(incidentData.StartTime);
     }
   }, [incidentData]);
 
@@ -78,6 +83,15 @@ function IncidentDetails({
     M.Timepicker.init(dueDateTimeRef.current);
   }
 
+  const getNameById = (id) => {   
+    let user = allAssignees.find((assignee) => {
+      return assignee.Id === id;
+    });   
+    if(!user){    
+      return id;
+    }
+    return user.FirstName + " " + user.LastName
+  }
 
   const assigneeSelected = (userId) => {
     let currentAssignee = allAssignees.find((assignee) => {
@@ -115,10 +129,6 @@ function IncidentDetails({
     setAssigneeList(newList);
   };
 
-  if (!incidentData || !allAssignees) {
-    console.log(incidentData, allAssignees, assigneeList);
-    return <h1> Loading</h1>;
-  }
 
   if (allAssignees && !assigneeList) {
     setAssigneeList(allAssignees);
@@ -176,7 +186,7 @@ function IncidentDetails({
 
   const additionalDetailsEditSave = () =>{
     updateIncidentByField("AdditionalData" , additionalDetails.trim());
-    setEditAdditionalDetails(false);
+    setEditAdditionalDetails(false);    
   }
 
 
@@ -189,8 +199,20 @@ function IncidentDetails({
   }
 
   const dueDateEditSave = () =>{
-   setEditDueDate(false);
-  }
+    
+    if ( dueDateDateRef.current.value === "" ||  dueDateTimeRef.current.value === "" ) {
+      alert("Please select date and time.");
+      setEditDueDate(false);
+      return;
+    } 
+
+    let dueDateTemp  = new Date( dueDateDateRef.current.value + " " + dueDateTimeRef.current.value);
+    dueDateTemp = (dueDateTemp.getMonth() + 1) + "/" + dueDateTemp.getDate() + "/" +  dueDateTemp.getFullYear() 
+                + " " + dueDateTemp.getHours() + ":" + dueDateTemp.getMinutes() + ":" + dueDateTemp.getSeconds(); 
+      updateIncidentByField("DueDate" , dueDateTemp);     
+      setEditDueDate(false);
+      setDueDate(dueDateTemp);
+   }
 
 
   const startDateEditClick = () =>{
@@ -202,7 +224,19 @@ function IncidentDetails({
   }
 
   const startDateEditSave = () =>{
-   setEditStartDate(false);
+  
+   if ( startTimeDateRef.current.value === "" ||  startTimeTimeRef.current.value === "" ) {
+    alert("Please select date and time.");
+    setEditStartDate(false);
+    return;
+  } 
+
+  let startTimeTemp  = new Date( startTimeDateRef.current.value + " " + startTimeTimeRef.current.value);
+  startTimeTemp = (startTimeTemp.getMonth() + 1) + "/" + startTimeTemp.getDate() + "/" +  startTimeTemp.getFullYear() 
+                + " " + startTimeTemp.getHours() + ":" + startTimeTemp.getMinutes() + ":" + startTimeTemp.getSeconds();  
+    updateIncidentByField("StartTime" , startTimeTemp);   
+    setEditStartDate(false); 
+    setStartTime(startTimeTemp);  
   }
 
   const updateIncidentByField = (field , value) => {    
@@ -222,6 +256,24 @@ function IncidentDetails({
   }
 
 
+
+  if (!incidentData || !allAssignees) {    
+    return  ( 
+     
+              <div class="preloader-wrapper container big active page-loader">
+                <div class="spinner-layer spinner-blue-only">
+                  <div class="circle-clipper left">
+                    <div class="circle"></div>
+                  </div><div class="gap-patch">
+                    <div class="circle"></div>
+                  </div><div class="circle-clipper right">
+                    <div class="circle"></div>
+                  </div>
+                </div>
+            </div>
+          );
+  }
+
   return (
     <>
       <link rel="stylesheet" href="./Styles/incidentDetails.css"></link>
@@ -232,115 +284,156 @@ function IncidentDetails({
             <div className="col s12 l12 ">
               <div className="row">
                 <div className="col s9">
-                 {!editTitle ? 
-                      (<h5 className="left indigo-text darken-4">  {/* Title  */}                 
-                        {incidentData.Title}
-                        <i className="material-icons actions-icon" onClick={titleEditClick}>edit</i>
-                        <span className="im-createTime black-text " title={moment(incidentData.CreatedAT).format("MMMM DD YYYY, h:mm:ss a")}>
-                          {moment(incidentData.CreatedAT).fromNow()}                         
-                        </span>
-                      </h5>)
-                  :
-                        (<div className="input-field"> {/* Title Edit */}
-                          <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
-                          <button
-                            title="Save"
-                            className="btn green darken-2 right updateBtn"
-                            onClick={titleEditSave}
-                          >
-                            <i className="actions-icon material-icons">check</i>
-                          </button>
-                          <button
-                            title="Cancel"
-                            className="btn yellow darken-2 right updateBtn"
-                            onClick={titleEditCancel}
-                          >
-                            <i className="actions-icon material-icons">cancel</i>
-                          </button>
-                        </div>
-                     )
-                 }
-                 </div>
-                <div className="col s3"> {/* IM Major Action Edit */}
-                  <h5 className="left indigo-text darken-4"> </h5>
+                  {!editTitle ? (
+                    <h5 className="left indigo-text darken-4">
+                      {" "}
+                      {/* Title  */}
+                      {title}
+                      <i
+                        className="material-icons actions-icon"
+                        onClick={titleEditClick}
+                      >
+                        edit
+                      </i>
+                    </h5>
+                  ) : (
+                    <div className="input-field">
+                      {" "}
+                      {/* Title Edit */}
+                      <input
+                        type="text"
+                        value={title}
+                        onChange={(e) => setTitle(e.target.value)}
+                      />
+                      <button
+                        title="Save"
+                        className="btn green darken-2 right updateBtn"
+                        onClick={titleEditSave}
+                      >
+                        <i className="actions-icon material-icons">check</i>
+                      </button>
+                      <button
+                        title="Cancel"
+                        className="btn yellow darken-2 right updateBtn"
+                        onClick={titleEditCancel}
+                      >
+                        <i className="actions-icon material-icons">cancel</i>
+                      </button>
+                    </div>
+                  )}
+                </div>
+                <div className="col s3">
+                  {" "}
+                  {/* IM Major Action Edit */}
+                  <h5>
+                    {" "}
+                    <span
+                      className="im-createTime black-text "
+                      title={moment(incidentData.CreatedAT).format(
+                        "MMMM DD YYYY, h:mm:ss a"
+                      )}
+                    >
+                      Created by <a> {getNameById(incidentData.CreatedBy)} </a>{" "}
+                      - {moment(incidentData.CreatedAT).fromNow()}
+                    </span>
+                  </h5>
                 </div>
               </div>
 
               <div className="row">
                 <div className="col s12 l6">
-
-                  <p className="heading left-align indigo-text darken-4"> {/* Description  */}
-                          Description :
-                          <i className="inline-icon material-icons actions-icon" onClick={descriptionEditClick}>
-                            edit
-                          </i>
-                  </p>        
-                {!editDescription ?
-                  ( <>                               
+                  <p className="heading left-align indigo-text darken-4">
+                    {" "}
+                    {/* Description  */}
+                    Description :
+                    <i
+                      className="inline-icon material-icons actions-icon"
+                      onClick={descriptionEditClick}
+                    >
+                      edit
+                    </i>
+                  </p>
+                  {!editDescription ? (
+                    <>
                       <div className="input-field">
                         <p className="darkslategrayText bigTextScroll">
-                         {incidentData.Description}
+                          {description}
                         </p>
                       </div>
                     </>
-                  )
-                :
-                    ( 
-                      <>
-                        <div className="input-field"> {/* Description Edit */}
-                          <textarea id="description" className="materialize-textarea" value={description} onChange={(e) => setDescription(e.target.value)}  >
-                           
-                          </textarea>
-                          <button
-                            title="Save"
-                            className="btn green darken-2 right updateBtn"
-                            onClick={descriptionEditSave}
-                          >
-                            <i className="actions-icon material-icons">check</i>
-                          </button>
-                          <button
-                            title="Cancel"
-                            className="btn yellow darken-2 right updateBtn"
-                            onClick={descriptionEditCancel}
-                          >
-                            <i className="actions-icon material-icons">cancel</i>
-                          </button>
-                        </div>
-                    </>
-                  )
-                }
-                  <p className="heading left-align indigo-text darken-4"> {/*   Additional Details */}
-                    Additional Details :
-                    <i className="inline-icon material-icons" onClick={additionalDetailsEditClick}>edit</i>
-                  </p>
-                  {!editAdditionalDetails ? 
-                      (     <div className="input-field">
-                            <p className="darkslategrayText bigTextScroll">
-                               {incidentData.AdditionalData}
-                            </p>
-                          </div>)
-                  :
-                      (  <div className="input-field">   {/*   Additional Details Edit */}
-                          <textarea className="materialize-textarea" value={additionalDetails} onChange={(e) => setAdditionalDetails(e.target.value)} >
-
-                          </textarea>
+                  ) : (
+                    <>
+                      <div className="input-field">
+                        {" "}
+                        {/* Description Edit */}
+                        <textarea
+                          id="description"
+                          className="materialize-textarea"
+                          value={description}
+                          onChange={(e) => setDescription(e.target.value)}
+                        ></textarea>
                         <button
                           title="Save"
                           className="btn green darken-2 right updateBtn"
-                          onClick={additionalDetailsEditSave}
+                          onClick={descriptionEditSave}
                         >
                           <i className="actions-icon material-icons">check</i>
                         </button>
                         <button
                           title="Cancel"
                           className="btn yellow darken-2 right updateBtn"
-                          onClick={additionalDetailsEditCancel}
+                          onClick={descriptionEditCancel}
                         >
                           <i className="actions-icon material-icons">cancel</i>
                         </button>
-                      </div>) 
-                  }
-                  <p className="heading left-align indigo-text darken-4"> {/*  Attachments */}
+                      </div>
+                    </>
+                  )}
+                  <p className="heading left-align indigo-text darken-4">
+                    {" "}
+                    {/*   Additional Details */}
+                    Additional Details :
+                    <i
+                      className="inline-icon material-icons"
+                      onClick={additionalDetailsEditClick}
+                    >
+                      edit
+                    </i>
+                  </p>
+                  {!editAdditionalDetails ? (
+                    <div className="input-field">
+                      <p className="darkslategrayText bigTextScroll">
+                        {additionalDetails}
+                      </p>
+                    </div>
+                  ) : (
+                    <div className="input-field">
+                      {" "}
+                      {/*   Additional Details Edit */}
+                      <textarea
+                        className="materialize-textarea"
+                        value={additionalDetails}
+                        onChange={(e) => setAdditionalDetails(e.target.value)}
+                      ></textarea>
+                      <button
+                        title="Save"
+                        className="btn green darken-2 right updateBtn"
+                        onClick={additionalDetailsEditSave}
+                      >
+                        <i className="actions-icon material-icons">check</i>
+                      </button>
+                      <button
+                        title="Cancel"
+                        className="btn yellow darken-2 right updateBtn"
+                        onClick={additionalDetailsEditCancel}
+                      >
+                        <i className="actions-icon material-icons">cancel</i>
+                      </button>
+                    </div>
+                  )}
+                  <p className="heading left-align indigo-text darken-4">
+                    {" "}
+                    {/*  Attachments */}
                     <i className="material-icons inline-icon">attachment</i>
                     Attachments:
                   </p>
@@ -361,7 +454,13 @@ function IncidentDetails({
                     </ul>
                   </div>
 
-                  <Comment />
+                  <Comment
+                    userId={userId}
+                    incidentId={incidentData.Id}
+                    comments={incidentData.Comments}
+                    saveNewComment={addNewComment}
+                    getNameById = {getNameById}
+                  />
                 </div>
 
                 <div className="col s12 l5 offset-l1  ID-dropdowns">
@@ -402,10 +501,8 @@ function IncidentDetails({
                                       key={user.Id}
                                       onClick={() => assigneeSelected(user.Id)}
                                     >
-                                      <a className="indigo-text" href="#!">                                       
-                                        {user.FirstName +
-                                          " " +
-                                          user.LastName}
+                                      <a className="indigo-text" href="#!">
+                                        {user.FirstName + " " + user.LastName}
                                       </a>
                                     </li>
                                   );
@@ -415,10 +512,16 @@ function IncidentDetails({
                       </tr>
                       <tr>
                         <td>
-                          <p className="heading left indigo-text darken-4">Status </p>
+                          <p className="heading left indigo-text darken-4">
+                            Status{" "}
+                          </p>
                         </td>
                         <td>
-                          <select ref={statusRef} value={status} onChange={statusChanged}>
+                          <select
+                            ref={statusRef}
+                            value={status}
+                            onChange={statusChanged}
+                          >
                             <option value="N" disabled selected>
                               New
                             </option>
@@ -432,117 +535,133 @@ function IncidentDetails({
                         <td>
                           <p className="heading left indigo-text darken-4">
                             Due Date
-                            <i className="actions-icon inline-icon material-icons" onClick={dueDateEditClick}>edit</i>
+                            <i
+                              className="actions-icon inline-icon material-icons"
+                              onClick={dueDateEditClick}
+                            >
+                              edit
+                            </i>
                           </p>
                         </td>
                         <td>
-                        {!editDueDate ? 
-                          (   <p title={moment(incidentData.DueDate).format("MMMM DD YYYY, h:mm a")}>
-                                  {moment(incidentData.DueDate).fromNow()} 
-                              </p>)
-                          : null }
-                              <div className={editDueDate ? "" : "hide"}>
-                                <div className="input-field ">
-                                  <input
-                                    type="text"
-                                    id="dueDateDate"
-                                    className="datepicker"
-                                    ref={dueDateDateRef}
-                                  />
-                                  <label for="dueDateDate" className="">
-                                    Pick Date
-                                  </label>
-                                </div>
-                                <div className="input-field ">
-                                  <input
-                                    type="text"
-                                    id="dueDateTime"
-                                    className="timepicker"
-                                    ref={dueDateTimeRef}
-                                  />
-                                  <label for="dueDateTime" className="">
-                                    Pick Time
-                                  </label>
-                                </div>
-                                <button
-                                  title="Save"
-                                  className="btn green darken-2 right updateBtn"
-                                  onClick={dueDateEditSave}
-                                >
-                                  <i className="actions-icon material-icons">
-                                    check
-                                  </i>
-                                </button>
-                                <button
-                                  title="Cancel"
-                                  className="btn yellow darken-2 right updateBtn"
-                                  onClick={dueDateEditCancel}
-                                >
-                                  <i className="actions-icon material-icons">
-                                    cancel
-                                  </i>
-                                </button>
-                              </div>
-                        
+                          {!editDueDate ? (
+                            <p
+                              title={moment(dueDate).format(
+                                "MMMM DD YYYY, h:mm a"
+                              )}
+                            >
+                              {moment(dueDate).fromNow()}
+                            </p>
+                          ) : null}
+                          <div className={editDueDate ? "" : "hide"}>
+                            <div className="input-field ">
+                              <input
+                                type="text"
+                                id="dueDateDate"
+                                className="datepicker"
+                                ref={dueDateDateRef}
+                              />
+                              <label for="dueDateDate" className="">
+                                Pick Date
+                              </label>
+                            </div>
+                            <div className="input-field ">
+                              <input
+                                type="text"
+                                id="dueDateTime"
+                                className="timepicker"
+                                ref={dueDateTimeRef}
+                              />
+                              <label for="dueDateTime" className="">
+                                Pick Time
+                              </label>
+                            </div>
+                            <button
+                              title="Save"
+                              className="btn green darken-2 right updateBtn"
+                              onClick={dueDateEditSave}
+                            >
+                              <i className="actions-icon material-icons">
+                                check
+                              </i>
+                            </button>
+                            <button
+                              title="Cancel"
+                              className="btn yellow darken-2 right updateBtn"
+                              onClick={dueDateEditCancel}
+                            >
+                              <i className="actions-icon material-icons">
+                                cancel
+                              </i>
+                            </button>
+                          </div>
                         </td>
                       </tr>
                       <tr>
                         <td>
-                          <p className="heading left indigo-text darken-4">                            
-                               Start Time
-                            <i className="actions-icon inline-icon material-icons"   onClick={startDateEditClick}>edit</i>
+                          <p className="heading left indigo-text darken-4">
+                            Start Time
+                            <i
+                              className="actions-icon inline-icon material-icons"
+                              onClick={startDateEditClick}
+                            >
+                              edit
+                            </i>
                           </p>
                         </td>
                         <td>
-                        {!editStartDate ? 
-                          ( <p title={moment(incidentData.StartTime).format("MMMM DD YYYY, h:mm a")}>
-                                  {moment(incidentData.StartTime).fromNow()} 
-                              </p>)
-                          : null }
-                             <div className={editStartDate ? "" : "hide"}>
-                              <div className="input-field">
-                                <input
-                                  type="text"
-                                  id="startTimeDate"
-                                  className="datepicker"
-                                  ref={startTimeDateRef}
-                                />
-                                <label for="startTimeDate" className="">                               
-                                  Pick Date
-                                </label>
-                              </div>
-                              <div className="input-field">
-                                <input
-                                  readOnly
-                                  type="text"
-                                  id="startTimeTime"
-                                  className="timepicker"
-                                  ref={startTimeTimeRef}
-                                />
-                                <label for="startTimeime" className="">
-                                  Pick Time
-                                </label>
-                              </div>
-                              <button
-                                title="Save"
-                                className="btn green darken-2 right updateBtn"
-                                onClick={startDateEditSave}
-                              >
-                                <i className="actions-icon material-icons">
-                                  check
-                                </i>
-                              </button>
-                              <button
-                                title="Cancel"
-                                className="btn yellow darken-2 right updateBtn"
-                                onClick={startDateEditCancel}
-                              >
-                                <i className="actions-icon material-icons">
-                                  cancel
-                                </i>
-                              </button>
+                          {!editStartDate ? (
+                            <p
+                              title={moment(startTime).format(
+                                "MMMM DD YYYY, h:mm a"
+                              )}
+                            >
+                              {moment(startTime).fromNow()}
+                            </p>
+                          ) : null}
+                          <div className={editStartDate ? "" : "hide"}>
+                            <div className="input-field">
+                              <input
+                                type="text"
+                                id="startTimeDate"
+                                className="datepicker"
+                                ref={startTimeDateRef}
+                              />
+                              <label for="startTimeDate" className="">
+                                Pick Date
+                              </label>
                             </div>
-                        
+                            <div className="input-field">
+                              <input
+                                readOnly
+                                type="text"
+                                id="startTimeTime"
+                                className="timepicker"
+                                ref={startTimeTimeRef}
+                              />
+                              <label for="startTimeime" className="">
+                                Pick Time
+                              </label>
+                            </div>
+                            <button
+                              title="Save"
+                              className="btn green darken-2 right updateBtn"
+                              onClick={startDateEditSave}
+                            >
+                              <i className="actions-icon material-icons">
+                                check
+                              </i>
+                            </button>
+                            <button
+                              title="Cancel"
+                              className="btn yellow darken-2 right updateBtn"
+                              onClick={startDateEditCancel}
+                            >
+                              <i className="actions-icon material-icons">
+                                cancel
+                              </i>
+                            </button>
+                          </div>
                         </td>
                       </tr>
                     </tbody>
@@ -570,6 +689,7 @@ const mapDispatchToProps = (dispatch) => {
     getAllAssignees: () => dispatch(allUsers()),
     getIncidentById: (incidentId) => dispatch(getIncidentById(incidentId)), 
     updateIncident: (parameters) => dispatch(updateIncident(parameters)), 
+    addNewComment: (formData) => dispatch(addNewComment(formData)), 
   };
 };
 

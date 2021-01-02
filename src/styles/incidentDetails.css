@@ -88,3 +88,7 @@ nav .badge{
       .heading {
         font-weight: bold;
       }
+
+      .page-loader {
+        margin-top: 10%;
+      }
