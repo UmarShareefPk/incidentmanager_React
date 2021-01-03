@@ -54,23 +54,6 @@ export const incidentsWithPage = (parameters) => {
     }
   }
 
-  // export const addNewComment = (formData) => {
-  //   console.log("OUTside : inside Add comment action", formData); 
-  //   return (dispatch, getState) => {     
-  //     console.log("inside Add comment action", formData); 
-  //       axios.defaults.headers = {'Authorization': `Bearer ${getState().userLogin.token + ""}`};
-  //       const url = "https://localhost:44398/api/Incidents/AddComment";
-  //       axios.post(url, formData)
-  //         .then((response)=>{            
-  //            const data = response.data;
-  //           //  dispatch({ type: 'INCIDENTS_WITH_PAGE', data });
-  //         })
-  //         .catch((err)=>{                 
-  //                  console.log(err);
-  //         });   
-  //   }
-  // }
-
   export const updateIncident = (parameters) => {
     return (dispatch, getState) => {      
         axios.defaults.headers = {'Authorization': `Bearer ${getState().userLogin.token + ""}`};

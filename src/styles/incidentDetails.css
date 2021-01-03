@@ -68,7 +68,7 @@ nav .badge{
       }
 
       .commentHeader{
-        padding-bottom: 20px;
+        
       }
 
       .inline-icon {
@@ -85,10 +85,19 @@ nav .badge{
         overflow-y: scroll;
       }
 
+      .all-comments-box{
+        max-height: 50vh;
+        overflow-y: scroll;
+      }
+
       .heading {
         font-weight: bold;
       }
 
       .page-loader {
         margin-top: 10%;
+      }
+
+      .comment-edit-box{
+        padding: 30px;
       }

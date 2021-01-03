@@ -1,7 +1,8 @@
 import {React, useState} from 'react'
 import { connect } from 'react-redux'
 import { logIn } from '../../store/actions/userLoginActions'
- import { Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
+import '../../styles/loginStyles.css'
 
 
  function Login(props) {

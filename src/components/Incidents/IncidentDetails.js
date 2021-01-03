@@ -4,7 +4,7 @@ import M from "materialize-css";
 import { connect } from "react-redux";
 import { allUsers } from "../../store/actions/usersActions";
 import { getIncidentById, updateIncident, addNewComment } from "../../store/actions/incidentsActions";
-import Comment from "./Comment";
+import Comments from "./Comments";
 import "../../styles/incidentDetails.css";
 import moment from "moment";
 
@@ -132,6 +132,17 @@ function IncidentDetails({
 
   if (allAssignees && !assigneeList) {
     setAssigneeList(allAssignees);
+  }
+
+  const downloadFile = (file) => {
+    console.log(file);
+    window.open(
+        "https://localhost:44398/api/Incidents/DownloadFile?type=incident"
+           + "&commentId=" + "" 
+           + "&incidentId=" + incidentData.Id
+           + "&filename=" + file.FileName
+           + "&contentType=" + file.ContentType
+    ); 
   }
 
   const titleEditClick = () =>{
@@ -440,21 +451,29 @@ function IncidentDetails({
 
                   <div className="input-field">
                     <ul className="input-field incidentFiles">
-                      <li className="center indigo-text darken-4">
-                        <i
-                          title="Remove"
-                          className="actions-icon material-icons red-text inline-icon"
-                        >
-                          cancel
-                        </i>
-                        File 1
+                    {!incidentData.Attachments? null : incidentData.Attachments.map(file => {
+                      return (
+                        <li key={file.Id} className="center indigo-text darken-4">
+                            <i
+                              title="Remove"
+                              className="actions-icon material-icons red-text inline-icon"
+                            >
+                              cancel
+                            </i>
+                            <span title={ file.FileName } onClick={() => downloadFile(file)}> 
+                                {file.FileName.length > 12 ? file.FileName.slice(0,12) + "..." :  file.FileName } 
+                            </span>
                       </li>
-                      <li className="center indigo-text darken-4">File 2</li>
-                      <li className="center indigo-text darken-4">File 3</li>
+                      )
+
+                    }) }
+
+                   
+                      
                     </ul>
                   </div>
 
-                  <Comment
+                  <Comments
                     userId={userId}
                     incidentId={incidentData.Id}
                     comments={incidentData.Comments}
