@@ -1,14 +1,18 @@
 import { React, useEffect, useState, useRef } from "react";
 import moment from "moment";
 
-export default function Comment({comment,getNameById, incidentId}) {
+export default function Comment({comment,getNameById, incidentId, deleteCommentAttachment, userId}) {
 
     const [editComment, setEditComment] = useState(false);
+    const [commentText, setCommentText] = useState(comment.CommentText);
+    const [files, setFiles] = useState(null);
 
     const commentEditClick = () =>{
         setEditComment(!editComment);
+        setCommentText(comment.CommentText);
       }
       const commentEditCancel = () =>{
+        setCommentText(comment.CommentText);
         setEditComment(false);
       }
     
@@ -16,8 +20,8 @@ export default function Comment({comment,getNameById, incidentId}) {
         setEditComment(false);
       }
 
-   const downloadFile = (file) => {
-         console.log(file);
+     const downloadFile = (file) => {
+        
          window.open(
              "https://localhost:44398/api/Incidents/DownloadFile?type=comment"
                 + "&commentId=" + file.CommentId 
@@ -26,7 +30,13 @@ export default function Comment({comment,getNameById, incidentId}) {
                 + "&contentType=" + file.ContentType
          ); 
        }
-    console.log(comment.CreateDate);
+
+       const deleteFile = (file) => {        
+        if(window.confirm("Are you sure you want to delete this attachment." + file.FileName)){
+          deleteCommentAttachment("comment" , userId, incidentId , file);
+        }      
+       }
+    
     return (
         <div className="">
         <p className="commentHeader">
@@ -86,7 +96,9 @@ export default function Comment({comment,getNameById, incidentId}) {
                       {!editComment ? null : 
                           <i
                             title="Remove"
-                            className="actions-icon material-icons red-text inline-icon" >
+                            className="actions-icon material-icons red-text inline-icon" 
+                            onClick={() => deleteFile(file)}
+                            >
                             cancel
                           </i>
                       }

@@ -41,7 +41,10 @@ nav .badge{
 
 .tbl-title {
     width:20%;
+    cursor: pointer;
 }
+
+
 
 /* Small devices  */
 @media (min-width: 300px) {

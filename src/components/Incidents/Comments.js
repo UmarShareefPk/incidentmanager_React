@@ -3,7 +3,7 @@ import moment from "moment";
 import {  useHistory  } from 'react-router-dom';
 import Comment from "./Comment";
 
-export default function Comments({incidentId , comments, saveNewComment, userId , getNameById}) {
+export default function Comments({incidentId , comments, saveNewComment, userId , getNameById, deleteCommentAttachment}) {
 
   const [newComment, setNewComment] = useState("");
   const [newCommentFiles, setNewCommentFiles] = useState(null);
@@ -49,8 +49,15 @@ export default function Comments({incidentId , comments, saveNewComment, userId 
          <p className="all-comments-box" > 
             {!comments? (<h1>No Comments</h1>) : comments.map(comment =>{           
               return (
-                       <Comment key={comment.Id} comment={comment} getNameById={getNameById} incidentId={incidentId} />  
-                      )
+                <Comment
+                  key={comment.Id}
+                  comment={comment}
+                  getNameById={getNameById}
+                  incidentId={incidentId}
+                  userId={userId}
+                  deleteCommentAttachment ={deleteCommentAttachment}
+                />
+              );
             })} {/* end of comments loop */}
          </p>       
                 

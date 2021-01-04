@@ -1,11 +1,7 @@
-nav .badge{
-    position: relative;
-    top: 20px;
-    right: 20px;
-    }
+
    
     ::-webkit-scrollbar {
-        width: 7px;
+        width: 4px;
       }
 
       /* Track */

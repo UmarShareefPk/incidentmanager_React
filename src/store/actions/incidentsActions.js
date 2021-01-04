@@ -85,6 +85,29 @@ export const incidentsWithPage = (parameters) => {
     }
   }
 
+  export const deleteAttachment = (type, userid, incidentId , file) => {
+    return (dispatch, getState) => {  
+     
+        axios.defaults.headers = {'Authorization': `Bearer ${getState().userLogin.token + ""}`};
+        const url = "https://localhost:44398/api/Incidents/DeleteFile?"
+                + "type=" + type
+                + "&commentId=" + file.CommentId 
+                + "&incidentId=" + incidentId
+                + "&userId=" + userid
+                + "&fileId=" + file.Id
+                + "&filename=" + file.FileName
+                + "&contentType=" + file.ContentType
+        axios.get(url)
+          .then((response)=>{            
+             const data = response.data;  
+           
+          })
+          .catch((err)=>{                 
+                   console.log("By Id",err);
+          });   
+    }
+  }
+
   export const removeIncidentData = () => {       
          return   { type: 'REMOVE_INCIDENT_DATA', data : null};
          

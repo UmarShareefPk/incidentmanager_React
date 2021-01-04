@@ -3,7 +3,7 @@ import PageActions from "../PageActions";
 import M from "materialize-css";
 import { connect } from "react-redux";
 import { allUsers } from "../../store/actions/usersActions";
-import { getIncidentById, updateIncident, addNewComment } from "../../store/actions/incidentsActions";
+import { getIncidentById, updateIncident, addNewComment, deleteAttachment } from "../../store/actions/incidentsActions";
 import Comments from "./Comments";
 import "../../styles/incidentDetails.css";
 import moment from "moment";
@@ -16,7 +16,8 @@ function IncidentDetails({
   getAllAssignees,
   userId,
   updateIncident,
-  addNewComment
+  addNewComment,
+  deleteAttachment
 }) {
  
   const [title, setTitle] = useState("");
@@ -266,7 +267,16 @@ function IncidentDetails({
     updateIncidentByField("Status" , e.target.value);
   }
 
+  const deleteCommentAttachment = (type, userid, incidentId ,file) => {
+    console.log("deleteCommentAttachment");
+    deleteAttachment(type, userid, incidentId ,file);
+  }
 
+  const deleteIncidentAttachment = (file) => {        
+    if(window.confirm("Are you sure you want to delete this attachment." + file.FileName)){
+      deleteAttachment("incicent" , userId, incidentData.Id , file);
+    }      
+   }
 
   if (!incidentData || !allAssignees) {    
     return  ( 
@@ -457,6 +467,7 @@ function IncidentDetails({
                             <i
                               title="Remove"
                               className="actions-icon material-icons red-text inline-icon"
+                              onClick={() => deleteIncidentAttachment(file)}
                             >
                               cancel
                             </i>
@@ -479,6 +490,7 @@ function IncidentDetails({
                     comments={incidentData.Comments}
                     saveNewComment={addNewComment}
                     getNameById = {getNameById}
+                    deleteCommentAttachment = {deleteCommentAttachment}
                   />
                 </div>
 
@@ -709,6 +721,7 @@ const mapDispatchToProps = (dispatch) => {
     getIncidentById: (incidentId) => dispatch(getIncidentById(incidentId)), 
     updateIncident: (parameters) => dispatch(updateIncident(parameters)), 
     addNewComment: (formData) => dispatch(addNewComment(formData)), 
+    deleteAttachment : (type, userid, incidentId , file) => dispatch(deleteAttachment(type, userid, incidentId ,file))
   };
 };
 
