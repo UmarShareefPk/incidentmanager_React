@@ -3,7 +3,7 @@ import PageActions from "../PageActions";
 import M from "materialize-css";
 import { connect } from "react-redux";
 import { allUsers } from "../../store/actions/usersActions";
-import { getIncidentById, updateIncident, addNewComment, deleteAttachment } from "../../store/actions/incidentsActions";
+import { getIncidentById, updateIncident, addNewComment, deleteAttachment, updateComment } from "../../store/actions/incidentsActions";
 import Comments from "./Comments";
 import "../../styles/incidentDetails.css";
 import moment from "moment";
@@ -18,6 +18,7 @@ function IncidentDetails({
   updateIncident,
   addNewComment,
   deleteAttachment
+  
 }) {
  
   const [title, setTitle] = useState("");
@@ -267,10 +268,6 @@ function IncidentDetails({
     updateIncidentByField("Status" , e.target.value);
   }
 
-  const deleteCommentAttachment = (type, userid, incidentId ,file) => {
-    console.log("deleteCommentAttachment");
-    deleteAttachment(type, userid, incidentId ,file);
-  }
 
   const deleteIncidentAttachment = (file) => {        
     if(window.confirm("Are you sure you want to delete this attachment." + file.FileName)){
@@ -354,7 +351,7 @@ function IncidentDetails({
                         "MMMM DD YYYY, h:mm:ss a"
                       )}
                     >
-                      Created by <a> {getNameById(incidentData.CreatedBy)} </a>{" "}
+                      Created by <a className="username"> {getNameById(incidentData.CreatedBy)} </a>{" "}
                       - {moment(incidentData.CreatedAT).fromNow()}
                     </span>
                   </h5>
@@ -489,8 +486,7 @@ function IncidentDetails({
                     incidentId={incidentData.Id}
                     comments={incidentData.Comments}
                     saveNewComment={addNewComment}
-                    getNameById = {getNameById}
-                    deleteCommentAttachment = {deleteCommentAttachment}
+                    getNameById = {getNameById}              
                   />
                 </div>
 
@@ -721,7 +717,7 @@ const mapDispatchToProps = (dispatch) => {
     getIncidentById: (incidentId) => dispatch(getIncidentById(incidentId)), 
     updateIncident: (parameters) => dispatch(updateIncident(parameters)), 
     addNewComment: (formData) => dispatch(addNewComment(formData)), 
-    deleteAttachment : (type, userid, incidentId , file) => dispatch(deleteAttachment(type, userid, incidentId ,file))
+    deleteAttachment : (type, userid, incidentId , file) => dispatch(deleteAttachment(type, userid, incidentId ,file))    
   };
 };
 

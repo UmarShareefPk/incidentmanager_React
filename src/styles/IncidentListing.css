@@ -43,7 +43,9 @@ nav .badge{
     width:20%;
     cursor: pointer;
 }
-
+.tbl-title:hover {
+   text-decoration: underline;
+}
 
 
 /* Small devices  */

@@ -60,13 +60,29 @@ export const incidentsWithPage = (parameters) => {
         const url = "https://localhost:44398/api/Incidents/UpdateIncident"
         axios.post(url, parameters)
           .then((response)=>{  
-            //  dispatch({ type: 'INCIDENTS_WITH_PAGE', data });
+              dispatch({ type: 'INCIDENTS_UPDATE', parameters });
           })
           .catch((err)=>{                 
                    console.log(err);
           });   
     }
   }
+
+  export const updateComment = (comment) => {
+    return (dispatch, getState) => {    
+       // dispatch(removeIncidentData());  
+        axios.defaults.headers = {'Authorization': `Bearer ${getState().userLogin.token + ""}`};
+        const url = "https://localhost:44398/api/Incidents/UpdateComment"
+        axios.post(url, comment)
+          .then((response)=>{  
+          //  dispatch(getIncidentById(comment.IncidentId)); 
+          })
+          .catch((err)=>{                 
+                   console.log(err);
+          });   
+    }
+  }
+
 
   export const getIncidentById = (incidentId) => {
     return (dispatch, getState) => {  
@@ -75,8 +91,7 @@ export const incidentsWithPage = (parameters) => {
         const url = "https://localhost:44398/api/Incidents/IncidentById?Id=" + incidentId; 
         axios.get(url)
           .then((response)=>{            
-             const data = response.data;  
-            // console.log("data" , data);           
+             const data = response.data;                     
               dispatch({ type: 'INCIDENTS_BY_ID', data });
           })
           .catch((err)=>{                 
@@ -86,7 +101,7 @@ export const incidentsWithPage = (parameters) => {
   }
 
   export const deleteAttachment = (type, userid, incidentId , file) => {
-    return (dispatch, getState) => {  
+    return (dispatch, getState) => {    
      
         axios.defaults.headers = {'Authorization': `Bearer ${getState().userLogin.token + ""}`};
         const url = "https://localhost:44398/api/Incidents/DeleteFile?"
@@ -98,8 +113,12 @@ export const incidentsWithPage = (parameters) => {
                 + "&filename=" + file.FileName
                 + "&contentType=" + file.ContentType
         axios.get(url)
-          .then((response)=>{            
-             const data = response.data;  
+          .then((response)=>{      
+                if (type === "comment")
+                  dispatch({ type: "COMMENT_ATTACHMENT_DELETED", data: file });
+                else
+                dispatch({ type: "INCIDENT_ATTACHMENT_DELETED", data: file });
+                const data = response.data;  
            
           })
           .catch((err)=>{                 

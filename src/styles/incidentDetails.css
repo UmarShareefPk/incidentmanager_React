@@ -69,11 +69,13 @@
 
       .inline-icon {
         vertical-align: bottom;
-        font-size: 22px !important;
+        font-size: 15px !important;
+      margin-bottom: 3px;
       }
 
       .actions-icon{
         cursor: pointer;
+        font-size: 30px;
       }
 
       .bigTextScroll{
@@ -82,7 +84,7 @@
       }
 
       .all-comments-box{
-        max-height: 50vh;
+        max-height: 70vh;
         overflow-y: scroll;
       }
 
@@ -96,4 +98,21 @@
 
       .comment-edit-box{
         padding: 30px;
+      }
+
+      .username{        
+        /* background-color: #1A237E; */
+        color: #1A237E;
+        border-radius: 25px;
+        padding: 5px;
+        cursor: pointer;
+        font-weight: bold;
+      }
+
+      .username:hover{
+        text-decoration: underline;
+      }
+
+      .all-comments-box hr {
+        border-top: #efefef solid 1px;
       }

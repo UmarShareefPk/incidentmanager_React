@@ -38,7 +38,7 @@ export default function Pages({TotalPages, PostsPerPage, setPageNumber, setPageS
     }, [search])
 
     pages = pages.map((p,index)=>{
-        let pclass = currentPage === p ? "waves-effect active" : "waves-effect";        
+        let pclass = currentPage === p ? "active" : "";        
         return (             
             <li className={pclass} key={p}  onClick={() => pageNumberClick(p)}>              
               <a > {p} </a>
@@ -68,14 +68,14 @@ export default function Pages({TotalPages, PostsPerPage, setPageNumber, setPageS
         <div className="input-field col s12 m8 l8">
             <ul className="pagination right">
             <li
-                className={  currentPage === 1 ? "waves-effect disabled" : "waves-effect" } >
+                className={  currentPage === 1 ? " disabled" : "" } >
                 <a href="#!" onClick={() => pageNumberClick(currentPage - 1)}>
                 <i className="material-icons">chevron_left</i>
                 </a>
             </li>
             {pages}
             <li
-                className={ currentPage === pages.length ? "waves-effect disabled" : "waves-effect" } >
+                className={ currentPage === pages.length ? " disabled" : "" } >
                 <a href="#!" onClick={() => pageNumberClick(currentPage + 1)}>
                 <i className="material-icons">chevron_right</i>
                 </a>
