@@ -3,7 +3,7 @@ import PageActions from "../PageActions";
 import M from "materialize-css";
 import { connect } from "react-redux";
 import { allUsers } from "../../store/actions/usersActions";
-import { getIncidentById, updateIncident, addNewComment, deleteAttachment, updateComment } from "../../store/actions/incidentsActions";
+import { getIncidentById, updateIncident, deleteAttachment } from "../../store/actions/incidentsActions";
 import Comments from "./Comments";
 import "../../styles/incidentDetails.css";
 import moment from "moment";
@@ -16,7 +16,6 @@ function IncidentDetails({
   getAllAssignees,
   userId,
   updateIncident,
-  addNewComment,
   deleteAttachment
   
 }) {
@@ -469,23 +468,20 @@ function IncidentDetails({
                               cancel
                             </i>
                             <span title={ file.FileName } onClick={() => downloadFile(file)}> 
-                                {file.FileName.length > 12 ? file.FileName.slice(0,12) + "..." :  file.FileName } 
+                                {file.FileName.length > 35 ? file.FileName.slice(0,35) + "..." :  file.FileName } 
                             </span>
                       </li>
                       )
 
                     }) }
 
-                   
-                      
                     </ul>
                   </div>
 
                   <Comments
                     userId={userId}
                     incidentId={incidentData.Id}
-                    comments={incidentData.Comments}
-                    saveNewComment={addNewComment}
+                    comments={incidentData.Comments}                    
                     getNameById = {getNameById}              
                   />
                 </div>
@@ -715,8 +711,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     getAllAssignees: () => dispatch(allUsers()),
     getIncidentById: (incidentId) => dispatch(getIncidentById(incidentId)), 
-    updateIncident: (parameters) => dispatch(updateIncident(parameters)), 
-    addNewComment: (formData) => dispatch(addNewComment(formData)), 
+    updateIncident: (parameters) => dispatch(updateIncident(parameters)),   
     deleteAttachment : (type, userid, incidentId , file) => dispatch(deleteAttachment(type, userid, incidentId ,file))    
   };
 };

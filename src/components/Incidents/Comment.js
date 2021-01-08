@@ -1,6 +1,6 @@
 import { React, useEffect, useState, useRef } from "react";
 import moment from "moment";
-import { deleteAttachment, updateComment } from "../../store/actions/incidentsActions";
+import { deleteAttachment, updateComment , deleteComment } from "../../store/actions/incidentsActions";
 import { connect } from "react-redux";
 
 function Comment({
@@ -9,7 +9,8 @@ function Comment({
   incidentId,
   userId,
   deleteAttachment,
-  updateComment
+  updateComment,
+  deleteComment
 }) {
 
   const [editComment, setEditComment] = useState(false);
@@ -62,6 +63,16 @@ function Comment({
     }
   };
 
+  const deleteThisComment = () => {
+    if (
+      window.confirm(
+        "Are you sure you want to delete this comment."
+      )
+    ) {
+      deleteComment(comment.Id,incidentId, userId );  
+    }
+  }
+
   return (
     <div className="">
       <p className="commentHeader darkslategrayText">
@@ -83,6 +94,7 @@ function Comment({
           <i
             title="Delete Comment"
             className="actions-icon material-icons red-text inline-icon"
+            onClick = {deleteThisComment}
           >
             cancel
           </i>
@@ -132,8 +144,8 @@ function Comment({
                         title={file.FileName}
                         onClick={() => downloadFile(file)}
                       >
-                        {file.FileName.length > 12
-                          ? file.FileName.slice(0, 12) + "..."
+                        {file.FileName.length > 40
+                          ? file.FileName.slice(0, 40) + "..."
                           : file.FileName}
                       </span>
                     </a>
@@ -158,7 +170,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {   
     deleteAttachment : (type, userid, incidentId , file) => dispatch(deleteAttachment(type, userid, incidentId ,file)),
-    updateComment : (comment) => dispatch(updateComment(comment))
+    updateComment : (comment) => dispatch(updateComment(comment)),
+    deleteComment : (commentId, incidentId, userId) => dispatch(deleteComment(commentId, incidentId, userId))
   };
 };
 

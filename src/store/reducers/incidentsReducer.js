@@ -48,8 +48,8 @@ const initState = {
        case "INCIDENT_ATTACHMENT_DELETED":
          changedincident = { ...state.IncidentSelected };
          changedincident.Attachments = changedincident.Attachments.filter(
-           (file) => file.Id !== action.data.Id
-         );
+                                                                    (file) => file.Id !== action.data.Id
+                                                                  );
 
          return {
            ...state,
@@ -87,6 +87,22 @@ const initState = {
            ...state,
            IncidentSelected: changedincident,
          };
+
+         case "ADD_NEW_COMMENT" :
+          changedincident = { ...state.IncidentSelected };
+          changedincident.Comments = [action.data].concat(changedincident.Comments);
+          return {
+            ...state,
+            IncidentSelected: changedincident,
+          };
+
+          case "COMMENT_DELETED" :
+            changedincident = { ...state.IncidentSelected };
+            changedincident.Comments =  changedincident.Comments.filter(comment => comment.Id !== action.data );
+            return {
+              ...state,
+              IncidentSelected: changedincident,
+            };
 
        default:
          return state;

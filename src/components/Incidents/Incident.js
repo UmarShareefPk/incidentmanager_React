@@ -9,8 +9,7 @@ function Incident({incident, dispatch, getUserNameById}) {
 
   const history = useHistory();
 
-  const openIncident = (id) => {
-    console.log(removeIncidentData());
+  const openIncident = (id) => {  
     dispatch(removeIncidentData()); // So that user does not see old data that is stored in redux (and local storage)
     let path = '/Incident/' + id;      
       history.push(path);

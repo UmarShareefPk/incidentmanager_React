@@ -2,13 +2,15 @@ import { React, useEffect, useState, useRef } from "react";
 import moment from "moment";
 import {  useHistory  } from 'react-router-dom';
 import Comment from "./Comment";
+import { connect } from "react-redux";
+import {  addNewComment } from "../../store/actions/incidentsActions";
 
-export default function Comments({
+function Comments({
   incidentId,
   comments,
-  saveNewComment,
   userId,
-  getNameById
+  getNameById,
+  addNewComment
 }) {
   const [newComment, setNewComment] = useState("");
   const [newCommentFiles, setNewCommentFiles] = useState(null);
@@ -39,7 +41,7 @@ export default function Comments({
     formData.append("CommentText", newComment.trim());
     formData.append("IncidentId", incidentId);
     formData.append("UserId", userId);
-    saveNewComment(formData);
+    addNewComment(formData);
 
     setNewComment("");
     setNewCommentFiles(null);
@@ -108,3 +110,19 @@ export default function Comments({
     </>
   );
 }
+
+const mapStateToProps = (state) => {
+  return {
+    allAssignees: state.users.users,
+    incidentData: state.incidents.IncidentSelected,
+    userId :state.userLogin.userId,  // logged in User Id       
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {    
+    addNewComment: (formData) => dispatch(addNewComment(formData))    
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Comments);

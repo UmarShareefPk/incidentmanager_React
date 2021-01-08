@@ -45,8 +45,26 @@ export const incidentsWithPage = (parameters) => {
         const url = "https://localhost:44398/api/Incidents/AddComment"
         axios.post(url, formData)
           .then((response)=>{            
-             const data = response.data;
-            //  dispatch({ type: 'INCIDENTS_WITH_PAGE', data });
+             const comment = response.data;
+            // console.log("Comment", comment);
+              dispatch({ type: 'ADD_NEW_COMMENT', data: comment });
+          })
+          .catch((err)=>{                 
+                   console.log(err);
+          });   
+    }
+  }
+
+  export const deleteComment = (commentId, incidentId, userId) => {
+    return (dispatch, getState) => {      
+        axios.defaults.headers = {'Authorization': `Bearer ${getState().userLogin.token + ""}`};
+        const url = "https://localhost:44398/api/Incidents/DeleteComment?" 
+                    + "commentId=" + commentId
+                    + "&incidentId=" + incidentId
+                    + "&userId=" + userId
+        axios.get(url)
+          .then((response)=>{    
+              dispatch({ type: 'COMMENT_DELETED', data: commentId });
           })
           .catch((err)=>{                 
                    console.log(err);
