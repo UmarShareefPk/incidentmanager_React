@@ -1,5 +1,3 @@
-//import userLogin from '../../models/UserLogin';
-
 const initState = {
     user_Name : null,
     userId : null,

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { incidentsUrls } from "../../api/apiURLs";
 
 export var cancel;
 
@@ -6,7 +7,7 @@ export const incidentsWithPage = (parameters) => {
     return (dispatch, getState) => {  
      
         axios.defaults.headers = {'Authorization': `Bearer ${getState().userLogin.token + ""}`};
-        const url = "https://localhost:44398/api/Incidents/GetIncidentsWithPage?"+
+        const url = incidentsUrls.incidentsWithPageUrl +
                     "PageSize=" + parameters.PageSize +"&PageNumber=" + parameters.PageNumber 
                     + "&SortBy=q&SortDirection=q&Search=" + parameters.Search;     
         axios({
@@ -27,7 +28,7 @@ export const incidentsWithPage = (parameters) => {
   export const addNewIncident = (formData) => {
     return (dispatch, getState) => {      
         axios.defaults.headers = {'Authorization': `Bearer ${getState().userLogin.token + ""}`};
-        const url = "https://localhost:44398/api/Incidents/AddIncident"
+        const url = incidentsUrls.addNewIncidentUrl
         axios.post(url, formData)
           .then((response)=>{            
              const data = response.data;
@@ -42,7 +43,7 @@ export const incidentsWithPage = (parameters) => {
   export const addNewComment = (formData) => {
     return (dispatch, getState) => {      
         axios.defaults.headers = {'Authorization': `Bearer ${getState().userLogin.token + ""}`};
-        const url = "https://localhost:44398/api/Incidents/AddComment"
+        const url = incidentsUrls.addNewCommentUrl
         axios.post(url, formData)
           .then((response)=>{            
              const comment = response.data;
@@ -58,7 +59,7 @@ export const incidentsWithPage = (parameters) => {
   export const deleteComment = (commentId, incidentId, userId) => {
     return (dispatch, getState) => {      
         axios.defaults.headers = {'Authorization': `Bearer ${getState().userLogin.token + ""}`};
-        const url = "https://localhost:44398/api/Incidents/DeleteComment?" 
+        const url = incidentsUrls.deleteCommentUrl
                     + "commentId=" + commentId
                     + "&incidentId=" + incidentId
                     + "&userId=" + userId
@@ -75,7 +76,7 @@ export const incidentsWithPage = (parameters) => {
   export const updateIncident = (parameters) => {
     return (dispatch, getState) => {      
         axios.defaults.headers = {'Authorization': `Bearer ${getState().userLogin.token + ""}`};
-        const url = "https://localhost:44398/api/Incidents/UpdateIncident"
+        const url = incidentsUrls.updateIncidentUrl
         axios.post(url, parameters)
           .then((response)=>{  
               dispatch({ type: 'INCIDENTS_UPDATE', parameters });
@@ -90,7 +91,7 @@ export const incidentsWithPage = (parameters) => {
     return (dispatch, getState) => {    
        // dispatch(removeIncidentData());  
         axios.defaults.headers = {'Authorization': `Bearer ${getState().userLogin.token + ""}`};
-        const url = "https://localhost:44398/api/Incidents/UpdateComment"
+        const url = incidentsUrls.updateCommentUrl
         axios.post(url, comment)
           .then((response)=>{  
           //  dispatch(getIncidentById(comment.IncidentId)); 
@@ -106,7 +107,7 @@ export const incidentsWithPage = (parameters) => {
     return (dispatch, getState) => {  
     //  console.log("getIncidentById" ); 
         axios.defaults.headers = {'Authorization': `Bearer ${getState().userLogin.token + ""}`};
-        const url = "https://localhost:44398/api/Incidents/IncidentById?Id=" + incidentId; 
+        const url = incidentsUrls.getIncidentByIdUrl + incidentId; 
         axios.get(url)
           .then((response)=>{            
              const data = response.data;                     
@@ -122,7 +123,7 @@ export const incidentsWithPage = (parameters) => {
     return (dispatch, getState) => {    
      
         axios.defaults.headers = {'Authorization': `Bearer ${getState().userLogin.token + ""}`};
-        const url = "https://localhost:44398/api/Incidents/DeleteFile?"
+        const url = incidentsUrls.deleteAttachmentUrl
                 + "type=" + type
                 + "&commentId=" + file.CommentId 
                 + "&incidentId=" + incidentId

@@ -1,11 +1,11 @@
 import axios from 'axios';
+import { usersUrls } from "../../api/apiURLs";
 
 export const  allUsers = (parameters) => {
     return (dispatch, getState) => {  
      
         axios.defaults.headers = {'Authorization': `Bearer ${getState().userLogin.token + ""}`};
-
-        const url = "https://localhost:44398/api/users/AllUsers";
+        const url = usersUrls.allUsersUrl
         axios.get(url)
           .then((response)=>{            
              const users = response.data;
@@ -22,7 +22,7 @@ export const  allUsers = (parameters) => {
     return (dispatch, getState) => {  
      
         axios.defaults.headers = {'Authorization': `Bearer ${getState().userLogin.token + ""}`};
-        const url = "https://localhost:44398/api/Users/GetUsersWithPage?"+
+        const url = usersUrls.userssWithPageUrl +
                     "PageSize=" + parameters.PageSize +"&PageNumber=" + parameters.PageNumber 
                     + "&SortBy=q&SortDirection=q&Search=" + parameters.Search;
         axios.get(url)
@@ -40,7 +40,7 @@ export const  allUsers = (parameters) => {
     return (dispatch, getState) => {  
      
         axios.defaults.headers = {'Authorization': `Bearer ${getState().userLogin.token + ""}`};
-        const url = "https://localhost:44398/api/Users/AddUser"
+        const url = usersUrls.addNewUserUrl 
         axios.post(url, formData)
           .then((response)=>{            
              const data = response.data;
