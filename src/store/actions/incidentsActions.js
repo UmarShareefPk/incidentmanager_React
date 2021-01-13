@@ -75,6 +75,7 @@ export const incidentsWithPage = (parameters) => {
 
   export const updateIncident = (parameters) => {
     return (dispatch, getState) => {      
+     // console.log(comment);
         axios.defaults.headers = {'Authorization': `Bearer ${getState().userLogin.token + ""}`};
         const url = incidentsUrls.updateIncidentUrl
         axios.post(url, parameters)
@@ -89,7 +90,7 @@ export const incidentsWithPage = (parameters) => {
 
   export const updateComment = (comment) => {
     return (dispatch, getState) => {    
-       // dispatch(removeIncidentData());  
+       console.log(comment);
         axios.defaults.headers = {'Authorization': `Bearer ${getState().userLogin.token + ""}`};
         const url = incidentsUrls.updateCommentUrl
         axios.post(url, comment)

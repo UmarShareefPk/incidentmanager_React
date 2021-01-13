@@ -1,5 +1,6 @@
 const initState = {
-   Users : [],
+   users : [],
+   UsersList :[],
    TotalUsers : 0
   }
   
@@ -17,11 +18,10 @@ const initState = {
             users : action.users    
           }      
         
-        case 'USERS_WITH_PAGE':
-          // console.log(action);
+        case 'USERS_WITH_PAGE':           
           return {
             ...state, 
-            Users : action.data.Users,
+            UsersList : action.data.Users,
             TotalUsers : action.data.Total_Users           
           }     
       default:

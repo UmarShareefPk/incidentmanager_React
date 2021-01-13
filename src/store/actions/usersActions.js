@@ -27,7 +27,7 @@ export const  allUsers = (parameters) => {
                     + "&SortBy=q&SortDirection=q&Search=" + parameters.Search;
         axios.get(url)
           .then((response)=>{            
-             const data = response.data;             
+             const data = response.data;                   
               dispatch({ type: 'USERS_WITH_PAGE', data });
           })
           .catch((err)=>{                 

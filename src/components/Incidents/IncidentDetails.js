@@ -7,6 +7,7 @@ import { getIncidentById, updateIncident, deleteAttachment } from "../../store/a
 import Comments from "./Comments";
 import "../../styles/incidentDetails.css";
 import moment from "moment";
+import { incidentsUrls } from "../../api/apiURLs";
 
 function IncidentDetails({
   match,
@@ -138,7 +139,8 @@ function IncidentDetails({
   const downloadFile = (file) => {
     console.log(file);
     window.open(
-        "https://localhost:44398/api/Incidents/DownloadFile?type=incident"
+          incidentsUrls.downloadFileUrl
+           + "type=incident"
            + "&commentId=" + "" 
            + "&incidentId=" + incidentData.Id
            + "&filename=" + file.FileName

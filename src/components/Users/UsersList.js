@@ -36,6 +36,22 @@ import {  useHistory  } from 'react-router-dom'
       history.push(path);
     }
     
+    if( !props.Users){
+      return (
+        <div class="preloader-wrapper container big active page-loader">
+        <div class="spinner-layer spinner-blue-only">
+          <div class="circle-clipper left">
+            <div class="circle"></div>
+          </div><div class="gap-patch">
+            <div class="circle"></div>
+          </div><div class="circle-clipper right">
+            <div class="circle"></div>
+          </div>
+        </div>
+    </div>
+      )
+    }
+    
     return (
       <>
         <PageActions Title={"Users"} /> 
@@ -72,7 +88,7 @@ import {  useHistory  } from 'react-router-dom'
                   </thead>
                   <tbody>
                   {
-                      props.Users.map(user=>{
+                   !props.Users? null : props.Users.map(user=>{
                           return (
                             <User key={user.Id} user= {user} />                          )
                       })
@@ -90,7 +106,7 @@ import {  useHistory  } from 'react-router-dom'
 
 const mapStateToProps = (state) => {
     return{
-        Users : state.users.Users,
+        Users : state.users.UsersList,
         TotalUsers : state.users.TotalUsers     
     }
   }

@@ -2,6 +2,7 @@ import { React, useEffect, useState, useRef } from "react";
 import moment from "moment";
 import { deleteAttachment, updateComment , deleteComment } from "../../store/actions/incidentsActions";
 import { connect } from "react-redux";
+import { incidentsUrls } from "../../api/apiURLs";
 
 function Comment({
   comment,
@@ -31,9 +32,9 @@ function Comment({
       Id : comment.Id,
       IncidentId : incidentId,
       UserId : userId,
-      CreateDate : null,
+      CreateDate : new Date(),
       CommentText : commentText,
-      attachments :null
+      attachments :[]
     }
     updateComment(changedComment);
     setEditComment(false);
@@ -41,7 +42,8 @@ function Comment({
 
   const downloadFile = (file) => {
     window.open(
-      "https://localhost:44398/api/Incidents/DownloadFile?type=comment" +
+      incidentsUrls.downloadFileUrl + 
+      "type=comment" +
         "&commentId=" +
         file.CommentId +
         "&incidentId=" +
