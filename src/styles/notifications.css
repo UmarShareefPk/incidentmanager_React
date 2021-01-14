@@ -1,0 +1,15 @@
+.notifications.dropdown-content{
+    width: 300px !important;
+    margin-top: 83px !important;
+    margin-right: 100px !important;
+    background-color: #1A237E !important;
+    padding: 0 10px;
+  }
+
+  .notifications.dropdown-content:hover{
+    background-color: #1A237E !important;
+  }
+  .notification-card{
+    background-color: white;
+    color: #1A237E;
+  }

@@ -1,9 +1,10 @@
-import { data } from "jquery";
-
 
 const initState = {
     Incidents : [],
     TotalIncidents : 0,
+    IncidentsError : "",
+    AddNewIncidentError: "",   
+    AddNewIncidentStatus: false,   // true if new incident has been addedd
     IncidentSelected : null
    }
    let changedincident = null;
@@ -16,10 +17,29 @@ const initState = {
            ...state,
            Incidents: action.data.Incidents,
            TotalIncidents: action.data.Total_Incidents,
+           IncidentsError: "",     
          };
 
-       case "INCIDENTS_BY_ID":
+       case "INCIDENTS_WITH_PAGE_ERROR":
          // console.log(action);
+         return {
+           ...state,
+           IncidentsError: action.data,
+         };
+
+         case "NEW_INCIDENT_ERROR":         
+          return {
+            ...state,
+            AddNewIncidentError: action.data,
+          };
+          case "NEW_INCIDENT_STATUS":         
+          return {
+            ...state,
+            AddNewIncidentError: "",
+            AddNewIncidentStatus : action.data
+          };
+
+       case "INCIDENTS_BY_ID":
          return {
            ...state,
            IncidentSelected: action.data,
@@ -48,61 +68,65 @@ const initState = {
        case "INCIDENT_ATTACHMENT_DELETED":
          changedincident = { ...state.IncidentSelected };
          changedincident.Attachments = changedincident.Attachments.filter(
-                                                                    (file) => file.Id !== action.data.Id
-                                                                  );
+           (file) => file.Id !== action.data.Id
+         );
 
          return {
            ...state,
            IncidentSelected: changedincident,
          };
 
-       case "INCIDENTS_UPDATE":        
+       case "INCIDENTS_UPDATE":
          changedincident = { ...state.IncidentSelected };
-          switch (action.parameters.Parameter.toLowerCase()) {
-            case "status" :
-                changedincident.Status = action.parameters.Value;
-              break;
-              case "assignedto" :
-                changedincident.AssignedTo = action.parameters.Value;
-              break;
-              case "title" :
-                changedincident.Title = action.parameters.Value;
-              break;
-              case "description" :
-                changedincident.Description = action.parameters.Value;
-              break;
-              case "additionaldata" :
-                changedincident.AdditionalData = action.parameters.Value;
-              break;
-              case "starttime" :
-                changedincident.StartTime = action.parameters.Value;
-              break;
-              case "duedate" :
-                changedincident.DueDate = action.parameters.Value;
-              break;    
+         switch (action.parameters.Parameter.toLowerCase()) {
+           case "status":
+             changedincident.Status = action.parameters.Value;
+             break;
+           case "assignedto":
+             changedincident.AssignedTo = action.parameters.Value;
+             break;
+           case "title":
+             changedincident.Title = action.parameters.Value;
+             break;
+           case "description":
+             changedincident.Description = action.parameters.Value;
+             break;
+           case "additionaldata":
+             changedincident.AdditionalData = action.parameters.Value;
+             break;
+           case "starttime":
+             changedincident.StartTime = action.parameters.Value;
+             break;
+           case "duedate":
+             changedincident.DueDate = action.parameters.Value;
+             break;
 
-            default:
-          }
+           default:
+         }
          return {
            ...state,
            IncidentSelected: changedincident,
          };
 
-         case "ADD_NEW_COMMENT" :
-          changedincident = { ...state.IncidentSelected };
-          changedincident.Comments = [action.data].concat(changedincident.Comments);
-          return {
-            ...state,
-            IncidentSelected: changedincident,
-          };
+       case "ADD_NEW_COMMENT":
+         changedincident = { ...state.IncidentSelected };
+         changedincident.Comments = [action.data].concat(
+           changedincident.Comments
+         );
+         return {
+           ...state,
+           IncidentSelected: changedincident,
+         };
 
-          case "COMMENT_DELETED" :
-            changedincident = { ...state.IncidentSelected };
-            changedincident.Comments =  changedincident.Comments.filter(comment => comment.Id !== action.data );
-            return {
-              ...state,
-              IncidentSelected: changedincident,
-            };
+       case "COMMENT_DELETED":
+         changedincident = { ...state.IncidentSelected };
+         changedincident.Comments = changedincident.Comments.filter(
+           (comment) => comment.Id !== action.data
+         );
+         return {
+           ...state,
+           IncidentSelected: changedincident,
+         };
 
        default:
          return state;

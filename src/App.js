@@ -5,16 +5,18 @@ import NavBar from './components/NavBar';
 import IncidentLisiting from './components/Incidents/IncidentLisiting';
 import UsersList from "./components/Users/UsersList";
 import IncidentDetails from './components/Incidents/IncidentDetails';
- import  AddNew  from "./components/Incidents/AddNew";
- import  AddUser  from "./components/Users/AddUser";
+import  AddNew  from "./components/Incidents/AddNew";
+import  AddUser  from "./components/Users/AddUser";
 import { connect } from "react-redux";
+import CommentAdded from './signalR/CommentAdded';
 
 function App(props) {
- 
+  
   return (
     <BrowserRouter>
       <div className="App">     
-      {props.user_Name ?  <NavBar /> : null }    
+         <NavBar /> 
+         <CommentAdded />
         <Switch>
           <Route exact path="/" component={Login} />          
           <Route exact path="/incidentListing" component={IncidentLisiting} />  
@@ -30,7 +32,9 @@ function App(props) {
 
 const mapStateToProps = (state) => {
   return{     
-    user_Name : state.userLogin.user_Name    
+    user_Name : state.userLogin.user_Name,
+    loginError : state.userLogin.loginError,
+    token : state.userLogin.token   
   }
 }
 

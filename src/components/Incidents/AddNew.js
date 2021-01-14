@@ -5,15 +5,15 @@ import {  useHistory  } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { allUsers } from '../../store/actions/usersActions';
 import { addNewIncident } from '../../store/actions/incidentsActions';
+import { Redirect } from 'react-router-dom'
 
- function AddNew({getAllAssignees, allAssignees, userId, addNewIncident}) {
+ function AddNew({getAllAssignees, allAssignees, userId, addNewIncident, addNewError, AddNewIncidentStatus}) {
 
     const dueDateTimeRef= useRef();
     const dueDateDateRef= useRef();
     const startTimeTimeRef = useRef();
     const startTimeDateRef = useRef();
-    const assigneeRef = useRef();
-    
+    const assigneeRef = useRef();   
    
 
     const history = useHistory();
@@ -136,13 +136,14 @@ import { addNewIncident } from '../../store/actions/incidentsActions';
      //setTitle("");
 
      addNewIncident(formData);
-
     // setTitle("");
-     //setDescription("");
-     
+     //setDescription("");     
 
   }; 
 
+  if(AddNewIncidentStatus){
+    return <Redirect to='/incidentListing' /> 
+  }
  
     return (
       <>
@@ -297,6 +298,8 @@ import { addNewIncident } from '../../store/actions/incidentsActions';
                   
                   <div className="input-field">
                       <p className="red-text center">{formError ? formError : "" }</p>
+                      <p className="red-text center">{addNewError}</p>
+                      
                   </div>
 
                   
@@ -330,7 +333,9 @@ const mapStateToProps = (state) => {
     return{
         allAssignees : state.users.users,
         user_Name :state.userLogin.user_Name, // Logged in User's name
-        userId :state.userLogin.userId,  // logged in User Id       
+        userId :state.userLogin.userId,  // logged in User Id      
+        addNewError :state.incidents.AddNewIncidentError, 
+        AddNewIncidentStatus :state.incidents.AddNewIncidentStatus 
     }
   }
   

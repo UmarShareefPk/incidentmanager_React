@@ -1,9 +1,20 @@
-import {React} from 'react'
+import {React} from 'react';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import '../styles/Navbar.css';
+import { Redirect } from 'react-router-dom';
+import Notifications from './Notifications';
+import { commentRecieved, commentSent } from "../signalR/newComment";
 
-function NavBar({user_Name}) {
+function NavBar({user_Name, loginError, token}) {
+
+  if (!token){
+    alert("Your session has been expired. Please login again.")
+    return <Redirect to='/' /> 
+  } 
+  // if (loginError) return <Redirect to='/' /> 
+   
+    
 
     return (
       <nav className="nav-wrapper indigo darken-4">
@@ -30,10 +41,8 @@ function NavBar({user_Name}) {
             <li>
               <a>Contact</a>
             </li>
-            <li>
-              <a href="" className="btn-floating z-depth-0 indigo darken-4">
-                <i className="material-icons">notifications</i>
-              </a>
+            <li onClick={()=> commentSent("Hi please work.")}>             
+              <Notifications />
             </li>
             <li>
               <span className="badge white-text new pink">5</span>
@@ -64,6 +73,7 @@ function NavBar({user_Name}) {
                 <i className="material-icons">notifications</i>
                 <span className="Indigo-text">5</span>
               </a>
+             
             </li>
           </ul>
         </div>
@@ -75,7 +85,9 @@ function NavBar({user_Name}) {
 const mapStateToProps = (state) => {        
   return{      
       user_Name :state.userLogin.user_Name, // Logged in User's name
-      userId :state.userLogin.userId,  // logged in User Id       
+      userId :state.userLogin.userId,  // logged in User Id      
+      loginError : state.userLogin.loginError,
+      token : state.userLogin.token   
   }
 }
 

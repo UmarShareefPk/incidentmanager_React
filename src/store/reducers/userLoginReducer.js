@@ -2,7 +2,7 @@ const initState = {
     user_Name : null,
     userId : null,
     loginError : false,
-    token : null
+    token : null   
    
    }
    

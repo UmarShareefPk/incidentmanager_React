@@ -42,6 +42,8 @@ import {  useHistory  } from 'react-router-dom';
     }
 
     const addNewClick = ()=>{
+      const data = false;
+      props.dispatch({ type: 'NEW_INCIDENT_STATUS', data });
       let path = '/AddNew';      
       history.push(path);
     }
@@ -54,6 +56,16 @@ import {  useHistory  } from 'react-router-dom';
         return id;
       }
       return user.FirstName + " " + user.LastName
+    }
+
+    if(props.Error!==""){
+      return (
+        <div className="container">
+          <h1 className="center red-text">Error</h1>
+          <h5 className="center">{props.Error}</h5>
+          <p className="center">Please check your network and try loging back.</p>
+        </div>
+      )
     }
     
     return (
@@ -116,7 +128,8 @@ const mapStateToProps = (state) => {
     return{
         allAssignees: state.users.users,
         Incidents : state.incidents.Incidents,
-        TotalIncidents : state.incidents.TotalIncidents      
+        TotalIncidents : state.incidents.TotalIncidents,
+        Error : state.incidents.IncidentsError   
     }
   }
   
@@ -124,6 +137,7 @@ const mapStateToProps = (state) => {
     return {
         incidentsWithPage: (parameters) => dispatch(incidentsWithPage(parameters)),
         getAllAssignees: () => dispatch(allUsers()),
+        dispatch:dispatch
     }
   }
   

@@ -19,8 +19,10 @@ export const incidentsWithPage = (parameters) => {
              const data = response.data;
               dispatch({ type: 'INCIDENTS_WITH_PAGE', data });
           })
-          .catch((err)=>{                 
-                   console.log(err);
+          .catch((err)=>{    
+                   console.log(err.message);
+                   const data = err.message;
+                   dispatch({ type: 'INCIDENTS_WITH_PAGE_ERROR', data });
           });    
     }
   }
@@ -31,11 +33,12 @@ export const incidentsWithPage = (parameters) => {
         const url = incidentsUrls.addNewIncidentUrl
         axios.post(url, formData)
           .then((response)=>{            
-             const data = response.data;
-            //  dispatch({ type: 'INCIDENTS_WITH_PAGE', data });
+             const data = true;
+              dispatch({ type: 'NEW_INCIDENT_STATUS', data });
           })
-          .catch((err)=>{                 
-                   console.log(err);
+          .catch((err)=>{  
+            const data = err.message;
+            dispatch({ type: 'NEW_INCIDENT_ERROR', data });
           });   
     }
   }
