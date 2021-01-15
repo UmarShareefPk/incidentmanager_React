@@ -8,7 +8,7 @@ import IncidentDetails from './components/Incidents/IncidentDetails';
 import  AddNew  from "./components/Incidents/AddNew";
 import  AddUser  from "./components/Users/AddUser";
 import { connect } from "react-redux";
-import CommentAdded from './signalR/CommentAdded';
+import Receiver from './signalR/Receiver';
 
 function App(props) {
   
@@ -16,7 +16,7 @@ function App(props) {
     <BrowserRouter>
       <div className="App">     
          <NavBar /> 
-         <CommentAdded />
+         <Receiver />
         <Switch>
           <Route exact path="/" component={Login} />          
           <Route exact path="/incidentListing" component={IncidentLisiting} />  

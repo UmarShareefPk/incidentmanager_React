@@ -67,3 +67,23 @@ import { usersUrls } from "../../api/apiURLs";
     return (dispatch, getState) => {     
     }
   }
+
+  export const updateHubId = (hubId, userId) => {
+    return (dispatch, getState) => {  
+     
+        axios.defaults.headers = {'Authorization': `Bearer ${getState().userLogin.token + ""}`};
+        const url = usersUrls.updateHubIdUrl 
+        axios.post(url, {
+          HubId : hubId,
+          UserId : userId
+        })
+          .then((response)=>{          
+          
+             dispatch({ type: 'UPDATE_HUB', hubId });
+          })
+          .catch((err)=>{                 
+                   console.log(err);
+          });
+    
+    }
+  }

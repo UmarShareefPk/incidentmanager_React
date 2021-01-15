@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import '../styles/Navbar.css';
 import { Redirect } from 'react-router-dom';
 import Notifications from './Notifications';
-import { commentRecieved, commentSent } from "../signalR/newComment";
+import {  commentSent } from "../signalR/sender";
 
 function NavBar({user_Name, loginError, token}) {
 
