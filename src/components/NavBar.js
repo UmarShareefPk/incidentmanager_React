@@ -41,12 +41,9 @@ function NavBar({user_Name, loginError, token}) {
             <li>
               <a>Contact</a>
             </li>
-            <li onClick={()=> commentSent("Hi please work.")}>             
+            {/* <li onClick={()=> commentSent("Hi please work.")}>              */}
+           
               <Notifications />
-            </li>
-            <li>
-              <span className="badge white-text new pink">5</span>
-            </li>
             <li>
                 <button type="button" title={user_Name} className="btn-floating  orange darken-3 userWelcome" >
                   {user_Name.split(/\s/).reduce((response,word)=> response+=word.slice(0,1),'')} 

@@ -19,5 +19,24 @@ export const  commentRecieved = (comment) => {
     }
   }
 
+  export const  getAllNotifications = (userId) => {
+    return (dispatch, getState) => {  
+     
+      
+        axios.defaults.headers = {'Authorization': `Bearer ${getState().userLogin.token + ""}`};
+        const url = usersUrls.allNotificationsUrl + "?userId=" + userId;
+        axios.get(url)
+          .then((response)=>{            
+             const notifications = response.data;
+             dispatch({ type: 'GET_ALL_NOTIFICATIONS', data : notifications });
+          })
+          .catch((err)=>{                 
+                   console.log(err);
+          });
+    
+    }
+  }
+
+
 
  

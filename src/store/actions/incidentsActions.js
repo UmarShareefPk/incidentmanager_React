@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { incidentsUrls } from "../../api/apiURLs";
+import { incidentUpdatedSignalR } from "../../signalR/sender";
 
 export var cancel;
 
@@ -52,6 +53,7 @@ export const incidentsWithPage = (parameters) => {
              const comment = response.data;
             // console.log("Comment", comment);
               dispatch({ type: 'ADD_NEW_COMMENT', data: comment });
+              incidentUpdatedSignalR(comment.IncidentId);
           })
           .catch((err)=>{                 
                    console.log(err);

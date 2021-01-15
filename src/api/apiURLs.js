@@ -7,8 +7,8 @@ export const usersUrls = {
     allUsersUrl : baseUrl + "api/users/AllUsers",
     userssWithPageUrl : baseUrl + "api/Users/GetUsersWithPage?",
     addNewUserUrl : baseUrl + "api/Users/AddUser",
-    updateHubIdUrl : baseUrl + "api/Users/UpdateHubId"
-    
+    updateHubIdUrl : baseUrl + "api/Users/UpdateHubId",
+    allNotificationsUrl :  baseUrl + "api/Users/UserNotifications"
 }
 
 export const incidentsUrls = {

@@ -4,11 +4,11 @@ import {  JsonHubProtocol,
     HubConnectionBuilder,
     LogLevel
 } from '@microsoft/signalr';
-import { commentRecieved } from "../store/actions/notificationsActions";
+import { commentRecieved, getAllNotifications } from "../store/actions/notificationsActions";
 import { updateHubId } from '../store/actions/userLoginActions'
 
 
-  function Receiver({commentRecieved, updateHubId, userId}) {
+  function Receiver({commentRecieved, updateHubId, userId, refreshNotifications}) {
 
     useEffect(() => {   
         
@@ -27,8 +27,13 @@ import { updateHubId } from '../store/actions/userLoginActions'
             
             newConnection.on('ReceiveMessage', (message) => {
                 console.log(message);
-                commentRecieved(message);
+                 commentRecieved(message);
             });
+            newConnection.on('UpdateNotifications', (incidentId) => {
+              console.log(incidentId);
+              refreshNotifications(userId);
+          });
+
         })
         .catch(e => console.log('Connection failed: ', e));
      
@@ -54,6 +59,7 @@ const mapStateToProps = (state) => {
     return {
         commentRecieved: (comment) => dispatch(commentRecieved(comment)),
         updateHubId: (hubId, userId) => dispatch(updateHubId(hubId, userId)),
+        refreshNotifications : (userId) =>  dispatch(getAllNotifications(userId))
     };
   };
   
