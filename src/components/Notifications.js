@@ -1,43 +1,67 @@
 import {React, useRef, useEffect, useState} from 'react'
+import {  useHistory  } from 'react-router-dom';
 import { connect } from 'react-redux';
 import M from 'materialize-css';
 import  '../styles/notifications.css'
-import {getAllNotifications} from '../store/actions/notificationsActions';
+import {getAllNotifications, setNotificationStatus} from '../store/actions/notificationsActions';
+import { removeIncidentData } from "../store/actions/incidentsActions";
 
- function Notifications({getNotifications, userId, notifications}) {
 
-    const ddlRef = useRef(); 
+ function Notifications({getNotifications, userId, notifications, setNotificationStatus, removeIncidentData}) {
+
+    const ddlNotiRef = useRef(); 
+    const history = useHistory();
     
-    const [unReadCount, setUnReadCount] = useState(notifications.length);
+    const [unReadCount, setUnReadCount] = useState(notifications.filter(notification => !notification.IsRead).length);
 
     useEffect(() => {        
-        var options = {
-            closeOnClick : false
-          }
-          M.Dropdown.init(ddlRef.current, options);
+      var options = {
+        closeOnClick : false
+      }
+      M.Dropdown.init(ddlNotiRef.current, options);
     }, [])
+
+
+  
 
     useEffect(() => {        
       getNotifications(userId);
   }, [])
 
     useEffect(() => {        
-      setUnReadCount(notifications.length);
+      setUnReadCount(notifications.filter(notification => !notification.IsRead).length);
   }, [notifications])
+  
+  const setStatus = (id , status) =>{
+    setNotificationStatus(id,status);
+  }
+
+  const openIncident = (notification) => {
+    setStatus(notification.Id,true);
+    
+    let path = '/Incident/' + notification.IncidentId;         
+    if(history.location.pathname !== path) {// only change path if it is different      
+      M.Dropdown.getInstance(ddlNotiRef.current).close();
+      removeIncidentData(); // So that user does not see old data that is stored in redux (and local storage)    
+      
+    }
+    history.push(path);
+  }
+
   
 
     return (
       <>
        <li>
         <a
-          ref={ddlRef}
+          ref={ddlNotiRef}
           href="#dropdown1"
           className="btn-floating z-depth-0 indigo darken-4 dropdown-trigger"
-          data-target="dropdown1"
+          data-target="dropdownNotifications"     
         >
           <i className="material-icons">notifications</i>
         </a>
-        <ul id="dropdown1" className="notifications dropdown-content">
+        <ul id="dropdownNotifications" className="notifications dropdown-content">
           {notifications == null || notifications.length < 1 ? (
             <li>
               <div className="notification-box">                
@@ -46,10 +70,26 @@ import {getAllNotifications} from '../store/actions/notificationsActions';
             </li>
           ) : (
             notifications.map((notification) => {
+              let classes =  notification.IsRead ? "notification-box read" : "notification-box unread";
               return (
                 <li key={notification.Id}>
-                  <div className="notification-box">                                    
-                      <p>{notification.NotifyAbout}</p>                   
+                  <div className={classes}>
+                    <div className="row">
+                      <div className="col s2">
+                      {notification.IsRead?  
+                          (  <i className="material-icons white-text readIcon" title="Mark Unread" onClick={()=>setStatus(notification.Id,false)}>
+                                radio_button_unchecked
+                            </i>)
+                        :
+                          ( <i className="material-icons white-text readIcon" title="Mark Read" onClick={()=>setStatus(notification.Id,true)}>
+                                radio_button_checked
+                            </i>)
+                      }
+                      </div>
+                      <div className="col s10 right">
+                        <p onClick={()=>openIncident(notification)}> {notification.NotifyAbout}</p>
+                      </div>
+                    </div>
                   </div>
                 </li>
               );
@@ -68,16 +108,16 @@ import {getAllNotifications} from '../store/actions/notificationsActions';
 const mapStateToProps = (state) => {        
     return{      
         notifications :state.notifications.notifications,
-        userId :state.userLogin.userId  // logged in User Id       
-            
+        userId :state.userLogin.userId  // logged in User Id   
     }
   }  
 
 const mapDispatchToProps = (dispatch) => {
   return {
       getNotifications: (userid) => dispatch(getAllNotifications(userid)),
-    
-  };
+      setNotificationStatus : (id, isRead) => dispatch(setNotificationStatus(id, isRead)),
+      removeIncidentData : () => dispatch(removeIncidentData())
+    };
 };
   
   export default connect(mapStateToProps, mapDispatchToProps)(Notifications);

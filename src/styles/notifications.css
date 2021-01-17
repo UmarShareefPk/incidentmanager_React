@@ -1,23 +1,29 @@
 .notifications.dropdown-content{
-    width: 300px !important;
-    margin-top: 83px !important;
-    margin-right: 100px !important;
+  width: 300px !important;
+  margin-top: 116px !important;
+  margin-right: 100px !important;    
   min-height: 50vh;
-  
-  }
+  border: 1px solid white;
+  background-color:  #1A237E;
+}
 
-  ul.notifications.dropdown-content li{
-    border-bottom: 1px solid silver;
-  }
+.notification-box.unread{
+  background-color:  #1A237E;
+  color: white;
+  padding: 2px 20px;
+  border-bottom: 1px solid white;
+}
 
-  .notification-box{
-    background-color: white !important;
-    color: #1A237E !important;
-    padding: 0 10px;
-  }
+.notification-box.read{
+  background-color:  #1A237E;
+  color: silver;
+  padding: 2px 20px;
+  border-bottom: 1px solid white;
+}
+.notification-box p:hover{
+  text-decoration: underline;
+}
 
-  .notification-box:hover{
-   text-decoration: underline;
- 
-  }
-
+i.readIcon {
+  font-size: 14px !important;   
+}

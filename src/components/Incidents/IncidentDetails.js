@@ -56,7 +56,11 @@ function IncidentDetails({
   useEffect(() => {    
     getIncidentById(match.params.id);
     getAllAssignees();
-  }, []);
+  }, [match.params.id]); // whenever Id changes get new
+
+  useEffect(() => {       
+    getAllAssignees();
+  }, []); // get assignee on first render only
 
   useEffect(() => {  // To update Fields
     if(incidentData){
@@ -504,14 +508,14 @@ function IncidentDetails({
                             type="text"
                             className="dropdown-trigger  align-right"
                             id="assignee"
-                            data-target="dropdown1"
+                            data-target="dropdownAssginee"
                             placeholder=""
                             ref={assigneeRef}
                             value={assigneeName}
                           />
 
-                          <ul id="dropdown1" className="dropdown-content">
-                            <li>
+                          <ul id="dropdownAssginee" className="dropdown-content">
+                            <li className="search-assignee-box">
                               <input
                                 type="text"
                                 placeholder="Search Assignee"

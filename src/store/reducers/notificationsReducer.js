@@ -13,10 +13,25 @@ const initState = {
            ...state,
            notifications: nn,
          };
-       case "GET_ALL_NOTIFICATIONS":      
+       case "GET_ALL_NOTIFICATIONS":
          return {
            ...state,
            notifications: action.data,
+         };
+
+       case "STATUS_CHANGED":
+         var noti = action.data;
+
+        let notifications = state.notifications.map(notification => {
+          if(notification.Id === noti.id){
+            notification.IsRead = noti.isRead;
+          }
+          return notification;
+         });
+
+         return {
+           ...state,
+           notifications: notifications,
          };
 
        default:

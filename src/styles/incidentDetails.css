@@ -116,3 +116,7 @@
       .all-comments-box hr {
         border-top: #efefef solid 1px;
       }
+
+      .search-assignee-box{
+        padding: 5px 10px;
+      }

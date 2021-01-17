@@ -20,8 +20,7 @@ export const  commentRecieved = (comment) => {
   }
 
   export const  getAllNotifications = (userId) => {
-    return (dispatch, getState) => {  
-     
+    return (dispatch, getState) => {      
       
         axios.defaults.headers = {'Authorization': `Bearer ${getState().userLogin.token + ""}`};
         const url = usersUrls.allNotificationsUrl + "?userId=" + userId;
@@ -36,6 +35,27 @@ export const  commentRecieved = (comment) => {
     
     }
   }
+
+  export const  setNotificationStatus = (id, isRead) => {
+    return (dispatch, getState) => {      
+      
+        axios.defaults.headers = {'Authorization': `Bearer ${getState().userLogin.token + ""}`};
+        const url = usersUrls.setNotificationStatusUrl + "?notificationId=" + id + "&isRead="+ isRead;
+        axios.get(url)
+          .then((response)=>{            
+             const notification = {
+               id,
+               isRead
+             };
+             dispatch({ type: 'STATUS_CHANGED', data : notification });
+          })
+          .catch((err)=>{                 
+                   console.log(err);
+          });
+    
+    }
+  }
+
 
 
 
