@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { allUsers } from "../../store/actions/usersActions";
 import { getIncidentById, updateIncident, deleteAttachment } from "../../store/actions/incidentsActions";
 import Comments from "./Comments";
+import  AssigneeDropdown  from "./AssigneeDropdown";
 import "../../styles/incidentDetails.css";
 import moment from "moment";
 import { incidentsUrls } from "../../api/apiURLs";
@@ -30,16 +31,14 @@ function IncidentDetails({
   const [dueDate, setDueDate] = useState('');
   const [startTime, setStartTime] = useState('');
   
-  const [assigneeName, setAssigneeName] = useState("");
-  const [assigneeList, setAssigneeList] = useState(allAssignees);
+  const [assigneeName, setAssigneeName] = useState("");  
 
   const [editTitle, setEditTitle] = useState(false);
   const [editDescription, setEditDescription] = useState(false);
   const [editAdditionalDetails, setEditAdditionalDetails] = useState(false);
   const [editDueDate, setEditDueDate] = useState(false);
   const [editStartDate, setEditStartDate] = useState(false);
-
-  const assigneeRef = useRef();
+  
   const statusRef = useRef();
   const dueDateTimeRef= useRef();
   const dueDateDateRef= useRef();
@@ -47,21 +46,12 @@ function IncidentDetails({
   const startTimeDateRef = useRef();
 
   useEffect(() => {
-    setAssigneeList(allAssignees);
-  }, [allAssignees]);
-
-  useEffect(() => {
     setMaterializeCSS();
   }, [incidentData]);
 
   useEffect(() => {    
-    getIncidentById(match.params.id);
-    getAllAssignees();
+    getIncidentById(match.params.id);   
   }, [match.params.id]); // whenever Id changes get new
-
-  useEffect(() => {       
-    getAllAssignees();
-  }, []); // get assignee on first render only
 
   useEffect(() => {  // To update Fields
     if(incidentData){
@@ -78,11 +68,7 @@ function IncidentDetails({
     }
   }, [incidentData]);
 
-  const setMaterializeCSS = () => {
-    var options = {
-      closeOnClick: false,
-    };
-    M.Dropdown.init(assigneeRef.current, options);
+  const setMaterializeCSS = () => { 
     M.FormSelect.init(statusRef.current);
     M.Datepicker.init(startTimeDateRef.current);
     M.Timepicker.init(startTimeTimeRef.current);
@@ -99,48 +85,7 @@ function IncidentDetails({
     }
     return user.FirstName + " " + user.LastName
   }
-
-  const assigneeSelected = (userId) => {
-    let currentAssignee = allAssignees.find((assignee) => {
-      return assignee.Id === userId;
-    });
-
-    setAssignee(userId);
-    setAssigneeName(currentAssignee.FirstName + " " + currentAssignee.LastName);
-    updateIncidentByField("AssignedTo" , userId);
-    var assigneeDropdown = M.Dropdown.getInstance(assigneeRef.current);
-    assigneeDropdown.close();
-  };
-
-  const searchAssignee = (event) => {
-    let newList = [];
-    if (event.target.value !== "")
-      newList = allAssignees.filter((assignee) => {
-        return (
-          assignee.FirstName.toUpperCase().startsWith(
-            event.target.value.toUpperCase()
-          ) ||
-          assignee.LastName.toUpperCase().startsWith(
-            event.target.value.toUpperCase()
-          )
-        );
-      });
-
-    if (newList !== undefined && newList.length !== 0) {
-      //check if there is atlease one assignee
-      newList = [].concat(newList);
-    } else {
-      //if search found nothing, show all assignees
-      newList = allAssignees.slice(0, allAssignees.length);
-    }
-    setAssigneeList(newList);
-  };
-
-
-  if (allAssignees && !assigneeList) {
-    setAssigneeList(allAssignees);
-  }
-
+ 
   const downloadFile = (file) => {
     console.log(file);
     window.open(
@@ -172,7 +117,6 @@ function IncidentDetails({
     setEditTitle(false);
   }
 
-
   const descriptionEditClick = () =>{
     setEditDescription(!editDescription);
     setDescription(incidentData.Description);
@@ -193,7 +137,6 @@ function IncidentDetails({
     setEditDescription(false);
   }
 
-
   const additionalDetailsEditClick = () =>{
     setEditAdditionalDetails(!editAdditionalDetails);
     setAdditionalDetails(incidentData.AdditionalData);
@@ -208,7 +151,6 @@ function IncidentDetails({
     setEditAdditionalDetails(false);    
   }
 
-
   const dueDateEditClick = () =>{
     setEditDueDate(!editDueDate);
     setMaterializeCSS();
@@ -217,8 +159,7 @@ function IncidentDetails({
     setEditDueDate(false);
   }
 
-  const dueDateEditSave = () =>{
-    
+  const dueDateEditSave = () =>{    
     if ( dueDateDateRef.current.value === "" ||  dueDateTimeRef.current.value === "" ) {
       alert("Please select date and time.");
       setEditDueDate(false);
@@ -232,7 +173,6 @@ function IncidentDetails({
       setEditDueDate(false);
       setDueDate(dueDateTemp);
    }
-
 
   const startDateEditClick = () =>{
     setEditStartDate(!editStartDate);
@@ -268,12 +208,10 @@ function IncidentDetails({
     updateIncident(parameters); // Calling action here
   }
 
-
   const statusChanged = (e) => {
     setStatus(e.target.value);
     updateIncidentByField("Status" , e.target.value);
   }
-
 
   const deleteIncidentAttachment = (file) => {        
     if(window.confirm("Are you sure you want to delete this attachment." + file.FileName)){
@@ -367,7 +305,11 @@ function IncidentDetails({
                         "MMMM DD YYYY, h:mm:ss a"
                       )}
                     >
-                      Created by <a className="username"> {getNameById(incidentData.CreatedBy)} </a>{" "}
+                      Created by{" "}
+                      <a className="username">
+                        {" "}
+                        {getNameById(incidentData.CreatedBy)}{" "}
+                      </a>{" "}
                       - {moment(incidentData.CreatedAT).fromNow()}
                     </span>
                   </h5>
@@ -474,32 +416,40 @@ function IncidentDetails({
 
                   <div className="input-field">
                     <ul className="input-field incidentFiles">
-                    {!incidentData.Attachments? null : incidentData.Attachments.map(file => {
-                      return (
-                        <li key={file.Id} className="center indigo-text darken-4">
-                            <i
-                              title="Remove"
-                              className="actions-icon material-icons red-text inline-icon"
-                              onClick={() => deleteIncidentAttachment(file)}
-                            >
-                              cancel
-                            </i>
-                            <span title={ file.FileName } onClick={() => downloadFile(file)}> 
-                                {file.FileName.length > 35 ? file.FileName.slice(0,35) + "..." :  file.FileName } 
-                            </span>
-                      </li>
-                      )
-
-                    }) }
-
+                      {!incidentData.Attachments
+                        ? null
+                        : incidentData.Attachments.map((file) => {
+                            return (
+                              <li
+                                key={file.Id}
+                                className="center indigo-text darken-4"
+                              >
+                                <i
+                                  title="Remove"
+                                  className="actions-icon material-icons red-text inline-icon"
+                                  onClick={() => deleteIncidentAttachment(file)}
+                                >
+                                  cancel
+                                </i>
+                                <span
+                                  title={file.FileName}
+                                  onClick={() => downloadFile(file)}
+                                >
+                                  {file.FileName.length > 35
+                                    ? file.FileName.slice(0, 35) + "..."
+                                    : file.FileName}
+                                </span>
+                              </li>
+                            );
+                          })}
                     </ul>
                   </div>
 
                   <Comments
                     userId={userId}
                     incidentId={incidentData.Id}
-                    comments={incidentData.Comments}                    
-                    getNameById = {getNameById}              
+                    comments={incidentData.Comments}
+                    getNameById={getNameById}
                   />
                 </div>
 
@@ -512,42 +462,13 @@ function IncidentDetails({
                             Assignee
                           </p>
                         </td>
-                        <td>
-                          <input
-                            readOnly
-                            required
-                            type="text"
-                            className="dropdown-trigger  align-right"
-                            id="assignee"
-                            data-target="dropdownAssginee"
-                            placeholder=""
-                            ref={assigneeRef}
-                            value={assigneeName}
+                        <td>                         
+                          <AssigneeDropdown
+                            updateIncidentByField={updateIncidentByField}
+                            setAssignee={setAssignee}
+                            assigneeName = {assigneeName}
+                            setAssigneeName = {setAssigneeName}
                           />
-
-                          <ul id="dropdownAssginee" className="dropdown-content">
-                            <li className="search-assignee-box">
-                              <input
-                                type="text"
-                                placeholder="Search Assignee"
-                                onChange={searchAssignee}
-                              />
-                            </li>
-                            {!assigneeList
-                              ? null
-                              : assigneeList.map((user) => {
-                                  return (
-                                    <li
-                                      key={user.Id}
-                                      onClick={() => assigneeSelected(user.Id)}
-                                    >
-                                      <a className="indigo-text" href="#!">
-                                        {user.FirstName + " " + user.LastName}
-                                      </a>
-                                    </li>
-                                  );
-                                })}
-                          </ul>
                         </td>
                       </tr>
                       <tr>

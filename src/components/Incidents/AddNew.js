@@ -231,7 +231,7 @@ import { Redirect } from 'react-router-dom'
                         ref={startTimeDateRef}
                       />
                       <label htmlFor="startTimeDate" className="">
-                        When the problem started (Pick Date)
+                      Start Time (Pick Date)
                       </label>
                     </div>
 
@@ -244,7 +244,7 @@ import { Redirect } from 'react-router-dom'
                         ref={startTimeTimeRef}
                       />
                       <label htmlFor="startTimeime" className="">
-                        When the problem started (Pick Time)
+                       Start Time (Pick Time)
                       </label>
                     </div>
                   </div>

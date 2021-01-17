@@ -73,6 +73,7 @@ export const incidentsWithPage = (parameters) => {
         axios.get(url)
           .then((response)=>{    
               dispatch({ type: 'COMMENT_DELETED', data: commentId });
+              incidentUpdatedSignalR(incidentId);
           })
           .catch((err)=>{                 
             console.log(err.message);
@@ -90,6 +91,7 @@ export const incidentsWithPage = (parameters) => {
         axios.post(url, parameters)
           .then((response)=>{  
               dispatch({ type: 'INCIDENTS_UPDATE', parameters });
+              incidentUpdatedSignalR(parameters.IncidentId);
           })
           .catch((err)=>{                 
             console.log(err.message);
@@ -107,6 +109,7 @@ export const incidentsWithPage = (parameters) => {
         axios.post(url, comment)
           .then((response)=>{  
           //  dispatch(getIncidentById(comment.IncidentId)); 
+          incidentUpdatedSignalR(comment.IncidentId);
           })
           .catch((err)=>{                 
             console.log(err.message);
