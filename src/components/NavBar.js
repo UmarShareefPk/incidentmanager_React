@@ -4,9 +4,9 @@ import { connect } from 'react-redux';
 import '../styles/Navbar.css';
 import { Redirect } from 'react-router-dom';
 import Notifications from './Notifications';
-import {  commentSent } from "../signalR/sender";
+import { signOut } from "../store/actions/userLoginActions";
 
-function NavBar({user_Name, loginError, token}) {
+function NavBar({user_Name, loginError, token, signOut}) {
 
   if (!token){
     alert("Your session has been expired. Please login again.")
@@ -14,8 +14,6 @@ function NavBar({user_Name, loginError, token}) {
   } 
   // if (loginError) return <Redirect to='/' /> 
    
-    
-
     return (
       <nav className="nav-wrapper indigo darken-4">
         <div className="container">
@@ -37,10 +35,7 @@ function NavBar({user_Name, loginError, token}) {
               <NavLink to="/UsersList" >             
                    Users 
                 </NavLink>              
-            </li>
-            <li>
-              <a>Contact</a>
-            </li>
+            </li>            
             {/* <li onClick={()=> commentSent("Hi please work.")}>              */}
            
               <Notifications />
@@ -48,6 +43,9 @@ function NavBar({user_Name, loginError, token}) {
                 <button type="button" title={user_Name} className="btn-floating  orange darken-3 userWelcome" >
                   {user_Name.split(/\s/).reduce((response,word)=> response+=word.slice(0,1),'')} 
                  </button>
+            </li>
+            <li className=" singout-btn">
+             <a> <i className="material-icons" onClick={signOut}>settings_power</i> </a>
             </li>
           </ul>
           {/* for mobile */}
@@ -63,8 +61,9 @@ function NavBar({user_Name, loginError, token}) {
                   </NavLink>            
             </li>
             <li>
-              <a className="sidenav-close">Contact</a>
+                 <a> <i className="material-icons" onClick={signOut}>settings_power</i> </a>        
             </li>
+            
             <li>
               <a href="" className=" white-text">
                 <i className="material-icons">notifications</i>
@@ -88,5 +87,12 @@ const mapStateToProps = (state) => {
   }
 }
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    signOut: () => dispatch(signOut())
+ 
+    };
+};
 
-export default connect(mapStateToProps, null)(NavBar);
+
+export default connect(mapStateToProps, mapDispatchToProps)(NavBar);

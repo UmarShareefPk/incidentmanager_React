@@ -17,7 +17,8 @@ function IncidentDetails({
   getAllAssignees,
   userId,
   updateIncident,
-  deleteAttachment
+  deleteAttachment,
+  IncidentDetailError
   
 }) {
  
@@ -278,6 +279,16 @@ function IncidentDetails({
     if(window.confirm("Are you sure you want to delete this attachment." + file.FileName)){
       deleteAttachment("incicent" , userId, incidentData.Id , file);
     }      
+   }
+
+   if(IncidentDetailError !== ""){
+    return (
+      <div className="container">
+        <h1 className="center red-text">Error</h1>
+        <h5 className="center">{IncidentDetailError}</h5>
+        <p className="center">Please check your network and try loging back.</p>
+      </div>
+    )
    }
 
   if (!incidentData || !allAssignees) {    
@@ -709,7 +720,8 @@ const mapStateToProps = (state) => {
   return {
     allAssignees: state.users.users,
     incidentData: state.incidents.IncidentSelected,
-    userId :state.userLogin.userId,  // logged in User Id       
+    userId :state.userLogin.userId,  // logged in User Id  
+    IncidentDetailError : state.incidents.IncidentDetailError     // if api ERROR
   };
 };
 

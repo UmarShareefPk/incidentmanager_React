@@ -27,3 +27,8 @@
 i.readIcon {
   font-size: 14px !important;   
 }
+
+.singout-btn i{
+  cursor: pointer;
+  color: red;
+}

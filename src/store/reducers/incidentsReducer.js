@@ -2,7 +2,8 @@
 const initState = {
     Incidents : [],
     TotalIncidents : 0,
-    IncidentsError : "",
+    IncidentsError : "", // if API error in Incident Listing
+    IncidentDetailError : "", // if API error in Incident Detail
     AddNewIncidentError: "",   
     AddNewIncidentStatus: false,   // true if new incident has been addedd
     IncidentSelected : null
@@ -17,33 +18,39 @@ const initState = {
            ...state,
            Incidents: action.data.Incidents,
            TotalIncidents: action.data.Total_Incidents,
-           IncidentsError: "",     
+           IncidentsError: "",
          };
 
        case "INCIDENTS_WITH_PAGE_ERROR":
-         // console.log(action);
          return {
            ...state,
            IncidentsError: action.data,
          };
 
-         case "NEW_INCIDENT_ERROR":         
-          return {
-            ...state,
-            AddNewIncidentError: action.data,
-          };
-          case "NEW_INCIDENT_STATUS":         
-          return {
-            ...state,
-            AddNewIncidentError: "",
-            AddNewIncidentStatus : action.data
-          };
+       case "NEW_INCIDENT_ERROR":
+         return {
+           ...state,
+           AddNewIncidentError: action.data,
+         };
+       case "NEW_INCIDENT_STATUS":
+         return {
+           ...state,
+           AddNewIncidentError: "",
+           AddNewIncidentStatus: action.data,
+         };
 
        case "INCIDENTS_BY_ID":
          return {
            ...state,
+           IncidentDetailError: "",
            IncidentSelected: action.data,
          };
+       case "INCIDENTS_BY_ID_ERROR":
+         return {
+           ...state,
+           IncidentDetailError: action.data,
+         };
+
        case "REMOVE_INCIDENT_DATA":
          return {
            ...state,
@@ -126,6 +133,17 @@ const initState = {
          return {
            ...state,
            IncidentSelected: changedincident,
+         };
+
+       case "SIGN_OUT":
+         return {
+           ...state,
+           Incidents: [],
+           TotalIncidents: 0,
+           IncidentsError: "",
+           AddNewIncidentError: "",
+           AddNewIncidentStatus: false, // true if new incident has been addedd
+           IncidentSelected: null,
          };
 
        default:

@@ -29,7 +29,17 @@ const initState = {
        case "UPDATE_HUB":
          return {
            ...state,
-          hubId : action.hubId
+           hubId: action.hubId,
+         };
+       case "SIGN_OUT":
+         return {
+           ...state,
+           user_Name : null,
+           userId : null,
+           loginError : false,
+           token : null ,
+           hubId : null  
+          
          };
        default:
          return state;

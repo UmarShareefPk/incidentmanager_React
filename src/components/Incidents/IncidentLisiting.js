@@ -129,7 +129,7 @@ const mapStateToProps = (state) => {
         allAssignees: state.users.users,
         Incidents : state.incidents.Incidents,
         TotalIncidents : state.incidents.TotalIncidents,
-        Error : state.incidents.IncidentsError   
+        Error : state.incidents.IncidentsError   // if there is an error while getting data from API
     }
   }
   

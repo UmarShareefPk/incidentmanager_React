@@ -59,7 +59,8 @@ import { usersUrls } from "../../api/apiURLs";
   
   
   export const signOut = () => {
-    return (dispatch, getState) => {      
+    return (dispatch, getState) => {     
+      dispatch({ type: 'SIGN_OUT', data:null });
     }
   }
   

@@ -22,16 +22,22 @@ const initState = {
        case "STATUS_CHANGED":
          var noti = action.data;
 
-        let notifications = state.notifications.map(notification => {
-          if(notification.Id === noti.id){
-            notification.IsRead = noti.isRead;
-          }
-          return notification;
+         let notifications = state.notifications.map((notification) => {
+           if (notification.Id === noti.id) {
+             notification.IsRead = noti.isRead;
+           }
+           return notification;
          });
 
          return {
            ...state,
            notifications: notifications,
+         };
+
+       case "SIGN_OUT":
+         return {
+           ...state,
+         notifications : []
          };
 
        default:

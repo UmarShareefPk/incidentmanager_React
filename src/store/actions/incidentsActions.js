@@ -56,7 +56,9 @@ export const incidentsWithPage = (parameters) => {
               incidentUpdatedSignalR(comment.IncidentId);
           })
           .catch((err)=>{                 
-                   console.log(err);
+            console.log(err.message);
+            const data = "while adding comment: " + err.message;
+            dispatch({ type: 'INCIDENTS_BY_ID_ERROR', data });
           });   
     }
   }
@@ -73,7 +75,9 @@ export const incidentsWithPage = (parameters) => {
               dispatch({ type: 'COMMENT_DELETED', data: commentId });
           })
           .catch((err)=>{                 
-                   console.log(err);
+            console.log(err.message);
+            const data = "while delteing comment: " + err.message;
+            dispatch({ type: 'INCIDENTS_BY_ID_ERROR', data });
           });   
     }
   }
@@ -88,7 +92,9 @@ export const incidentsWithPage = (parameters) => {
               dispatch({ type: 'INCIDENTS_UPDATE', parameters });
           })
           .catch((err)=>{                 
-                   console.log(err);
+            console.log(err.message);
+            const data = "while updating incident: " + err.message;
+            dispatch({ type: 'INCIDENTS_BY_ID_ERROR', data });
           });   
     }
   }
@@ -103,7 +109,9 @@ export const incidentsWithPage = (parameters) => {
           //  dispatch(getIncidentById(comment.IncidentId)); 
           })
           .catch((err)=>{                 
-                   console.log(err);
+            console.log(err.message);
+            const data = "while updating comment: " + err.message;
+            dispatch({ type: 'INCIDENTS_BY_ID_ERROR', data });
           });   
     }
   }
@@ -120,7 +128,9 @@ export const incidentsWithPage = (parameters) => {
               dispatch({ type: 'INCIDENTS_BY_ID', data });
           })
           .catch((err)=>{                 
-                   console.log("By Id",err);
+            console.log(err.message);
+            const data = "while getting data for incident: " + err.message;
+            dispatch({ type: 'INCIDENTS_BY_ID_ERROR', data });
           });   
     }
   }
@@ -143,11 +153,11 @@ export const incidentsWithPage = (parameters) => {
                   dispatch({ type: "COMMENT_ATTACHMENT_DELETED", data: file });
                 else
                 dispatch({ type: "INCIDENT_ATTACHMENT_DELETED", data: file });
-                const data = response.data;  
-           
           })
           .catch((err)=>{                 
-                   console.log("By Id",err);
+            console.log(err.message);
+            const data = "while delteing attachment: " + err.message;
+            dispatch({ type: 'INCIDENTS_BY_ID_ERROR', data });
           });   
     }
   }
