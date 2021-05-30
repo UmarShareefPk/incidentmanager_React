@@ -13,7 +13,7 @@ import Receiver from './signalR/Receiver';
 function App(props) {
   
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/ImReact">
       <div className="App">     
          <NavBar /> 
          <Receiver />

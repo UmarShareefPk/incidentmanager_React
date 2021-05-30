@@ -23,6 +23,7 @@ export const incidentsWithPage = (parameters) => {
           .catch((err)=>{    
                    console.log(err.message);
                    const data = err.message;
+                   console.log("error:", err)
                    dispatch({ type: 'INCIDENTS_WITH_PAGE_ERROR', data });
           });    
     }
@@ -30,6 +31,7 @@ export const incidentsWithPage = (parameters) => {
 
   export const addNewIncident = (formData) => {
     return (dispatch, getState) => {      
+      //console.log("add new incident action");
         axios.defaults.headers = {'Authorization': `Bearer ${getState().userLogin.token + ""}`};
         const url = incidentsUrls.addNewIncidentUrl
         axios.post(url, formData)
@@ -39,6 +41,7 @@ export const incidentsWithPage = (parameters) => {
           })
           .catch((err)=>{  
             const data = err.message;
+            console.log(data);
             dispatch({ type: 'NEW_INCIDENT_ERROR', data });
           });   
     }
@@ -48,15 +51,15 @@ export const incidentsWithPage = (parameters) => {
     return (dispatch, getState) => {      
         axios.defaults.headers = {'Authorization': `Bearer ${getState().userLogin.token + ""}`};
         const url = incidentsUrls.addNewCommentUrl
-        axios.post(url, formData)
-          .then((response)=>{            
+         axios.post(url, formData)
+           .then((response)=>{            
              const comment = response.data;
             // console.log("Comment", comment);
               dispatch({ type: 'ADD_NEW_COMMENT', data: comment });
-              incidentUpdatedSignalR(comment.IncidentId);
+              incidentUpdatedSignalR(comment.IncidentId, comment.UserId);
           })
           .catch((err)=>{                 
-            console.log(err.message);
+            console.log("err", err);
             const data = "while adding comment: " + err.message;
             dispatch({ type: 'INCIDENTS_BY_ID_ERROR', data });
           });   
@@ -73,7 +76,7 @@ export const incidentsWithPage = (parameters) => {
         axios.get(url)
           .then((response)=>{    
               dispatch({ type: 'COMMENT_DELETED', data: commentId });
-              incidentUpdatedSignalR(incidentId);
+              incidentUpdatedSignalR(incidentId, userId);
           })
           .catch((err)=>{                 
             console.log(err.message);
@@ -91,7 +94,7 @@ export const incidentsWithPage = (parameters) => {
         axios.post(url, parameters)
           .then((response)=>{  
               dispatch({ type: 'INCIDENTS_UPDATE', parameters });
-              incidentUpdatedSignalR(parameters.IncidentId);
+              incidentUpdatedSignalR(parameters.IncidentId, parameters.UserId);
           })
           .catch((err)=>{                 
             console.log(err.message);
@@ -109,7 +112,8 @@ export const incidentsWithPage = (parameters) => {
         axios.post(url, comment)
           .then((response)=>{  
           //  dispatch(getIncidentById(comment.IncidentId)); 
-          incidentUpdatedSignalR(comment.IncidentId);
+        //  dispatch({ type: 'COMMENT_UPDATE', data:comment });
+          incidentUpdatedSignalR(comment.IncidentId, comment.UserId);
           })
           .catch((err)=>{                 
             console.log(err.message);
@@ -122,12 +126,11 @@ export const incidentsWithPage = (parameters) => {
 
   export const getIncidentById = (incidentId) => {
     return (dispatch, getState) => {  
-    //  console.log("getIncidentById" ); 
         axios.defaults.headers = {'Authorization': `Bearer ${getState().userLogin.token + ""}`};
         const url = incidentsUrls.getIncidentByIdUrl + incidentId; 
         axios.get(url)
           .then((response)=>{            
-             const data = response.data;                     
+             const data = response.data;                           
               dispatch({ type: 'INCIDENTS_BY_ID', data });
           })
           .catch((err)=>{                 
@@ -140,8 +143,7 @@ export const incidentsWithPage = (parameters) => {
 
   export const deleteAttachment = (type, userid, incidentId , file) => {
     return (dispatch, getState) => {    
-     
-        axios.defaults.headers = {'Authorization': `Bearer ${getState().userLogin.token + ""}`};
+           axios.defaults.headers = {'Authorization': `Bearer ${getState().userLogin.token + ""}`};
         const url = incidentsUrls.deleteAttachmentUrl
                 + "type=" + type
                 + "&commentId=" + file.CommentId 

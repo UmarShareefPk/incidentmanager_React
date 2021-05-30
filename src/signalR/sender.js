@@ -1,54 +1,57 @@
 import {  JsonHubProtocol,   
-    HubConnectionBuilder,
-    LogLevel
+  HubConnectionBuilder,
+  LogLevel
 } from '@microsoft/signalr';  /*npm i --save @microsoft/signalr */
 
+import { baseUrl } from "../api/apiURLs";
 
-export   const incidentUpdatedSignalR =  (incidentId) => {
-  const connection = new HubConnectionBuilder()
-  .withUrl('https://localhost:44310/hubs/notifications')
-  .withAutomaticReconnect()
-  .withHubProtocol(new JsonHubProtocol())
-  .configureLogging(LogLevel.Information)
-  .build();
 
-  connection.start().then(()=>{
-      console.log(connection.connectionStarted);
-      if (connection.connectionStarted) {
-          try {
-              connection.send("SendIncidentUpdate", incidentId);
-          } catch (e) {
-            console.log(e);
-          }
-        } else {
-          alert("No connection to server yet.");
+export   const incidentUpdatedSignalR =  (incidentId, userId) => {
+const connection = new HubConnectionBuilder()
+//.withUrl('https://localhost:44310/hubs/notifications')
+.withUrl(baseUrl + 'hubs/notifications')
+.withAutomaticReconnect()
+.withHubProtocol(new JsonHubProtocol())
+.configureLogging(LogLevel.Information)
+.build();
+
+connection.start().then(()=>{
+    console.log(connection.connectionStarted);
+    if (connection.connectionStarted) {
+        try {
+            connection.send("SendIncidentUpdate", incidentId, userId);
+        } catch (e) {
+          console.log(e);
         }
-  })      
+      } else {
+        alert("No connection to server yet.");
+      }
+})      
 
 };
 
 
 export   const commentSent =  (message) => {
-        const connection = new HubConnectionBuilder()
-        .withUrl('https://localhost:44310/hubs/notifications')
-        .withAutomaticReconnect()
-        .withHubProtocol(new JsonHubProtocol())
-        .configureLogging(LogLevel.Information)
-        .build();
+      const connection = new HubConnectionBuilder()
+      .withUrl('https://localhost:44310/hubs/notifications')
+      .withAutomaticReconnect()
+      .withHubProtocol(new JsonHubProtocol())
+      .configureLogging(LogLevel.Information)
+      .build();
 
-        connection.start().then(()=>{
-            console.log(connection.connectionStarted);
-            if (connection.connectionStarted) {
-                try {
-                    connection.send("Send", message);
-                } catch (e) {
-                  console.log(e);
-                }
-              } else {
-                alert("No connection to server yet.");
+      connection.start().then(()=>{
+          console.log(connection.connectionStarted);
+          if (connection.connectionStarted) {
+              try {
+                  connection.send("Send", message);
+              } catch (e) {
+                console.log(e);
               }
-        })      
-    
-    };
+            } else {
+              alert("No connection to server yet.");
+            }
+      })      
+  
+  };
 
 
