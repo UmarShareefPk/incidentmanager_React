@@ -13,7 +13,8 @@ import Receiver from './signalR/Receiver';
 function App(props) {
   
   return (
-    <BrowserRouter basename="/ImReact">
+    // remove basename properity when run from local
+    <BrowserRouter basename="/ImReact"> 
       <div className="App">     
          <NavBar /> 
          <Receiver />
