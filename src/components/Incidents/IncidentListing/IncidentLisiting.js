@@ -1,10 +1,10 @@
 import { React, useState, useEffect} from 'react'
 import { connect } from 'react-redux'
-import Pages from '../Pages'
+import Pages from '../../Pages'
 import Incident from './Incident'
-import PageActions from "../PageActions";
-import { allUsers } from "../../store/actions/usersActions";
-import { incidentsWithPage, cancel } from "../../store/actions/incidentsActions";
+import PageActions from "../../PageActions";
+import { allUsers } from "../../../store/actions/usersActions";
+import { incidentsWithPage, cancel } from "../../../store/actions/incidentsActions";
 import {  useHistory  } from 'react-router-dom';
 
 

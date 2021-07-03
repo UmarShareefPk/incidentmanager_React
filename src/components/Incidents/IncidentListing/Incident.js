@@ -1,8 +1,8 @@
 import React from 'react';
 import {  useHistory  } from 'react-router-dom';
-import { removeIncidentData } from "../../store/actions/incidentsActions";
+import { removeIncidentData } from "../../../store/actions/incidentsActions";
 import { connect  } from 'react-redux';
-import '../../styles/IncidentListing.css';
+import '../../../styles/IncidentListing.css';
 import moment from "moment";;
 
 function Incident({incident, dispatch, getUserNameById}) {

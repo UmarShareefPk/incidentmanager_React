@@ -1,14 +1,16 @@
 import { React, useEffect, useState, useRef } from "react";
-import PageActions from "../PageActions";
+import PageActions from "../../PageActions";
 import M from "materialize-css";
 import { connect } from "react-redux";
-import { allUsers } from "../../store/actions/usersActions";
-import { getIncidentById, updateIncident, deleteAttachment } from "../../store/actions/incidentsActions";
+import { allUsers } from "../../../store/actions/usersActions";
+import { getIncidentById, updateIncident, deleteAttachment } from "../../../store/actions/incidentsActions";
 import Comments from "./Comments";
-import  AssigneeDropdown  from "./AssigneeDropdown";
-import "../../styles/incidentDetails.css";
+import  AssigneeDropdown  from "../AssigneeDropdown";
+import "../../../styles/incidentDetails.css";
 import moment from "moment";
-import { incidentsUrls } from "../../api/apiURLs";
+import { incidentsUrls } from "../../../api/apiURLs";
+import IncidentTitle from "./IncidentTitle";
+import IncidentDescription from "./IncidentDescription";
 
 function IncidentDetails({
   match,
@@ -23,8 +25,6 @@ function IncidentDetails({
   
 }) {
  
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
   const [additionalDetails, setAdditionalDetails] = useState(""); 
   const [assignee, setAssignee] = useState(null);
   const [status, setStatus] = useState('N');
@@ -33,8 +33,7 @@ function IncidentDetails({
   
   const [assigneeName, setAssigneeName] = useState("");  
 
-  const [editTitle, setEditTitle] = useState(false);
-  const [editDescription, setEditDescription] = useState(false);
+
   const [editAdditionalDetails, setEditAdditionalDetails] = useState(false);
   const [editDueDate, setEditDueDate] = useState(false);
   const [editStartDate, setEditStartDate] = useState(false);
@@ -55,8 +54,8 @@ function IncidentDetails({
 
   useEffect(() => {  // To update Fields
     if(incidentData){
-      setTitle(incidentData.Title);
-      setDescription(incidentData.Description);
+    
+    
       setAdditionalDetails(incidentData.AdditionalData); 
       let currentAssignee =  allAssignees.find((assignee) => {
         return assignee.Id === incidentData.AssignedTo;
@@ -97,60 +96,7 @@ function IncidentDetails({
            + "&contentType=" + file.ContentType
     ); 
   }
-
-  const titleEditClick = () =>{
-    setEditTitle(!editTitle);
-    setTitle(incidentData.Title);
-  }
-  const titleEditCancel = () =>{
-    setTitle(incidentData.Title);
-    setEditTitle(false);
-  }
-
-  const titleEditSave = () =>{
-    if(title.trim() === ""){
-      alert("Title cannot be empty.");
-      setTitle(incidentData.Title);
-      return;
-    }
-    updateIncidentByField("Title" , title.trim());
-    setEditTitle(false);
-  }
-
-  const descriptionEditClick = () =>{
-    setEditDescription(!editDescription);
-    setDescription(incidentData.Description);
-   
-  }
-  const descriptionEditCancel = () =>{
-    setDescription(incidentData.Description);
-    setEditDescription(false);
-  }
-
-  const descriptionEditSave = () =>{
-    if(description.trim() === ""){
-      alert("Description cannot be empty.");
-      setDescription(incidentData.Description);
-      return;
-    }
-    updateIncidentByField("Description" , description.trim());
-    setEditDescription(false);
-  }
-
-  const additionalDetailsEditClick = () =>{
-    setEditAdditionalDetails(!editAdditionalDetails);
-    setAdditionalDetails(incidentData.AdditionalData);
-  }
-  const additionalDetailsEditCancel = () =>{
-    setAdditionalDetails(incidentData.AdditionalData);
-    setEditAdditionalDetails(false);
-  }
-
-  const additionalDetailsEditSave = () =>{
-    updateIncidentByField("AdditionalData" , additionalDetails.trim());
-    setEditAdditionalDetails(false);    
-  }
-
+  
   const dueDateEditClick = () =>{
     setEditDueDate(!editDueDate);
     setMaterializeCSS();
@@ -254,159 +200,12 @@ function IncidentDetails({
         <div className="container">
           <div className="row">
             <div className="col s12 l12 ">
-              <div className="row">
-                <div className="col s9">
-                  {!editTitle ? (
-                    <h5 className="left indigo-text darken-4">
-                      {" "}
-                      {/* Title  */}
-                      {title}
-                      <i
-                        className="material-icons actions-icon"
-                        onClick={titleEditClick}
-                      >
-                        edit
-                      </i>
-                    </h5>
-                  ) : (
-                    <div className="input-field">
-                      {" "}
-                      {/* Title Edit */}
-                      <input
-                        type="text"
-                        value={title}
-                        onChange={(e) => setTitle(e.target.value)}
-                      />
-                      <button
-                        title="Save"
-                        className="btn green darken-2 right updateBtn"
-                        onClick={titleEditSave}
-                      >
-                        <i className="actions-icon material-icons">check</i>
-                      </button>
-                      <button
-                        title="Cancel"
-                        className="btn yellow darken-2 right updateBtn"
-                        onClick={titleEditCancel}
-                      >
-                        <i className="actions-icon material-icons">cancel</i>
-                      </button>
-                    </div>
-                  )}
-                </div>
-                <div className="col s3">
-                  {" "}
-                  {/* IM Major Action Edit */}
-                  <h5>
-                    {" "}
-                    <span
-                      className="im-createTime black-text "
-                      title={moment(incidentData.CreatedAT).format(
-                        "MMMM DD YYYY, h:mm:ss a"
-                      )}
-                    >
-                      Created by{" "}
-                      <a className="username">
-                        {" "}
-                        {getNameById(incidentData.CreatedBy)}{" "}
-                      </a>{" "}
-                      - {moment(incidentData.CreatedAT).fromNow()}
-                    </span>
-                  </h5>
-                </div>
-              </div>
-
-              <div className="row">
+            <IncidentTitle getNameById={getNameById} />
+             <div className="row">
                 <div className="col s12 l6">
-                  <p className="heading left-align indigo-text darken-4">
-                    {" "}
-                    {/* Description  */}
-                    Description :
-                    <i
-                      className="inline-icon material-icons actions-icon"
-                      onClick={descriptionEditClick}
-                    >
-                      edit
-                    </i>
-                  </p>
-                  {!editDescription ? (
-                    <>
-                      <div className="input-field">
-                        <p className="darkslategrayText bigTextScroll">
-                          {description}
-                        </p>
-                      </div>
-                    </>
-                  ) : (
-                    <>
-                      <div className="input-field">
-                        {" "}
-                        {/* Description Edit */}
-                        <textarea
-                          id="description"
-                          className="materialize-textarea"
-                          value={description}
-                          onChange={(e) => setDescription(e.target.value)}
-                        ></textarea>
-                        <button
-                          title="Save"
-                          className="btn green darken-2 right updateBtn"
-                          onClick={descriptionEditSave}
-                        >
-                          <i className="actions-icon material-icons">check</i>
-                        </button>
-                        <button
-                          title="Cancel"
-                          className="btn yellow darken-2 right updateBtn"
-                          onClick={descriptionEditCancel}
-                        >
-                          <i className="actions-icon material-icons">cancel</i>
-                        </button>
-                      </div>
-                    </>
-                  )}
-                  <p className="heading left-align indigo-text darken-4">
-                    {" "}
-                    {/*   Additional Details */}
-                    Additional Details :
-                    <i
-                      className="inline-icon material-icons"
-                      onClick={additionalDetailsEditClick}
-                    >
-                      edit
-                    </i>
-                  </p>
-                  {!editAdditionalDetails ? (
-                    <div className="input-field">
-                      <p className="darkslategrayText bigTextScroll">
-                        {additionalDetails}
-                      </p>
-                    </div>
-                  ) : (
-                    <div className="input-field">
-                      {" "}
-                      {/*   Additional Details Edit */}
-                      <textarea
-                        className="materialize-textarea"
-                        value={additionalDetails}
-                        onChange={(e) => setAdditionalDetails(e.target.value)}
-                      ></textarea>
-                      <button
-                        title="Save"
-                        className="btn green darken-2 right updateBtn"
-                        onClick={additionalDetailsEditSave}
-                      >
-                        <i className="actions-icon material-icons">check</i>
-                      </button>
-                      <button
-                        title="Cancel"
-                        className="btn yellow darken-2 right updateBtn"
-                        onClick={additionalDetailsEditCancel}
-                      >
-                        <i className="actions-icon material-icons">cancel</i>
-                      </button>
-                    </div>
-                  )}
+              <IncidentDescription type="description" />
+              <IncidentDescription type="additionaldata" />
+                  
                   <p className="heading left-align indigo-text darken-4">
                     {" "}
                     {/*  Attachments */}
