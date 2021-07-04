@@ -23,9 +23,8 @@ function IncidentDetails({
   deleteAttachment,
   IncidentDetailError
   
-}) {
- 
-  const [additionalDetails, setAdditionalDetails] = useState(""); 
+}) { 
+
   const [assignee, setAssignee] = useState(null);
   const [status, setStatus] = useState('N');
   const [dueDate, setDueDate] = useState('');
@@ -53,10 +52,7 @@ function IncidentDetails({
   }, [match.params.id]); // whenever Id changes get new
 
   useEffect(() => {  // To update Fields
-    if(incidentData){
-    
-    
-      setAdditionalDetails(incidentData.AdditionalData); 
+    if(incidentData){   
       let currentAssignee =  allAssignees.find((assignee) => {
         return assignee.Id === incidentData.AssignedTo;
       });

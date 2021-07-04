@@ -9,6 +9,7 @@ import  AddNew  from "./components/Incidents/AddNew";
 import  AddUser  from "./components/Users/AddUser";
 import { connect } from "react-redux";
 import Receiver from './signalR/Receiver';
+import Dashboard from './components/Incidents/Dashboard/Dashboard';
 
 function App(props) {
   
@@ -20,7 +21,8 @@ function App(props) {
          <NavBar /> 
          <Receiver />
         <Switch>
-          <Route exact path="/" component={Login} />          
+          <Route exact path="/" component={Login} /> 
+          <Route exact path="/dashboard" component={Dashboard} />                
           <Route exact path="/incidentListing" component={IncidentLisiting} />  
           <Route exact path="/UsersList" component={UsersList} />    
           <Route exact path="/AddNew" component={AddNew} />  

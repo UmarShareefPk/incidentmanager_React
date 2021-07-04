@@ -18,7 +18,7 @@ function NavBar({user_Name, loginError, token, signOut}) {
       <nav className="nav-wrapper indigo darken-4">
         <div className="container">
           <div className="left">
-            <NavLink to="/incidentListing" className="brand-logo">             
+            <NavLink to="/dashboard" className="brand-logo">             
               Incident Manager
             </NavLink>
           </div>
