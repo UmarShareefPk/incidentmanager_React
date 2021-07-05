@@ -5,8 +5,9 @@ import '../../../styles/kpibar.css'
 function KPIBar() {
     return (
       <div class="row kpibar">
-        <KPI value={500} text="TOTAL" color="indigo darken-4" />
+       
         <KPI value={100} text="NEW" color="orange darken-2" />
+        <KPI value={500} text="IN PROGRESS" color="indigo darken-4" />
         <KPI value={100} text="CLOSED" color="green darken-1" />
         <KPI value={100} text="APPROVED" color="green darken-4" />
         <KPI value={100} text="LATE" color="red darken-4"/>

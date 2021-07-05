@@ -1,5 +1,8 @@
 .kpibar{
-
+           border: 1px solid gray;
+        padding: 20px;
+        border-radius: 20px;
+   
 } 
 
 .kpi{
@@ -13,14 +16,16 @@
     padding: 25px 10px;
     border-radius: 30px;
     color: white;
-    margin-bottom: 20px;
+    
 }
+
 
 
 /* Small devices  */
 @media (min-width: 300px) {
    .kpi{
     padding: 10px 0px;
+    margin-bottom: 20px;
    }
 }
 
@@ -33,6 +38,7 @@
 @media (min-width: 1000px) {
     .kpi{
         padding: 25px 10px;
+        margin-bottom: 0px;
        }
 
     .kpi-value{    
@@ -50,6 +56,7 @@
 @media (min-width: 1500px) {
     .kpi{
         padding: 25px 10px;
+        margin-bottom: 0px;
        }
        
     .kpi-value{

@@ -22,14 +22,15 @@ function OverallWidget() {
           data: [
               { name: 'New', y: 100, color:'orange' },
               { name: 'In Progress', y: 200, color:'blue' },
-              { name: 'Closed', y:205, color:'green' },
-              { name: 'Approved', y: 50, color:'darkgreen' }             
+              { name: 'Closed', y:205, color:'lightgreen' },
+              { name: 'Approved', y: 50, color:'darkgreen' },
+              { name: 'Approved', y: 150, color:'red' }                
           ]
       }]
       }
 
     return (
-        <div className="col s12 m12 l6">
+        <div className="col s12 m12 l6 widget">
             <h5> Overall</h5>
             <HighchartsReact highcharts={Highcharts} options={options} />
         </div>

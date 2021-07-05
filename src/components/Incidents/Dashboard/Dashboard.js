@@ -4,6 +4,7 @@ import KPIBar from './KPIBar';
 import Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
 import OverallWidget from './OverallWidget'
+import  '../../../styles/dashboard.css'
 
  function Dashboard() {
 
