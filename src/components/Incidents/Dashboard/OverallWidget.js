@@ -20,11 +20,11 @@ function OverallWidget() {
          series: [{
           name: 'Share',
           data: [
-              { name: 'New', y: 100, color:'orange' },
-              { name: 'In Progress', y: 200, color:'blue' },
-              { name: 'Closed', y:205, color:'lightgreen' },
-              { name: 'Approved', y: 50, color:'darkgreen' },
-              { name: 'Approved', y: 150, color:'red' }                
+              { name: 'New', y: 100, color:'#F57C00' },
+              { name: 'In Progress', y: 200, color:'#1A237E' },
+              { name: 'Closed', y:205, color:'#43A047' },
+              { name: 'Approved', y: 50, color:'#1B5E20' },
+              { name: 'Late', y: 150, color:'#B71C1C' }                
           ]
       }]
       }
