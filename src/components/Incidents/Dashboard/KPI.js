@@ -1,12 +1,12 @@
 import React from 'react'
 
-function KPI() {
+function KPI({value, text, color}) {
     return (
-      <div class="row">
-        <div className="col l3 m6 s6">KPI1</div>
-        <div className="col l3 m6 s6">KPI2</div>
-        <div className="col l3 m6 s6">KPI3</div>
-        <div className="col l3 m6 s6">KPI4</div>
+      <div className="col l2 m6 s6">
+        <div className={"kpi " + color}  >
+          <div className="kpi-value">{value}</div>
+          <div className="kpi-text">{text}</div>
+        </div>
       </div>
     );
 }
