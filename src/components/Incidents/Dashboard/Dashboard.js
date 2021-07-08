@@ -4,6 +4,7 @@ import KPIBar from './KPIBar';
 import Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
 import OverallWidget from './OverallWidget'
+import LastFive from './LastFive';
 import  '../../../styles/dashboard.css'
 
  function Dashboard() {
@@ -38,6 +39,7 @@ import  '../../../styles/dashboard.css'
           <KPIBar />
           <div className="row">
             <OverallWidget />
+            <LastFive />
           </div>
         </div>
       </div>

@@ -10,13 +10,21 @@ function OverallWidget() {
         },
         chart: {    
           type: 'pie',
-          height: (80) + '%',
+          height: (70) + '%',
           //width: (100) + '%',
          },
          title:{
             text:''
         },
-        
+        credits:
+        {
+            enabled: false
+        },
+        legend: {
+            enabled: false,
+            floating: true,
+            useHTML: true,
+        },
          series: [{
           name: 'Share',
           data: [
