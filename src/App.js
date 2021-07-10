@@ -2,24 +2,27 @@ import './App.css';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Login from './components/Login/Login';
 import NavBar from './components/NavBar';
-import IncidentLisiting from './components/Incidents/IncidentLisiting';
+import IncidentLisiting from './components/Incidents/IncidentListing/IncidentLisiting';
 import UsersList from "./components/Users/UsersList";
-import IncidentDetails from './components/Incidents/IncidentDetails';
+import IncidentDetails from './components/Incidents/IncidentDetails/IncidentDetails';
 import  AddNew  from "./components/Incidents/AddNew";
 import  AddUser  from "./components/Users/AddUser";
 import { connect } from "react-redux";
 import Receiver from './signalR/Receiver';
+import Dashboard from './components/Incidents/Dashboard/Dashboard';
 
 function App(props) {
   
   return (
-    // remove basename properity when run from local
-    <BrowserRouter basename="/ImReact"> 
+    // add basename properity when run from server basename="/ImReact"
+    // in package.json "homepage":"http://localhost/ImReact",
+    <BrowserRouter > 
       <div className="App">     
          <NavBar /> 
          <Receiver />
         <Switch>
-          <Route exact path="/" component={Login} />          
+          <Route exact path="/" component={Login} /> 
+          <Route exact path="/dashboard" component={Dashboard} />                
           <Route exact path="/incidentListing" component={IncidentLisiting} />  
           <Route exact path="/UsersList" component={UsersList} />    
           <Route exact path="/AddNew" component={AddNew} />  

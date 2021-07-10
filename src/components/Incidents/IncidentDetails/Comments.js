@@ -3,7 +3,7 @@ import moment from "moment";
 import {  useHistory  } from 'react-router-dom';
 import Comment from "./Comment";
 import { connect } from "react-redux";
-import {  addNewComment } from "../../store/actions/incidentsActions";
+import {  addNewComment } from "../../../store/actions/incidentsActions";
 
 function Comments({
   incidentId,

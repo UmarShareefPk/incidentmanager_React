@@ -1,8 +1,8 @@
 import { React, useEffect, useState, useRef } from "react";
 import moment from "moment";
-import { deleteAttachment, updateComment , deleteComment } from "../../store/actions/incidentsActions";
+import { deleteAttachment, updateComment , deleteComment } from "../../../store/actions/incidentsActions";
 import { connect } from "react-redux";
-import { incidentsUrls } from "../../api/apiURLs";
+import { incidentsUrls } from "../../../api/apiURLs";
 
 function Comment({
   comment,

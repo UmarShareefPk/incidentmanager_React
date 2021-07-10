@@ -1,0 +1,71 @@
+.kpibar{
+           border: 1px solid gray;
+        padding: 20px;
+        border-radius: 20px;
+   
+} 
+
+.kpi{
+    
+    padding-right: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #1A237E;
+    padding: 25px 10px;
+    border-radius: 30px;
+    color: white;
+    
+}
+
+
+
+/* Small devices  */
+@media (min-width: 300px) {
+   .kpi{
+    padding: 10px 0px;
+    margin-bottom: 20px;
+   }
+}
+
+/* (tablets, 768px and up) */
+@media (min-width: 700px) {
+    
+}
+
+/* Large Tablets  */
+@media (min-width: 1000px) {
+    .kpi{
+        padding: 25px 10px;
+        margin-bottom: 0px;
+       }
+
+    .kpi-value{    
+        font-size: 35px; 
+        margin-bottom: 5px;    
+    }
+    .kpi-text{
+        font-weight: bold;
+        font-size: 15px;
+       
+    }
+}
+
+/* Computer */
+@media (min-width: 1500px) {
+    .kpi{
+        padding: 25px 10px;
+        margin-bottom: 0px;
+       }
+       
+    .kpi-value{
+    
+        font-size: 25px;   
+        margin-bottom: 5px; 
+    }
+    .kpi-text{
+        font-weight: bold;
+        font-size: 12px;
+    }
+}
