@@ -1,46 +1,33 @@
 import React from 'react'
 import PageActions from '../../PageActions';
 import KPIBar from './KPIBar';
-import Highcharts from 'highcharts'
-import HighchartsReact from 'highcharts-react-official'
 import OverallWidget from './OverallWidget'
 import LastFive from './LastFive';
 import  '../../../styles/dashboard.css'
+import MostAssignedByUser from './MostAssignedByUser';
+import DayByDayCount from './DayByDayCount';
+import FiveOldestOpenIncidents from './OldestOpen';
 
  function Dashboard() {
-
-  const options = {
-    title: {
-      text: 'My chart'
-    },
-    chart: {    
-      type: 'pie'
-     },
-    
-     series: [{
-      name: 'Share',
-      data: [
-          { name: 'Chrome', y: 61.41, color:'indigo' },
-          { name: 'Internet Explorer', y: 11.84 },
-          { name: 'Firefox', y: 10.85 },
-          { name: 'Edge', y: 4.67 },
-          { name: 'Safari', y: 4.18 },
-          { name: 'Other', y: 7.05 }
-      ]
-  }]
-  }
+ 
 
     return (
       <div>
         <PageActions Title={"Dashboard"} />
         
-        <div className="container">
-        {/* <HighchartsReact highcharts={Highcharts} options={options} /> */}
+        <div className="container">     
           <KPIBar />
           <div className="row">
             <OverallWidget />
             <LastFive />
           </div>
+
+          <div className="row">
+           <MostAssignedByUser />
+           <FiveOldestOpenIncidents />
+           <DayByDayCount />
+          </div>
+
         </div>
       </div>
     );

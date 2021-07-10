@@ -20,16 +20,25 @@ function OverallWidget() {
         {
             enabled: false
         },
-        legend: {
-            enabled: false,
-            floating: true,
-            useHTML: true,
+        tooltip: {
+            //pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            pointFormat: '{series.name}: <b>{point.y} ({point.percentage:.1f}%)</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: false
+                },
+                showInLegend: true
+            }
         },
          series: [{
           name: 'Share',
           data: [
               { name: 'New', y: 100, color:'#F57C00' },
-              { name: 'In Progress', y: 200, color:'#1A237E' },
+              { name: 'In Progress', y: 200, color:'#1976D2' },
               { name: 'Closed', y:205, color:'#43A047' },
               { name: 'Approved', y: 50, color:'#1B5E20' },
               { name: 'Late', y: 150, color:'#B71C1C' }                
