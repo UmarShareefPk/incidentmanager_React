@@ -1,16 +1,25 @@
-import React from 'react'
+import React,{useEffect, useState} from 'react'
 import '../../../styles/kpibar.css'
+import { GetKPI } from '../../../store/actions/dashboardActions';
+import { connect } from 'react-redux';
 
-function KPIBar() {
-    return (
-      <div class="row kpibar">
-       
-        <KPI value={100} text="NEW" color="orange darken-2" />
-        <KPI value={500} text="IN PROGRESS" color="blue darken-2" />
-        <KPI value={100} text="CLOSED" color="green darken-1" />
-        <KPI value={100} text="APPROVED" color="green darken-4" />
-        <KPI value={100} text="LATE" color="red darken-4"/>
-        <KPI value={100} text="ASSINGED TO YOU" color="indigo darken-4"/>        
+function KPIBar({getKPIData, userId, kpiData}) {
+ 
+  console.log(getKPIData);
+  
+  useEffect(() => {    
+    getKPIData(userId); 
+  }, [])
+
+  console.log(kpiData);
+    return (     
+      <div class="row kpibar">       
+        <KPI value={kpiData.New} text="NEW" color="orange darken-2" />
+        <KPI value={kpiData.InProgress} text="IN PROGRESS" color="blue darken-2" />
+        <KPI value={kpiData.Closed} text="CLOSED" color="green darken-1" />
+        <KPI value={kpiData.Approved} text="APPROVED" color="green darken-4" />
+        <KPI value={kpiData.Late} text="LATE" color="red darken-4"/>
+        <KPI value={kpiData.AssignedToMe} text="ASSINGED TO YOU" color="indigo darken-4"/>        
       </div>
     );
 }
@@ -26,4 +35,18 @@ function KPI({value, text, color}) {
   );
 }
 
-export default KPIBar
+const mapStateToProps = (state) => {        
+  return{   
+      userId :state.userLogin.userId,  // logged in User Id  
+      kpiData: state.dashboard.KPIData
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+      getKPIData : (userId) => dispatch(GetKPI(userId)),     
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(KPIBar);
+
