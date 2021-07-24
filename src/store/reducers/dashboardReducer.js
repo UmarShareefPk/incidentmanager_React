@@ -2,9 +2,9 @@
 const initState = {
    KPIData: {},
    OverallWidgetData : {},
-   Last5IncidentsData : {},
+   Last5IncidentsData : [],
    MostAssignedIncidentsData : {},
-   Oldest5UnresolvedIncidentsData : {},
+   Oldest5UnresolvedIncidentsData : [],
    }
   
    const dashboardReducer = (state = initState, action) => {

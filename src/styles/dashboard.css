@@ -29,11 +29,18 @@
     font-size: small;
     color: gray;
 }
-.incident .title{
+
+.incident .title {
+   display: inline-block;
+   min-width: 250px;
+}
+
+.incident .title a{
     font-size: 16px;
     margin-right: 5px;
     margin-left: 5px;
     color:  #1A237E;
+   
 }
 .incident .title:hover{
    text-decoration: underline;

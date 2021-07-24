@@ -32,11 +32,25 @@ export const  GetKPI = (userId) => {
           })
           .catch((err)=>{                 
                    console.log(err);
-          });
-    
+          });    
     }
   }
 
-
+  export const  GetLast5Incidents = () => {
+    return (dispatch, getState) => {  
+             axios.defaults.headers = {'Authorization': `Bearer ${getState().userLogin.token + ""}`};
+        const url = dashboardUrls.last5IncidentsUrl ;      
+        axios.get(url)
+          .then((response)=>{      
+            console.log("reponse : ",  response);      
+             const data = response.data;
+            // console.log(data);
+              dispatch({ type: 'LAST5INCIDENTS', data });
+          })
+          .catch((err)=>{                 
+                   console.log(err);
+          });    
+    }
+  }
  
 
