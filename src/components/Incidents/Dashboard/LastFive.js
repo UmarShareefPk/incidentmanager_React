@@ -25,14 +25,6 @@ console.log("Last5", Last5IncidentsData);
               )
             })
           }
-
-          {/* {
-            Last5IncidentsData.map(incident => {
-              return (
-                <Incident key={incident.Id} incident={incident} />)
-            })
-          } */}
-
         </div>
       </div>
     );
@@ -41,15 +33,19 @@ console.log("Last5", Last5IncidentsData);
 const Incident = ({incident}) => {
     return (
       <div className="incident">
-        <span className="timestamp"> 6 minutes ago</span>
+        <div className="time-status">
+          <span className="timestamp"> 6 minutes ago</span>
+          <span className="status">
+            New
+          </span>
+        </div>
+
         <div className="title">
           <a >
             {incident.Title}
           </a>
         </div>
-        <span className="status">
-          New
-        </span>
+
       </div>
 
     );
