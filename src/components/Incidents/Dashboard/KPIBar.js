@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 function KPIBar({getKPIData, userId, kpiData}) {
  
-  console.log(getKPIData);
+  console.log("kpiData",kpiData);
   
   useEffect(() => {    
     getKPIData(userId); 
