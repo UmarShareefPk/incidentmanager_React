@@ -54,3 +54,36 @@ export const  GetKPI = (userId) => {
   }
  
 
+  export const  GetOldest5UnresolvedIncidents = () => {
+    return (dispatch, getState) => {  
+             axios.defaults.headers = {'Authorization': `Bearer ${getState().userLogin.token + ""}`};
+        const url = dashboardUrls.oldest5UnresolvedIncidentsUrl ;      
+        axios.get(url)
+          .then((response)=>{      
+            console.log("reponse : ",  response);      
+             const data = response.data;
+            // console.log(data);
+              dispatch({ type: 'OLDEST5UNRESOLVEDINCIDENTS', data });
+          })
+          .catch((err)=>{                 
+                   console.log(err);
+          });    
+    }
+  }
+ 
+  export const  GetMostAssignedToUsers = () => {
+    return (dispatch, getState) => {  
+             axios.defaults.headers = {'Authorization': `Bearer ${getState().userLogin.token + ""}`};
+        const url = dashboardUrls.mostAssignedToUsersIncidentsUrl ;      
+        axios.get(url)
+          .then((response)=>{      
+            console.log("reponse : ",  response);      
+             const data = response.data;
+            // console.log(data);
+              dispatch({ type: 'MOSTASSIGNEDTOUSERS', data });
+          })
+          .catch((err)=>{                 
+                   console.log(err);
+          });    
+    }
+  }

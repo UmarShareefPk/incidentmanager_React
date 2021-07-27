@@ -9,7 +9,7 @@ function LastFive({Last5IncidentsData, getLast5IncidentsData}) {
     getLast5IncidentsData();
 }, [])
 
-if(Last5IncidentsData == null || Last5IncidentsData.length==0 )
+if(Last5IncidentsData == null || Last5IncidentsData.length===0 )
  return <h3>Loading...</h3>
 
 console.log("Last5", Last5IncidentsData);

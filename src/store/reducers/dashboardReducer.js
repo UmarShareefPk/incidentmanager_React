@@ -30,7 +30,7 @@ const initState = {
            Last5IncidentsData: action.data,
          };
 
-       case "MOSTASSIGNEDINCIDENTS":
+       case "MOSTASSIGNEDTOUSERS":
          // console.log(action);
          return {
            ...state,

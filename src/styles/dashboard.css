@@ -27,6 +27,7 @@
 .time-status{
     display: flex;
     flex-direction: column;
+    color: indigo;
 }
 
 .incident .timestamp{
@@ -42,6 +43,7 @@
 .incident .title {
    display: inline-block;
    min-width: 250px;
+   margin-left: 20px;
 }
 
 .incident .title a{
