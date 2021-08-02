@@ -1,6 +1,8 @@
 import React ,{useEffect, useState} from 'react'
 import { connect } from 'react-redux';
 import { GetOldest5UnresolvedIncidents } from '../../../store/actions/dashboardActions';
+import moment from "moment";
+import {  useHistory  } from 'react-router-dom';
 
 function FiveOldestOpenIncidents({Oldest5UnresolvedIncidents, getOldest5UnresolvedIncidents}) {
 
@@ -28,18 +30,46 @@ if(Oldest5UnresolvedIncidents == null || Oldest5UnresolvedIncidents.length===0 )
     );
 }
 
-const Incident = ({incident}) => {
+const Incident = ({incident, dispatch}) => {
+
+  const statusName = (status) => {
+    switch(status){
+      case "N":
+        return "New";
+      case "C":
+        return "Close";
+      case "A":
+        return "Approved";
+      case "I":
+        return "In Progress";
+      default:
+        return status;
+    }
+  }
+
+  const history = useHistory();
+  const openIncident = (id) => {  
+  //  dispatch(removeIncidentData()); // So that user does not see old data that is stored in redux (and local storage)
+    let path = '/Incident/' + id;      
+      history.push(path);
+  }
+
     return (
       <div className="incident">
         <div className="time-status">
-          <span className="timestamp"> 6 minutes ago</span>
+        <span className="timestamp"
+          title={moment(incident.CreatedAT).format("MMMM DD YYYY, h:mm:ss a")}
+        >
+          {moment(incident.CreatedAT).fromNow()}{" "}
+        </span>
+         
           <span className="status">
-            New
+            {statusName(incident.Status)}
           </span>
         </div>
 
         <div className="title">
-          <a >
+          <a onClick={()=> openIncident(incident.Id)} >
             {incident.Title}
           </a>
         </div>

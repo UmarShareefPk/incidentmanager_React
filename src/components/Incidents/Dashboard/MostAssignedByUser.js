@@ -1,8 +1,14 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
+import {GetMostAssignedToUsers} from '../../../store/actions/dashboardActions';
+import { connect } from 'react-redux';
 
-function MostAssignedByUser() {
+function MostAssignedByUser({MostAssignedIncidentsData, getMostAssignedToUsers}) {
+
+  useEffect(() => {
+    getMostAssignedToUsers();
+  }, []);
 
     const options = {
         title: {
@@ -44,11 +50,11 @@ function MostAssignedByUser() {
             sortKey: 'y'
         },
           data: [
-              { name: 'Umar Shareef', y: 43, color:'#B71C1C' },
-              { name: 'Maryam Umar', y: 24, color:'#E53935' },
-              { name: 'Ali Ashraf', y:22, color:'#EF5350' },
-              { name: 'Lala lala', y: 15, color:'#E57373' },
-              { name: 'Trump', y: 9, color:'#FFCDD2' }                
+              { name: MostAssignedIncidentsData[0].Name, y: parseInt(MostAssignedIncidentsData[0].Count), color:'#B71C1C' },
+              { name: MostAssignedIncidentsData[1].Name, y: parseInt(MostAssignedIncidentsData[1].Count), color:'#E53935' },
+              { name: MostAssignedIncidentsData[2].Name, y: parseInt(MostAssignedIncidentsData[2].Count), color:'#EF5350' },
+              { name: MostAssignedIncidentsData[3].Name, y: parseInt(MostAssignedIncidentsData[3].Count), color:'#E57373' },
+              { name: MostAssignedIncidentsData[4].Name, y: parseInt(MostAssignedIncidentsData[4].Count), color:'#FFCDD2' }                
           ]
       }]
       }
@@ -63,4 +69,18 @@ function MostAssignedByUser() {
     );
 }
 
-export default MostAssignedByUser
+
+const mapStateToProps = (state) => {        
+  return{   
+      userId :state.userLogin.userId,  // logged in User Id  
+      MostAssignedIncidentsData: state.dashboard.MostAssignedIncidentsData
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getMostAssignedToUsers: () => dispatch(GetMostAssignedToUsers()),     
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MostAssignedByUser);

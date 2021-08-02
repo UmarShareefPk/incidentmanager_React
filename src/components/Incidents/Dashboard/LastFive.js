@@ -1,13 +1,16 @@
 import React ,{useEffect, useState} from 'react'
-import { GetOverallWidget } from '../../../store/actions/dashboardActions';
 import { connect } from 'react-redux';
 import { GetLast5Incidents } from '../../../store/actions/dashboardActions';
+import moment from "moment";
 
-function LastFive({Last5IncidentsData, getLast5IncidentsData}) {
+import {  useHistory  } from 'react-router-dom';
+
+function LastFive({Last5IncidentsData, getLast5IncidentsData, dispatch}) {
 
   useEffect(() => {
     getLast5IncidentsData();
 }, [])
+
 
 if(Last5IncidentsData == null || Last5IncidentsData.length===0 )
  return <h3>Loading...</h3>
@@ -30,18 +33,46 @@ console.log("Last5", Last5IncidentsData);
     );
 }
 
-const Incident = ({incident}) => {
+const Incident = ({incident, dispatch}) => {
+
+  const statusName = (status) => {
+    switch(status){
+      case "N":
+        return "New";
+      case "C":
+        return "Close";
+      case "A":
+        return "Approved";
+      case "I":
+        return "In Progress";
+      default:
+        return status;
+    }
+  }
+
+  const history = useHistory();
+  const openIncident = (id) => {  
+  //  dispatch(removeIncidentData()); // So that user does not see old data that is stored in redux (and local storage)
+    let path = '/Incident/' + id;      
+      history.push(path);
+  }
+
     return (
       <div className="incident">
         <div className="time-status">
-          <span className="timestamp"> 6 minutes ago</span>
+        <span className="timestamp"
+          title={moment(incident.CreatedAT).format("MMMM DD YYYY, h:mm:ss a")}
+        >
+          {moment(incident.CreatedAT).fromNow()}{" "}
+        </span>
+         
           <span className="status">
-            New
+            {statusName(incident.Status)}
           </span>
         </div>
 
         <div className="title">
-          <a >
+          <a onClick={()=> openIncident(incident.Id)} >
             {incident.Title}
           </a>
         </div>
