@@ -25,7 +25,7 @@ import FiveOldestOpenIncidents from './OldestOpen';
           <div className="row">
            <MostAssignedByUser />
            <FiveOldestOpenIncidents />
-           <DayByDayCount />
+           {/* <DayByDayCount /> */}
           </div>
 
         </div>

@@ -5,13 +5,13 @@ import { connect } from 'react-redux';
 
 function KPIBar({getKPIData, userId, kpiData}) {
  
-  console.log("kpiData",kpiData);
+  //console.log("kpiData",kpiData);
   
   useEffect(() => {    
     getKPIData(userId); 
   }, [])
 
-  console.log(kpiData);
+ 
     return (     
       <div class="row kpibar">       
         <KPI value={kpiData.New} text="NEW" color="orange darken-2" />
