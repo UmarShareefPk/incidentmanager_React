@@ -1,7 +1,8 @@
 //const baseUrl = "https://localhost:44398/";
-//const baseUrl = "https://localhost:44310/";https://192.168.100.178:44310/
+//https://192.168.100.178:44310/
 //export const baseUrl = "http://im/IMCore/";
-export const baseUrl = "http://im/IMCore/";
+export const baseUrl = "https://localhost:44310/";
+//export const baseUrl = "http://localhost/ImWebapiCore/";
 
 export const usersUrls = {
     tokenUrl : baseUrl + "token",
@@ -32,4 +33,9 @@ export const dashboardUrls = {
     last5IncidentsUrl : baseUrl + "api/Incidents/Last5Incidents",
     oldest5UnresolvedIncidentsUrl : baseUrl + "api/Incidents/Oldest5UnresolvedIncidents?",
     mostAssignedToUsersIncidentsUrl : baseUrl + "api/Incidents/MostAssignedToUsersIncidents",
+}
+
+export const messagesUrls = {
+   messagesByUserUrl : baseUrl + "api/Messages/MessagesByUser?UserId=",
+   sendMessageUrl :  baseUrl + "api/Messages/AddMessage"
 }

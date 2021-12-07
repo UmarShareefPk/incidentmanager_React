@@ -10,6 +10,7 @@ import  AddUser  from "./components/Users/AddUser";
 import { connect } from "react-redux";
 import Receiver from './signalR/Receiver';
 import Dashboard from './components/Incidents/Dashboard/Dashboard';
+import Messages from './components/Messages/Messages';
 
 function App(props) {
   
@@ -29,6 +30,7 @@ function App(props) {
           <Route exact path="/Incident/:id" component={IncidentDetails} />   
           <Route exact path="/AddUser" component={AddUser} />         
         </Switch>
+        <Messages />
       </div>
     </BrowserRouter>
   );

@@ -3,12 +3,15 @@ import {  updateIncident, deleteAttachment } from "../../store/actions/incidents
 import M from "materialize-css";
 import { connect } from "react-redux";
 import { allUsers } from "../../store/actions/usersActions";
+import { v4 as uuidv4 } from 'uuid';
 
 function AssigneeDropdown({getAllAssignees, allAssignees, updateIncidentByField, setAssignee ,assigneeName, setAssigneeName }) {
 
     const [assigneeList, setAssigneeList] = useState(allAssignees);
     
     const assigneeRef = useRef();
+
+    const dropDownId = "dropdownAssginee" + uuidv4();
 
     useEffect(() => {       
         getAllAssignees();
@@ -30,7 +33,8 @@ function AssigneeDropdown({getAllAssignees, allAssignees, updateIncidentByField,
     M.Dropdown.init(assigneeRef.current, options);   
   }
 
-  const assigneeSelected = (userId) => {
+  const assigneeSelected = (event, userId) => {
+    event.preventDefault();
     let currentAssignee = allAssignees.find((assignee) => {
       return assignee.Id === userId;
     });
@@ -45,6 +49,7 @@ function AssigneeDropdown({getAllAssignees, allAssignees, updateIncidentByField,
   };
 
   const searchAssignee = (event) => {
+    console.log("searching....");
     let newList = [];
     if (event.target.value !== "")
       newList = allAssignees.filter((assignee) => {
@@ -82,15 +87,17 @@ function AssigneeDropdown({getAllAssignees, allAssignees, updateIncidentByField,
                             type="text"
                             className="dropdown-trigger  align-right"
                             id="assignee"
-                            data-target="dropdownAssginee"
+                            data-target={dropDownId}
                             placeholder=""
                             ref={assigneeRef}
                             value={assigneeName}
+                            defaultValue="Select User"
                           />
 
-                          <ul id="dropdownAssginee" className="dropdown-content">
+                          <ul id={dropDownId} className="dropdown-content">
                             <li className="search-assignee-box">
                               <input
+                                defaultValue=""
                                 type="text"
                                 placeholder="Search Assignee"
                                 onChange={searchAssignee}
@@ -102,7 +109,7 @@ function AssigneeDropdown({getAllAssignees, allAssignees, updateIncidentByField,
                                   return (
                                     <li
                                       key={user.Id}
-                                      onClick={() => assigneeSelected(user.Id)}
+                                      onClick={(event) => assigneeSelected(event,user.Id)}
                                     >
                                       <a className="indigo-text" href="#!">
                                         {user.FirstName + " " + user.LastName}
