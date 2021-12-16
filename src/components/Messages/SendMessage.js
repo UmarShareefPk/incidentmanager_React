@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { sendNewMessage } from "../../store/actions/messagesActions";
 import  AssigneeDropdown  from "../../components/Incidents/AssigneeDropdown";
 import '../../styles/chatbox.css';
+import { sendMessage } from '@microsoft/signalr/dist/esm/Utils';
 
 function SendMessage({
     userId,
@@ -12,14 +13,32 @@ function SendMessage({
 }) {
     const [receiver, setReceiver] = useState(null);
     const [receivereName, setReceiverName] = useState("");  
+    const [messageText, setMessageText] = useState("");
   
+    const sendMessage = (event) => {
+        event.preventDefault();
+        const formData = new FormData(); 
+
+        // if(files){
+        //     for(let i = 0; i < files.length ; i++){
+        //       formData.append( 
+        //         "Attachment" + i+1, 
+        //         files[i], 
+        //         files[i].name 
+        //       );
+        //     }
+        // }   
+         formData.append("From", userId); 
+         formData.append("To", receiver);
+         formData.append("MessageText", messageText);     
+        console.log("formData", formData);
+        sendNewMessage(formData);
+    }
        
     return (
         <div className="container">
         <div className="row">
-          <div className="col s12 l12 chatbox-container">
-
-        
+          <div className="col s12 l12 chatbox-container">    
            
 
                             <input type="checkbox" id="click" />
@@ -42,10 +61,10 @@ function SendMessage({
                                         />
                                     </div>                                   
                                     <div className="field textarea">
-                                        <textarea cols="30" rows="10" placeholder="Write message here" required></textarea>
+                                        <textarea cols="30" rows="10" onChange={(e) => setMessageText(e.target.value)} placeholder="Write message here" required></textarea>
                                     </div>
                                     <div className="field">
-                                        <button type="submit">Send</button>
+                                        <button type="submit" onClick={(event)=> sendMessage(event)} >Send</button>
                                     </div>
                                     </form>
                                 </div>

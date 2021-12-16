@@ -58,7 +58,8 @@ import { Redirect } from 'react-router-dom'
    };
 
 
-   const assigneeSelected = (userId) => {       
+   const assigneeSelected = (event, userId) => {    
+    event.preventDefault();   
     let currentAssignee = allAssignees.find(assignee => {
         return assignee.Id === userId
     })
@@ -189,7 +190,7 @@ import { Redirect } from 'react-router-dom'
                         </li>
                         {!assigneeList? null : assigneeList.map((user) => {
                           return (
-                            <li  key={user.Id} onClick= {()=>assigneeSelected(user.Id)}>
+                            <li  key={user.Id} onClick= {(event)=>assigneeSelected(event,user.Id)}>
                               <a className="indigo-text" href="#!">  {user.FirstName + " " + user.LastName}    </a>
                             </li>
                           );
