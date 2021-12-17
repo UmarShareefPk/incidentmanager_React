@@ -64,7 +64,7 @@ import { removeIncidentData, getIncidentById } from "../store/actions/incidentsA
          <a
            ref={ddlNotiRef}
            href="#dropdown1"
-           className="btn-floating z-depth-0 indigo darken-4 dropdown-trigger"
+           className="btn-floating z-depth-0 indigo darken-4 dropdown-trigger badge-a"
            data-target="dropdownNotifications"
          >
            <i className="material-icons">notifications</i>

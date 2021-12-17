@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { sendNewMessage } from "../../store/actions/messagesActions";
 import  AssigneeDropdown  from "../../components/Incidents/AssigneeDropdown";
 import '../../styles/chatbox.css';
-import { sendMessage } from '@microsoft/signalr/dist/esm/Utils';
 
 function SendMessage({
     userId,

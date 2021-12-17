@@ -35,7 +35,18 @@ function NavBar({user_Name, loginError, token, signOut}) {
               <NavLink to="/UsersList" >             
                    Users 
                 </NavLink>              
-            </li>            
+            </li> 
+               
+            <li>     
+              <NavLink to="/messages" className="badge-a btn-floating z-depth-0 indigo darken-4" >     
+                <i className="material-icons  ">message</i>
+              
+              </NavLink> 
+              
+            </li>    
+            <li>
+              <span className=" badge white-text new green messages-badge">5</span> 
+              </li>   
             {/* <li onClick={()=> commentSent("Hi please work.")}>              */}
            
               <Notifications />
@@ -51,25 +62,31 @@ function NavBar({user_Name, loginError, token, signOut}) {
           {/* for mobile */}
           <ul className="sidenav grey lighten-2" id="mobile-menu">
             <li>
-              <NavLink to="/incidentListing"  className="sidenav-close">             
-                  Incidents
-                </NavLink>               
+              <NavLink to="/Messages" className="sidenav-close">
+                Messages
+              </NavLink>
             </li>
             <li>
-                <NavLink to="/UsersList" className="sidenav-close">             
-                       Users
-                  </NavLink>            
+              <NavLink to="/incidentListing" className="sidenav-close">
+                Incidents
+              </NavLink>
             </li>
             <li>
-                 <a> <i className="material-icons" onClick={signOut}>settings_power</i> </a>        
+              <NavLink to="/UsersList" className="sidenav-close">
+                Users
+              </NavLink>
             </li>
-            
+
+            <li>
+              <a> <i className="material-icons" onClick={signOut}>settings_power</i> </a>
+            </li>
+
             <li>
               <a href="" className=" white-text">
                 <i className="material-icons">notifications</i>
                 <span className="Indigo-text">5</span>
               </a>
-             
+
             </li>
           </ul>
         </div>

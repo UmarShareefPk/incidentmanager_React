@@ -1,0 +1,40 @@
+.messages-window{
+}
+
+.messages-window .users {
+    border-right: 0.5px solid slategray;
+    cursor: pointer;
+}
+
+.messages-window .users .user-info{
+    /* border-bottom: 0.5px solid slategray; */
+    padding: 20px;
+    padding-bottom: 30px;
+    
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.messages-window .users .user-info.selected{
+    background-color:lightgray;
+}
+
+.messages-window .users .photo{
+    margin-right: 5px;
+}
+
+.messages-window .users .name {
+    font-weight: bold;
+}
+
+.messages-window .users .last-message {
+    color: slategray;
+    font-size: small;
+}
+.messages-window .users .last-message .date-time {
+    color: slategray;
+    font-size: x-small;
+    margin-left: 7px;
+}

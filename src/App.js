@@ -28,9 +28,10 @@ function App(props) {
           <Route exact path="/UsersList" component={UsersList} />    
           <Route exact path="/AddNew" component={AddNew} />  
           <Route exact path="/Incident/:id" component={IncidentDetails} />   
-          <Route exact path="/AddUser" component={AddUser} />         
+          <Route exact path="/AddUser" component={AddUser} /> 
+          <Route exact path="/Messages" component={Messages} />         
         </Switch>
-        <Messages />
+        {/* <Messages /> */}
       </div>
     </BrowserRouter>
   );
