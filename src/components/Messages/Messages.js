@@ -19,8 +19,16 @@ function Messages({
     return (
         <section>
             <div className="container messages-window">
+                {/* <div className="row">
+                    <div className="col s12">
+                    <ul class="tabs">
+                        <li class="tab col s6"><a href="#test1">Test 1</a></li>
+                        <li class="tab col s6"><a class="active" href="#test2">Test 2</a></li>                      
+                    </ul>
+                    </div>
+                </div> */}
                 <div className="row">
-                    <div className="col s6 l3 users">
+                    <div className="col s12 l3 users hide-on-med-and-down">
                         <ul>
                             <User></User>
                             <User></User>
@@ -28,8 +36,14 @@ function Messages({
                             <User></User>
                         </ul>
                     </div>
-                    <div className="col s6 l9">
-                        messages
+                    <div className="col s12 l9 ">
+                        <h5> Umar Shareef </h5>
+                        <ul className='messages'>
+                            <Message isSent={true}/>
+                            <Message isSent={false}/>
+                            <Message isSent={true}/>
+                            <Message isSent={false}/>
+                        </ul>
                     </div>
 
                 </div>
@@ -73,5 +87,18 @@ const mapStateToProps = (state) => {
           </li>
       )
   }
+
+const Message = ({ isSent }) => {
+    return (
+        <li className='message-li'>
+            <div className='message-time'>2 days ago</div>
+            <div className={isSent ? "message left" : "message right"}>
+                <div className='message-text'>
+                    Yes 1920. Phle os ne wo lgai thi. Main ne pir Toda makhan lgaya. Os ne tea pilai pir kaha k
+                </div>
+            </div>
+        </li>
+    )
+}
   
   export default connect(mapStateToProps, mapDispatchToProps)(Messages);

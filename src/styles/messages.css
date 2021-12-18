@@ -1,5 +1,6 @@
-.messages-window{
-}
+
+
+
 
 .messages-window .users {
     border-right: 0.5px solid slategray;
@@ -30,11 +31,102 @@
 }
 
 .messages-window .users .last-message {
+    padding-top: 5px;
     color: slategray;
     font-size: small;
 }
 .messages-window .users .last-message .date-time {
     color: slategray;
     font-size: x-small;
-    margin-left: 7px;
+    margin-left: 10px;
+}
+
+ .messages{
+    padding-left: 10px !important;
+}
+
+.message-li{
+  
+}
+
+.message{
+    margin-bottom: 10px;
+    width:70%; 
+
+    border-radius: 36px;
+    padding:5px 10px;
+}
+
+.message.left{
+    background-color: springgreen;
+}
+.message.right{
+    background-color:pink;
+}
+
+.message-text{
+    color:slategray;
+    font-size: large;
+} 
+
+.message-time{
+    width: 100%;
+    clear: both;
+    margin-bottom: 2px;
+    color: slategray;
+}
+
+/* Small devices  */
+@media (min-width: 300px) {
+    .message-text{
+        width: 100%;
+        font-size: small;
+    }
+
+    .message{
+        margin-bottom: 10px;
+        width:80%;        
+    }
+}
+
+/* (tablets, 768px and up) */
+@media (min-width: 700px) {
+    .message-text{
+        width: 100%;
+        font-size: large;
+    }
+
+    .message{
+        margin-bottom: 10px;
+        width:70%; 
+    }
+}
+
+/* Large Tablets  */
+@media (min-width: 1000px) {
+    .container.messages-window{
+        width: 90%;
+        max-width:initial;
+        > .row{
+            margin: 0;
+            > .col{
+                padding: 0;
+            }
+        }
+    }
+}
+
+/* Computer */
+@media (min-width: 1500px) {
+    .container.messages-window{
+        width: 90%;
+        max-width:initial;
+        > .row{
+            margin: 0;
+            > .col{
+                padding: 0;
+            }
+        }
+    }
+   
 }

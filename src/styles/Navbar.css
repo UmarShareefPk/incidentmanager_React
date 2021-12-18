@@ -25,7 +25,7 @@ ul.sidenav li{
 /* Small devices  */
 @media (min-width: 300px) {
     nav .brand-logo {
-        font-size: 21px;
+        font-size: 15px;
     }
 }
 
@@ -39,7 +39,7 @@ ul.sidenav li{
 /* Large Tablets  */
 @media (min-width: 1000px) {
     nav .brand-logo {
-        font-size: 30px;
+       
     }
 }
 
