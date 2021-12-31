@@ -37,13 +37,15 @@ function Messages({
                         </ul>
                     </div>
                     <div className="col s12 l9 ">
-                        <h5> Umar Shareef </h5>
+                        <h5 className="left"> Umar Shareef </h5>
                         <ul className='messages'>
                             <Message isSent={true}/>
                             <Message isSent={false}/>
                             <Message isSent={true}/>
                             <Message isSent={false}/>
+                            
                         </ul>
+                        <NewMessage />
                     </div>
 
                 </div>
@@ -100,5 +102,32 @@ const Message = ({ isSent }) => {
         </li>
     )
 }
+
+const NewMessage = () => {
+    return (
+        <div className="new-message-window">
+            <div className="input-field">
+                <textarea
+                    id="comment"
+                    className="materialize-textarea"
+                    placeholder='Write new message'
+                // value={newComment}
+                // onChange={(e) => setNewComment(e.target.value)}
+                ></textarea>
+            </div>
+            <div>
+                <button
+                    className="left btn green darken-2 updateBtn"
+                   // onClick={saveComment}
+                >
+                    <span>Add</span>
+                    <i className="material-icons right">save</i>
+                </button>
+            </div>
+        </div>
+
+    )
+}
+
   
   export default connect(mapStateToProps, mapDispatchToProps)(Messages);

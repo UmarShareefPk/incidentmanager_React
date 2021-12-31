@@ -58,14 +58,14 @@
 }
 
 .message.left{
-    background-color: springgreen;
+    background-color: green;
 }
 .message.right{
-    background-color:pink;
+    background-color:royalblue;
 }
 
 .message-text{
-    color:slategray;
+    color:wheat;
     font-size: large;
 } 
 
@@ -74,6 +74,15 @@
     clear: both;
     margin-bottom: 2px;
     color: slategray;
+    font-size: 11px;
+}
+
+.new-message-window {
+    clear: both;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: end;
 }
 
 /* Small devices  */
@@ -104,6 +113,12 @@
 
 /* Large Tablets  */
 @media (min-width: 1000px) {
+
+    .message-text{
+        width: 100%;
+        font-size: 16px;
+    }
+
     .container.messages-window{
         width: 90%;
         max-width:initial;
@@ -118,6 +133,11 @@
 
 /* Computer */
 @media (min-width: 1500px) {
+    .message-text{
+        width: 100%;
+        font-size: 16px;
+    }
+
     .container.messages-window{
         width: 90%;
         max-width:initial;
