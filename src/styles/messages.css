@@ -1,5 +1,24 @@
 
 
+.user-toogle{
+
+
+text-align: start;
+padding: 30px 0;
+margin-top: 100px;
+font-size: 20px;
+border:1px solid;
+border-radius: 10px;
+}
+.user-toogle span{
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    color: blue;
+}
+.user-toogle i{
+   padding-left: 3px;
+   color: blue;
+}
 
 
 .messages-window .users {
@@ -42,7 +61,10 @@
 }
 
  .messages{
+     clear: both;
     padding-left: 10px !important;
+    height: 10%;
+    overflow-y: scroll;
 }
 
 .message-li{
@@ -54,7 +76,7 @@
     width:70%; 
 
     border-radius: 36px;
-    padding:5px 10px;
+    padding:10px 10px;
 }
 
 .message.left{
@@ -82,7 +104,11 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: end;
+    justify-content:space-between;
+}
+
+.new-message-window .input-field{
+    width: 85%;
 }
 
 /* Small devices  */

@@ -10,25 +10,39 @@ function Messages({
     UserMessages,
     getMessagesByUser
 }) {
+
+    const [userToggle, setUserToggle] = useState(false);
+
     useEffect(() => {
         getMessagesByUser(userId);
         
-    }, [])
+    }, []);
        
     
     return (
         <section>
-            <div className="container messages-window">
-                {/* <div className="row">
-                    <div className="col s12">
-                    <ul class="tabs">
-                        <li class="tab col s6"><a href="#test1">Test 1</a></li>
-                        <li class="tab col s6"><a class="active" href="#test2">Test 2</a></li>                      
-                    </ul>
-                    </div>
-                </div> */}
+            <div className="container messages-window">     
+
                 <div className="row">
-                    <div className="col s12 l3 users hide-on-med-and-down">
+                    <div className="col s2 m3 hide-on-large-only">
+                        <div className="user-toogle" onClick={()=>setUserToggle(!userToggle)}>
+                            <span>Users</span>
+                            <i className="material-icons center">send</i>
+                        </div> 
+                    </div>
+                    {userToggle? (
+                         <div className="col s10 m9 l3 users hide-on-large-only">
+                         <ul>
+                             <User></User>
+                             <User></User>
+                             <User></User>
+                             <User></User>
+                         </ul>
+                     </div>
+                    ) : <></>}
+                   
+
+                    <div className="col s10 m9 l3 users hide-on-med-and-down">                        
                         <ul>
                             <User></User>
                             <User></User>
@@ -36,17 +50,24 @@ function Messages({
                             <User></User>
                         </ul>
                     </div>
-                    <div className="col s12 l9 ">
-                        <h5 className="left"> Umar Shareef </h5>
-                        <ul className='messages'>
+                    {!userToggle? (
+                    <div className="col s10 m9 l9 ">
+                        <h5 className="left indigo-text darken-4"> Umar Shareef </h5>
+                        <div className="messages">
+                        <ul className=''>
                             <Message isSent={true}/>
                             <Message isSent={false}/>
                             <Message isSent={true}/>
                             <Message isSent={false}/>
-                            
+                            <Message isSent={false}/>
+                            <Message isSent={false}/>
+                            <Message isSent={true}/>
                         </ul>
+                        </div>
                         <NewMessage />
                     </div>
+
+                    ) : <></> }
 
                 </div>
             </div>
@@ -73,12 +94,12 @@ const mapStateToProps = (state) => {
           <li >
               <div className='user-info'>
                   <div className='photo'>
-                      <button type="button" title={"Umar Shareef"} className="btn-floating  blue darken-3 userWelcome" >
+                      <button type="button" title={"Umar Shareef"} className="btn-floating  red darken-2 userWelcome" >
                           {"Umar Shareef".split(/\s/).reduce((response, word) => response += word.slice(0, 1), '')}
                       </button>
                   </div>
                   <div>
-                      <div className='name'>Umar Shareef</div>
+                      <div className='name indigo-text darken-4'>Umar Shareef</div>
                       <div className='last-message'>last message
                           <span className='date-time'>22 Dec</span>
                       </div>
@@ -117,11 +138,11 @@ const NewMessage = () => {
             </div>
             <div>
                 <button
-                    className="left btn green darken-2 updateBtn"
+                    className="left btn pink darken-1 updateBtn"
                    // onClick={saveComment}
                 >
-                    <span>Add</span>
-                    <i className="material-icons right">save</i>
+                    <span>Send</span>
+                    <i className="material-icons right">send</i>
                 </button>
             </div>
         </div>
