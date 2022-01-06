@@ -1,8 +1,9 @@
-import { React, useState, useEffect} from 'react'
+import { React, useState, useEffect, useRef} from 'react'
 import { connect } from 'react-redux'
 import { messagesByUser } from "../../store/actions/messagesActions";
 import SendMessage from './SendMessage';
 import '../../styles/messages.css';
+import ComposeMessage from './ComposeMessage';
 
 function Messages({
     userId,
@@ -12,13 +13,49 @@ function Messages({
 }) {
 
     const [userToggle, setUserToggle] = useState(false);
+    const messagesRef = useRef();   
+    const [usersInfo, setUsersInfo] = useState([]);
 
     useEffect(() => {
-        getMessagesByUser(userId);
+        getMessagesByUser(userId); 
+        messagesRef.current.scrollTop = messagesRef.current.scrollHeight;
         
     }, []);
-       
-    
+
+    useEffect(() => {
+        //console.log("UserMessages", UserMessages);
+        let users = [];
+        let messagesByUsers = [];
+
+        const unique = [...new Set(UserMessages.map(item => { 
+           
+            return item.From == userId? item.To : item.From;
+            // if(item.From == userId) {
+            //     return {id: item.To, source:'To'}
+            // }
+            // else {
+            //     return {id: item.From, source:'From'}
+            // }
+        }))]; 
+        console.log("unique", unique)
+
+        unique.forEach(user => {
+            let messages = []; 
+            if(user == userId) {
+                messages = UserMessages.filter(msg=> msg.To == user);
+            }
+            else {
+                messages = UserMessages.filter(msg=> msg.From== user );
+            }
+               
+            messagesByUsers.push(messages);
+        });
+
+        console.log("messagesByUsers", messagesByUsers)
+     
+    }, [UserMessages])
+  
+      
     return (
         <section>
             <div className="container messages-window">     
@@ -33,6 +70,12 @@ function Messages({
                     {userToggle? (
                          <div className="col s10 m9 l3 users hide-on-large-only">
                          <ul>
+                         <li>
+                                <div className="compose-message">
+                                     <i className="material-icons indigo-text">message</i>
+                                    <span className='indigo-text'> Compose Message </span>
+                                </div>                              
+                            </li>
                              <User></User>
                              <User></User>
                              <User></User>
@@ -44,16 +87,25 @@ function Messages({
 
                     <div className="col s10 m9 l3 users hide-on-med-and-down">                        
                         <ul>
+                            <li>
+                                <div className="compose-message">
+                                     <i className="material-icons indigo-text">message</i>
+                                    <span className='indigo-text'> Compose Message </span>
+                                </div>                              
+                            </li>
                             <User></User>
                             <User></User>
                             <User></User>
                             <User></User>
                         </ul>
                     </div>
+                    <div className="col s10 m9 l9 hide ">
+                        <ComposeMessage />
+                    </div>
                     {!userToggle? (
                     <div className="col s10 m9 l9 ">
                         <h5 className="left indigo-text darken-4"> Umar Shareef </h5>
-                        <div className="messages">
+                        <div className="messages" ref={messagesRef}>
                         <ul className=''>
                             <Message isSent={true}/>
                             <Message isSent={false}/>
@@ -64,7 +116,7 @@ function Messages({
                             <Message isSent={true}/>
                         </ul>
                         </div>
-                        <NewMessage />
+                        <Reply />
                     </div>
 
                     ) : <></> }
@@ -124,7 +176,7 @@ const Message = ({ isSent }) => {
     )
 }
 
-const NewMessage = () => {
+const Reply = () => {
     return (
         <div className="new-message-window">
             <div className="input-field">

@@ -88,7 +88,7 @@ function AssigneeDropdown({getAllAssignees, allAssignees, updateIncidentByField,
                             className="dropdown-trigger  align-right"
                             id="assignee"
                             data-target={dropDownId}
-                            placeholder=""
+                            placeholder="Select User"
                             ref={assigneeRef}
                             value={assigneeName}
                             defaultValue="Select User"
