@@ -26,6 +26,50 @@ export const messagesByUser = (userId) => {
     }
   } 
 
+  export const conversationsByUser = (userId) => {
+    return (dispatch, getState) => {  
+     
+        axios.defaults.headers = {'Authorization': `Bearer ${getState().userLogin.token + ""}`};
+        const url = messagesUrls.conversationsByUserUrl + userId;                   
+        axios({
+          method: 'GET',
+          url: url,         
+          cancelToken: new axios.CancelToken(c => cancel = c)
+        })
+          .then((response)=>{ 
+             const data = response.data;
+              dispatch({ type: 'CONVERSATIONS_BY_USER', data });
+          })
+          .catch((err)=>{    
+                   console.log(err.message);
+                   const data = err.message;
+                   console.log("error:", err);              
+          });    
+    }
+  } 
+
+  export const messagesByConversations = (conversationId) => {
+    return (dispatch, getState) => {  
+     
+        axios.defaults.headers = {'Authorization': `Bearer ${getState().userLogin.token + ""}`};
+        const url = messagesUrls.messagesByConversationsUrl + conversationId;                   
+        axios({
+          method: 'GET',
+          url: url,         
+          cancelToken: new axios.CancelToken(c => cancel = c)
+        })
+          .then((response)=>{ 
+             const data = response.data;
+              dispatch({ type: 'MESSAGES_BY_CONVERSATIONS', data });
+          })
+          .catch((err)=>{    
+                   console.log(err.message);
+                   const data = err.message;
+                   console.log("error:", err);              
+          });    
+    }
+  } 
+
  
   export const sendNewMessage = (formData) => {
     return (dispatch, getState) => {      

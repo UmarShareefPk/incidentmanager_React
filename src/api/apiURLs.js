@@ -37,5 +37,7 @@ export const dashboardUrls = {
 
 export const messagesUrls = {
    messagesByUserUrl : baseUrl + "api/Messages/MessagesByUser?UserId=",
-   sendMessageUrl :  baseUrl + "api/Messages/AddMessage"
+   sendMessageUrl :  baseUrl + "api/Messages/AddMessage",
+   conversationsByUserUrl :  baseUrl + "api/Messages/ConversationsByUser?UserId=",
+   messagesByConversationsUrl :  baseUrl + "api/Messages/MessagesByConversations?ConversationId=",
 }

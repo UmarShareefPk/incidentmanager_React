@@ -5,6 +5,9 @@ nav ul li span.badge{
     right: 37px;
     z-index: 1;
     }
+    nav ul li span.message-nav.badge{
+        right: 2px;
+    }
 
     .messages-badge{
         margin-left: 16px;

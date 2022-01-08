@@ -1,6 +1,6 @@
 import { React, useState, useEffect, useRef} from 'react'
 import { connect } from 'react-redux'
-import { messagesByUser } from "../../store/actions/messagesActions";
+import { messagesByUser, conversationsByUser, messagesByConversations } from "../../store/actions/messagesActions";
 import SendMessage from './SendMessage';
 import '../../styles/messages.css';
 import ComposeMessage from './ComposeMessage';
@@ -9,7 +9,9 @@ function Messages({
     userId,
     allUsers,
     UserMessages,
-    getMessagesByUser
+    getMessagesByUser,
+    conversationsByUser,
+    messagesByConversations
 }) {
 
     const [userToggle, setUserToggle] = useState(false);
@@ -17,7 +19,8 @@ function Messages({
     const [usersInfo, setUsersInfo] = useState([]);
 
     useEffect(() => {
-        getMessagesByUser(userId); 
+        conversationsByUser(userId); 
+        messagesByConversations('C8078ABB-9A70-4CBF-9D3F-A2B6B1FD538F');
         messagesRef.current.scrollTop = messagesRef.current.scrollHeight;
         
     }, []);
@@ -86,12 +89,13 @@ function Messages({
                    
 
                     <div className="col s10 m9 l3 users hide-on-med-and-down">                        
+                        <div className="compose-message">
+                            <i className="material-icons indigo-text">message</i>
+                            <span className='indigo-text'> Compose Message </span>
+                        </div>   
                         <ul>
                             <li>
-                                <div className="compose-message">
-                                     <i className="material-icons indigo-text">message</i>
-                                    <span className='indigo-text'> Compose Message </span>
-                                </div>                              
+                                                        
                             </li>
                             <User></User>
                             <User></User>
@@ -134,10 +138,12 @@ const mapStateToProps = (state) => {
         UserMessages : state.messages.Messages,
     }
   }
-  
+
   const mapDispatchToProps = (dispatch) => {
     return {
-        getMessagesByUser: (userId) => dispatch(messagesByUser(userId)),    
+        getMessagesByUser: (userId) => dispatch(messagesByUser(userId)),   
+        conversationsByUser: (userId) => dispatch(conversationsByUser(userId)),   
+        messagesByConversations: (conversationId) => dispatch(messagesByConversations(conversationId))    
     }
   }
 
@@ -190,7 +196,7 @@ const Reply = () => {
             </div>
             <div>
                 <button
-                    className="left btn pink darken-1 updateBtn"
+                    className="left btn green darken-2 updateBtn"
                    // onClick={saveComment}
                 >
                     <span>Send</span>

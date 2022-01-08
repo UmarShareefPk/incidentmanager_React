@@ -80,14 +80,14 @@ border-radius: 10px;
 }
 
 .message.left{
-    background-color: green;
+    background-color: gray;
 }
 .message.right{
-    background-color:royalblue;
+    background-color:darkslateblue;
 }
 
 .message-text{
-    color:wheat;
+    color:white;
     font-size: large;
 } 
 

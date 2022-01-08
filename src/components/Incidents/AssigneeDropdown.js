@@ -8,7 +8,7 @@ import { v4 as uuidv4 } from 'uuid';
 function AssigneeDropdown({getAllAssignees, allAssignees, updateIncidentByField, setAssignee ,assigneeName, setAssigneeName }) {
 
     const [assigneeList, setAssigneeList] = useState(allAssignees);
-    
+    const [assgineeSearchText, setAssgineeSearchText] = useState("");
     const assigneeRef = useRef();
 
     const dropDownId = "dropdownAssginee" + uuidv4();
@@ -49,7 +49,10 @@ function AssigneeDropdown({getAllAssignees, allAssignees, updateIncidentByField,
   };
 
   const searchAssignee = (event) => {
+    event.preventDefault();
     console.log("searching....");
+    setAssgineeSearchText(event.target.value);
+    console.log("assgineeSearchText", assgineeSearchText);
     let newList = [];
     if (event.target.value !== "")
       newList = allAssignees.filter((assignee) => {
@@ -97,7 +100,9 @@ function AssigneeDropdown({getAllAssignees, allAssignees, updateIncidentByField,
                           <ul id={dropDownId} className="dropdown-content">
                             <li className="search-assignee-box">
                               <input
-                                defaultValue=""
+                              // onClick={()=> alert("clicker")}
+                            //   onKeyDown={(e)=> console.log(e.target.value)}
+                               // value={assgineeSearchText}
                                 type="text"
                                 placeholder="Search Assignee"
                                 onChange={searchAssignee}
