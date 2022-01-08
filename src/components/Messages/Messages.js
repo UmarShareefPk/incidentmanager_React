@@ -11,7 +11,9 @@ function Messages({
     UserMessages,
     getMessagesByUser,
     conversationsByUser,
-    messagesByConversations
+    messagesByConversations,
+    Conversations,
+    MessagesByConversations,
 }) {
 
     const [userToggle, setUserToggle] = useState(false);
@@ -27,34 +29,7 @@ function Messages({
 
     useEffect(() => {
         //console.log("UserMessages", UserMessages);
-        let users = [];
-        let messagesByUsers = [];
-
-        const unique = [...new Set(UserMessages.map(item => { 
-           
-            return item.From == userId? item.To : item.From;
-            // if(item.From == userId) {
-            //     return {id: item.To, source:'To'}
-            // }
-            // else {
-            //     return {id: item.From, source:'From'}
-            // }
-        }))]; 
-        console.log("unique", unique)
-
-        unique.forEach(user => {
-            let messages = []; 
-            if(user == userId) {
-                messages = UserMessages.filter(msg=> msg.To == user);
-            }
-            else {
-                messages = UserMessages.filter(msg=> msg.From== user );
-            }
-               
-            messagesByUsers.push(messages);
-        });
-
-        console.log("messagesByUsers", messagesByUsers)
+       
      
     }, [UserMessages])
   
@@ -94,13 +69,11 @@ function Messages({
                             <span className='indigo-text'> Compose Message </span>
                         </div>   
                         <ul>
-                            <li>
-                                                        
-                            </li>
+                            {Conversations.map(c=> <User conversation={c} />)}                          
+                            {/* <User></User>
                             <User></User>
                             <User></User>
-                            <User></User>
-                            <User></User>
+                            <User></User> */}
                         </ul>
                     </div>
                     <div className="col s10 m9 l9 hide ">
@@ -136,6 +109,8 @@ const mapStateToProps = (state) => {
         userId :state.userLogin.userId, 
         allUsers: state.users.users,
         UserMessages : state.messages.Messages,
+        Conversations :  state.messages.Conversations,
+        MessagesByConversations: state.messages.MessagesByConversations,
     }
   }
 
@@ -147,7 +122,7 @@ const mapStateToProps = (state) => {
     }
   }
 
-  const User = ()=> {
+  const User = ({conversation})=> {
       return (
           <li >
               <div className='user-info'>
@@ -158,7 +133,7 @@ const mapStateToProps = (state) => {
                   </div>
                   <div>
                       <div className='name indigo-text darken-4'>Umar Shareef</div>
-                      <div className='last-message'>last message
+                      <div className='last-message'>{conversation.LastMessage.slice(0,20)}
                           <span className='date-time'>22 Dec</span>
                       </div>
                   </div>
