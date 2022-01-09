@@ -2,7 +2,7 @@
 
 .user-toogle{
 
-
+width: fit-content;
 text-align: start;
 padding: 30px 0;
 margin-top: 100px;
@@ -33,11 +33,15 @@ border-radius: 10px;
     
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
 }
 
 .messages-window .users .user-info.selected{
+    background-color:lightgray;
+}
+
+.messages-window .users .user-info:hover{
     background-color:lightgray;
 }
 
@@ -73,8 +77,8 @@ border-radius: 10px;
 
 .message{
     margin-bottom: 10px;
-    width:70%; 
-
+    width: fit-content;
+    max-width: 70%;
     border-radius: 36px;
     padding:10px 10px;
 }
@@ -134,12 +138,12 @@ border-radius: 10px;
 @media (min-width: 300px) {
     .message-text{
         width: 100%;
-        font-size: small;
+        font-size: 10px;
     }
 
     .message{
         margin-bottom: 10px;
-        width:80%;        
+       
     }
 }
 
@@ -147,12 +151,12 @@ border-radius: 10px;
 @media (min-width: 700px) {
     .message-text{
         width: 100%;
-        font-size: large;
+        font-size: 13px;
     }
 
     .message{
         margin-bottom: 10px;
-        width:70%; 
+      
     }
 }
 
@@ -161,7 +165,7 @@ border-radius: 10px;
 
     .message-text{
         width: 100%;
-        font-size: 16px;
+        font-size: 13px;
     }
 
     .container.messages-window{
@@ -180,7 +184,7 @@ border-radius: 10px;
 @media (min-width: 1500px) {
     .message-text{
         width: 100%;
-        font-size: 16px;
+        font-size: 13px;
     }
 
     .container.messages-window{

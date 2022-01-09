@@ -20,15 +20,6 @@ function ComposeMessage({
         event.preventDefault();
         const formData = new FormData(); 
 
-        // if(files){
-        //     for(let i = 0; i < files.length ; i++){
-        //       formData.append( 
-        //         "Attachment" + i+1, 
-        //         files[i], 
-        //         files[i].name 
-        //       );
-        //     }
-        // }   
          formData.append("From", userId); 
          formData.append("To", receiver);
          formData.append("MessageText", messageText);     
