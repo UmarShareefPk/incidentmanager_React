@@ -1,17 +1,19 @@
 
-nav ul li span.badge{
+nav ul li span.badge.notification-badge{
     position: relative;
     top: 20px;
     right: 37px;
     z-index: 1;
     }
-    nav ul li span.message-nav.badge{
-        right: 2px;
-    }
 
-    .messages-badge{
-        margin-left: 16px;
-    }
+    nav ul li span.badge.messages-badge{
+        position: relative;
+        top: 20px;
+        right: 25px;
+        z-index: 1;
+        }
+      
+    
 .badge-a {
      margin-top: -2px; 
      margin-left: 0px !important;

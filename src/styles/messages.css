@@ -28,8 +28,8 @@ border-radius: 10px;
 
 .messages-window .users .user-info{
     /* border-bottom: 0.5px solid slategray; */
-    padding: 20px;
-    padding-bottom: 30px;
+    padding: 10px;
+    padding-bottom: 10px;
     
     display: flex;
     flex-direction: row;
@@ -46,7 +46,7 @@ border-radius: 10px;
 }
 
 .messages-window .users .photo{
-    margin-right: 5px;
+    margin-right: 15px;
 }
 
 .messages-window .users .name {
@@ -116,8 +116,9 @@ border-radius: 10px;
 }
 
 .compose-message{
-    padding:20px 10px;
-    margin-left: 10px;
+    padding:10px 0px;
+    margin-right: 15px;
+    
    display: flex;
    justify-content: center;
    align-items: center;

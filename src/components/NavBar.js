@@ -38,7 +38,7 @@ function NavBar({user_Name, loginError, token, signOut}) {
             </li> 
                
             <li>     
-              <NavLink to="/messages" className="message-nav badge-a btn-floating z-depth-0 indigo darken-4" >     
+              <NavLink to="/messages" className="message-nav indigo darken-4" >     
                 {/* <i className="material-icons  ">message</i> */}
                 Messages
               

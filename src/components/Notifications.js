@@ -123,7 +123,7 @@ import { removeIncidentData, getIncidentById } from "../store/actions/incidentsA
        </li>
        <li>
          {unReadCount > 0 ? (
-           <span className="badge white-text new pink">{unReadCount}</span>
+           <span className="badge notification-badge white-text new pink">{unReadCount}</span>
          ) : null}
        </li>
      </>

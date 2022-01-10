@@ -2,7 +2,7 @@ import moment from "moment";;
 
 const Message = ({ message, userId }) => {
 
-    const isSender = message.From == userId ? false: true;
+    const isSender = message.From == userId ? true: false;
 
     return (
         <li className='message-li'>
