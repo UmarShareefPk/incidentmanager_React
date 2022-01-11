@@ -1,12 +1,12 @@
 import { React, useState, useEffect} from 'react'
 import { connect } from 'react-redux'
-import { sendNewMessage } from "../../store/actions/messagesActions";
+import { replyMessage } from "../../store/actions/messagesActions";
 
 const Reply = ({
     userId,      
-    sendNewMessage,
-    UserMessages,
-    replySent
+    replyMessage,
+    UserMessages
+    
 }) => {
 
     const [messageText, setMessageText] = useState("");
@@ -15,15 +15,16 @@ const Reply = ({
         event.preventDefault();
 
         let To = UserMessages[0].From == userId? UserMessages[0].To : UserMessages[0].From;
+        let conversationId = UserMessages[0].ConversationId;
         const formData = new FormData(); 
 
          formData.append("From", userId); 
          formData.append("To", To);
          formData.append("MessageText", messageText);     
         
-        sendNewMessage(formData);
-        //setMessageText("");
-        replySent();
+         replyMessage(formData, conversationId);
+        setMessageText("");
+     
     }
 
     return (
@@ -61,7 +62,7 @@ const mapStateToProps = (state) => {
   
   const mapDispatchToProps = (dispatch) => {
     return {
-        sendNewMessage: (formData) => dispatch(sendNewMessage(formData)),    
+        replyMessage: (formData, conversationId) => dispatch(replyMessage(formData, conversationId)),    
     }
   }
 

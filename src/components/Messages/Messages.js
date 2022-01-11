@@ -31,7 +31,7 @@ function Messages({
     }, []);
 
     useEffect(() => {        
-        if(selectedConversation == "" && Conversations.length > 0){
+        if(selectedConversation == "" && Conversations != null && Conversations.length > 0){
             messagesByConversations(Conversations[0].Id);
             setSelectedConversation(Conversations[0].Id);
         }         
@@ -44,8 +44,11 @@ function Messages({
         if(UserMessages != null && UserMessages.length > 0){
             let user = UserMessages[0].From == userId? getUserNameById(UserMessages[0].To) : getUserNameById(UserMessages[0].From);
            setConversationTitle(user);
-        }         
-        messagesRef.current.scrollTop = messagesRef.current.scrollHeight;     
+        }       
+        try{
+            messagesRef.current.scrollTop = messagesRef.current.scrollHeight;     
+        }  catch(e){}
+     
     }, [UserMessages])
 
     const getUserNameById = (id) => {   
@@ -62,12 +65,11 @@ function Messages({
       const conversationClicked = (id) => {
         setSelectedConversation(id);
         messagesByConversations(id);
+        if(userToggle)
+            setUserToggle(false);
       }
 
-      const replySent = () => {
-        messagesRef.current.scrollTop = messagesRef.current.scrollHeight;     
-        messagesByConversations(selectedConversation);
-      }
+   
     
         
     return (
@@ -101,7 +103,11 @@ function Messages({
                             <span className='indigo-text'> Compose Message </span>
                         </div>   
                         <ul>
-                            {Conversations.map(c => <Conversation conversation={c} allUsers={allUsers} userId={userId} getUserNameById={getUserNameById} conversationClicked={conversationClicked} selectedConversation={selectedConversation} />)}
+                            {(Conversations != null && Conversations.length > 0)? 
+                                Conversations.map(c => <Conversation conversation={c} allUsers={allUsers} userId={userId} getUserNameById={getUserNameById} conversationClicked={conversationClicked} selectedConversation={selectedConversation} />)
+                                :
+                                <></>
+                            }
 
                         </ul>
                     </div>
@@ -122,7 +128,7 @@ function Messages({
                             
                         </ul>
                         </div>
-                        <Reply replySent={replySent} />
+                        <Reply  />
                     </div>
 
                     ) : <></> }

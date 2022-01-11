@@ -29,7 +29,7 @@ border-radius: 10px;
 .messages-window .users .user-info{
     /* border-bottom: 0.5px solid slategray; */
     padding: 10px;
-    padding-bottom: 10px;
+    padding-bottom: 5px;
     
     display: flex;
     flex-direction: row;
@@ -49,11 +49,40 @@ border-radius: 10px;
     margin-right: 15px;
 }
 
+.messages-window .users .name-message{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+   align-items: flex-start;
+}
+
+.messages-window .users .name-unread{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .messages-window .users .name {
     font-weight: bold;
 }
 
-.messages-window .users .last-message {
+.messages-window .users .unread-count{
+    font-size: 10px;
+    color: red;
+}
+
+
+
+.messages-window .users .last-message{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.messages-window .users .last-message .last-message-text {
     padding-top: 5px;
     color: slategray;
     font-size: small;

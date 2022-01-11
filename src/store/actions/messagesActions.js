@@ -70,6 +70,25 @@ export const messagesByUser = (userId) => {
     }
   } 
 
+  export const replyMessage = (formData, conversationId) => {
+    return (dispatch, getState) => {      
+      //console.log("add new incident action");
+        axios.defaults.headers = {'Authorization': `Bearer ${getState().userLogin.token + ""}`};
+        const url = messagesUrls.sendMessageUrl
+        axios.post(url, formData)
+          .then((response)=>{            
+             const data = true;
+             dispatch(messagesByConversations(conversationId));
+             
+              dispatch({ type: 'NEW_MESSAGE', data });
+          })
+          .catch((err)=>{  
+            const data = err.message;
+            console.log(data);
+           
+          });   
+    }
+  }
  
   export const sendNewMessage = (formData) => {
     return (dispatch, getState) => {      
