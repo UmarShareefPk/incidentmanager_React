@@ -34,12 +34,17 @@ import { baseUrl } from "../api/apiURLs";
               refreshNotifications(userId);
           });
 
+          newConnection.on('UpdateConversation', (coversationId) => {
+            console.log(coversationId);
+           // refreshNotifications(coversationId);
+        });
+
         })
         .catch(e => console.log('Connection failed: ', e));
      
     }, [])
 
- 
+
 
     return (
         <>  

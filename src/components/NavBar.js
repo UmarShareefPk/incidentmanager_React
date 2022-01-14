@@ -15,7 +15,7 @@ function NavBar({user_Name, loginError, token, signOut}) {
   // if (loginError) return <Redirect to='/' /> 
    
     return (
-      <nav className="nav-wrapper indigo darken-4">
+      <nav className="nav-wrapper ">
         <div className="container">
           <div className="left">
             <NavLink to="/dashboard" className="brand-logo">             
@@ -38,7 +38,7 @@ function NavBar({user_Name, loginError, token, signOut}) {
             </li> 
                
             <li>     
-              <NavLink to="/messages" className="message-nav indigo darken-4" >     
+              <NavLink to="/messages" className="message-nav " >     
                 {/* <i className="material-icons  ">message</i> */}
                 Messages
               
@@ -57,7 +57,7 @@ function NavBar({user_Name, loginError, token, signOut}) {
                  </button>
             </li>
             <li className=" singout-btn">
-             <a> <i className="material-icons" onClick={signOut}>settings_power</i> </a>
+             <a> <i className="material-icons white-text" onClick={signOut}>settings_power</i> </a>
             </li>
           </ul>
           {/* for mobile */}

@@ -6,7 +6,7 @@ export default function PageActions(props) {
         <div className="row ">
           <div className="col s12 l5">
             <div className="left">
-              <h4 className="title">{props.Title}</h4>
+              <h4 className="page-title">{props.Title}</h4>
             </div>
           </div>
           

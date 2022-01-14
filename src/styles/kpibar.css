@@ -19,6 +19,31 @@
     
 }
 
+.new-color{
+    background: rgb(183,28,28);
+    background: linear-gradient(90deg, rgba(245,124,0,1) 52%, rgba(255,226,0,1) 100%);
+}
+
+.inprogress-color{
+    background: rgb(183,28,28);
+    background: linear-gradient(90deg, rgba(25,118,210,1) 70%, rgba(0,237,255,1) 100%);
+}
+
+.closed-color{
+    background: rgb(183,28,28);
+    background: linear-gradient(90deg, rgba(67,160,71,1) 52%, rgba(0,255,187,1) 100%);
+}
+
+.approved-color{
+    background: rgb(183,28,28);
+    background: linear-gradient(90deg, rgba(27,94,32,1) 52%, rgba(19,255,0,1) 100%);
+}
+
+.late-color{
+    background: rgb(183,28,28);
+    background: linear-gradient(90deg, rgba(183,28,28,1) 52%, rgba(255,140,0,1) 100%);
+}
+
 
 
 /* Small devices  */
@@ -42,12 +67,12 @@
        }
 
     .kpi-value{    
-        font-size: 35px; 
+        font-size: 20px; 
         margin-bottom: 5px;    
     }
     .kpi-text{
         font-weight: bold;
-        font-size: 15px;
+        font-size: 12px;
        
     }
 }
