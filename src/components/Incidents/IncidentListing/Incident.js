@@ -40,7 +40,7 @@ function Incident({incident, dispatch, getUserNameById}) {
   }
 
   let currentDate = new Date();
-  const dueDateClass = (new Date(incident.DueDate)) < currentDate ? "red-text text-darken-2" : "green-text text-darken-2";
+  const dueDateClass = (new Date(incident.DueDate)) > currentDate || incident.Status == 'C' || incident.Status == 'A' ?  "green-text text-darken-2" : "red-text text-darken-2" ;
   
     return (
       <tr >

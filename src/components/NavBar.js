@@ -46,7 +46,7 @@ function NavBar({user_Name, loginError, token, signOut}) {
               
             </li>    
             <li>
-              <span className=" badge white-text new green messages-badge">5</span> 
+              <span className=" badge white-text new  messages-badge">5</span> 
               </li>   
             {/* <li onClick={()=> commentSent("Hi please work.")}>              */}
            
