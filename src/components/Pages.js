@@ -4,22 +4,36 @@ import M from 'materialize-css';
 
 
 
-export default function Pages({TotalPages, PostsPerPage, setPageNumber, setPageSize , search }) {
+export default function Pages({TotalRecords, PostsPerPage, setPageNumber, setPageSize , search }) {
 
     const [currentPage, setCurrentPage] = useState(1);
     const [currentSize, setCurrentSize] = useState(5);
 
+    let hidePreviousPages = false;
+    let hideNextPages = false;
+
     const ddlRef = useRef();
 
-    let pages = [];
-    for(let i = 1; i <= Math.ceil(TotalPages / PostsPerPage) ; i++ )
+    let pageIndexes = [];
+    for(let i = 1; i <= Math.ceil(TotalRecords / PostsPerPage) ; i++ )
     {
-        pages.push(i);
+        if(i > currentPage - 3 &&  i < currentPage + 3)
+        pageIndexes.push(i);        
     }
 
-    const pageNumberClick = (p) =>{
-        if(p <1 || p > pages.length)
+    if(pageIndexes[0] != 1){
+        hidePreviousPages = true;      
+    }
+
+    if(pageIndexes[pageIndexes.length -1] != Math.ceil(TotalRecords / PostsPerPage)){
+        hideNextPages = true;      
+    }
+
+    const pageNumberClick = (event, p) =>{
+        event.preventDefault();
+        if(p <1 || p > Math.ceil(TotalRecords / PostsPerPage))
             return;
+            console.log(p);
         setPageNumber(p);
         setCurrentPage(p);
     }
@@ -37,15 +51,15 @@ export default function Pages({TotalPages, PostsPerPage, setPageNumber, setPageS
         M.FormSelect.init(ddlRef.current); 
     }, [search])
 
-    pages = pages.map((p,index)=>{
+    let pages = pageIndexes.map((p,index)=>{
         let pclass = currentPage === p ? "active" : "";        
         return (             
-            <li className={pclass} key={p}  onClick={() => pageNumberClick(p)}>              
+            <li className={pclass} key={p}  onClick={(e) => pageNumberClick(e, p)}>              
               <a > {p} </a>
             </li>        
         );
     });
-  
+
     return (
         
       <div className="row pagesRow">
@@ -69,14 +83,16 @@ export default function Pages({TotalPages, PostsPerPage, setPageNumber, setPageS
             <ul className="pagination right">
             <li
                 className={  currentPage === 1 ? " disabled" : "" } >
-                <a href="#!" onClick={() => pageNumberClick(currentPage - 1)}>
-                <i className="material-icons">chevron_left</i>
+                <a href="#!" onClick={(e) => pageNumberClick(e ,currentPage - 1)}>
+                <i className="material-icons">chevron_left</i>               
                 </a>
             </li>
+            {hidePreviousPages? <li><a>...</a></li> : null} 
             {pages}
+            {hideNextPages? <li><a>...</a></li> : null} 
             <li
-                className={ currentPage === pages.length ? " disabled" : "" } >
-                <a href="#!" onClick={() => pageNumberClick(currentPage + 1)}>
+                className={ currentPage === Math.ceil(TotalRecords / PostsPerPage) ? " disabled" : "" } >
+                <a href="#!" onClick={(e) => pageNumberClick(e, currentPage + 1)}>
                 <i className="material-icons">chevron_right</i>
                 </a>
             </li>

@@ -115,7 +115,7 @@ import {  useHistory  } from 'react-router-dom';
                   }           
                   </tbody>
                 </table>
-                <Pages  TotalPages={props.TotalIncidents} PostsPerPage={PageSize} setPageNumber={setPageNumber} setPageSize={setPageSize} search={Search} />
+                <Pages  TotalRecords={props.TotalIncidents} PostsPerPage={PageSize} setPageNumber={setPageNumber} setPageSize={setPageSize} search={Search} />
               </div>
             </div>
           </div>

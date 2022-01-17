@@ -39,6 +39,10 @@ ul.sidenav li{
     -webkit-text-fill-color: transparent;
 }
 
+.pagination li {
+    cursor: pointer;
+}
+
 /* Small devices  */
 @media (min-width: 300px) {
     nav .brand-logo {

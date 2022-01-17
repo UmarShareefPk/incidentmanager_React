@@ -19,7 +19,7 @@ function KPIBar({getKPIData, userId, kpiData}) {
         <KPI value={kpiData.Closed} text="CLOSED" color="closed-color" />
         <KPI value={kpiData.Approved} text="APPROVED" color="approved-color" />
         <KPI value={kpiData.Late} text="LATE" color="late-color"/>
-        <KPI value={kpiData.AssignedToMe} text="ASSINGED TO YOU" color="indigo darken-4"/>        
+        <KPI value={kpiData.AssignedToMe} text="ASSINGED TO YOU" color="assignedToMe-color"/>        
       </div>
     );
 }

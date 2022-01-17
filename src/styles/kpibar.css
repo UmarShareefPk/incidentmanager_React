@@ -44,6 +44,11 @@
     background: linear-gradient(90deg, rgba(183,28,28,1) 52%, rgba(255,140,0,1) 100%);
 }
 
+.assignedToMe-color{
+    background: rgb(26,35,126);
+    background: linear-gradient(90deg, rgba(26,35,126,1) 63%, rgba(0,194,255,1) 100%);
+}
+
 
 
 /* Small devices  */

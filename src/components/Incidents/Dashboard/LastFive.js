@@ -40,7 +40,7 @@ const Incident = ({incident, dispatch}) => {
       case "N":
         return "New";
       case "C":
-        return "Close";
+        return "Closed";
       case "A":
         return "Approved";
       case "I":
