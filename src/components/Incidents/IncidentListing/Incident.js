@@ -43,21 +43,34 @@ function Incident({incident, dispatch, getUserNameById}) {
   const dueDateClass = (new Date(incident.DueDate)) > currentDate || incident.Status == 'C' || incident.Status == 'A' ?  "green-text text-darken-2" : "red-text text-darken-2" ;
   
     return (
-      <tr >
+      <tr >      
         
         <td
-          className="tbl-title"
-          title={incident.Title}
+          className="tbl-title"        
         >
-         <span className="indigo-text darken-4" onClick = { () => openIncident(incident.Id) }>
-               {incident.Title.length > 50 ? incident.Title.slice(0,50) + " ..." : incident.Title }
-         </span>
+          <div class="custom-dropdown">
+            <span className="indigo-text darken-4" onClick={() => openIncident(incident.Id)} >
+              {incident.Title.length > 50 ? incident.Title.slice(0, 50) + " ..." : incident.Title}
+            </span>
+            <div class="custom-dropdown-content">
+              <p> {incident.Title}</p>
+            </div>
+          </div>
+
         </td>
+        
         <td
           className="tbl-description"
-          title={incident.Description}
         >
-          {incident.Description.length > 30 ? incident.Description.slice(0,30) + " ..." : incident.Description }
+          <div class="custom-dropdown">
+            <span >
+               {incident.Description.length > 30 ? incident.Description.slice(0,30) + " ..." : incident.Description }
+            </span>
+            <div class="custom-dropdown-content">
+              <p> {incident.Description}</p>
+            </div>
+          </div>
+    
         </td>
         <td>{getUserNameById(incident.AssignedTo)}</td>
         <td>{getUserNameById(incident.CreatedBy)}</td>
