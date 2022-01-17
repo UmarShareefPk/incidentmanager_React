@@ -1,25 +1,43 @@
 .notifications.dropdown-content{
-  width: 300px !important;
+  min-width: 380px !important;
   margin-top: 116px !important;
   margin-right: 100px !important;    
   min-height: 50vh;
+  max-height: 80vh;
   border: 1px solid white;
-  background-color:  #1A237E;
+
 }
 
-.notification-box.unread{
-  background-color:  #1A237E;
-  color: white;
+.notification-box{
   padding: 2px 20px;
   border-bottom: 1px solid white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid gray;
 }
 
-.notification-box.read{
-  background-color:  #1A237E;
-  color: silver;
-  padding: 2px 20px;
-  border-bottom: 1px solid white;
+.notification-box .icon{
+  font-size: 15px;
 }
+
+.notification-box .text{
+  font-size: 14px;
+  max-width: 220px;
+}
+
+.notification-box .time{
+  font-size: 10px;
+}
+
+
+ .notification-box.unread{ 
+  background-color: rgb(226, 221, 221);
+}
+
+.notification-box.read{ 
+  background-color: white;
+} 
 .notification-box p:hover{
   text-decoration: underline;
 }

@@ -1,6 +1,6 @@
 import { React, useState, useEffect} from 'react'
 import { connect } from 'react-redux'
-import { sendNewMessage } from "../../store/actions/messagesActions";
+import { sendNewMessage, conversationsByUser } from "../../store/actions/messagesActions";
 import  AssigneeDropdown  from "../../components/Incidents/AssigneeDropdown";
 import '../../styles/composemessage.css'
 
@@ -8,7 +8,10 @@ function ComposeMessage({
     userId,
     allUsers,
     UserMessages,
-    sendNewMessage
+    sendNewMessage,
+    conversationsByUser,
+    setComposeToggle,
+    newConversationAdded
 }) {
 
 
@@ -17,18 +20,32 @@ function ComposeMessage({
     const [messageText, setMessageText] = useState("");
   
     const sendMessage = (event) => {
+        
         event.preventDefault();
+
+        if(messageText.trim() == "" || receiver == null){
+            alert("Please select a user and type message.");
+            return;
+        }
+       
         const formData = new FormData(); 
 
          formData.append("From", userId); 
          formData.append("To", receiver);
          formData.append("MessageText", messageText);     
-        console.log("formData", formData);
+      
         sendNewMessage(formData);
+
+        setMessageText("");
+        setReceiverName("");
+        setReceiver(null);
+        conversationsByUser(userId);
+        setComposeToggle(false);
     }
 
     return (
         <div className="compose-message-container">    
+            <h5>Compose New Message</h5>
                     <form action="#">
                         <div className="field">
                             <AssigneeDropdown
@@ -39,16 +56,24 @@ function ComposeMessage({
                             />
                         </div>
                 <div className="input-field">
-                    <textarea className="materialize-textarea" cols="30" rows="10" onChange={(e) => setMessageText(e.target.value)} placeholder="Write message here" required></textarea>
+                    <textarea className="materialize-textarea" cols="30" value={messageText} rows="10" onChange={(e) => setMessageText(e.target.value)} placeholder="Write message here" required></textarea>
                 </div>
 
                 <div>
                     <button
-                        className=" btn green darken-1 updateBtn"
+                        className=" btn green darken-2 updateBtn"
                         onClick={(event) => sendMessage(event)}
                     >
                         <span>Send</span>
                         <i className="material-icons right">send</i>
+                    </button>
+
+                    <button
+                        className=" btn yellow darken-2 updateBtn"
+                        onClick={() => setComposeToggle(false)}
+                    >
+                        <span>Cancel</span>
+                        <i className="material-icons right">cancel</i>
                     </button>
                 </div>
                     </form>
@@ -66,7 +91,8 @@ const mapStateToProps = (state) => {
   
   const mapDispatchToProps = (dispatch) => {
     return {
-        sendNewMessage: (formData) => dispatch(sendNewMessage(formData)),    
+        sendNewMessage: (formData) => dispatch(sendNewMessage(formData)),   
+        conversationsByUser: (userId) => dispatch(conversationsByUser(userId)),  
     }
   }
 

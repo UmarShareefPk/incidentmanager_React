@@ -9,7 +9,9 @@
     margin-bottom: 10px;
 }
 .widget h5{
-    color: #1A237E;
+    background: linear-gradient(0deg, rgba(26,35,126,1) 25%, rgba(253,187,45,1) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
     font-size: large;
     font-weight: bold;
 }

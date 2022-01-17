@@ -20,6 +20,7 @@ function Messages({
 }) {
 
     const [userToggle, setUserToggle] = useState(false);
+    const [composeToggle, setComposeToggle] = useState(false);
     const messagesRef = useRef();   
     const [usersInfo, setUsersInfo] = useState([]);
     const [selectedConversation, setSelectedConversation] = useState('');
@@ -40,7 +41,7 @@ function Messages({
 
     
     useEffect(() => {        
-       console.log("UserMessages", UserMessages[0].To);
+      
         if(UserMessages != null && UserMessages.length > 0){
             let user = UserMessages[0].From == userId? getUserNameById(UserMessages[0].To) : getUserNameById(UserMessages[0].From);
            setConversationTitle(user);
@@ -50,6 +51,10 @@ function Messages({
         }  catch(e){}
      
     }, [UserMessages])
+
+    const newConversationAdded = () =>{
+        conversationsByUser(userId);  
+    }
 
     const getUserNameById = (id) => {   
         let user = allUsers.find((assignee) => {
@@ -85,11 +90,11 @@ function Messages({
                     </div>
                     {userToggle? (
                          <div className="col s10 m9 l3 users hide-on-large-only">
-                              <div className="compose-message">
+                              <div className="compose-message" onClick={()=> setComposeToggle(!composeToggle)}>
                                      <i className="material-icons indigo-text">message</i>
                                     <span className='indigo-text'> Compose Message </span>
                                 </div>  
-                         <ul>                         
+                         <ul className='conversation-list'>                         
                                 {Conversations.map(c => <Conversation conversation={c} allUsers={allUsers} userId={userId} getUserNameById={getUserNameById} conversationClicked={conversationClicked} selectedConversation={selectedConversation} />)}
 
                          </ul>
@@ -98,11 +103,11 @@ function Messages({
                    
 
                     <div className="col s10 m9 l3 users hide-on-med-and-down">                        
-                        <div className="compose-message">
+                        <div className="compose-message" onClick={()=> setComposeToggle(!composeToggle)}>
                             <i className="material-icons indigo-text">message</i>
                             <span className='indigo-text'> Compose Message </span>
                         </div>   
-                        <ul>
+                        <ul className='conversation-list'> 
                             {(Conversations != null && Conversations.length > 0)? 
                                 Conversations.map(c => <Conversation conversation={c} allUsers={allUsers} userId={userId} getUserNameById={getUserNameById} conversationClicked={conversationClicked} selectedConversation={selectedConversation} />)
                                 :
@@ -111,27 +116,32 @@ function Messages({
 
                         </ul>
                     </div>
-                    <div className="col s10 m9 l9 hide ">
-                        <ComposeMessage />
-                    </div>
-                    {!userToggle? (
-                    <div className="col s10 m9 l9 ">
-                        <h5 className="left indigo-text darken-4"> {conversationTitle} </h5>
-                        <div className="messages" ref={messagesRef}>
-                        <ul className=''>
-                            {
-                                UserMessages.map(m => (
-                                    <Message message={m} userId={userId}/>
-                                ))
-                            }
-                            
-                            
-                        </ul>
+                    {composeToggle ? (
+                        <div className="col s10 m9 l9  ">
+                            <ComposeMessage setComposeToggle={setComposeToggle} newConversationAdded={newConversationAdded} />
                         </div>
-                        <Reply  />
-                    </div>
+                    )
+                        :
+                        (
+                            !userToggle ? (
+                                <div className="col s10 m9 l9 ">
+                                    <h5 className="left indigo-text darken-4"> {conversationTitle} </h5>
+                                    <div className="messages" ref={messagesRef}>
+                                        <ul className=''>
+                                            {
+                                                UserMessages.map(m => (
+                                                    <Message message={m} userId={userId} />
+                                                ))
+                                            }
+                                        </ul>
+                                    </div>
+                                    <Reply />
+                                </div>
 
-                    ) : <></> }
+                            ) : <></>
+                        )}
+
+                   
 
                 </div>
             </div>

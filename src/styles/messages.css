@@ -164,6 +164,11 @@ border-radius: 10px;
     font-size: larger;
 }
 
+.conversation-list{
+    max-height: 75vh;
+    overflow-y: auto;
+}
+
 /* Small devices  */
 @media (min-width: 300px) {
     .message-text{

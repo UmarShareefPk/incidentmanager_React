@@ -5,7 +5,7 @@ import M from 'materialize-css';
 import  '../styles/notifications.css'
 import {getAllNotifications, setNotificationStatus} from '../store/actions/notificationsActions';
 import { removeIncidentData, getIncidentById } from "../store/actions/incidentsActions";
-
+import moment from "moment";
 
  function Notifications({
    getNotifications,
@@ -87,33 +87,36 @@ import { removeIncidentData, getIncidentById } from "../store/actions/incidentsA
                return (
                  <li key={notification.Id}>
                    <div className={classes}>
-                     <div className="row">
-                       <div className="col s2">
-                         {notification.IsRead ? (
-                           <i
-                             className="material-icons white-text readIcon"
-                             title="Mark Unread"
-                             onClick={() => setStatus(notification.Id, false)}
-                           >
-                             radio_button_unchecked
-                           </i>
-                         ) : (
-                           <i
-                             className="material-icons white-text readIcon"
-                             title="Mark Read"
-                             onClick={() => setStatus(notification.Id, true)}
-                           >
-                             radio_button_checked
-                           </i>
-                         )}
-                       </div>
-                       <div className="col s10 right">
-                         <p onClick={() => openIncident(notification)}>
-                           {" "}
-                           {notification.NotifyAbout}
-                         </p>
-                       </div>
-                     </div>
+                     <span className='icon'>
+                       {notification.IsRead ? (
+                         <i
+                           className="material-icons black-text readIcon"
+                           title="Mark Unread"
+                           onClick={() => setStatus(notification.Id, false)}
+                         >
+                           radio_button_unchecked
+                         </i>
+                       ) : (
+                         <i
+                           className="material-icons black-text readIcon"
+                           title="Mark Read"
+                           onClick={() => setStatus(notification.Id, true)}
+                         >
+                           radio_button_checked
+                         </i>
+                       )}
+                     </span>
+
+                     <p className='text indigo-text darken-4' onClick={() => openIncident(notification)}>
+                       {" "}
+                       {notification.NotifyAbout}
+                     </p>
+
+                     <p className='time'>
+                      <span title= {moment(notification.CreateDate).format("MMMM DD YYYY, h:mm:ss a")}>{moment(notification.CreateDate).fromNow() } </span>                      
+                     </p>
+                         
+                       
                    </div>
                  </li>
                );
