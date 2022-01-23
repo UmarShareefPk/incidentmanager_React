@@ -94,7 +94,7 @@ function AssigneeDropdown({getAllAssignees, allAssignees, updateIncidentByField,
                             placeholder="Select User"
                             ref={assigneeRef}
                             value={assigneeName}
-                            defaultValue="Select User"
+                          
                           />
 
                           <ul id={dropDownId} className="dropdown-content">

@@ -22,6 +22,9 @@ export const incidentsWithPage = (parameters) => {
           })
           .catch((err)=>{    
                    console.log(err.message);
+                   if(err.message.toLowerCase()=="request failed with status code 401")
+                         dispatch({ type: 'SIGN_OUT', data:"token invalid" });
+
                    const data = err.message;
                    console.log("error:", err)
                    dispatch({ type: 'INCIDENTS_WITH_PAGE_ERROR', data });
@@ -40,8 +43,10 @@ export const incidentsWithPage = (parameters) => {
               dispatch({ type: 'NEW_INCIDENT_STATUS', data });
           })
           .catch((err)=>{  
-            const data = err.message;
-            console.log(data);
+            if (err.message.toLowerCase() == "request failed with status code 401")
+              dispatch({ type: 'SIGN_OUT', data: "token invalid" });
+           let data = err.message;
+              console.log(data);
             dispatch({ type: 'NEW_INCIDENT_ERROR', data });
           });   
     }
@@ -80,6 +85,8 @@ export const incidentsWithPage = (parameters) => {
           })
           .catch((err)=>{                 
             console.log(err.message);
+            if (err.message.toLowerCase() == "request failed with status code 401")
+               dispatch({ type: 'SIGN_OUT', data: "token invalid" });
             const data = "while delteing comment: " + err.message;
             dispatch({ type: 'INCIDENTS_BY_ID_ERROR', data });
           });   
@@ -98,6 +105,8 @@ export const incidentsWithPage = (parameters) => {
           })
           .catch((err)=>{                 
             console.log(err.message);
+            if (err.message.toLowerCase() == "request failed with status code 401")
+               dispatch({ type: 'SIGN_OUT', data: "token invalid" });
             const data = "while updating incident: " + err.message;
             dispatch({ type: 'INCIDENTS_BY_ID_ERROR', data });
           });   
@@ -117,6 +126,8 @@ export const incidentsWithPage = (parameters) => {
           })
           .catch((err)=>{                 
             console.log(err.message);
+            if (err.message.toLowerCase() == "request failed with status code 401")
+              dispatch({ type: 'SIGN_OUT', data: "token invalid" });
             const data = "while updating comment: " + err.message;
             dispatch({ type: 'INCIDENTS_BY_ID_ERROR', data });
           });   
@@ -135,6 +146,8 @@ export const incidentsWithPage = (parameters) => {
           })
           .catch((err)=>{                 
             console.log(err.message);
+            if (err.message.toLowerCase() == "request failed with status code 401")
+              dispatch({ type: 'SIGN_OUT', data: "token invalid" });
             const data = "while getting data for incident: " + err.message;
             dispatch({ type: 'INCIDENTS_BY_ID_ERROR', data });
           });   
@@ -161,6 +174,8 @@ export const incidentsWithPage = (parameters) => {
           })
           .catch((err)=>{                 
             console.log(err.message);
+            if (err.message.toLowerCase() == "request failed with status code 401")
+              dispatch({ type: 'SIGN_OUT', data: "token invalid" });
             const data = "while delteing attachment: " + err.message;
             dispatch({ type: 'INCIDENTS_BY_ID_ERROR', data });
           });   

@@ -21,7 +21,7 @@ if(Oldest5UnresolvedIncidents == null || Oldest5UnresolvedIncidents.length===0 )
           {
             Oldest5UnresolvedIncidents.map(incident => {
               return (
-                <Incident incident={incident} />
+                <Incident key={incident.Id} incident={incident} />
               )
             })
           }

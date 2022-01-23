@@ -79,7 +79,7 @@ function Comments({
           value={newComment}
           onChange={(e) => setNewComment(e.target.value)}
         ></textarea>
-        <label for="comment" className="">
+        <label htmlFor="comment" className="">
           Comment
         </label>
       </div>

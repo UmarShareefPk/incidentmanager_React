@@ -20,6 +20,8 @@ export const messagesByUser = (userId) => {
           })
           .catch((err)=>{    
                    console.log(err.message);
+                   if (err.message.toLowerCase() == "request failed with status code 401")
+                       dispatch({ type: 'SIGN_OUT', data: "token invalid" });
                    const data = err.message;
                    console.log("error:", err);              
           });    
@@ -42,6 +44,8 @@ export const messagesByUser = (userId) => {
           })
           .catch((err)=>{    
                    console.log(err.message);
+                   if (err.message.toLowerCase() == "request failed with status code 401")
+                      dispatch({ type: 'SIGN_OUT', data: "token invalid" });
                    const data = err.message;
                    console.log("error:", err);              
           });    
@@ -62,7 +66,9 @@ export const messagesByUser = (userId) => {
              const data = response.data;
               dispatch({ type: 'MESSAGES_BY_CONVERSATIONS', data });
           })
-          .catch((err)=>{    
+          .catch((err)=>{  
+            if (err.message.toLowerCase() == "request failed with status code 401")
+              dispatch({ type: 'SIGN_OUT', data: "token invalid" });  
                    console.log(err.message);
                    const data = err.message;
                    console.log("error:", err);              
@@ -83,6 +89,8 @@ export const messagesByUser = (userId) => {
               dispatch({ type: 'NEW_MESSAGE', data });
           })
           .catch((err)=>{  
+            if (err.message.toLowerCase() == "request failed with status code 401")
+              dispatch({ type: 'SIGN_OUT', data: "token invalid" });
             const data = err.message;
             console.log(data);
            
@@ -101,6 +109,8 @@ export const messagesByUser = (userId) => {
               dispatch({ type: 'NEW_MESSAGE', data });
           })
           .catch((err)=>{  
+            if (err.message.toLowerCase() == "request failed with status code 401")
+              dispatch({ type: 'SIGN_OUT', data: "token invalid" });
             const data = err.message;
             console.log(data);
            

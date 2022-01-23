@@ -48,11 +48,11 @@ function Incident({incident, dispatch, getUserNameById}) {
         <td
           className="tbl-title"        
         >
-          <div class="custom-dropdown">
+          <div className="custom-dropdown">
             <span className="indigo-text darken-4" onClick={() => openIncident(incident.Id)} >
               {incident.Title.length > 50 ? incident.Title.slice(0, 50) + " ..." : incident.Title}
             </span>
-            <div class="custom-dropdown-content">
+            <div className="custom-dropdown-content">
               <p> {incident.Title}</p>
             </div>
           </div>
@@ -62,11 +62,11 @@ function Incident({incident, dispatch, getUserNameById}) {
         <td
           className="tbl-description"
         >
-          <div class="custom-dropdown">
+          <div className="custom-dropdown">
             <span >
                {incident.Description.length > 30 ? incident.Description.slice(0,30) + " ..." : incident.Description }
             </span>
-            <div class="custom-dropdown-content">
+            <div className="custom-dropdown-content">
               <p> {incident.Description}</p>
             </div>
           </div>

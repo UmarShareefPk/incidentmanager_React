@@ -32,6 +32,10 @@ const initState = {
            hubId: action.hubId,
          };
        case "SIGN_OUT":
+         console.log("action", action);
+        // if(action.data = "token invalid")
+          // alert("Your session has been expired. Please login again.");
+
          return {
            ...state,
            user_Name : null,

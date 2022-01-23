@@ -41,7 +41,7 @@ function SendMessage({
            
 
                             <input type="checkbox" id="click" />
-                                <label for="click">
+                                <label htmlFor="click">
                                 <i className="fab fa-facebook-messenger"></i>
                                 <i className="fas fa-times"></i>
                                 +

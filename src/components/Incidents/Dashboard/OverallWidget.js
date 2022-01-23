@@ -12,7 +12,7 @@ function OverallWidget({overallWidgetData, getOverallWidgetData}) {
     }, [])
 
     useEffect(() => {
-        console.log("overallWidgetData", overallWidgetData);
+     
         const options = {
             chart: {
                 type: 'pie',
@@ -85,8 +85,10 @@ function OverallWidget({overallWidgetData, getOverallWidgetData}) {
                 ]
             }]
         }
-
-        setChartOptions(options);
+        try{
+            setChartOptions(options);
+        }catch(e){}
+    
     }, [overallWidgetData])
 
 

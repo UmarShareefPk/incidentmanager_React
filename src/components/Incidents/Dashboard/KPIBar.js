@@ -13,7 +13,7 @@ function KPIBar({getKPIData, userId, kpiData}) {
 
  
     return (     
-      <div class="row kpibar">       
+      <div className="row kpibar">       
         <KPI value={kpiData.New} text="NEW" color="new-color" />
         <KPI value={kpiData.InProgress} text="IN PROGRESS" color="inprogress-color" />
         <KPI value={kpiData.Closed} text="CLOSED" color="closed-color" />

@@ -95,7 +95,7 @@ function Messages({
                                     <span className='indigo-text'> Compose Message </span>
                                 </div>  
                          <ul className='conversation-list'>                         
-                                {Conversations.map(c => <Conversation conversation={c} allUsers={allUsers} userId={userId} getUserNameById={getUserNameById} conversationClicked={conversationClicked} selectedConversation={selectedConversation} />)}
+                                {Conversations.map(c => <Conversation key={c.Id} conversation={c} allUsers={allUsers} userId={userId} getUserNameById={getUserNameById} conversationClicked={conversationClicked} selectedConversation={selectedConversation} />)}
 
                          </ul>
                      </div>
@@ -109,7 +109,7 @@ function Messages({
                         </div>   
                         <ul className='conversation-list'> 
                             {(Conversations != null && Conversations.length > 0)? 
-                                Conversations.map(c => <Conversation conversation={c} allUsers={allUsers} userId={userId} getUserNameById={getUserNameById} conversationClicked={conversationClicked} selectedConversation={selectedConversation} />)
+                                Conversations.map(c => <Conversation conversation={c} key={c.Id} allUsers={allUsers} userId={userId} getUserNameById={getUserNameById} conversationClicked={conversationClicked} selectedConversation={selectedConversation} />)
                                 :
                                 <></>
                             }
@@ -130,7 +130,7 @@ function Messages({
                                         <ul className=''>
                                             {
                                                 UserMessages.map(m => (
-                                                    <Message message={m} userId={userId} />
+                                                    <Message key={m.Id} message={m} userId={userId} />
                                                 ))
                                             }
                                         </ul>

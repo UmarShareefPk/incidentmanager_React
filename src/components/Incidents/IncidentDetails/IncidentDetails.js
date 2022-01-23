@@ -174,14 +174,14 @@ function IncidentDetails({
   if (!incidentData || !allAssignees) {    
     return  ( 
      
-              <div class="preloader-wrapper container big active page-loader">
-                <div class="spinner-layer spinner-blue-only">
-                  <div class="circle-clipper left">
-                    <div class="circle"></div>
-                  </div><div class="gap-patch">
-                    <div class="circle"></div>
-                  </div><div class="circle-clipper right">
-                    <div class="circle"></div>
+              <div className="preloader-wrapper container big active page-loader">
+                <div className="spinner-layer spinner-blue-only">
+                  <div className="circle-clipper left">
+                    <div className="circle"></div>
+                  </div><div className="gap-patch">
+                    <div className="circle"></div>
+                  </div><div className="circle-clipper right">
+                    <div className="circle"></div>
                   </div>
                 </div>
             </div>
@@ -278,7 +278,7 @@ function IncidentDetails({
                             value={status}
                             onChange={statusChanged}
                           >
-                            <option value="N" disabled selected>
+                            <option value="N" disabled >
                               New
                             </option>
                             <option value="I">In Progress</option>
@@ -317,7 +317,7 @@ function IncidentDetails({
                                 className="datepicker"
                                 ref={dueDateDateRef}
                               />
-                              <label for="dueDateDate" className="">
+                              <label htmlFor="dueDateDate" className="">
                                 Pick Date
                               </label>
                             </div>
@@ -328,7 +328,7 @@ function IncidentDetails({
                                 className="timepicker"
                                 ref={dueDateTimeRef}
                               />
-                              <label for="dueDateTime" className="">
+                              <label htmlFor="dueDateTime" className="">
                                 Pick Time
                               </label>
                             </div>
@@ -383,7 +383,7 @@ function IncidentDetails({
                                 className="datepicker"
                                 ref={startTimeDateRef}
                               />
-                              <label for="startTimeDate" className="">
+                              <label htmlFor="startTimeDate" className="">
                                 Pick Date
                               </label>
                             </div>
@@ -395,7 +395,7 @@ function IncidentDetails({
                                 className="timepicker"
                                 ref={startTimeTimeRef}
                               />
-                              <label for="startTimeime" className="">
+                              <label htmlFor="startTimeime" className="">
                                 Pick Time
                               </label>
                             </div>

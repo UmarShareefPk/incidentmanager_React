@@ -9,9 +9,13 @@ import { signOut } from "../store/actions/userLoginActions";
 function NavBar({user_Name, loginError, token, signOut}) {
 
   if (!token){
-    alert("Your session has been expired. Please login again.")
+    //alert("Your session has been expired. Please login again.")
     return <Redirect to='/' /> 
   } 
+
+  const logOut = () => {
+    signOut();   
+  }
   // if (loginError) return <Redirect to='/' /> 
    
     return (
@@ -57,7 +61,7 @@ function NavBar({user_Name, loginError, token, signOut}) {
                  </button>
             </li>
             <li className=" singout-btn">
-             <a> <i className="material-icons white-text" onClick={signOut}>settings_power</i> </a>
+             <a> <i className="material-icons white-text" onClick={() => logOut()}>settings_power</i> </a>
             </li>
           </ul>
           {/* for mobile */}
