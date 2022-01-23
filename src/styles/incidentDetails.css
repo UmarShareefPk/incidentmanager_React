@@ -1,7 +1,8 @@
 
    
     ::-webkit-scrollbar {
-        width: 4px;
+        width: 5px;
+        height: 5em;
       }
 
       /* Track */
@@ -12,7 +13,7 @@
       
       /* Handle */
       ::-webkit-scrollbar-thumb {
-        background: #1A237E; 
+        background: lightblue  ; 
         border-radius: 10px;
       }
 
@@ -23,7 +24,7 @@
    
 
       .datepicker-date-display, .timepicker-digital-display{
-        background-color:#1A237E; ;
+        background-color:#1A237E; 
     }
 
     li>a, .dropdown-content li>span {

@@ -43,7 +43,28 @@ ul.sidenav li{
 
 .pagination li {
     cursor: pointer;
+    border-radius: 10px;
 }
+
+.pagesRow {
+    display: flex;
+    align-items: center;
+}
+
+.pagesRow .pageSize {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;    
+}
+.pagesRow .pageSize span {
+    color: slategray;
+}
+
+.pagesRow .pageSize .select-wrapper {
+    width: 4vw;
+}
+
+
 
 /* Small devices  */
 @media (min-width: 300px) {

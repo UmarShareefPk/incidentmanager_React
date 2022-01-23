@@ -22,7 +22,10 @@ const Conversation = ({ conversation, allUsers, userId, getUserNameById, convers
                 <div className='name-message'>
                     <div className='name-unread' >
                         <span className='name indigo-text darken-4'>{getUserNameById(user)} </span>
-                        <span className='unread-count hide'>5 new</span>
+                        {conversation.UnReadCount == 0 ?
+                            null :
+                            (<span className='unread-count'>{conversation.UnReadCount} new</span>)
+                        }
                     </div>
                     <div className='last-message'>
                         <span className='last-message-text'>{conversation.LastMessage.slice(0,20)}</span>

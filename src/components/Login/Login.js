@@ -18,7 +18,7 @@ import '../../styles/loginStyles.css'
         props.logIn(credentials);       
    }
 
-    if (props.token) return <Redirect to='/incidentListing' /> 
+    if (props.token) return <Redirect to='/dashboard' /> 
      
     return (
       <div className="loginMain">

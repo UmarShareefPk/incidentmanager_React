@@ -24,8 +24,9 @@ nav .badge{
         font-size: 15px;
         min-width:300px;
         box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-        padding: 12px 16px;
+        padding: 5px 10px;
         z-index: 2;
+        border-radius: 20px;
       }
       
       .custom-dropdown:hover .custom-dropdown-content {
