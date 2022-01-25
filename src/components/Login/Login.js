@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 import { logIn } from '../../store/actions/userLoginActions'
 import { Redirect } from 'react-router-dom'
 import '../../styles/loginStyles.css'
+import logo from '../../images/logoBigWhite.png'
+import logoSmall from '../../images/logoColored.png'
 
 
  function Login(props) {
@@ -21,12 +23,22 @@ import '../../styles/loginStyles.css'
     if (props.token) return <Redirect to='/dashboard' /> 
      
     return (
-      <div className="loginMain">
+      <div className="">
+     
         <div className="row ">
-          <div className="col s12 m8 offset-m2 l6 offset-l3 login">
-            <h3> WELCOME!</h3>
-            <br />
-            <h6>User Login</h6>
+        
+        <div className="col l6 hide-on-med-and-down ">
+          <div className="logo-Container">
+               <img src={logo}/>
+          </div>          
+        </div> 
+
+          <div className="col s12 m8 offset-m2 l6">
+            <div className="form-container">
+            {/* <h3> WELCOME!</h3>
+            <br /> */}
+              <img className='hide-on-large-only' src={logoSmall}/>
+            <h4>User Login</h4>
             <br />
             <form>
               <div className="input-field">
@@ -54,6 +66,7 @@ import '../../styles/loginStyles.css'
                 </button>
               </div>             
             </form>
+          </div>
           </div>
         </div>      
       </div>

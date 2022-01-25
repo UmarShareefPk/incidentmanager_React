@@ -5,6 +5,7 @@ import '../styles/Navbar.css';
 import { Redirect } from 'react-router-dom';
 import Notifications from './Notifications';
 import { signOut } from "../store/actions/userLoginActions";
+import logo from '../images/logo-white.png'
 
 function NavBar({user_Name, loginError, token, signOut}) {
 
@@ -22,8 +23,9 @@ function NavBar({user_Name, loginError, token, signOut}) {
       <nav className="nav-wrapper ">
         <div className="container">
           <div className="left">
+
             <NavLink to="/dashboard" className="brand-logo">             
-              Incident Manager
+              <img src={logo} />
             </NavLink>
           </div>
           <a href="#" className="sidenav-trigger" data-target="mobile-menu">

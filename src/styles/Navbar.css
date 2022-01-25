@@ -1,3 +1,7 @@
+.brand-logo img{
+    height: 2em;   
+}
+
 .nav-wrapper{
     background: rgb(26,35,126);
 background: radial-gradient(circle, rgba(26,35,126,1) 85%, rgba(70,221,252,1) 100%);
@@ -68,30 +72,31 @@ ul.sidenav li{
 
 /* Small devices  */
 @media (min-width: 300px) {
-    nav .brand-logo {
-        font-size: 15px;
+    .brand-logo img{
+        height: 1.7em;   
     }
+    
 }
 
 /* (tablets, 768px and up) */
 @media (min-width: 700px) {
-    nav .brand-logo {
-        font-size: 21px;
+    .brand-logo img{
+        height: 1.7em;   
     }
 }
 
 /* Large Tablets  */
 @media (min-width: 1000px) {
-    nav .brand-logo {
-       
+    .brand-logo img{
+        height: 2em;   
     }
 }
 
 /* Computer */
 @media (min-width: 1500px) {
 
-    nav .brand-logo {
-     font-size: 30px;
- }
+    .brand-logo img{
+        height: 2em;   
+    }
    
 }
