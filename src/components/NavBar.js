@@ -6,13 +6,17 @@ import { Redirect } from 'react-router-dom';
 import Notifications from './Notifications';
 import { signOut } from "../store/actions/userLoginActions";
 import logo from '../images/logo-white.png'
+import { allUsers } from "../store/actions/usersActions";
 
-function NavBar({user_Name, loginError, token, signOut}) {
+function NavBar({user_Name, loginError, token, signOut, getAllUsers, allUsers}) {
 
   if (!token){
     //alert("Your session has been expired. Please login again.")
     return <Redirect to='/' /> 
   } 
+
+  if(allUsers == null || allUsers.length == 0)
+      getAllUsers();
 
   const logOut = () => {
     signOut();   
@@ -63,7 +67,7 @@ function NavBar({user_Name, loginError, token, signOut}) {
                  </button>
             </li>
             <li className=" singout-btn">
-             <a> <i className="material-icons white-text" onClick={() => logOut()}>settings_power</i> </a>
+             <a> <i className="material-icons red-text" onClick={() => logOut()}>logout</i> </a>
             </li>
           </ul>
           {/* for mobile */}
@@ -107,14 +111,15 @@ const mapStateToProps = (state) => {
       user_Name :state.userLogin.user_Name, // Logged in User's name
       userId :state.userLogin.userId,  // logged in User Id      
       loginError : state.userLogin.loginError,
-      token : state.userLogin.token   
+      token : state.userLogin.token,
+      allUser: state.users.users,   
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    signOut: () => dispatch(signOut())
- 
+    signOut: () => dispatch(signOut()),
+    getAllUsers: () => dispatch(allUsers()),
     };
 };
 
