@@ -49,6 +49,7 @@ import { usersUrls } from "../../api/apiURLs";
                   User_Id :  response.data.user.Id
               }
               dispatch({ type: 'LOGIN_PASS', loginData });
+              dispatch({ type: 'UNREAD_CONVERSATION', data:  response.data.UnreadConversationCount });            
           })
           .catch((err)=>{
                    dispatch({ type: 'LOGIN_FAIL'});

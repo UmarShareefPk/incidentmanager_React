@@ -8,7 +8,7 @@ import { signOut } from "../store/actions/userLoginActions";
 import logo from '../images/logo-white.png'
 import { allUsers } from "../store/actions/usersActions";
 
-function NavBar({user_Name, loginError, token, signOut, getAllUsers, allUsers}) {
+function NavBar({user_Name, loginError, token, signOut, getAllUsers, allUsers, UnreadConversations}) {
 
   if (!token){
     //alert("Your session has been expired. Please login again.")
@@ -55,10 +55,13 @@ function NavBar({user_Name, loginError, token, signOut, getAllUsers, allUsers}) 
               </NavLink> 
               
             </li>    
-            <li>
-              <span className=" badge white-text new  messages-badge">5</span> 
-              </li>   
-            {/* <li onClick={()=> commentSent("Hi please work.")}>              */}
+            {UnreadConversations > 0? (
+              <li>
+              <span className=" badge white-text new  messages-badge">{UnreadConversations}</span>
+            </li>  
+            )
+            : <></>}
+                       
            
               <Notifications />
             <li>
@@ -113,6 +116,7 @@ const mapStateToProps = (state) => {
       loginError : state.userLogin.loginError,
       token : state.userLogin.token,
       allUser: state.users.users,   
+      UnreadConversations : state.messages.UnreadConversations
   }
 }
 

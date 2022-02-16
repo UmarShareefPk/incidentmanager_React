@@ -43,7 +43,7 @@ export   const sendMessageSignalR =  (conversationId, userId) => {
       console.log(connection.connectionStarted);
       if (connection.connectionStarted) {
           try {
-              connection.send("SendMessage", conversationId, userId);
+              connection.send("SendMessageAsync", conversationId, userId);
           } catch (e) {
             console.log(e);
           }

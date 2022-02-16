@@ -1,0 +1,113 @@
+.toolTip{
+     color: rgba(0, 0, 0, 0.5);
+    
+
+   
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    position: relative;
+    transition: all 0.3s ease; 
+}
+.toolTip:hover,
+.toolTip:focus{
+    
+    
+   
+}
+.toolTip:before,
+.toolTip:after{
+    content: attr(data-tip);
+    color: red;
+    background: #fff;
+    font-size: 14px;
+    font-weight: 800;
+    width: 115px;
+    white-space: normal;
+    padding: 13px 10px;
+    border-radius: 20% 50%/50% 20%;
+    box-shadow: 0 0 10px -2px rgba(0,0,0,0.5);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease 0s;
+}
+.toolTip:after{
+    content: '';
+    height: 10px;
+    width: 10px;
+    padding: 0;
+    border-radius: 0;
+    box-shadow: none;
+}
+.toolTip:hover:before,
+.toolTip:hover:after{
+    opacity: 1;
+    visibility: visible;
+}
+.toolTip.top:before,
+.toolTip.top:after{
+    transform: translateX(-50%) rotateY(90deg);
+    position: absolute;
+    bottom: calc(130% - 4px);
+    left: 50%;
+}
+.toolTip.top:after{
+    transform: translateX(-50%) rotate(45deg) rotateY(90deg);
+    bottom: calc(130% - 4px);
+}
+.toolTip.top:hover:before{
+    transform: translateX(-50%) rotateY(0);
+    bottom: 130%;
+}
+.toolTip.top:hover:after{ transform: translateX(-50%) rotate(45deg) rotateY(0); }
+.toolTip.left:before,
+.toolTip.left:after{
+    transform: translateY(-50%) rotateX(90deg);
+    position: absolute;
+    right: calc(140% - 4px);
+    top: 50%;
+}
+.toolTip.left:after{
+    transform: translateY(-50%) rotate(45deg) rotateX(90deg);
+    right: calc(140% - 4px);
+}
+.toolTip.left:hover:before{
+    transform: translateY(-50%) rotateX(0);
+    right: 140%;
+}
+.toolTip.left:hover:after{ transform: translateY(-50%) rotate(45deg) rotateX(0); }
+.toolTip.right:before,
+.toolTip.right:after{
+    transform: translateY(-50%) rotateX(90deg);
+    position: absolute;
+    left: calc(140% - 4px);
+    top: 50%;
+}
+.toolTip.right:after{
+    transform: translateY(-50%) rotate(45deg) rotateX(90deg);
+    left: calc(140% - 4px);
+}
+.toolTip.right:hover:before{
+    transform: translateY(-50%) rotateX(0);
+    left: 140%;
+}
+.toolTip.right:hover:after{ transform: translateY(-50%) rotate(45deg) rotateX(0); }
+.toolTip.bottom:before,
+.toolTip.bottom:after{
+    transform: translateX(-50%) rotateY(90deg);
+    position: absolute;
+    top: calc(130% - 4px);
+    left: 50%;
+}
+.toolTip.bottom:after{
+    transform: translateX(-50%) rotate(45deg) rotateY(90deg);
+    top: calc(130% - 4px);
+}
+.toolTip.bottom:hover:before{
+    transform: translateX(-50%) rotateY(0);
+    top: 130%;
+}
+.toolTip.bottom:hover:after{ transform: translateX(-50%) rotate(45deg) rotateY(0); }
+@media only screen and (max-width: 767px){
+    .toolTip{ margin: 0 0 20px; }
+}

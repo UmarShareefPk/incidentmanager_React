@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { messagesUrls } from "../../api/apiURLs";
-
+import { sendMessageSignalR } from "../../signalR/sender";
 
 export var cancel;
 
@@ -53,6 +53,7 @@ export const messagesByUser = (userId) => {
   } 
 
   export const messagesByConversations = (conversationId) => {
+    
     return (dispatch, getState) => {  
      
         axios.defaults.headers = {'Authorization': `Bearer ${getState().userLogin.token + ""}`};
@@ -64,6 +65,7 @@ export const messagesByUser = (userId) => {
         })
           .then((response)=>{ 
              const data = response.data;
+             console.log("Messages Action", data);
               dispatch({ type: 'MESSAGES_BY_CONVERSATIONS', data });
           })
           .catch((err)=>{  
@@ -85,7 +87,8 @@ export const messagesByUser = (userId) => {
           .then((response)=>{            
              const data = true;
              dispatch(messagesByConversations(conversationId));
-             
+             console.log("conversationId, response.data.To");
+             sendMessageSignalR(conversationId, response.data.To);
               dispatch({ type: 'NEW_MESSAGE', data });
           })
           .catch((err)=>{  

@@ -11,6 +11,7 @@ import { connect } from "react-redux";
 import Receiver from './signalR/Receiver';
 import Dashboard from './components/Incidents/Dashboard/Dashboard';
 import Messages from './components/Messages/Messages';
+import './styles/tooltip.css';
 
 function App(props) {
   

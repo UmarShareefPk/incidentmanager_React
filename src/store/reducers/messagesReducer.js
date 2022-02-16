@@ -1,8 +1,8 @@
 
 const initState = {
     Messages : [],
-    Conversations : [],
-    MessagesByConversations: []
+    Conversations : [],  
+    UnreadConversations: 0,
    }
  
    
@@ -14,6 +14,13 @@ const initState = {
            ...state,
            Messages: action.data
          };
+
+        case "UNREAD_CONVERSATION":
+        //  console.log(action.data);
+        return {
+          ...state,
+          UnreadConversations: action.data
+        };
 
        case "CONVERSATIONS_BY_USER":
          //  console.log(action.data);

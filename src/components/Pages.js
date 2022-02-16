@@ -61,6 +61,8 @@ export default function Pages({TotalRecords, PostsPerPage, setPageNumber, setPag
         let start = end - currentSize + 1;
         if(end > TotalRecords)
             end = TotalRecords;
+        if(start > TotalRecords)
+            start = 0;
         setInformation("Showing from " + start + " to " + end + " of " + TotalRecords);
     }
 

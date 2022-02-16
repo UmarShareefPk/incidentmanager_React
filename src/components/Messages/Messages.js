@@ -33,8 +33,8 @@ function Messages({
 
     useEffect(() => {        
         if(selectedConversation == "" && Conversations != null && Conversations.length > 0){
-            messagesByConversations(Conversations[0].Id);
-            setSelectedConversation(Conversations[0].Id);
+            //messagesByConversations(Conversations[0].Id);
+           // setSelectedConversation(Conversations[0].Id);
         }         
 
     }, [Conversations])
