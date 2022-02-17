@@ -6,10 +6,10 @@ import {  JsonHubProtocol,
 } from '@microsoft/signalr';
 import { commentRecieved, getAllNotifications } from "../store/actions/notificationsActions";
 import { updateHubId } from '../store/actions/userLoginActions';
-import { conversationsByUser, messagesByConversations } from '../store/actions/messagesActions';
+import { conversationsByUser, messagesByConversations, receiveMessage } from '../store/actions/messagesActions';
 import { baseUrl } from "../api/apiURLs";
 
-  function Receiver({commentRecieved, updateHubId, userId, refreshNotifications, Conversations, conversationsByUser, Messages, messagesByConversations}) {
+  function Receiver({commentRecieved, updateHubId, userId, refreshNotifications, Conversations, conversationsByUser, Messages, messagesByConversations, receiveMessage}) {
 
     useEffect(() => {   
         
@@ -35,21 +35,14 @@ import { baseUrl } from "../api/apiURLs";
               refreshNotifications(userId);
           });
 
-          newConnection.on('ReceiveNewMessage', (coversationId) => {
-            console.log("ReceiveNewMessageXXX" , coversationId);
-           // let conversation = Conversations.filter(c => c.Id==coversationId);
-            
-           
-           
-            console.log("Messages[0]", Messages[0].ConversationId );
-            console.log("coversationId", coversationId);
-            
-
-          if(Messages[0].ConversationId == coversationId) // if conversation is open, update messages 
-             messagesByConversations(coversationId);
-
+          newConnection.on('ReceiveNewMessage', (newMessage) => {
+         //   console.log("newMessage" , newMessage);
+            let coversationId = newMessage.ConversationId; 
+            if(Messages[0].ConversationId == coversationId){ // if conversation is open, update messages 
+                  receiveMessage(newMessage);
+            }
              conversationsByUser(userId);
-           // refreshNotifications(coversationId);
+          
         });
 
         })
@@ -83,6 +76,7 @@ const mapStateToProps = (state) => {
         refreshNotifications : (userId) =>  dispatch(getAllNotifications(userId)),
         conversationsByUser: (userId) => dispatch(conversationsByUser(userId)),   
         messagesByConversations: (conversationId) => dispatch(messagesByConversations(conversationId)),
+        receiveMessage : (newMessage) => dispatch(receiveMessage(newMessage))
     };
   };
   

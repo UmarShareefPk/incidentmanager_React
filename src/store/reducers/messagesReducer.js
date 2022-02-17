@@ -5,8 +5,10 @@ const initState = {
     UnreadConversations: 0,
    }
  
-   
+   let changedMessages;
+
    const messagesReducer = (state = initState, action) => {
+
      switch (action.type) {
        case "MESSAGES_BY_USER":
          //  console.log(action.data);
@@ -35,8 +37,15 @@ const initState = {
            ...state,
            Messages: action.data
          };
-
-   
+        
+        case "NEW_MESSAGE":
+        
+        changedMessages = [ ...state.Messages ];
+        changedMessages.push(action.data);
+        return {
+          ...state,
+          Messages: changedMessages
+        };
        default:
          return state;
      }

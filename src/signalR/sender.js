@@ -30,7 +30,7 @@ connection.start().then(()=>{
 
 };
 
-export   const sendMessageSignalR =  (conversationId, userId) => {
+export   const sendMessageSignalR =  (conversationId, userId, newMessage) => {
   const connection = new HubConnectionBuilder()
   //.withUrl('https://localhost:44310/hubs/notifications')
   .withUrl(baseUrl + 'hubs/notifications')
@@ -43,7 +43,7 @@ export   const sendMessageSignalR =  (conversationId, userId) => {
       console.log(connection.connectionStarted);
       if (connection.connectionStarted) {
           try {
-              connection.send("SendMessageAsync", conversationId, userId);
+              connection.send("SendMessageAsync", conversationId, userId, newMessage);
           } catch (e) {
             console.log(e);
           }

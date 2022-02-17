@@ -65,7 +65,7 @@ export const messagesByUser = (userId) => {
         })
           .then((response)=>{ 
              const data = response.data;
-             console.log("Messages Action", data);
+            // console.log("Messages Action", data);
               dispatch({ type: 'MESSAGES_BY_CONVERSATIONS', data });
           })
           .catch((err)=>{  
@@ -86,10 +86,11 @@ export const messagesByUser = (userId) => {
         axios.post(url, formData)
           .then((response)=>{            
              const data = true;
-             dispatch(messagesByConversations(conversationId));
+             dispatch({ type: 'NEW_MESSAGE', data:response.data });
+           //  dispatch(messagesByConversations(conversationId));
              console.log("conversationId, response.data.To");
-             sendMessageSignalR(conversationId, response.data.To);
-              dispatch({ type: 'NEW_MESSAGE', data });
+             sendMessageSignalR(conversationId, response.data.To, response.data);
+             // dispatch({ type: 'NEW_MESSAGE', data });
           })
           .catch((err)=>{  
             if (err.message.toLowerCase() == "request failed with status code 401")
@@ -100,6 +101,15 @@ export const messagesByUser = (userId) => {
           });   
     }
   }
+
+  
+  export const receiveMessage = (newMessage) => {
+    return (dispatch, getState) => {      
+     dispatch({ type: 'NEW_MESSAGE', data:newMessage });
+    }
+  }
+
+
  
   export const sendNewMessage = (formData) => {
     return (dispatch, getState) => {      
