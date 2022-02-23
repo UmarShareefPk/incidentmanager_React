@@ -15,8 +15,8 @@ function NavBar({user_Name, loginError, token, signOut, getAllUsers, allUsers, U
     return <Redirect to='/' /> 
   } 
 
-  if(allUsers == null || allUsers.length == 0)
-      getAllUsers();
+  if(allUsers == null || allUsers.length == 0);
+      // getAllUsers();
 
   const logOut = () => {
     signOut();   

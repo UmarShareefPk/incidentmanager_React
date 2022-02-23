@@ -46,6 +46,14 @@ const initState = {
           ...state,
           Messages: changedMessages
         };
+
+        case "NEW_CONVERSATION":
+          console.log("new con in reducer", action.data);
+          return {
+            ...state,
+            Conversations: [action.data, ...state.Conversations]
+          };
+
        default:
          return state;
      }

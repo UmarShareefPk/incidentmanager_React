@@ -85,11 +85,11 @@ export const messagesByUser = (userId) => {
         const url = messagesUrls.sendMessageUrl
         axios.post(url, formData)
           .then((response)=>{            
-             const data = true;
-             dispatch({ type: 'NEW_MESSAGE', data:response.data });
+             const data = true;           
+             dispatch({ type: 'NEW_MESSAGE', data:response.data[0] });
            //  dispatch(messagesByConversations(conversationId));
              console.log("conversationId, response.data.To");
-             sendMessageSignalR(conversationId, response.data.To, response.data);
+             sendMessageSignalR(conversationId, response.data[0].To, response.data[0], false);
              // dispatch({ type: 'NEW_MESSAGE', data });
           })
           .catch((err)=>{  
@@ -108,7 +108,12 @@ export const messagesByUser = (userId) => {
      dispatch({ type: 'NEW_MESSAGE', data:newMessage });
     }
   }
-
+  export const receiveConversation = (newConversation) => {
+    console.log("newConversation", newConversation);
+    return (dispatch, getState) => {      
+     dispatch({ type: 'NEW_CONVERSATION', data:newConversation });
+    }
+  }
 
  
   export const sendNewMessage = (formData) => {
@@ -119,7 +124,8 @@ export const messagesByUser = (userId) => {
         axios.post(url, formData)
           .then((response)=>{            
              const data = true;
-              dispatch({ type: 'NEW_MESSAGE', data });
+             dispatch({ type: 'NEW_CONVERSATION', data:response.data[1] });
+             sendMessageSignalR(null, response.data[1].User2, response.data[1], true);
           })
           .catch((err)=>{  
             if (err.message.toLowerCase() == "request failed with status code 401")

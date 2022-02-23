@@ -18,8 +18,8 @@ import moment from "moment";
    const ddlNotiRef = useRef();
    const history = useHistory();
 
-   const [unReadCount, setUnReadCount] = useState(
-     notifications.filter((notification) => !notification.IsRead).length
+   const [unReadCount, setUnReadCount] = useState(    
+      notifications!=null && notifications.length >0 ? notifications.filter((notification) => !notification.IsRead).length : 0     
    );
 
    useEffect(() => {
@@ -35,7 +35,7 @@ import moment from "moment";
 
    useEffect(() => {
      setUnReadCount(
-       notifications.filter((notification) => !notification.IsRead).length
+      notifications!=null && notifications.length >0 ? notifications.filter((notification) => !notification.IsRead).length : 0     
      );
    }, [notifications]);
 

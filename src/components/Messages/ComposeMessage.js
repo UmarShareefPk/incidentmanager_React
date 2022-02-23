@@ -39,7 +39,7 @@ function ComposeMessage({
         setMessageText("");
         setReceiverName("");
         setReceiver(null);
-        conversationsByUser(userId);
+        //conversationsByUser(userId);
         setComposeToggle(false);
     }
 

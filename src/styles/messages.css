@@ -75,7 +75,7 @@ border-radius: 10px;
     background: indigo;
     border-radius: 10px;
     /* animation: blink 1s linear infinite; */
-    animation: blink 5s  ease-in infinite;
+    /* animation: blink 5s  ease-in infinite; */
 }
 
 @keyframes blink{
