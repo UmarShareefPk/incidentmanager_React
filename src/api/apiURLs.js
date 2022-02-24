@@ -40,4 +40,6 @@ export const messagesUrls = {
    sendMessageUrl :  baseUrl + "api/Messages/AddMessage",
    conversationsByUserUrl :  baseUrl + "api/Messages/ConversationsByUser?UserId=",
    messagesByConversationsUrl :  baseUrl + "api/Messages/MessagesByConversations?ConversationId=",
+   deleteConversationUrl :  baseUrl + "api/Messages/DeleteConversation?ConversationId=",
+   deleteMessageUrl :  baseUrl + "api/Messages/DeleteMessage?MessageId=",
 }

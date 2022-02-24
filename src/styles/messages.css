@@ -75,7 +75,7 @@ border-radius: 10px;
     background: indigo;
     border-radius: 10px;
     /* animation: blink 1s linear infinite; */
-    /* animation: blink 5s  ease-in infinite; */
+     animation: blink 5s  ease-in infinite; 
 }
 
 @keyframes blink{
@@ -85,7 +85,7 @@ border-radius: 10px;
     30%{opacity: 0.3;}
     40%{opacity: 0.4;} 
     50%{opacity: .5;background : red}
-     60%{opacity: 0.6;}
+    60%{opacity: 0.6;}
     70%{opacity: 0.7;}
     80%{opacity: 0.8;}
     90%{opacity: 0.9;}   
@@ -124,10 +124,12 @@ border-radius: 10px;
 
 .message{
     margin-bottom: 10px;
-    width: fit-content;
+
     max-width: 70%;
     border-radius: 36px;
     padding:10px 10px;
+    display: flex;
+    align-items: center;
 }
 
 .message.left{
@@ -138,9 +140,17 @@ border-radius: 10px;
 }
 
 .message-text{
+        width: fit-content;
     color:white;
     font-size: large;
 } 
+
+.delete-message-icon{
+    font-size: 22px;
+    cursor: pointer;
+    color: orange;
+    padding-left: 15px;
+}
 
 .message-time{
     width: 100%;

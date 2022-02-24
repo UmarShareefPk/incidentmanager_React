@@ -1,22 +1,25 @@
 import { React, useState, useEffect, useRef} from 'react'
 import moment from "moment";
+import { connect } from 'react-redux'
+import {selectConversation } from "../../store/actions/messagesActions";
 
-const Conversation = ({ conversation, allUsers, userId, getUserNameById, conversationClicked, selectedConversation})=> {
+const Conversation = ({ conversation, userId, getUserNameById,  SelectedConversation, selectConversation})=> {
+    
     const user = conversation.User1 == userId? conversation.User2 : conversation.User1;
 
+    // console.log("user", getUserNameById(user));
+    // if( getUserNameById(user) == undefined)
+    //     console.log(user);
+   
     
-    const conversationSelected = (id) => {
-        conversationClicked(id);
-    }
-    
-    const cssClass = selectedConversation == conversation.Id ? "user-info selected" : "user-info";
+    const cssClass = SelectedConversation.Id == conversation.Id ? "user-info selected" : "user-info";
 
     return (
         <li >
-            <div className={cssClass} onClick={() => conversationSelected(conversation.Id)}>
+            <div className={cssClass} onClick={() => selectConversation(conversation)}>
                 <div className='photo'>
                     <button type="button" title={"Umar Shareef"} className="btn-floating  pink darken-2 userWelcome" >
-                        {getUserNameById(user).toUpperCase().split(/\s/).reduce((response, word) => response += word.slice(0, 1), '')}
+                         {user ? getUserNameById(user).toUpperCase().split(/\s/).reduce((response, word) => response += word.slice(0, 1), '') : "Null"} 
                     </button>
                 </div>
                 <div className='name-message'>
@@ -38,5 +41,18 @@ const Conversation = ({ conversation, allUsers, userId, getUserNameById, convers
         </li>
     )
 }
+const mapStateToProps = (state) => {
+    return{
+        userId :state.userLogin.userId, 
+        SelectedConversation : state.messages.SelectedConversation,
+        allUsers: state.users.users,
+    }
+  }
 
-export default Conversation;
+  const mapDispatchToProps = (dispatch) => {
+    return {      
+        selectConversation: (conversation) => dispatch(selectConversation(conversation)), 
+    }
+  }
+ 
+  export default connect(mapStateToProps, mapDispatchToProps)(Conversation);

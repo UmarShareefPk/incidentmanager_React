@@ -5,17 +5,17 @@ import { replyMessage } from "../../store/actions/messagesActions";
 const Reply = ({
     userId,      
     replyMessage,
-    UserMessages
-    
+    UserMessages,
+    SelectedConversation
 }) => {
 
     const [messageText, setMessageText] = useState("");
   
     const sendMessage = (event) => {
         event.preventDefault();
-
-        let To = UserMessages[0].From == userId? UserMessages[0].To : UserMessages[0].From;
-        let conversationId = UserMessages[0].ConversationId;
+       
+        let To =  SelectedConversation.User1 == userId? SelectedConversation.User2 : SelectedConversation.User1;
+        let conversationId = SelectedConversation.Id;
         const formData = new FormData(); 
 
          formData.append("From", userId); 
@@ -57,6 +57,7 @@ const mapStateToProps = (state) => {
         userId :state.userLogin.userId, 
         allUsers: state.users.users,
         UserMessages : state.messages.Messages,
+        SelectedConversation : state.messages.SelectedConversation,
     }
   }
   

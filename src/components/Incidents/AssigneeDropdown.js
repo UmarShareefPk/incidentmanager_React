@@ -14,10 +14,11 @@ function AssigneeDropdown({getAllAssignees, allAssignees, updateIncidentByField,
     const dropDownId = "dropdownAssginee" + uuidv4();
 
     useEffect(() => {       
-        getAllAssignees();
+       // getAllAssignees();
       }, []); // get assignee on first render only
     
     useEffect(() => {
+       console.log("Set hook edit");
         setAssigneeList(allAssignees);
       }, [allAssignees]);
 

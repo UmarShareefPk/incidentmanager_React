@@ -1,6 +1,6 @@
 import { React, useState, useEffect, useRef} from 'react'
 import { connect } from 'react-redux'
-import { messagesByUser, conversationsByUser, messagesByConversations } from "../../store/actions/messagesActions";
+import { messagesByUser, conversationsByUser, messagesByConversations, selectConversation } from "../../store/actions/messagesActions";
 import '../../styles/messages.css';
 import ComposeMessage from './ComposeMessage';
 import Reply from './Reply';
@@ -9,14 +9,14 @@ import Conversation from './Conversation'
 
 function Messages({
     userId,
-
     allUsers,
     UserMessages,
     getMessagesByUser,
     conversationsByUser,
     messagesByConversations,
-    Conversations,
-    MessagesByConversations,
+    Conversations, 
+    SelectedConversation,
+    selectConversation
 }) {
 
     const [userToggle, setUserToggle] = useState(false);
@@ -27,29 +27,27 @@ function Messages({
     const [conversationTitle, setConversationTitle] = useState('');
 
     useEffect(() => {
-        conversationsByUser(userId);     
-          
+        conversationsByUser(userId);   
     }, []);
 
     useEffect(() => {        
-        if(selectedConversation == "" && Conversations != null && Conversations.length > 0){
-            //messagesByConversations(Conversations[0].Id);
-           // setSelectedConversation(Conversations[0].Id);
-        }         
-
+        if(Conversations != null && Conversations.length > 0){
+            selectConversation(Conversations[0]);    
+        }  
     }, [Conversations])
 
-    
+    useEffect(() => {
+        messagesByConversations(SelectedConversation.Id);
+        if(SelectedConversation != null && SelectedConversation !={}){
+            let user = SelectedConversation.User1 == userId? getUserNameById(SelectedConversation.User2) : getUserNameById(SelectedConversation.User1);
+           setConversationTitle(user);        }       
+       
+    }, [SelectedConversation]);
+
     useEffect(() => {        
-      
-        if(UserMessages != null && UserMessages.length > 0){
-            let user = UserMessages[0].From == userId? getUserNameById(UserMessages[0].To) : getUserNameById(UserMessages[0].From);
-           setConversationTitle(user);
-        }       
         try{
             messagesRef.current.scrollTop = messagesRef.current.scrollHeight;     
         }  catch(e){}
-     
     }, [UserMessages])
 
     const newConversationAdded = () =>{
@@ -66,16 +64,6 @@ function Messages({
         return user.FirstName + " " + user.LastName
       }
       
-
-      const conversationClicked = (id) => {
-        setSelectedConversation(id);
-        messagesByConversations(id);
-        if(userToggle)
-            setUserToggle(false);
-      }
-
-   
-    
         
     return (
         <section>
@@ -95,7 +83,7 @@ function Messages({
                                     <span className='indigo-text'> Compose Message </span>
                                 </div>  
                          <ul className='conversation-list'>                         
-                                {Conversations.map(c => <Conversation key={c.Id} conversation={c} allUsers={allUsers} userId={userId} getUserNameById={getUserNameById} conversationClicked={conversationClicked} selectedConversation={selectedConversation} />)}
+                                {Conversations.map(c => <Conversation key={c.Id + "ll"} conversation={c}  getUserNameById={getUserNameById}  selectedConversation={selectedConversation} />)}
 
                          </ul>
                      </div>
@@ -109,7 +97,7 @@ function Messages({
                         </div>   
                         <ul className='conversation-list'> 
                             {(Conversations != null && Conversations.length > 0)? 
-                                Conversations.map(c => <Conversation conversation={c} key={c.Id} allUsers={allUsers} userId={userId} getUserNameById={getUserNameById} conversationClicked={conversationClicked} selectedConversation={selectedConversation} />)
+                                Conversations.map(c => <Conversation conversation={c} key={c.Id} getUserNameById={getUserNameById}  selectedConversation={selectedConversation} />)
                                 :
                                 <></>
                             }
@@ -139,9 +127,7 @@ function Messages({
                                 </div>
 
                             ) : <></>
-                        )}
-
-                   
+                        )}                  
 
                 </div>
             </div>
@@ -154,8 +140,8 @@ const mapStateToProps = (state) => {
         userId :state.userLogin.userId, 
         allUsers: state.users.users,
         UserMessages : state.messages.Messages,
-        Conversations :  state.messages.Conversations,
-        MessagesByConversations: state.messages.MessagesByConversations,
+        Conversations :  state.messages.Conversations,      
+        SelectedConversation : state.messages.SelectedConversation
     }
   }
 
@@ -163,7 +149,8 @@ const mapStateToProps = (state) => {
     return {
         getMessagesByUser: (userId) => dispatch(messagesByUser(userId)),   
         conversationsByUser: (userId) => dispatch(conversationsByUser(userId)),   
-        messagesByConversations: (conversationId) => dispatch(messagesByConversations(conversationId))    
+        messagesByConversations: (conversationId) => dispatch(messagesByConversations(conversationId)),
+        selectConversation: (conversation) => dispatch(selectConversation(conversation)),       
     }
   }
  

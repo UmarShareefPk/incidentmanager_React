@@ -28,7 +28,7 @@ import { Redirect } from 'react-router-dom'
     const [formError, setFormError] = useState("");
 
     useEffect(() => {
-      console.log("Set hook");
+      console.log("Set hook create");
       setAssigneeList(allAssignees);
     }, [allAssignees])
 
@@ -41,7 +41,7 @@ import { Redirect } from 'react-router-dom'
           closeOnClick : false
         }
         M.Dropdown.init(assigneeRef.current, options);
-        getAllAssignees();
+       // getAllAssignees();
     }, []);
 
    const onFileChange = (event) => {    

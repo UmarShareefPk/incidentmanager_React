@@ -3,6 +3,7 @@ const initState = {
     Messages : [],
     Conversations : [],  
     UnreadConversations: 0,
+    SelectedConversation: {},
    }
  
    let changedMessages;
@@ -16,7 +17,13 @@ const initState = {
            ...state,
            Messages: action.data
          };
-
+         
+        case "CONVERSATION_SELECTED":
+         //  console.log(action.data);
+         return {
+           ...state,
+           SelectedConversation: action.data
+         };
         case "UNREAD_CONVERSATION":
         //  console.log(action.data);
         return {
@@ -53,7 +60,16 @@ const initState = {
             ...state,
             Conversations: [action.data, ...state.Conversations]
           };
-
+       case "DELETE_MESSAGE":
+        changedMessages = [ ...state.Messages ];
+        let mId = action.data;
+        changedMessages = changedMessages.filter(m => m.Id != mId);
+    
+         return {
+           ...state,
+           Messages: changedMessages
+         };
+  
        default:
          return state;
      }

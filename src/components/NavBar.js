@@ -1,4 +1,4 @@
-import {React} from 'react';
+import {React, useEffect} from 'react';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import '../styles/Navbar.css';
@@ -10,13 +10,15 @@ import { allUsers } from "../store/actions/usersActions";
 
 function NavBar({user_Name, loginError, token, signOut, getAllUsers, allUsers, UnreadConversations}) {
 
+  useEffect(() => {    
+    console.log("loading users in navbar");  
+    getAllUsers();
+    }, [token]);
+
   if (!token){
     //alert("Your session has been expired. Please login again.")
     return <Redirect to='/' /> 
   } 
-
-  if(allUsers == null || allUsers.length == 0);
-      // getAllUsers();
 
   const logOut = () => {
     signOut();   
