@@ -197,6 +197,15 @@ border-radius: 10px;
     overflow-y: auto;
 }
 
+.converation-title{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.converation-title i{
+    font-size:xx-large;
+    cursor: pointer;
+}
 /* Small devices  */
 @media (min-width: 300px) {
     .message-text{

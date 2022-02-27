@@ -168,3 +168,31 @@ export const messagesByUser = (userId) => {
           });    
     }
   } 
+
+  
+  export const deleteConversation = (conversationId) => {
+    return (dispatch, getState) => {  
+      console.log("deleteConversation action");
+      dispatch({ type: 'DELETE_CONVERSATION', data:conversationId });
+      return;
+        axios.defaults.headers = {'Authorization': `Bearer ${getState().userLogin.token + ""}`};
+        const url = messagesUrls.deleteConversationUrl + conversationId;                   
+        axios({
+          method: 'POST',
+          url: url,         
+          cancelToken: new axios.CancelToken(c => cancel = c)
+        })
+          .then((response)=>{ 
+             const data = response.data;
+             console.log(data);
+              dispatch({ type: 'DELETE_CONVERSATION', data:conversationId });
+          })
+          .catch((err)=>{    
+                   console.log(err);
+                   if (err.message.toLowerCase() == "request failed with status code 401")
+                      dispatch({ type: 'SIGN_OUT', data: "token invalid" });
+                   const data = err.message;
+                   console.log("error:", err);              
+          });    
+    }
+  } 

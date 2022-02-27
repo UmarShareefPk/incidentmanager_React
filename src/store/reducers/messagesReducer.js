@@ -7,6 +7,7 @@ const initState = {
    }
  
    let changedMessages;
+   let changedConversations;
 
    const messagesReducer = (state = initState, action) => {
 
@@ -68,6 +69,17 @@ const initState = {
          return {
            ...state,
            Messages: changedMessages
+         };
+        
+       case "DELETE_CONVERSATION":
+        console.log("deleteConversation reducer 1",action.data);
+         changedConversations = [...state.Conversations];
+         let cId = action.data;
+         changedConversations = changedConversations.filter(c => c.Id != cId);
+
+         return {
+           ...state,
+           Conversations: changedConversations
          };
   
        default:

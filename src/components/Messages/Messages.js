@@ -1,6 +1,6 @@
 import { React, useState, useEffect, useRef} from 'react'
 import { connect } from 'react-redux'
-import { messagesByUser, conversationsByUser, messagesByConversations, selectConversation } from "../../store/actions/messagesActions";
+import { messagesByUser, conversationsByUser, messagesByConversations, selectConversation, deleteConversation } from "../../store/actions/messagesActions";
 import '../../styles/messages.css';
 import ComposeMessage from './ComposeMessage';
 import Reply from './Reply';
@@ -16,7 +16,8 @@ function Messages({
     messagesByConversations,
     Conversations, 
     SelectedConversation,
-    selectConversation
+    selectConversation,
+    deleteConversation
 }) {
 
     const [userToggle, setUserToggle] = useState(false);
@@ -40,7 +41,7 @@ function Messages({
         messagesByConversations(SelectedConversation.Id);
         if(SelectedConversation != null && SelectedConversation !={}){
             let user = SelectedConversation.User1 == userId? getUserNameById(SelectedConversation.User2) : getUserNameById(SelectedConversation.User1);
-           setConversationTitle(user);        }       
+           setConversationTitle(user);           }       
        
     }, [SelectedConversation]);
 
@@ -52,6 +53,13 @@ function Messages({
 
     const newConversationAdded = () =>{
         conversationsByUser(userId);  
+    }
+
+    const delConversation = () => {
+        if(window.confirm("Delete conversation forever?")){
+            deleteConversation(SelectedConversation.Id);
+        }
+      
     }
 
     const getUserNameById = (id) => {   
@@ -113,7 +121,11 @@ function Messages({
                         (
                             !userToggle ? (
                                 <div className="col s10 m9 l9 ">
-                                    <h5 className="left indigo-text darken-4"> {conversationTitle} </h5>
+                                    <div className="converation-title">
+                                        <h5 className="left indigo-text darken-4"> {conversationTitle}
+                                        </h5>
+                                        <i title="Delete Conversation" onClick={() => delConversation()} className="material-icons red-text lighten-4">delete</i>
+                                    </div>
                                     <div className="messages" ref={messagesRef}>
                                         <ul className=''>
                                             {
@@ -150,7 +162,8 @@ const mapStateToProps = (state) => {
         getMessagesByUser: (userId) => dispatch(messagesByUser(userId)),   
         conversationsByUser: (userId) => dispatch(conversationsByUser(userId)),   
         messagesByConversations: (conversationId) => dispatch(messagesByConversations(conversationId)),
-        selectConversation: (conversation) => dispatch(selectConversation(conversation)),       
+        selectConversation: (conversation) => dispatch(selectConversation(conversation)),    
+        deleteConversation: (conversationId) => dispatch(deleteConversation(conversationId)),    
     }
   }
  
