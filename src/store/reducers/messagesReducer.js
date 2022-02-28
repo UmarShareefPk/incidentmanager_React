@@ -1,9 +1,12 @@
 
 const initState = {
     Messages : [],
+    MessagesChanged:false,
     Conversations : [],  
+    ConversationsChanged:false,
     UnreadConversations: 0,
     SelectedConversation: {},
+    SelectedConversationChanged:false,
    }
  
    let changedMessages;
@@ -20,10 +23,11 @@ const initState = {
          };
          
         case "CONVERSATION_SELECTED":
-         //  console.log(action.data);
+         //  console.log("CONVERSATION_SELECTED", action.data);
          return {
            ...state,
-           SelectedConversation: action.data
+           SelectedConversation: action.data,
+           SelectedConversationChanged : !state.SelectedConversationChanged,
          };
         case "UNREAD_CONVERSATION":
         //  console.log(action.data);
@@ -36,14 +40,16 @@ const initState = {
          //  console.log(action.data);
          return {
            ...state,
-           Conversations: action.data
+           Conversations: action.data,
+           ConversationsChanged: !state.ConversationsChanged,
          };
 
        case "MESSAGES_BY_CONVERSATIONS":
          //  console.log(action.data);
          return {
            ...state,
-           Messages: action.data
+           Messages: action.data,
+           MessagesChanged: !state.MessagesChanged,
          };
         
         case "NEW_MESSAGE":
@@ -52,27 +58,55 @@ const initState = {
         changedMessages.push(action.data);
         return {
           ...state,
-          Messages: changedMessages
+          Messages: changedMessages,
+       //   MessagesChanged: !state.MessagesChanged,
         };
 
         case "NEW_CONVERSATION":
-          console.log("new con in reducer", action.data);
+       
           return {
             ...state,
             Conversations: [action.data, ...state.Conversations]
           };
        case "DELETE_MESSAGE":
-        changedMessages = [ ...state.Messages ];
-        let mId = action.data;
-        changedMessages = changedMessages.filter(m => m.Id != mId);
-    
+         changedMessages = [...state.Messages];
+         let mId = action.data;
+         changedMessages = changedMessages.filter(m => m.Id != mId);
+
          return {
            ...state,
            Messages: changedMessages
          };
+
+       case "CHANGE_MESSAGE_STATUS":
         
+         changedMessages = [...state.Messages];
+         changedMessages = changedMessages.map(m => {
+           if (m.Id == action.data.messageId){            
+             m.Status = action.data.status;
+           }          
+             //m = {...m};
+             return m;
+         }
+         );
+
+         changedConversations = [...state.Conversations];
+         changedConversations = changedConversations.map(c => {
+           if (c.Id == state.SelectedConversation.Id){
+            c.UnReadCount = c.UnReadCount - 1;
+           }
+          
+           return c;
+         });
+        
+         return {
+           ...state,
+           Messages: changedMessages,
+           Conversations: changedConversations
+         };
+
        case "DELETE_CONVERSATION":
-        console.log("deleteConversation reducer 1",action.data);
+         console.log("deleteConversation reducer 1", action.data);
          changedConversations = [...state.Conversations];
          let cId = action.data;
          changedConversations = changedConversations.filter(c => c.Id != cId);

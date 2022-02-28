@@ -1,10 +1,24 @@
+import { React, useState, useEffect, useRef} from 'react';
 import moment from "moment";
 import { connect } from 'react-redux'
-import {deleteMessage } from "../../store/actions/messagesActions";
+import {deleteMessage,changeMessageStatus } from "../../store/actions/messagesActions";
 
-const Message = ({ message, userId, deleteMessage }) => {
+const Message = ({ message, userId, deleteMessage, changeMessageStatus }) => {
 
     const isSender = message.From == userId ? true: false;
+    const ref = useRef();
+    const isVisible = useOnScreen(ref);
+
+    useEffect(() => {
+        if(!isSender){
+            if(message.Status.toLowerCase().trim() == "unread" ){
+               // console.log( message.MessageText);
+                changeMessageStatus(message.Id, "read");
+            }
+        }      
+    }, [isVisible])
+    
+   
 
     const delMessage = (messageId) => {
         if(window.confirm("Delete message forever?")){
@@ -13,9 +27,9 @@ const Message = ({ message, userId, deleteMessage }) => {
     }
 
     return (
-        <li className='message-li'>
+        <li className='message-li' ref={ref}>
             <div className='message-time'><span title= {moment(message.Date).format("MMMM DD YYYY, h:mm:ss a")}>{moment(message.Date).fromNow() } </span></div>
-            <div className={isSender ? "message left" : "message right"}>
+            <div className={ (message.Status =="Unread" && !isSender? "unread" : "") + " " +(isSender ? "message left" : "message right")}>
                 <div className='message-text'>
                    {message.MessageText}
                 </div>
@@ -25,6 +39,23 @@ const Message = ({ message, userId, deleteMessage }) => {
     )
 }
 
+function useOnScreen(ref) {
+
+    const [isIntersecting, setIntersecting] = useState(false);
+  
+    const observer = new IntersectionObserver(
+      ([entry]) => setIntersecting(entry.isIntersecting)
+    )
+  
+    useEffect(() => {
+      observer.observe(ref.current);
+      // Remove the observer as soon as the component is unmounted
+      return () => { observer.disconnect() }
+    }, [])
+  
+    return isIntersecting
+  }
+
 const mapStateToProps = (state) => {
     return{
         userId :state.userLogin.userId, 
@@ -33,7 +64,8 @@ const mapStateToProps = (state) => {
 
   const mapDispatchToProps = (dispatch) => {
     return {      
-        deleteMessage: (MessageId) => dispatch(deleteMessage(MessageId))    
+        deleteMessage: (MessageId) => dispatch(deleteMessage(MessageId)),
+        changeMessageStatus: (messageId, status) => dispatch(changeMessageStatus(messageId, status))        
     }
   }
  

@@ -138,6 +138,9 @@ border-radius: 10px;
 .message.right{
     background-color:darkslateblue;
 }
+.message.right.unread{    
+    border: 2px solid red;
+}
 
 .message-text{
         width: fit-content;

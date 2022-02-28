@@ -117,7 +117,7 @@ export const messagesByUser = (userId) => {
 
   export const selectConversation = (conversation) => {
     return (dispatch, getState) => {      
-     dispatch({ type: 'CONVERSATION_SELECTED', data:conversation });
+     dispatch({ type: 'CONVERSATION_SELECTED', data:{...conversation} });
     }
   }
 
@@ -169,10 +169,37 @@ export const messagesByUser = (userId) => {
     }
   } 
 
+  export const changeMessageStatus = (messageId, status) => {
+    return (dispatch, getState) => {  
+     
+      dispatch({ type: 'CHANGE_MESSAGE_STATUS', data:{messageId, status} });
+      return;
+
+        axios.defaults.headers = {'Authorization': `Bearer ${getState().userLogin.token + ""}`};
+        const url = messagesUrls.deleteMessageUrl + messageId;                   
+        axios({
+          method: 'POST',
+          url: url,         
+          cancelToken: new axios.CancelToken(c => cancel = c)
+        })
+          .then((response)=>{ 
+             const data = response.data;
+             console.log(data);
+              dispatch({ type: 'DELETE_MESSAGE', data:messageId });
+          })
+          .catch((err)=>{    
+                   console.log(err);
+                   if (err.message.toLowerCase() == "request failed with status code 401")
+                      dispatch({ type: 'SIGN_OUT', data: "token invalid" });
+                   const data = err.message;
+                   console.log("error:", err);              
+          });    
+    }
+  } 
+
   
   export const deleteConversation = (conversationId) => {
-    return (dispatch, getState) => {  
-      console.log("deleteConversation action");
+    return (dispatch, getState) => {      
       dispatch({ type: 'DELETE_CONVERSATION', data:conversationId });
       return;
         axios.defaults.headers = {'Authorization': `Bearer ${getState().userLogin.token + ""}`};

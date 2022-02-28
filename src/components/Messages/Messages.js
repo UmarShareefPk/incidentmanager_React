@@ -17,7 +17,8 @@ function Messages({
     Conversations, 
     SelectedConversation,
     selectConversation,
-    deleteConversation
+    deleteConversation,
+    UserMessagesChanged, ConversationsChanged, SelectedConversationChanged
 }) {
 
     const [userToggle, setUserToggle] = useState(false);
@@ -35,7 +36,7 @@ function Messages({
         if(Conversations != null && Conversations.length > 0){
             selectConversation(Conversations[0]);    
         }  
-    }, [Conversations])
+    }, [ConversationsChanged])
 
     useEffect(() => {
         messagesByConversations(SelectedConversation.Id);
@@ -43,13 +44,13 @@ function Messages({
             let user = SelectedConversation.User1 == userId? getUserNameById(SelectedConversation.User2) : getUserNameById(SelectedConversation.User1);
            setConversationTitle(user);           }       
        
-    }, [SelectedConversation]);
+    }, [SelectedConversationChanged]);
 
     useEffect(() => {        
         try{
-            messagesRef.current.scrollTop = messagesRef.current.scrollHeight;     
+          //  messagesRef.current.scrollTop = messagesRef.current.scrollHeight;     
         }  catch(e){}
-    }, [UserMessages])
+    }, [UserMessagesChanged])
 
     const newConversationAdded = () =>{
         conversationsByUser(userId);  
@@ -153,7 +154,10 @@ const mapStateToProps = (state) => {
         allUsers: state.users.users,
         UserMessages : state.messages.Messages,
         Conversations :  state.messages.Conversations,      
-        SelectedConversation : state.messages.SelectedConversation
+        SelectedConversation : state.messages.SelectedConversation,
+        UserMessagesChanged : state.messages.MessagesChanged,
+        ConversationsChanged :  state.messages.ConversationsChanged,      
+        SelectedConversationChanged : state.messages.SelectedConversationChanged
     }
   }
 
