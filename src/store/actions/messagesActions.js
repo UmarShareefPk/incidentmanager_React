@@ -172,11 +172,11 @@ export const messagesByUser = (userId) => {
   export const changeMessageStatus = (messageId, status) => {
     return (dispatch, getState) => {  
      
-      dispatch({ type: 'CHANGE_MESSAGE_STATUS', data:{messageId, status} });
-      return;
+      //dispatch({ type: 'CHANGE_MESSAGE_STATUS', data:{messageId, status} });
+      //return;
 
         axios.defaults.headers = {'Authorization': `Bearer ${getState().userLogin.token + ""}`};
-        const url = messagesUrls.deleteMessageUrl + messageId;                   
+        const url = messagesUrls.changeMessageStatusUrl + messageId + "&Status=" + status;                   
         axios({
           method: 'POST',
           url: url,         
@@ -185,7 +185,7 @@ export const messagesByUser = (userId) => {
           .then((response)=>{ 
              const data = response.data;
              console.log(data);
-              dispatch({ type: 'DELETE_MESSAGE', data:messageId });
+             dispatch({ type: 'CHANGE_MESSAGE_STATUS', data:{messageId, status} });
           })
           .catch((err)=>{    
                    console.log(err);
@@ -199,9 +199,8 @@ export const messagesByUser = (userId) => {
 
   
   export const deleteConversation = (conversationId) => {
-    return (dispatch, getState) => {      
-      dispatch({ type: 'DELETE_CONVERSATION', data:conversationId });
-      return;
+    return (dispatch, getState) => {    
+     
         axios.defaults.headers = {'Authorization': `Bearer ${getState().userLogin.token + ""}`};
         const url = messagesUrls.deleteConversationUrl + conversationId;                   
         axios({
@@ -211,7 +210,7 @@ export const messagesByUser = (userId) => {
         })
           .then((response)=>{ 
              const data = response.data;
-             console.log(data);
+             //console.log(data);
               dispatch({ type: 'DELETE_CONVERSATION', data:conversationId });
           })
           .catch((err)=>{    

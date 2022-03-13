@@ -1,8 +1,8 @@
 //const baseUrl = "https://localhost:44398/";
 //https://192.168.100.178:44310/
 //export const baseUrl = "http://im/IMCore/";
-export const baseUrl = "https://localhost:44310/";
-//export const baseUrl = "http://localhost/ImWebapiCore/";
+//export const baseUrl = "https://localhost:44310/";
+export const baseUrl = "http://localhost/ImWebapiCore/";
 
 export const usersUrls = {
     tokenUrl : baseUrl + "token",
@@ -42,4 +42,5 @@ export const messagesUrls = {
    messagesByConversationsUrl :  baseUrl + "api/Messages/MessagesByConversations?ConversationId=",
    deleteConversationUrl :  baseUrl + "api/Messages/DeleteConversation?ConversationId=",
    deleteMessageUrl :  baseUrl + "api/Messages/DeleteMessage?MessageId=",
+   changeMessageStatusUrl :  baseUrl + "api/Messages/ChangeMessageStatus?MessageId=",
 }

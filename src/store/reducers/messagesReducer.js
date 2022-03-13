@@ -52,22 +52,22 @@ const initState = {
            MessagesChanged: !state.MessagesChanged,
          };
         
-        case "NEW_MESSAGE":
-        
-        changedMessages = [ ...state.Messages ];
-        changedMessages.push(action.data);
-        return {
-          ...state,
-          Messages: changedMessages,
-       //   MessagesChanged: !state.MessagesChanged,
-        };
+       case "NEW_MESSAGE":
 
-        case "NEW_CONVERSATION":
-       
-          return {
-            ...state,
-            Conversations: [action.data, ...state.Conversations]
-          };
+         changedMessages = [...state.Messages];
+         changedMessages.push(action.data);
+         return {
+           ...state,
+           Messages: changedMessages,
+           //   MessagesChanged: !state.MessagesChanged,
+         };
+
+       case "NEW_CONVERSATION":
+
+         return {
+           ...state,
+           Conversations: [action.data, ...state.Conversations]
+         };
        case "DELETE_MESSAGE":
          changedMessages = [...state.Messages];
          let mId = action.data;
@@ -84,8 +84,7 @@ const initState = {
          changedMessages = changedMessages.map(m => {
            if (m.Id == action.data.messageId){            
              m.Status = action.data.status;
-           }          
-             //m = {...m};
+           }   
              return m;
          }
          );
@@ -94,8 +93,7 @@ const initState = {
          changedConversations = changedConversations.map(c => {
            if (c.Id == state.SelectedConversation.Id){
             c.UnReadCount = c.UnReadCount - 1;
-           }
-          
+           }          
            return c;
          });
         
@@ -113,7 +111,9 @@ const initState = {
 
          return {
            ...state,
-           Conversations: changedConversations
+           Conversations: changedConversations,
+           SelectedConversation: changedConversations[0],
+           SelectedConversationChanged : !state.SelectedConversationChanged,
          };
   
        default:

@@ -3,16 +3,17 @@ import moment from "moment";
 import { connect } from 'react-redux'
 import {deleteMessage,changeMessageStatus } from "../../store/actions/messagesActions";
 
-const Message = ({ message, userId, deleteMessage, changeMessageStatus }) => {
+const Message = ({ message, userId, deleteMessage, changeMessageStatus, isLast, isScrollDone }) => {
 
     const isSender = message.From == userId ? true: false;
-    const ref = useRef();
-    const isVisible = useOnScreen(ref);
+    const ref = useRef();    
+    const isVisible = useOnScreen(ref);    
+  
 
     useEffect(() => {
-        if(!isSender){
+        if(!isSender && isScrollDone){
             if(message.Status.toLowerCase().trim() == "unread" ){
-               // console.log( message.MessageText);
+                console.log( message.MessageText);
                 changeMessageStatus(message.Id, "read");
             }
         }      
@@ -26,33 +27,32 @@ const Message = ({ message, userId, deleteMessage, changeMessageStatus }) => {
         }
     }
 
-    return (
+    return (       
+           
         <li className='message-li' ref={ref}>
+            {/* {isLast? <span ref={lastRef}> </span> : null} */}
             <div className='message-time'><span title= {moment(message.Date).format("MMMM DD YYYY, h:mm:ss a")}>{moment(message.Date).fromNow() } </span></div>
             <div className={ (message.Status =="Unread" && !isSender? "unread" : "") + " " +(isSender ? "message left" : "message right")}>
                 <div className='message-text'>
-                   {message.MessageText}
+                {message.MessageText}
                 </div>
                 <i title="Delete Message" onClick={()=> delMessage(message.Id)} className="delete-message-icon material-icons lighten-4">highlight_off</i>
             </div>
-        </li>
+        </li>       
     )
 }
 
-function useOnScreen(ref) {
+function useOnScreen(refx) {
 
-    const [isIntersecting, setIntersecting] = useState(false);
-  
+    const [isIntersecting, setIntersecting] = useState(false);  
     const observer = new IntersectionObserver(
       ([entry]) => setIntersecting(entry.isIntersecting)
-    )
-  
+    )  
     useEffect(() => {
-      observer.observe(ref.current);
+      observer.observe(refx.current);
       // Remove the observer as soon as the component is unmounted
       return () => { observer.disconnect() }
-    }, [])
-  
+    }, [])  
     return isIntersecting
   }
 

@@ -23,10 +23,9 @@ function Messages({
 
     const [userToggle, setUserToggle] = useState(false);
     const [composeToggle, setComposeToggle] = useState(false);
-    const messagesRef = useRef();   
-    const [usersInfo, setUsersInfo] = useState([]);
-    const [selectedConversation, setSelectedConversation] = useState('');
+    const messagesRef = useRef();  
     const [conversationTitle, setConversationTitle] = useState('');
+    const [isScrollDone, setIsScrollDone] = useState(false);
 
     useEffect(() => {
         conversationsByUser(userId);   
@@ -34,11 +33,13 @@ function Messages({
 
     useEffect(() => {        
         if(Conversations != null && Conversations.length > 0){
+            setIsScrollDone(false);   
             selectConversation(Conversations[0]);    
         }  
     }, [ConversationsChanged])
 
     useEffect(() => {
+        setIsScrollDone(false);  
         messagesByConversations(SelectedConversation.Id);
         if(SelectedConversation != null && SelectedConversation !={}){
             let user = SelectedConversation.User1 == userId? getUserNameById(SelectedConversation.User2) : getUserNameById(SelectedConversation.User1);
@@ -48,7 +49,8 @@ function Messages({
 
     useEffect(() => {        
         try{
-          //  messagesRef.current.scrollTop = messagesRef.current.scrollHeight;     
+            messagesRef.current.scrollTop = messagesRef.current.scrollHeight; 
+            setIsScrollDone(true);    
         }  catch(e){}
     }, [UserMessagesChanged])
 
@@ -92,7 +94,7 @@ function Messages({
                                     <span className='indigo-text'> Compose Message </span>
                                 </div>  
                          <ul className='conversation-list'>                         
-                                {Conversations.map(c => <Conversation key={c.Id + "ll"} conversation={c}  getUserNameById={getUserNameById}  selectedConversation={selectedConversation} />)}
+                                {Conversations.map(c => <Conversation key={c.Id + "ll"} conversation={c}  getUserNameById={getUserNameById}  />)}
 
                          </ul>
                      </div>
@@ -106,7 +108,7 @@ function Messages({
                         </div>   
                         <ul className='conversation-list'> 
                             {(Conversations != null && Conversations.length > 0)? 
-                                Conversations.map(c => <Conversation conversation={c} key={c.Id} getUserNameById={getUserNameById}  selectedConversation={selectedConversation} />)
+                                Conversations.map(c => <Conversation conversation={c} key={c.Id} getUserNameById={getUserNameById}  />)
                                 :
                                 <></>
                             }
@@ -130,8 +132,8 @@ function Messages({
                                     <div className="messages" ref={messagesRef}>
                                         <ul className=''>
                                             {
-                                                UserMessages.map(m => (
-                                                    <Message key={m.Id} message={m} userId={userId} />
+                                                UserMessages.map((m,index,allM) => (
+                                                    <Message key={m.Id} isLast={index+1 === allM.length? true: false} message={m} userId={userId} isScrollDone={isScrollDone} />
                                                 ))
                                             }
                                         </ul>
