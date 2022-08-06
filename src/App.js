@@ -18,7 +18,7 @@ function App(props) {
   return (
     // add basename properity when run from server basename="/ImReact"
     // in package.json "homepage":"http://localhost/ImReact",
-    <BrowserRouter  basename="/" > 
+    <BrowserRouter  basename="/ImReact" > 
       <div className="App">     
          <NavBar /> 
          <Receiver />
