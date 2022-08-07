@@ -72,7 +72,7 @@ import {  useHistory  } from 'react-router-dom';
       <>
         <PageActions Title={"Incidents"} /> 
         { loading? <h1>Loading</h1> : null}
-        { props.TotalIncidents === 0? <h1>Zero</h1> : null}
+        {/* { props.TotalIncidents === 0? <h1>Zero</h1> : null} */}
         <section>
           <div className="container">
             <div className="row">

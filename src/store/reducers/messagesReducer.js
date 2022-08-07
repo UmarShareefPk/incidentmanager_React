@@ -59,7 +59,7 @@ const initState = {
          return {
            ...state,
            Messages: changedMessages,
-           //   MessagesChanged: !state.MessagesChanged,
+           MessagesChanged: !state.MessagesChanged,
          };
 
        case "NEW_CONVERSATION":
