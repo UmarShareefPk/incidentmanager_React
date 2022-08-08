@@ -38,7 +38,7 @@ import logoSmall from '../../images/logoColored.png'
             {/* <h3> WELCOME!</h3>
             <br /> */}
               <img className='hide-on-large-only' src={logoSmall}/>
-            <h4>User Login</h4>
+            <h4 className='userlogin-text'>User Login</h4>
             <br />
             <form>
               <div className="input-field">
@@ -53,14 +53,14 @@ import logoSmall from '../../images/logoColored.png'
                 <input type="password" id="password"  onChange={(e) => setPassword(e.target.value)} />
                 <label htmlFor="password">Your Password</label>
               </div>
-              <div className="input-field">
+              <div className="input-field hide">
                 <a href="/"> Forgot password?</a>
               </div>
               <div className="input-field ">              
                   <p className="red-text">{props.loginError? "Incorret username or password." : "" }</p>
               </div>
               <div className="input-field ">
-                <button className="btn indigo darken-2 right" onClick={(e)=>loginClick(e)}>
+                <button className="btn indigo darken-2 center" onClick={(e)=>loginClick(e)}>
                   <span>Login</span>
                   <i className="material-icons right">send</i>
                 </button>

@@ -12,6 +12,7 @@
             background-color: #1A237E;
 
         }
+       
         .logo-Container img{
             width: 40vw;
         }
@@ -39,6 +40,10 @@
             
                 width:90vw;
            }
+
+           .userlogin-text{
+                font-size: large;
+            }
         }
 
         /* (tablets, 768px and up) */

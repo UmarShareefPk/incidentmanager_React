@@ -61,8 +61,12 @@ function Messages({
     const delConversation = () => {
         if(window.confirm("Delete conversation forever?")){
             deleteConversation(SelectedConversation.Id);
-        }
-      
+        }      
+    }
+
+    const composeToggleClicked = () => {
+        setComposeToggle(!composeToggle);
+        setUserToggle(!userToggle);
     }
 
     const getUserNameById = (id) => {   
@@ -90,7 +94,7 @@ function Messages({
                     </div>
                     {userToggle? (
                          <div className="col s10 m9 l3 users hide-on-large-only">
-                              <div className="compose-message" onClick={()=> setComposeToggle(!composeToggle)}>
+                              <div className="compose-message" onClick={()=> composeToggleClicked()}>
                                      <i className="material-icons indigo-text">message</i>
                                     <span className='indigo-text'> Compose Message </span>
                                 </div>  
