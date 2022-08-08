@@ -15,7 +15,12 @@
     background-color: #1A237E;
     padding: 25px 10px;
     border-radius: 30px;
-    color: white;
+    color: white; 
+
+}
+
+.kpi-text{      
+    white-space: nowrap;
     
 }
 
@@ -56,7 +61,19 @@
    .kpi{
     padding: 10px 0px;
     margin-bottom: 20px;
+    border-radius: 10%;
    }
+
+       
+   .kpi-value{
+    
+    font-size: 15px;   
+    margin-bottom: 5px; 
+    }
+    .kpi-text{
+       
+        font-size: 10px;
+    }
 }
 
 /* (tablets, 768px and up) */
@@ -73,11 +90,12 @@
 
     .kpi-value{    
         font-size: 20px; 
+        font-weight: bold;
         margin-bottom: 5px;    
     }
     .kpi-text{
-        font-weight: bold;
-        font-size: 12px;
+        
+        font-size: 10px;
        
     }
 }

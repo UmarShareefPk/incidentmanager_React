@@ -51,8 +51,8 @@ ul.sidenav li{
 }
 
 .pagesRow {
-    display: flex;
-    align-items: center;
+    /* display: flex;
+    align-items: center; */
 }
 
 .pagesRow .pageSize {
@@ -64,9 +64,7 @@ ul.sidenav li{
     color: slategray;
 }
 
-.pagesRow .pageSize .select-wrapper {
-    width: 4vw;
-}
+
 
 
 
@@ -89,6 +87,13 @@ ul.sidenav li{
 @media (min-width: 1000px) {
     .brand-logo img{
         height: 2em;   
+    }
+    .pagesRow .pageSize .select-wrapper {
+        width: 4vw; 
+   }
+    .pagesRow {
+         display: flex;
+        align-items: center; 
     }
 }
 

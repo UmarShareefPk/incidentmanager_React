@@ -84,6 +84,7 @@ function Messages({
                     <div className="col s2 m3 hide-on-large-only">
                         <div className="user-toogle" onClick={()=>setUserToggle(!userToggle)}>
                             <span>Users</span>
+                            <br></br>
                             <i className="material-icons center">send</i>
                         </div> 
                     </div>
@@ -94,7 +95,7 @@ function Messages({
                                     <span className='indigo-text'> Compose Message </span>
                                 </div>  
                          <ul className='conversation-list'>                         
-                                {Conversations.map(c => <Conversation key={c.Id + "ll"} conversation={c}  getUserNameById={getUserNameById}  />)}
+                                {Conversations.map(c => <Conversation key={c.Id + "ll"} conversation={c}  getUserNameById={getUserNameById} setUserToggle={setUserToggle}  />)}
 
                          </ul>
                      </div>
@@ -108,7 +109,7 @@ function Messages({
                         </div>   
                         <ul className='conversation-list'> 
                             {(Conversations != null && Conversations.length > 0)? 
-                                Conversations.map(c => <Conversation conversation={c} key={c.Id} getUserNameById={getUserNameById}  />)
+                                Conversations.map(c => <Conversation conversation={c} key={c.Id} getUserNameById={getUserNameById} setUserToggle={null}  />)
                                 :
                                 <></>
                             }

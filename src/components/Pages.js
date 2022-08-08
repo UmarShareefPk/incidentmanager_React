@@ -81,7 +81,7 @@ export default function Pages({TotalRecords, PostsPerPage, setPageNumber, setPag
         <div className="col s12 m8 l6">
             <p className='left green-text darken-2'>{information}</p>
         </div>
-        <div className="col s3 m6 l2 pageSize">              
+        <div className="col s12 m4 l2 pageSize">              
                     <span>Page Size</span>
                     <select value={currentSize} onChange={(e) => pageSizeChanged(e.target.value)}
                         ref={ddlRef}  >
@@ -98,7 +98,7 @@ export default function Pages({TotalRecords, PostsPerPage, setPageNumber, setPag
                     </select>               					
         </div>
       
-        <div className="input-field col s9 m6 l4">
+        <div className="input-field col s12 m12 l4">
             <ul className="pagination right">
             <li
                 className={  currentPage === 1 ? " disabled" : "" } >

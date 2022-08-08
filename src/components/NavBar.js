@@ -57,12 +57,12 @@ function NavBar({user_Name, loginError, token, signOut, getAllUsers, allUsers, U
               </NavLink> 
               
             </li>    
-            {UnreadConversations > 0? (
+            {/* {UnreadConversations > 0? (
               <li>
               <span className=" badge white-text new  messages-badge">{UnreadConversations}</span>
             </li>  
             )
-            : <></>}
+            : <></>} */}
                        
            
               <Notifications />
@@ -76,34 +76,44 @@ function NavBar({user_Name, loginError, token, signOut, getAllUsers, allUsers, U
             </li>
           </ul>
           {/* for mobile */}
-          <ul className="sidenav grey lighten-2" id="mobile-menu">
+          <ul className="sidenav indigo darken-4" id="mobile-menu">
             <li>
-              <NavLink to="/Messages" className="sidenav-close">
+              <NavLink to="/Messages" className="sidenav-close white-text">
                 Messages
               </NavLink>
             </li>
             <li>
-              <NavLink to="/incidentListing" className="sidenav-close">
+              <NavLink to="/incidentListing" className="sidenav-close white-text">
                 Incidents
               </NavLink>
             </li>
             <li>
-              <NavLink to="/UsersList" className="sidenav-close">
+              <NavLink to="/UsersList" className="sidenav-close white-text">
                 Users
               </NavLink>
             </li>
 
-            <li>
-              <a> <i className="material-icons" onClick={signOut}>settings_power</i> </a>
-            </li>
-
-            <li>
-              <a href="" className=" white-text">
-                <i className="material-icons">notifications</i>
+            {/* <li>
+              <a href="" className="white-text">
+                <i className="material-icons white-text">notifications</i>
                 <span className="Indigo-text">5</span>
               </a>
 
             </li>
+            <li>
+              {UnreadConversations > 0? (
+                
+                <span className=" badge white-text new  messages-badge">{UnreadConversations}</span>
+              
+              )
+              : <></>}
+             </li>  */}
+
+            <li>
+              <a> <i className="material-icons red-text" onClick={signOut}>settings_power</i> </a>
+            </li>
+
+            
           </ul>
         </div>
       </nav>

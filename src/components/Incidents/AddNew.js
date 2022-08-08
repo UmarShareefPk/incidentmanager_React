@@ -158,8 +158,8 @@ import { Redirect } from 'react-router-dom'
                     <div className="col s12 l6">
                       <div className="input-field ">
                         <input
-                        className="validate"
-                          required
+                       // className="validate"
+                        //  required
                           type="text"
                           id="title"
                           value={title}
@@ -172,9 +172,9 @@ import { Redirect } from 'react-router-dom'
                     <div className="input-field col s12 l6">                    
                       <input
                         readOnly                    
-                        required
+                       // required
                         type="text"
-                        className="dropdown-trigger validate"
+                        className="dropdown-trigger"
                         id="assignee"
                         data-target="dropdown1"
                         placeholder=""
@@ -199,10 +199,10 @@ import { Redirect } from 'react-router-dom'
                   </div>
                   <div className="input-field">
                     <textarea
-                      required
+                     // required
                       value={description}
                       id="description"
-                      className="materialize-textarea validate"
+                      className="materialize-textarea"
                       onChange={(e) => setDescription(e.target.value)}
                     ></textarea>
                     <label htmlFor="description" className="">
@@ -225,10 +225,10 @@ import { Redirect } from 'react-router-dom'
                   <div className="row">
                     <div className="input-field col s6">
                       <input
-                        required
+                      //  required
                         type="text"
                         id="startTimeDate"
-                        className="datepicker validate"
+                        className="datepicker "
                         ref={startTimeDateRef}
                       />
                       <label htmlFor="startTimeDate" className="">
@@ -236,27 +236,34 @@ import { Redirect } from 'react-router-dom'
                       </label>
                     </div>
 
-                    <div className="input-field col s6">
+                    <div className="input-field col s6 starttime-container">
                       <input
-                        required
+                      //  required
                         type="text"
-                        id="startTimeTime"
-                        className="timepicker validate"
-                        ref={startTimeTimeRef}
+                       // id="startTimeTime"
+                       // className="timepicker "
+                      //  ref={startTimeTimeRef}
                       />
                       <label htmlFor="startTimeime" className="">
-                       Start Time (Pick Time)
+                      Start Time (Pick Time)
                       </label>
+                      <input
+                      //  required
+                        type="text"
+                        id="startTimeTime"
+                        className="timepicker starttime"
+                        ref={startTimeTimeRef}
+                      />
                     </div>
                   </div>
 
                   <div className="row">
                     <div className="input-field col s6">
                       <input
-                        required
+                       // required
                         type="text"
                         id="dueDateDate"
-                        className="datepicker validate"
+                        className="datepicker"
                         ref={dueDateDateRef}
                       />
                       <label htmlFor="dueDateDate" className="">
@@ -266,10 +273,10 @@ import { Redirect } from 'react-router-dom'
 
                     <div className="input-field col s6">
                       <input
-                        required
+                      //  required
                         type="text"
                         id="dueDateTime"
-                        className="timepicker validate" 
+                        className="timepicker" 
                         ref={dueDateTimeRef}
                       />
                       <label htmlFor="dueDateTime" className="">

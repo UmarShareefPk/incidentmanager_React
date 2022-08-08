@@ -13,7 +13,7 @@ const Message = ({ message, userId, deleteMessage, changeMessageStatus, isLast, 
     useEffect(() => {
         if(!isSender && isScrollDone){
             if(message.Status.toLowerCase().trim() == "unread" ){
-                console.log( message.MessageText);
+              //  console.log( message.MessageText);
                 changeMessageStatus(message.Id, "read");
             }
         }      
