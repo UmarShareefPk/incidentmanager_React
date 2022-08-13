@@ -10,7 +10,11 @@
             align-items: center;
             justify-content: center;
             background-color: #1A237E;
+        }
 
+        .row .col.login-logo-col {
+            padding: 0;
+            
         }
        
         .logo-Container img{

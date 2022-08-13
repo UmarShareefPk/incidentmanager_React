@@ -58,6 +58,8 @@ import moment from "moment";
      history.push(path);
    };
 
+   console.log("in Notifications");
+
    return (
      <>
        <li>

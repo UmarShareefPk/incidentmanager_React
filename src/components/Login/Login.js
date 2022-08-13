@@ -27,7 +27,7 @@ import logoSmall from '../../images/logoColored.png'
      
         <div className="row ">
         
-        <div className="col l6 hide-on-med-and-down ">
+        <div className="login-logo-col col l6 hide-on-med-and-down ">
           <div className="logo-Container">
                <img src={logo}/>
           </div>          

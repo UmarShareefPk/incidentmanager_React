@@ -23,8 +23,11 @@ const Reply = ({
          formData.append("MessageText", messageText);     
         
          replyMessage(formData, conversationId);
-        setMessageText("");
-     
+        setMessageText("");     
+    }
+    
+    const keyPressedOnMessageText = (e) =>{
+        console.log(e.keyCode);
     }
 
     return (
@@ -36,6 +39,7 @@ const Reply = ({
                     placeholder='Write new message'
                      value={messageText}
                      onChange={(e) => setMessageText(e.target.value)}
+                    // onKeyDown={(e) => keyPressedOnMessageText(e)}
                 ></textarea>
             </div>
             <div>
