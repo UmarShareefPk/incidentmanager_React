@@ -20,7 +20,7 @@ function App(props) {
     // in package.json "homepage":"http://localhost/ImReact",
     <BrowserRouter  basename="/ImReact" > 
       <div className="App">     
-         <NavBar /> 
+         <NavBar />  
          <Receiver />
         <Switch>
           <Route exact path="/" component={Login} /> 
