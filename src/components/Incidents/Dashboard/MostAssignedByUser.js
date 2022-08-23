@@ -71,7 +71,7 @@ function MostAssignedByUser({MostAssignedIncidentsData, getMostAssignedToUsers})
         },
         chart: {    
           type: 'bar',
-          height: (70) + '%',
+          // height: (70) + '%',
           //width: (100) + '%',
          },
          title:{

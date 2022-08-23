@@ -4,20 +4,22 @@
 
 width: fit-content;
 text-align: start;
-padding: 30px 0;
-margin-top: 100px;
-font-size: 20px;
+padding: 20px 0;
+margin-top: 30vh;
+font-size: small;
 border:1px solid;
-border-radius: 10px;
+border-radius: 15%;
 }
 .user-toogle span{
     writing-mode: vertical-rl;
     text-orientation: mixed;
+    font-size: small;
     color: blue;
 }
 .user-toogle i{
-   padding-left: 3px;
+  
    color: blue;
+   font-size: large;
 }
 
 
@@ -126,7 +128,7 @@ border-radius: 10px;
     margin-bottom: 10px;
 
     max-width: 70%;
-    border-radius: 10%;
+    border-radius:5%;
     padding:10px 10px;
     display: flex;
     align-items: center;

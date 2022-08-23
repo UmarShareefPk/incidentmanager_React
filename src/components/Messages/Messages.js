@@ -85,15 +85,15 @@ function Messages({
             <div className="container messages-window">     
 
                 <div className="row">
-                    <div className="col s2 m3 hide-on-large-only">
+                    <div className="col s1 m1 hide-on-large-only">
                         <div className="user-toogle" onClick={()=>setUserToggle(!userToggle)}>
-                            <span>Users</span>
-                            <br></br>
-                            <i className="material-icons center">send</i>
+                            {/* <span>Users</span>
+                            <br></br> */}
+                            <i className="material-icons center">person</i>
                         </div> 
                     </div>
                     {userToggle? (
-                         <div className="col s10 m9 l3 users hide-on-large-only">
+                         <div className="col s11 m11 l3 users hide-on-large-only">
                               <div className="compose-message" onClick={()=> composeToggleClicked()}>
                                      <i className="material-icons indigo-text">message</i>
                                     <span className='indigo-text'> Compose Message </span>

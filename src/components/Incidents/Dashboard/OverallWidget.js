@@ -16,7 +16,7 @@ function OverallWidget({overallWidgetData, getOverallWidgetData}) {
         const options = {
             chart: {
                 type: 'pie',
-                height: (70) + '%',
+                // height: (80) + '%',
             },
             title: {
                 text: ''
@@ -93,7 +93,7 @@ function OverallWidget({overallWidgetData, getOverallWidgetData}) {
 
 
     return (
-        <div className="col s12 m12 l6 widget">
+        <div className="col s12 m12 l6 widget chart-widget">
             <h5> Overall</h5>
             <HighchartsReact highcharts={Highcharts} options={chartOptions} />
         </div>

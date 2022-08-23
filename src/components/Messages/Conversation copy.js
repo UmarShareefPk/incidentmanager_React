@@ -25,8 +25,9 @@ const Conversation = ({ conversation, userId, getUserNameById,  SelectedConversa
             <div className={cssClass} onClick={() => conversationSelected() }>
                 <div className='photo'>
                     <button type="button" title={"Umar Shareef"} className="btn-floating  pink darken-2 userWelcome" >
-                         {/* {user ? getUserNameById(user).toUpperCase().split(/\s/).reduce((response, word) => response += word.slice(0, 1), '') : "Null"}  */}
-                         <i className='material-icons circle blue darken-3'>person</i>
+                         {/* {user ? getUserNameById(user).toUpperCase().split(/\s/).reduce((response, word) => response += word.slice(0, 1), '') : "Null"} 
+                          */}
+                          <i className='material-icons circle blue'></i>
                     </button>
                 </div>
                 <div className='name-message'>

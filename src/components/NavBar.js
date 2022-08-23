@@ -11,8 +11,7 @@ import { allUsers } from "../store/actions/usersActions";
 function NavBar({user_Name, loginError, token, signOut, getAllUsers, allUsers, UnreadConversations}) {
 
   useEffect(() => {    
-    console.log("loading users in navbar");  
-    getAllUsers();
+     getAllUsers();
     }, [token]);
 
   if (!token){
@@ -37,34 +36,28 @@ function NavBar({user_Name, loginError, token, signOut, getAllUsers, allUsers, U
           <a href="#" className="sidenav-trigger" data-target="mobile-menu">
             <i className="material-icons">menu</i>
           </a>
-          <ul className="right hide-on-med-and-down">
-            <li>     
-              <NavLink to="/incidentListing" >             
-                 Incidents
+          <ul className="navbar-ul right hide-on-med-and-down">
+            <li class="nav-link">     
+              <NavLink to="/incidentListing"  > 
+              <i class="material-icons">pest_control</i>            
+                 <span>Incidents </span>
               </NavLink> 
             </li>
-            <li>
-              <NavLink to="/UsersList" >             
-                   Users 
+            <li class="nav-link">
+              <NavLink to="/UsersList" >
+              <i class="material-icons">people</i>            
+                 <span>Users </span>
                 </NavLink>              
             </li> 
                
-            <li>     
-              <NavLink to="/messages" className="message-nav " >     
-                {/* <i className="material-icons  ">message</i> */}
-                Messages
+            <li class="nav-link">     
+              <NavLink to="/messages" className="message-nav" >     
+                 <i className="material-icons  ">message</i> 
+                 <span>Messages </span>
               
               </NavLink> 
               
             </li>    
-            {/* {UnreadConversations > 0? (
-              <li>
-              <span className=" badge white-text new  messages-badge">{UnreadConversations}</span>
-            </li>  
-            )
-            : <></>} */}
-                       
-           
               <Notifications />
             <li>
                 <button type="button" title={user_Name} className="btn-floating  orange darken-3 userWelcome" >
@@ -77,19 +70,32 @@ function NavBar({user_Name, loginError, token, signOut, getAllUsers, allUsers, U
           </ul>
           {/* for mobile */}
           <ul className="sidenav indigo darken-4" id="mobile-menu">
+
             <li>
-              <NavLink to="/Messages" className="sidenav-close white-text">
-                Messages
+              <NavLink to="/Dashboard" className="nav-link sidenav-close  white-text">
+              <i class="material-icons white-text">home</i>
+                <span>Dashboard</span>
               </NavLink>
             </li>
+
             <li>
-              <NavLink to="/incidentListing" className="sidenav-close white-text">
-                Incidents
+              <NavLink to="/incidentListing" className="nav-link sidenav-close  white-text">
+              <i class="material-icons white-text">pest_control</i>
+                <span>Incidents</span>
               </NavLink>
             </li>
             <li>
               <NavLink to="/UsersList" className="sidenav-close white-text">
-                Users
+              <i class="material-icons white-text">people</i>
+                <span>Users</span>
+                
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/Messages" className="sidenav-close white-text">
+                <i class="material-icons white-text">message</i>
+                  <span>Messages</span>
+                
               </NavLink>
             </li>
 
@@ -110,7 +116,9 @@ function NavBar({user_Name, loginError, token, signOut, getAllUsers, allUsers, U
              </li>  */}
 
             <li>
-              <a> <i className="material-icons red-text" onClick={signOut}>settings_power</i> </a>
+              <a> <i className="material-icons red-text" onClick={signOut}>settings_power</i> 
+                <span className='red-text lighten-1'>Logout</span>
+              </a>
             </li>
 
             
