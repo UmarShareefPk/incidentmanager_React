@@ -97,6 +97,7 @@ span.im-createTime {
 
 .incident-attachment-container div.file-container {
   display: flex;
+  margin-bottom: 5px;
 }
 
 .incident-attachment-container div span.file-text {
