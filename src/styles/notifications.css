@@ -17,8 +17,9 @@
   border-bottom: 1px solid gray;
 }
 
-.notification-box .icon{
-  font-size: 15px;
+.notification-box .icon i{
+  font-size: x-large !important;
+  color:#1A237E;
 }
 
 .notification-box .text{

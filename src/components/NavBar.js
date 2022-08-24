@@ -94,10 +94,10 @@ function NavBar({user_Name, loginError, token, signOut, getAllUsers, allUsers, U
             <li>
               <NavLink to="/Messages" className="sidenav-close white-text">
                 <i class="material-icons white-text">message</i>
-                  <span>Messages</span>
-                
+                  <span>Messages</span>                
               </NavLink>
             </li>
+            {/* <Notifications /> */}
 
             {/* <li>
               <a href="" className="white-text">

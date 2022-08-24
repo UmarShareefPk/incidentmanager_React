@@ -92,19 +92,19 @@ import moment from "moment";
                      <span className='icon'>
                        {notification.IsRead ? (
                          <i
-                           className="material-icons black-text readIcon"
+                           className="material-icons readIcon"
                            title="Mark Unread"
                            onClick={() => setStatus(notification.Id, false)}
                          >
-                           radio_button_unchecked
+                           drafts
                          </i>
                        ) : (
                          <i
-                           className="material-icons black-text readIcon"
+                           className="material-icons readIcon"
                            title="Mark Read"
                            onClick={() => setStatus(notification.Id, true)}
                          >
-                           radio_button_checked
+                           email
                          </i>
                        )}
                      </span>
