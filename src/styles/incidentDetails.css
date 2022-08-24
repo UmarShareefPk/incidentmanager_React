@@ -1,123 +1,188 @@
+::-webkit-scrollbar {
+  width: 5px;
+  /* height: 5em; */
+}
 
-   
-    ::-webkit-scrollbar {
-        width: 5px;
-        /* height: 5em; */
-      }
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px white;
+  border-radius: 10px;
+}
 
-      /* Track */
-      ::-webkit-scrollbar-track {
-        box-shadow: inset 0 0 5px white; 
-        border-radius: 10px;
-      }
-      
-      /* Handle */
-      ::-webkit-scrollbar-thumb {
-        background: lightblue  ; 
-        border-radius: 10px;
-      }
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: lightblue;
+  border-radius: 10px;
+}
 
-      /* Handle on hover */
-      ::-webkit-scrollbar-thumb:hover {
-        background: darkslategray; 
-      }
-   
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: darkslategray;
+}
 
-      .datepicker-date-display, .timepicker-digital-display{
-        background-color:#1A237E; 
-    }
+/********** general ************************/
 
-    li>a, .dropdown-content li>span {
-     color: #1A237E; 
-    }
+.datepicker-date-display,
+.timepicker-digital-display {
+  background-color: #1A237E;
+}
 
-      span.im-createTime{
-        font-size: 12px;
-      }
+li>a,
+.dropdown-content li>span {
+  color: #1A237E;
+}
 
-      ul.commentFiles{
-       text-align: center;
-      }
-      ul.commentFiles li {
-        list-style: none;
-        /* text-align: left;
-        padding-left: 20%; */
-        cursor: pointer;
-      }
+.darkslategrayText {
+  color: darkslategray;
+}
 
-      ul.incidentFiles{
-       text-align: center;
-      }
-      ul.incidentFiles li {
-        list-style: none;    
-        cursor: pointer;
-        text-align: left;
-        padding-left: 20%;
-     
-      }
+.inline-icon {
+  vertical-align: bottom;
+  font-size: 15px !important;
+  margin-bottom: 3px;
+}
 
-      .darkslategrayText{
-        color: darkslategray;
-      }
-      
-      .updateBtn{
-        margin-right: 5px;
-      }
+.actions-icon {
+  cursor: pointer;
+  font-size: medium;
+}
 
-      .commentHeader{
-        
-      }
+.bigTextScroll {
+  max-height: 20vh;
+  overflow-y: scroll;
+}
 
-      .inline-icon {
-        vertical-align: bottom;
-        font-size: 15px !important;
-      margin-bottom: 3px;
-      }
+.updateBtn {
+  margin-right: 5px;
+}
 
-      .actions-icon{
-        cursor: pointer;
-        font-size: medium;
-      }
 
-      .bigTextScroll{
-        max-height: 20vh;
-        overflow-y: scroll;
-      }
 
-      .all-comments-box{
-        max-height: 70vh;
-        overflow-y: scroll;
-      }
+.heading {
+  font-weight: bold;
+}
 
-      .heading {
-        font-weight: bold;
-      }
+.page-loader {
+  margin-top: 10%;
+}
 
-      .page-loader {
-        margin-top: 10%;
-      }
+/**************** Title **********************/
 
-      .comment-edit-box{
-        padding: 30px;
-      }
+.title-container {
+  text-align: left;
+  font-size: larger;
+}
 
-      .username{        
-        /* background-color: #1A237E; */
-        color: #1A237E;
-        border-radius: 25px;
-        padding: 5px;
-        cursor: pointer;
-        font-weight: bold;
-      }
+.actions-icon-title {
+  cursor: pointer;
+  font-size: large;
+  margin-right: 3px;
+  ;
+}
 
-      .username:hover{
-        text-decoration: underline;
-      }
+.incident-timestamp {
+  text-align: right;
+}
 
-      .all-comments-box hr {
-        border-top: #efefef solid 1px;
-      }
+span.im-createTime {
+  font-size: medium;
+}
 
-      .search-assignee-box{
-        padding: 5px 10px;
-      }
+
+/************** Attachments **************/
+
+.incident-attachment-container {
+  margin-left: 2vw;
+}
+
+.incident-attachment-container div.file-container {
+  display: flex;
+}
+
+.incident-attachment-container div span.file-text {
+  min-width: 190px;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  color: slategray;
+}
+
+/************** Comment **************/
+.cooment-title {
+  color: #1A237E;
+  font-size: larger;
+  font-weight: bold;
+}
+
+.all-comments-box {
+  max-height: 70vh;
+  overflow-y: scroll;
+}
+
+.comment-text {
+  text-align: center;
+}
+
+.comment-file-container {}
+
+.comment-file {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 5px;
+
+}
+
+.comment-file-text {
+  min-width: 160px;
+  font-size: small;
+  color: slategray;
+  display: flex;
+  align-items: center;
+}
+
+.comment-file-actions {
+  margin-left: 20px;
+}
+
+.comment-file-actions i {
+  margin-right: 5px;
+}
+
+.comment-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.comment-timestamp {
+  font-size: small;
+}
+
+.comment-actions i {
+  font-size: large;
+  margin-left: 5px;
+}
+
+.comment-edit-box {
+  padding: 30px;
+}
+
+.username {
+  /* background-color: #1A237E; */
+  color: #1A237E;
+  font-size: small;
+  font-weight: bold;
+}
+
+
+.all-comments-box hr {
+  border-top: #efefef solid 1px;
+}
+
+
+
+
+
+.search-assignee-box {
+  padding: 5px 10px;
+}

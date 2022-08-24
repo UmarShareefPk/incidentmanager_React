@@ -77,33 +77,36 @@ function Comment({
 
   return (
     <div className="">
-      <p className="commentHeader darkslategrayText">
-        <a className="username">{getNameById(comment.UserId)}</a> added a
-        comment. -{" "}
-        <span
+      <div className="darkslategrayText comment-header">
+        <div>
+        <a className="username">{getNameById(comment.UserId)}</a> 
+        <small> added a comment - </small>        
+        <span className="comment-timestamp"
           title={moment(comment.CreateDate).format("MMMM DD YYYY, h:mm:ss a")}
         >
-          {moment(comment.CreateDate).fromNow()}{" "}
+          {moment(comment.CreateDate).fromNow()}
         </span>
-        <span className="right">
+        </div>
+        <span className="comment-actions">
           <i
             title="Edit Comment"
-            className="actions-icon material-icons indigo-text darken-4 inline-icon"
+            className="actions-icon material-icons darkslategrayText"
             onClick={commentEditClick}
           >
             edit
           </i>
           <i
             title="Delete Comment"
-            className="actions-icon material-icons red-text inline-icon"
+            className="actions-icon material-icons red-text"
             onClick = {deleteThisComment}
           >
-            cancel
+            delete_forever
           </i>
         </span>
-      </p>
+
+      </div>
       {!editComment ? (
-        <p className="darkslategrayText">{comment.CommentText}</p>
+        <p className="darkslategrayText comment-text">{comment.CommentText}</p>
       ) : (
         <p className="comment-edit-box">
           <textarea className="materialize-textarea" onChange={(e) => setCommentText(e.target.value)}></textarea>
@@ -125,37 +128,51 @@ function Comment({
         </p>
       )}{" "}
       {/* end of edit comment - if */}
-      <p>
-        <ul className="commentFiles">
+      <div className="comment-file-container">
+        
           {!comment.attachments
             ? null
             : comment.attachments.map((file) => {
                 return (
-                  <li key={file.Id}>
-                    <a className="center indigo-text darken-4">
-                      {!editComment ? null : (
-                        <i
-                          title="Remove"
-                          className="actions-icon material-icons red-text inline-icon"
-                          onClick={() => deleteFile(file)}
-                        >
-                          cancel
-                        </i>
-                      )}
+                  <div className="comment-file" key={file.Id}>
+
+                    <div className="comment-file-text">
                       <span
                         title={file.FileName}
+                        // onClick={() => downloadFile(file)}
+                      >
+                         <i className="actions-icon material-icons orange-text">
+                                attachment
+                              </i>
+                        <span>
+                          {file.FileName.length > 20
+                            ? file.FileName.slice(0, 20) + "..."
+                            : file.FileName}
+                          </span>
+                      </span>
+                    </div>
+
+                    <div className="comment-file-actions">
+                      <i
+                        title="Remove"
+                        className="actions-icon material-icons indigo-text"
                         onClick={() => downloadFile(file)}
                       >
-                        {file.FileName.length > 40
-                          ? file.FileName.slice(0, 40) + "..."
-                          : file.FileName}
-                      </span>
-                    </a>
-                  </li>
+                        download
+                      </i>
+                      <i
+                        title="Remove"
+                        className="actions-icon material-icons red-text "
+                        onClick={() => deleteFile(file)}
+                      >
+                        delete_forever
+                      </i>
+                    </div>
+                 
+                  </div>
                 );
-              })}
-        </ul>
-      </p>
+              })}        
+      </div>
       <hr></hr>
     </div>
   );

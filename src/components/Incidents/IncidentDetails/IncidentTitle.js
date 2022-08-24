@@ -48,16 +48,16 @@ function IncidentTitle({
 
   return (
     <div className="row">
-      <div className="col s9">
+      <div className="col s12">
+        <div className="title-container">
         {!editable ? (
-          <h5 className="left indigo-text darken-4">
-            {" "}
-            {/* Title  */}
-            {title}
-            <i className="material-icons actions-icon" onClick={editClick}>
+          <span className="indigo-text darken-4"> 
+          <i className="material-icons actions-icon-title" onClick={editClick}>
               edit
-            </i>
-          </h5>
+            </i>                    
+            {title}
+            
+          </span>
         ) : (
           <div className="input-field">
             {" "}
@@ -84,20 +84,22 @@ function IncidentTitle({
           </div>
         )}
       </div>
-      <div className="col s3">        
-        <h5>         
-          <span
-            className="im-createTime black-text "
-            title={moment(incidentData.CreatedAT).format(
-              "MMMM DD YYYY, h:mm:ss a"
-            )}
-          >
-            Created by{" "}
-            <a className="username"> {getNameById(incidentData.CreatedBy)} </a>{" "}
-            - {moment(incidentData.CreatedAT).fromNow()}
-          </span>
-        </h5>
-      </div>
+        <div className="incident-timestamp">
+          
+            <span
+              className="im-createTime black-text "
+              title={moment(incidentData.CreatedAT).format(
+                "MMMM DD YYYY, h:mm:ss a"
+              )}
+            >
+              Created by{""}
+              <a className="username"> {getNameById(incidentData.CreatedBy)} </a>
+               {moment(incidentData.CreatedAT).fromNow()}
+            </span>
+          
+        </div>
+
+      </div>     
     </div>
   );
 }

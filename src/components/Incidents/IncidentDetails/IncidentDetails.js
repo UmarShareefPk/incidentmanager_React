@@ -199,56 +199,62 @@ function IncidentDetails({
             <IncidentTitle getNameById={getNameById} />
              <div className="row">
                 <div className="col s12 l6">
-              <IncidentDescription type="description" />
-              <IncidentDescription type="additionaldata" />
-                  
+                  <IncidentDescription type="description" />
+                  <IncidentDescription type="additionaldata" />
+
                   <p className="heading left-align indigo-text darken-4">
                     {" "}
                     {/*  Attachments */}
-                    <i className="material-icons inline-icon">attachment</i>
+                    {/* <i className="material-icons inline-icon">attachment</i> */}
                     Attachments:
                   </p>
 
-                  <div className="input-field">
-                    <ul className="input-field incidentFiles">
-                      {!incidentData.Attachments
-                        ? null
-                        : incidentData.Attachments.map((file) => {
-                            return (
-                              <li
-                                key={file.Id}
-                                className="center indigo-text darken-4"
+                  <div className="incident-attachment-container">
+                    {!incidentData.Attachments
+                      ? null
+                      : incidentData.Attachments.map((file) => {
+                        return (
+                          <div
+                            key={file.Id}
+                            className="file-container center"
+                          >
+                            <span
+                              className="file-text"
+                              title={file.FileName}
+                            // onClick={() => downloadFile(file)}
+                            >
+                              <i className="actions-icon material-icons orange-text">
+                                attachment
+                              </i>
+                              <span>
+                                {file.FileName.length > 20
+                                  ? file.FileName.slice(0, 20) + "..."
+                                  : file.FileName}
+                              </span>
+
+                            </span>
+                            <div>
+                              <i
+                                title="Download"
+                                className="actions-icon material-icons indigo-text inline-icon"
+                                onClick={() => downloadFile(file)}
                               >
-                                <i
-                                  title="Remove"
-                                  className="actions-icon material-icons red-text inline-icon"
-                                  onClick={() => deleteIncidentAttachment(file)}
-                                >
-                                  cancel
-                                </i>
-                                <span
-                                  title={file.FileName}
-                                  onClick={() => downloadFile(file)}
-                                >
-                                  {file.FileName.length > 35
-                                    ? file.FileName.slice(0, 35) + "..."
-                                    : file.FileName}
-                                </span>
-                              </li>
-                            );
-                          })}
-                    </ul>
+                                download
+                              </i>
+                              <i
+                                title="Remove"
+                                className="actions-icon material-icons red-text inline-icon"
+                                onClick={() => deleteIncidentAttachment(file)}
+                              >
+                                delete_forever
+                              </i>
+                            </div>
+                          </div>
+                        );
+                      })}
                   </div>
-
-                  <Comments
-                    userId={userId}
-                    incidentId={incidentData.Id}
-                    comments={incidentData.Comments}
-                    getNameById={getNameById}
-                  />
-                </div>
-
-                <div className="col s12 l5 offset-l1  ID-dropdowns">
+                  </div>
+                  <div className="col s12 l5 offset-l1  ID-dropdowns">
                   <table>
                     <tbody>
                       <tr>
@@ -422,8 +428,20 @@ function IncidentDetails({
                       </tr>
                     </tbody>
                   </table>
+                  </div>
+                  </div>  
+
+              <div className="row">
+                <div className="col s12 l6 ">
+                  <Comments
+                    userId={userId}
+                    incidentId={incidentData.Id}
+                    comments={incidentData.Comments}
+                    getNameById={getNameById}
+                  />
                 </div>
-              </div>
+              </div>       
+              
             </div>
           </div>
         </div>

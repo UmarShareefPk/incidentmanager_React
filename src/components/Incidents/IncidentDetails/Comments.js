@@ -51,7 +51,7 @@ function Comments({
 
   return (
     <>
-      <h5 className="heading left-align">Comments</h5>
+      <p className="cooment-title left-align">Comments</p>
       <p className="all-comments-box">
         {!comments ? (
           <h1>No Comments</h1>
