@@ -75,6 +75,14 @@ function Comment({
     }
   }
 
+  const setDate = (date) => {
+    var newDate = moment(date).format("YYYY-MM-DD h:mm:ss A");
+    newDate = new Date(newDate + " UTC");
+    console.log("Date", date);
+    console.log("newDate", newDate.toString());
+    return newDate.toString();
+  }
+
   return (
     <div className="">
       <div className="darkslategrayText comment-header">
@@ -82,9 +90,10 @@ function Comment({
         <a className="username">{getNameById(comment.UserId)}</a> 
         <small> added a comment - </small>        
         <span className="comment-timestamp"
-          title={moment(comment.CreateDate).format("MMMM DD YYYY, h:mm:ss a")}
+          title={moment(setDate(comment.CreateDate)).format("MMMM DD YYYY, h:mm:ss a")}
         >
-          {moment(comment.CreateDate).fromNow()}
+           {moment(setDate(comment.CreateDate)).fromNow()}
+          {/* {moment(comment.CreateDate).fromNow()} */}
         </span>
         </div>
         <span className="comment-actions">
