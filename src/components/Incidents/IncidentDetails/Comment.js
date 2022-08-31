@@ -3,6 +3,7 @@ import moment from "moment";
 import { deleteAttachment, updateComment , deleteComment } from "../../../store/actions/incidentsActions";
 import { connect } from "react-redux";
 import { incidentsUrls } from "../../../api/apiURLs";
+import {setDateTime} from "../../../helpers/common"
 
 function Comment({
   comment,
@@ -77,9 +78,7 @@ function Comment({
 
   const setDate = (date) => {
     var newDate = moment(date).format("YYYY-MM-DD h:mm:ss A");
-    newDate = new Date(newDate + " UTC");
-    console.log("Date", date);
-    console.log("newDate", newDate.toString());
+    newDate = new Date(newDate + " UTC");    
     return newDate.toString();
   }
 
@@ -90,9 +89,9 @@ function Comment({
         <a className="username">{getNameById(comment.UserId)}</a> 
         <small> added a comment - </small>        
         <span className="comment-timestamp"
-          title={moment(setDate(comment.CreateDate)).format("MMMM DD YYYY, h:mm:ss a")}
+          title={moment(setDateTime(comment.CreateDate)).format("MMMM DD YYYY, h:mm:ss a")}
         >
-           {moment(setDate(comment.CreateDate)).fromNow()}
+           {moment(setDateTime(comment.CreateDate)).fromNow()}
           {/* {moment(comment.CreateDate).fromNow()} */}
         </span>
         </div>

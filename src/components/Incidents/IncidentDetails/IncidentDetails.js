@@ -11,6 +11,7 @@ import moment from "moment";
 import { incidentsUrls } from "../../../api/apiURLs";
 import IncidentTitle from "./IncidentTitle";
 import IncidentDescription from "./IncidentDescription";
+import {setDateTime} from "../../../helpers/common"
 
 function IncidentDetails({
   match,
@@ -308,11 +309,11 @@ function IncidentDetails({
                         <td>
                           {!editDueDate ? (
                             <p
-                              title={moment(dueDate).format(
+                              title={moment((dueDate)).format(
                                 "MMMM DD YYYY, h:mm a"
                               )}
                             >
-                              {moment(dueDate).fromNow()}
+                              {moment((dueDate)).fromNow()}
                             </p>
                           ) : null}
                           <div className={editDueDate ? "" : "hide"}>

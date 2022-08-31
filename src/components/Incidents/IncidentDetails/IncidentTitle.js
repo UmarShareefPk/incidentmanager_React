@@ -2,6 +2,7 @@ import { React, useEffect, useState, useRef } from "react";
 import { updateIncident } from "../../../store/actions/incidentsActions";
 import { connect } from "react-redux";
 import moment from "moment";
+import {setDateTime} from "../../../helpers/common"
 
 function IncidentTitle({
   incidentData,
@@ -88,13 +89,13 @@ function IncidentTitle({
           
             <span
               className="im-createTime black-text "
-              title={moment(incidentData.CreatedAT).format(
+              title={moment(setDateTime(incidentData.CreatedAT)).format(
                 "MMMM DD YYYY, h:mm:ss a"
               )}
             >
               Created by{""}
               <a className="username"> {getNameById(incidentData.CreatedBy)} </a>
-               {moment(incidentData.CreatedAT).fromNow()}
+               {moment(setDateTime(incidentData.CreatedAT)).fromNow()}
             </span>
           
         </div>
