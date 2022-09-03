@@ -109,10 +109,12 @@ function MostAssignedByUser({MostAssignedIncidentsData, getMostAssignedToUsers})
       }
 
     return (
-      <div className="col s12 m12 l6 widget">
-        <div className="">
-          <h5> Most Assigned To Users</h5>
-          <HighchartsReact highcharts={Highcharts} options={options} />
+      <div className="col s12 m12 l6">
+        <div className="card">
+          <div className="card-content">
+            <h5> Most Assigned To Users</h5>
+            <HighchartsReact highcharts={Highcharts} options={options} />
+          </div>
         </div>
       </div>
     );

@@ -11,7 +11,7 @@
 .widget.chart-widget{
 
 }
-.widget h5{
+.card-content h5{
     /* background: linear-gradient(0deg, rgba(26,35,126,1) 25%, rgba(253,187,45,1) 100%); */
     /* -webkit-background-clip: text;
     -webkit-text-fill-color: transparent; */
@@ -25,7 +25,8 @@
     flex-direction: row;
     justify-content: flex-start;
     align-items: flex-start;
-    margin: 20px 0px;
+   
+    padding-top: 10px;
     padding-bottom: 10px;
     border-bottom: 1px dotted;
 }
@@ -33,29 +34,61 @@
 .time-status{
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     color: indigo;
+    height: 55px;
 }
 
 .incident .timestamp{
     white-space: nowrap;
     font-size: small;
     color: gray;
-}
-.incident .status{
-    white-space: nowrap;
-    font-size: small;
+    color: white;
+    background-color:#5f5858;
+   
+    border-radius:4px;
+
 }
 
+
+.incident .status {
+    white-space: nowrap;
+    font-size: small;
+    text-align:center;
+    padding: 6px;
+    min-width: 80px;
+    color: white;
+    border-radius: 7px
+}
+
+.incident .status.new {
+    /*  background-color: #ecc909;*/
+    background: rgb(183,28,28);
+    background: linear-gradient(90deg, rgba(245,124,0,1) 40%, rgba(255,226,0,1) 100%);
+}
+
+.incident .status.inprogress {
+    background: rgb(183,28,28);
+    background: linear-gradient(90deg, rgba(25,118,210,1) 40%, rgba(0,237,255,1) 100%);
+}
+
+.incident .status.closed {
+    bbackground: rgb(183,28,28);
+    background: linear-gradient(90deg, rgba(67,160,71,1) 40%, rgba(0,255,187,1) 100%);
+}
+
+.incident .status.approved {
+    background: rgb(183,28,28);
+    background: linear-gradient(90deg, rgba(27,94,32,1) 40%, rgba(19,255,0,1) 100%);
+}
 .incident .title {
    display: inline-block;
-   min-width: 250px;
    margin-left: 20px;
 }
 
 .incident .title a{
-    font-size: 16px;   
-    margin-left: 5px;
-    color:  #1A237E;
+    font-size: medium; 
+    color:  slategray !important;
    
 }
 .incident .title:hover{
@@ -84,11 +117,7 @@
     }
       
      
-     .incident .title a{
-         font-size: 12px; 
-         color:  #1A237E;
-        
-     }
+    
  }
  
  /* (tablets, 768px and up) */

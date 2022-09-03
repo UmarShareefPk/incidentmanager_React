@@ -17,16 +17,18 @@ if(Last5IncidentsData == null || Last5IncidentsData.length===0 )
 
     return (
       <div className="col s12 m12 l6">
-        <div className="widget">
-          <h5> Last 5 Incidents</h5>
+        <div className="card">
+          <div className="card-content">
+            <h5> Last 5 Incidents</h5>
 
-          {
-            Last5IncidentsData.map(incident => {
-              return (
-                <Incident key={incident.Id} incident={incident} />
-              )
-            })
-          }
+            {
+              Last5IncidentsData.map(incident => {
+                return (
+                  <Incident key={incident.Id} incident={incident} />
+                )
+              })
+            }
+          </div>
         </div>
       </div>
     );
@@ -65,7 +67,7 @@ const Incident = ({incident, dispatch}) => {
           {moment(incident.CreatedAT).fromNow()}{" "}
         </span>
          
-          <span className="status">
+          <span className={"status " + statusName(incident.Status).replaceAll(" ", "").toLowerCase() }>
             {statusName(incident.Status)}
           </span>
         </div>

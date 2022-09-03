@@ -93,9 +93,13 @@ function OverallWidget({overallWidgetData, getOverallWidgetData}) {
 
 
     return (
-        <div className="col s12 m12 l6 widget chart-widget">
-            <h5> Overall</h5>
-            <HighchartsReact highcharts={Highcharts} options={chartOptions} />
+        <div className="col s12 m12 l6  chart-widget">
+            <div className="card">
+                <div className="card-content">
+                    <h5> Overall</h5>
+                    <HighchartsReact highcharts={Highcharts} options={chartOptions} />
+                </div>
+            </div>
         </div>
     )
 }

@@ -12,14 +12,18 @@ function KPIBar({getKPIData, userId, kpiData}) {
   }, [])
 
  
-    return (     
-      <div className="row kpibar">       
-        <KPI value={kpiData.New} text="NEW" color="new-color" />
-        <KPI value={kpiData.InProgress} text="IN PROGRESS" color="inprogress-color" />
-        <KPI value={kpiData.Closed} text="CLOSED" color="closed-color" />
-        <KPI value={kpiData.Approved} text="APPROVED" color="approved-color" />
-        <KPI value={kpiData.Late} text="LATE" color="late-color"/>
-        <KPI value={kpiData.AssignedToMe} text="ASSINGED TO YOU" color="assignedToMe-color"/>        
+    return (  
+      <div className="card">
+        <div className="card-content">
+          <div className="row">
+            <KPI value={kpiData.New} text="NEW" color="new-color" />
+            <KPI value={kpiData.InProgress} text="IN PROGRESS" color="inprogress-color" />
+            <KPI value={kpiData.Closed} text="CLOSED" color="closed-color" />
+            <KPI value={kpiData.Approved} text="APPROVED" color="approved-color" />
+            <KPI value={kpiData.Late} text="LATE" color="late-color" />
+            <KPI value={kpiData.AssignedToMe} text="ASSINGED TO YOU" color="assignedToMe-color" />
+          </div>
+        </div>
       </div>
     );
 }

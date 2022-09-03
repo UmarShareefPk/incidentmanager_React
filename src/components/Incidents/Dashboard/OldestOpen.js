@@ -15,16 +15,18 @@ if(Oldest5UnresolvedIncidents == null || Oldest5UnresolvedIncidents.length===0 )
 
     return (
       <div className="col s12 m12 l6">
-        <div className="widget">
-          <h5> 5 Oldest Unresolved Incidents</h5>
+        <div className="card">
+          <div className="card-content">
+            <h5> 5 Oldest Unresolved Incidents</h5>
 
-          {
-            Oldest5UnresolvedIncidents.map(incident => {
-              return (
-                <Incident key={incident.Id} incident={incident} />
-              )
-            })
-          }
+            {
+              Oldest5UnresolvedIncidents.map(incident => {
+                return (
+                  <Incident key={incident.Id} incident={incident} />
+                )
+              })
+            }
+          </div>
         </div>
       </div>
     );
@@ -63,7 +65,7 @@ const Incident = ({incident, dispatch}) => {
           {moment(incident.CreatedAT).fromNow()}{" "}
         </span>
          
-          <span className="status">
+          <span className={"status " + statusName(incident.Status).replaceAll(" ", "").toLowerCase() }>
             {statusName(incident.Status)}
           </span>
         </div>
