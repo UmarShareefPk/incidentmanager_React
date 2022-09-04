@@ -58,46 +58,50 @@ import {  useHistory  } from 'react-router-dom'
 
         <section>
           <div className="container">
-            <div className="row">
+          <div className="card">
+        <div className="card-content">
+                <div className="row">
 
-              <div className="col s6 l6">
-                <div className="input-field">                
-                  <input type="text"  value={Search}  onChange={(e) => searchTextChange(e.target.value)} />
-                  <label htmlFor="search">Search</label>
-                </div>
-              </div>
-              
-              <div className="col s6 l6">
-                <div className="input-field">              
-                  <button className="btn green darken-4 right" onClick={()=>addNewClick()} >
-                    <span>Add New</span>
-                    <i className="material-icons right">create</i>
-                  </button>
-                </div>
-              </div>
+                  <div className="col s6 l6">
+                    <div className="input-field">                
+                      <input type="text"  value={Search}  onChange={(e) => searchTextChange(e.target.value)} />
+                      <label htmlFor="search">Search</label>
+                    </div>
+                  </div>
+                  
+                  <div className="col s6 l6">
+                    <div className="input-field">              
+                      <button className="btn green darken-4 right" onClick={()=>addNewClick()} >
+                        <span>Add New</span>
+                        <i className="material-icons right">create</i>
+                      </button>
+                    </div>
+                  </div>
 
-              <div className="col s12 l12">
-                <table className="responsive-table highlight incidentsTbl">
-                  <thead>
-                    <tr className="header" data-target="blue">
-                      <th>First Name</th>
-                      <th>Last Name</th>
-                      <th>Email</th>                      
-                      <th>Created Date</th>                     
-                    </tr>
-                  </thead>
-                  <tbody>
-                  {
-                   !props.Users? null : props.Users.map(user=>{
-                          return (
-                            <User key={user.Id} user= {user} />                          )
-                      })
-                  }           
-                  </tbody>
-                </table>
-                <Pages  TotalRecords={props.TotalUsers} PostsPerPage={PageSize} setPageNumber={setPageNumber} setPageSize={setPageSize} search={Search} />
-              </div>
-            </div>
+                  <div className="col s12 l12">
+                    <table className="responsive-table highlight incidentsTbl">
+                      <thead>
+                        <tr className="header" data-target="blue">
+                          <th>First Name</th>
+                          <th>Last Name</th>
+                          <th>Email</th>                      
+                          <th>Created Date</th>                     
+                        </tr>
+                      </thead>
+                      <tbody>
+                      {
+                      !props.Users? null : props.Users.map(user=>{
+                              return (
+                                <User key={user.Id} user= {user} />                          )
+                          })
+                      }           
+                      </tbody>
+                    </table>
+                    <Pages  TotalRecords={props.TotalUsers} PostsPerPage={PageSize} setPageNumber={setPageNumber} setPageSize={setPageSize} search={Search} />
+                  </div>
+                </div>
+                </div>
+                </div>
           </div>
         </section>
       </>

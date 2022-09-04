@@ -51,7 +51,7 @@ function Comments({
 
   return (
     <>
-      <p className="cooment-title left-align">Comments</p>
+      <p className="comment-title left-align">Comments</p>
       <p className="all-comments-box">
         {!comments ? (
           <h1>No Comments</h1>
@@ -71,41 +71,42 @@ function Comments({
         {/* end of comments loop */}
       </p>
 
-      <h6 className="heading indigo-text darken-4 left-align">Add Comment</h6>
-      <div className="input-field">
-        <textarea
-          id="comment"
-          className="materialize-textarea"
-          value={newComment}
-          onChange={(e) => setNewComment(e.target.value)}
-        ></textarea>
-        <label htmlFor="comment" className="">
-          Comment
-        </label>
-      </div>
-      <div className="file-field input-field">
-        <div className="btn indigo darken-2">
-          <i className="material-icons ">attachment</i>
-          <input type="file" id="attachment" multiple onChange={onFileChange} />
+      <div className="new-comment-box">
+        <h6 className="heading indigo-text darken-4 left-align">Add Comment</h6>
+        <div className="input-field">
+          <textarea
+            id="comment"
+            className="materialize-textarea"
+            value={newComment}
+            onChange={(e) => setNewComment(e.target.value)}
+          ></textarea>
+          <label htmlFor="comment" className="">
+            Comment
+          </label>
         </div>
-        <div className="file-path-wrapper">
-          <input
-            className="file-path validate"
-            ref={newCommentFilesRef}
-            type="text"
-            placeholder="Upload upto 3 files"
-          />
+        <div className="file-field ">
+          <div className="btn indigo darken-2">
+            <i className="material-icons ">attachment</i>
+            <input type="file" id="attachment" multiple onChange={onFileChange} />
+          </div>
+          <div className="file-path-wrapper">
+            <input
+              className="file-path validate"
+              ref={newCommentFilesRef}
+              type="text"
+              placeholder="Upload upto 3 files"
+            />
+          </div>
+          
         </div>
-      </div>
-
-      <div className="input-field center ">
         <button
-          className="left btn green darken-2 updateBtn"
-          onClick={saveComment}
-        >
-          <span>Add</span>
-          <i className="material-icons right">save</i>
-        </button>
+            className="btn green darken-2 updateBtn"
+            onClick={saveComment}
+          >
+            <span>Add</span>
+            <i className="material-icons right">save</i>
+          </button>
+        
       </div>
     </>
   );

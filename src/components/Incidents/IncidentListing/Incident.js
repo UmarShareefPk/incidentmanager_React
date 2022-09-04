@@ -50,7 +50,7 @@ function Incident({incident, dispatch, getUserNameById}) {
         >
           <div className="custom-dropdown">
             <span className="indigo-text darken-4" onClick={() => openIncident(incident.Id)} >
-              {incident.Title.length > 50 ? incident.Title.slice(0, 50) + " ..." : incident.Title}
+              {incident.Title.length > 30 ? incident.Title.slice(0, 30) + " ..." : incident.Title}
             </span>
             <div className="custom-dropdown-content">
               <p> {incident.Title}</p>

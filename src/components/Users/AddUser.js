@@ -76,6 +76,8 @@ import { addNewUser } from '../../store/actions/usersActions';
         <PageActions Title={"Add new User"} />
         <section>
           <div className="container">
+          <div className="card">
+        <div className="card-content">
             <div className="row">
               <div className="col s12 l10 offset-l1">
                 <form>
@@ -154,7 +156,7 @@ import { addNewUser } from '../../store/actions/usersActions';
                   </div>
 
                   
-                  <div className="input-field ">
+                  <div className="input-field save-btns">
                     <button
                       className="btn green darken-2 left"
                       onClick={saveClick}
@@ -174,6 +176,10 @@ import { addNewUser } from '../../store/actions/usersActions';
                 </form>
               </div>
             </div>
+            <br /><br/>
+            </div>
+            </div>
+           
           </div>
         </section>
       </>

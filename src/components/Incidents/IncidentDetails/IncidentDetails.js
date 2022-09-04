@@ -5,13 +5,13 @@ import { connect } from "react-redux";
 import { allUsers } from "../../../store/actions/usersActions";
 import { getIncidentById, updateIncident, deleteAttachment } from "../../../store/actions/incidentsActions";
 import Comments from "./Comments";
-import  AssigneeDropdown  from "../AssigneeDropdown";
+import AssigneeDropdown from "../AssigneeDropdown";
 import "../../../styles/incidentDetails.css";
 import moment from "moment";
 import { incidentsUrls } from "../../../api/apiURLs";
 import IncidentTitle from "./IncidentTitle";
 import IncidentDescription from "./IncidentDescription";
-import {setDateTime} from "../../../helpers/common"
+import { setDateTime } from "../../../helpers/common"
 
 function IncidentDetails({
   match,
@@ -23,24 +23,24 @@ function IncidentDetails({
   updateIncident,
   deleteAttachment,
   IncidentDetailError
-  
-}) { 
+
+}) {
 
   const [assignee, setAssignee] = useState(null);
   const [status, setStatus] = useState('N');
   const [dueDate, setDueDate] = useState('');
   const [startTime, setStartTime] = useState('');
-  
-  const [assigneeName, setAssigneeName] = useState("");  
+
+  const [assigneeName, setAssigneeName] = useState("");
 
 
   const [editAdditionalDetails, setEditAdditionalDetails] = useState(false);
   const [editDueDate, setEditDueDate] = useState(false);
   const [editStartDate, setEditStartDate] = useState(false);
-  
+
   const statusRef = useRef();
-  const dueDateTimeRef= useRef();
-  const dueDateDateRef= useRef();
+  const dueDateTimeRef = useRef();
+  const dueDateDateRef = useRef();
   const startTimeTimeRef = useRef();
   const startTimeDateRef = useRef();
 
@@ -48,23 +48,23 @@ function IncidentDetails({
     setMaterializeCSS();
   }, [incidentData]);
 
-  useEffect(() => {    
-    getIncidentById(match.params.id);   
+  useEffect(() => {
+    getIncidentById(match.params.id);
   }, [match.params.id]); // whenever Id changes get new
 
   useEffect(() => {  // To update Fields
-    if(incidentData){   
-      let currentAssignee =  allAssignees.find((assignee) => {
+    if (incidentData) {
+      let currentAssignee = allAssignees.find((assignee) => {
         return assignee.Id === incidentData.AssignedTo;
       });
-      setAssigneeName(currentAssignee.FirstName + " " + currentAssignee.LastName);  
+      setAssigneeName(currentAssignee.FirstName + " " + currentAssignee.LastName);
       setStatus(incidentData.Status);
       setDueDate(incidentData.DueDate);
       setStartTime(incidentData.StartTime);
     }
   }, [incidentData]);
 
-  const setMaterializeCSS = () => { 
+  const setMaterializeCSS = () => {
     M.FormSelect.init(statusRef.current);
     M.Datepicker.init(startTimeDateRef.current);
     M.Timepicker.init(startTimeTimeRef.current);
@@ -72,97 +72,97 @@ function IncidentDetails({
     M.Timepicker.init(dueDateTimeRef.current);
   }
 
-  const getNameById = (id) => {   
+  const getNameById = (id) => {
     let user = allAssignees.find((assignee) => {
       return assignee.Id === id;
-    });   
-    if(!user){    
+    });
+    if (!user) {
       return id;
     }
     return user.FirstName + " " + user.LastName
   }
- 
+
   const downloadFile = (file) => {
     console.log(file);
     window.open(
-          incidentsUrls.downloadFileUrl
-           + "type=incident"
-           + "&commentId=" + "" 
-           + "&incidentId=" + incidentData.Id
-           + "&filename=" + file.FileName
-           + "&contentType=" + file.ContentType
-    ); 
+      incidentsUrls.downloadFileUrl
+      + "type=incident"
+      + "&commentId=" + ""
+      + "&incidentId=" + incidentData.Id
+      + "&filename=" + file.FileName
+      + "&contentType=" + file.ContentType
+    );
   }
-  
-  const dueDateEditClick = () =>{
+
+  const dueDateEditClick = () => {
     setEditDueDate(!editDueDate);
     setMaterializeCSS();
   }
-  const dueDateEditCancel = () =>{
+  const dueDateEditCancel = () => {
     setEditDueDate(false);
   }
 
-  const dueDateEditSave = () =>{    
-    if ( dueDateDateRef.current.value === "" ||  dueDateTimeRef.current.value === "" ) {
+  const dueDateEditSave = () => {
+    if (dueDateDateRef.current.value === "" || dueDateTimeRef.current.value === "") {
       alert("Please select date and time.");
       setEditDueDate(false);
       return;
-    } 
+    }
 
-    let dueDateTemp  = new Date( dueDateDateRef.current.value + " " + dueDateTimeRef.current.value);
-    dueDateTemp = (dueDateTemp.getMonth() + 1) + "/" + dueDateTemp.getDate() + "/" +  dueDateTemp.getFullYear() 
-                + " " + dueDateTemp.getHours() + ":" + dueDateTemp.getMinutes() + ":" + dueDateTemp.getSeconds(); 
-      updateIncidentByField("DueDate" , dueDateTemp);     
-      setEditDueDate(false);
-      setDueDate(dueDateTemp);
-   }
+    let dueDateTemp = new Date(dueDateDateRef.current.value + " " + dueDateTimeRef.current.value);
+    dueDateTemp = (dueDateTemp.getMonth() + 1) + "/" + dueDateTemp.getDate() + "/" + dueDateTemp.getFullYear()
+      + " " + dueDateTemp.getHours() + ":" + dueDateTemp.getMinutes() + ":" + dueDateTemp.getSeconds();
+    updateIncidentByField("DueDate", dueDateTemp);
+    setEditDueDate(false);
+    setDueDate(dueDateTemp);
+  }
 
-  const startDateEditClick = () =>{
+  const startDateEditClick = () => {
     setEditStartDate(!editStartDate);
     setMaterializeCSS();
   }
-  const startDateEditCancel = () =>{
+  const startDateEditCancel = () => {
     setEditStartDate(false);
   }
 
-  const startDateEditSave = () =>{
-  
-   if ( startTimeDateRef.current.value === "" ||  startTimeTimeRef.current.value === "" ) {
-    alert("Please select date and time.");
-    setEditStartDate(false);
-    return;
-  } 
+  const startDateEditSave = () => {
 
-  let startTimeTemp  = new Date( startTimeDateRef.current.value + " " + startTimeTimeRef.current.value);
-  startTimeTemp = (startTimeTemp.getMonth() + 1) + "/" + startTimeTemp.getDate() + "/" +  startTimeTemp.getFullYear() 
-                + " " + startTimeTemp.getHours() + ":" + startTimeTemp.getMinutes() + ":" + startTimeTemp.getSeconds();  
-    updateIncidentByField("StartTime" , startTimeTemp);   
-    setEditStartDate(false); 
-    setStartTime(startTimeTemp);  
+    if (startTimeDateRef.current.value === "" || startTimeTimeRef.current.value === "") {
+      alert("Please select date and time.");
+      setEditStartDate(false);
+      return;
+    }
+
+    let startTimeTemp = new Date(startTimeDateRef.current.value + " " + startTimeTimeRef.current.value);
+    startTimeTemp = (startTimeTemp.getMonth() + 1) + "/" + startTimeTemp.getDate() + "/" + startTimeTemp.getFullYear()
+      + " " + startTimeTemp.getHours() + ":" + startTimeTemp.getMinutes() + ":" + startTimeTemp.getSeconds();
+    updateIncidentByField("StartTime", startTimeTemp);
+    setEditStartDate(false);
+    setStartTime(startTimeTemp);
   }
 
-  const updateIncidentByField = (field , value) => {    
+  const updateIncidentByField = (field, value) => {
     let parameters = {
-      IncidentId : incidentData.Id,
-      Parameter : field,
-      Value : value,
-      UserId : userId
+      IncidentId: incidentData.Id,
+      Parameter: field,
+      Value: value,
+      UserId: userId
     };
     updateIncident(parameters); // Calling action here
   }
 
   const statusChanged = (e) => {
     setStatus(e.target.value);
-    updateIncidentByField("Status" , e.target.value);
+    updateIncidentByField("Status", e.target.value);
   }
 
-  const deleteIncidentAttachment = (file) => {        
-    if(window.confirm("Are you sure you want to delete this attachment." + file.FileName)){
-      deleteAttachment("incicent" , userId, incidentData.Id , file);
-    }      
-   }
+  const deleteIncidentAttachment = (file) => {
+    if (window.confirm("Are you sure you want to delete this attachment." + file.FileName)) {
+      deleteAttachment("incicent", userId, incidentData.Id, file);
+    }
+  }
 
-   if(IncidentDetailError !== ""){
+  if (IncidentDetailError !== "") {
     return (
       <div className="container">
         <h1 className="center red-text">Error</h1>
@@ -170,23 +170,23 @@ function IncidentDetails({
         <p className="center">Please check your network and try loging back.</p>
       </div>
     )
-   }
+  }
 
-  if (!incidentData || !allAssignees) {    
-    return  ( 
-     
-              <div className="preloader-wrapper container big active page-loader">
-                <div className="spinner-layer spinner-blue-only">
-                  <div className="circle-clipper left">
-                    <div className="circle"></div>
-                  </div><div className="gap-patch">
-                    <div className="circle"></div>
-                  </div><div className="circle-clipper right">
-                    <div className="circle"></div>
-                  </div>
-                </div>
-            </div>
-          );
+  if (!incidentData || !allAssignees) {
+    return (
+
+      <div className="preloader-wrapper container big active page-loader">
+        <div className="spinner-layer spinner-blue-only">
+          <div className="circle-clipper left">
+            <div className="circle"></div>
+          </div><div className="gap-patch">
+            <div className="circle"></div>
+          </div><div className="circle-clipper right">
+            <div className="circle"></div>
+          </div>
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -195,18 +195,24 @@ function IncidentDetails({
       <PageActions Title={"Incident Details"} />
       <section>
         <div className="container">
+          <div className="card">
+            <div className="card-content">
+              <div className="row">
+                <div className="col s12 l12 ">
+                  <IncidentTitle getNameById={getNameById} />
+                </div>
+              </div>
+            </div>
+          </div>
+
           <div className="row">
-            <div className="col s12 l12 ">
-            <IncidentTitle getNameById={getNameById} />
-             <div className="row">
-                <div className="col s12 l6">
+            <div className="col s12 l6">
+              <div className="card">
+                <div className="card-content">
                   <IncidentDescription type="description" />
                   <IncidentDescription type="additionaldata" />
 
                   <p className="heading left-align indigo-text darken-4">
-                    {" "}
-                    {/*  Attachments */}
-                    {/* <i className="material-icons inline-icon">attachment</i> */}
                     Attachments:
                   </p>
 
@@ -254,9 +260,14 @@ function IncidentDetails({
                         );
                       })}
                   </div>
-                  </div>
-                  <div className="col s12 l5 offset-l1  ID-dropdowns">
-                  <table>
+                </div>
+              </div>
+            </div>
+
+            <div className="col s12 l6   ID-dropdowns">
+              <div className="card">
+                <div className="card-content">
+                  <table className="fields-table">
                     <tbody>
                       <tr>
                         <td>
@@ -264,12 +275,12 @@ function IncidentDetails({
                             Assignee
                           </p>
                         </td>
-                        <td>                         
+                        <td>
                           <AssigneeDropdown
                             updateIncidentByField={updateIncidentByField}
                             setAssignee={setAssignee}
-                            assigneeName = {assigneeName}
-                            setAssigneeName = {setAssigneeName}
+                            assigneeName={assigneeName}
+                            setAssigneeName={setAssigneeName}
                           />
                         </td>
                       </tr>
@@ -429,11 +440,17 @@ function IncidentDetails({
                       </tr>
                     </tbody>
                   </table>
-                  </div>
-                  </div>  
+                </div>
+              </div>
+            </div>
 
-              <div className="row">
-                <div className="col s12 l6 ">
+          </div>
+
+
+          <div className="row">
+            <div className="col s12 l6 ">
+              <div className="card">
+                <div className="card-content">
                   <Comments
                     userId={userId}
                     incidentId={incidentData.Id}
@@ -441,10 +458,11 @@ function IncidentDetails({
                     getNameById={getNameById}
                   />
                 </div>
-              </div>       
-              
+              </div>
             </div>
           </div>
+
+
         </div>
       </section>
     </>
@@ -455,17 +473,17 @@ const mapStateToProps = (state) => {
   return {
     allAssignees: state.users.users,
     incidentData: state.incidents.IncidentSelected,
-    userId :state.userLogin.userId,  // logged in User Id  
-    IncidentDetailError : state.incidents.IncidentDetailError     // if api ERROR
+    userId: state.userLogin.userId,  // logged in User Id  
+    IncidentDetailError: state.incidents.IncidentDetailError     // if api ERROR
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     getAllAssignees: () => dispatch(allUsers()),
-    getIncidentById: (incidentId) => dispatch(getIncidentById(incidentId)), 
-    updateIncident: (parameters) => dispatch(updateIncident(parameters)),   
-    deleteAttachment : (type, userid, incidentId , file) => dispatch(deleteAttachment(type, userid, incidentId ,file))    
+    getIncidentById: (incidentId) => dispatch(getIncidentById(incidentId)),
+    updateIncident: (parameters) => dispatch(updateIncident(parameters)),
+    deleteAttachment: (type, userid, incidentId, file) => dispatch(deleteAttachment(type, userid, incidentId, file))
   };
 };
 

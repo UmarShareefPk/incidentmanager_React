@@ -3,6 +3,10 @@ body{
   min-height: 100vh;
 }
 
+.card-content .row{
+  margin-bottom: 0px;
+}
+
 .App {
   text-align: center;
 }
@@ -44,7 +48,11 @@ body{
 }
 
 .card .card-content{
-  padding: 10px;;
+  padding: 15px;;
+}
+
+.save-btns button{
+  margin-right: 5px;
 }
 
 @keyframes App-logo-spin {

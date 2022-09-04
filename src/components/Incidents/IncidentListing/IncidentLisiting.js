@@ -75,47 +75,51 @@ import {  useHistory  } from 'react-router-dom';
         {/* { props.TotalIncidents === 0? <h1>Zero</h1> : null} */}
         <section>
           <div className="container">
-            <div className="row">
+            <div className="card">
+              <div className="card-content">
+                <div className="row">
 
-              <div className="col s6 l6">
-                <div className="input-field">                
-                  <input type="text" id="search" value={Search}  onChange={(e) => searchTextChange(e.target.value)} />
-                  <label htmlFor="search">Search</label>
-                </div>
-              </div>
-              
-              <div className="col s6 l6">
-                <div className="input-field">              
-                  <button className="btn green darken-4 right" onClick={()=>addNewClick()} >
-                    <span>Add New</span>
-                    <i className="material-icons right">create</i>
-                  </button>
-                </div>
-              </div>
+                  <div className="col s6 l6">
+                    <div className="input-field">
+                      <input type="text" id="search" value={Search} onChange={(e) => searchTextChange(e.target.value)} />
+                      <label htmlFor="search">Search</label>
+                    </div>
+                  </div>
 
-              <div className="col s12 l12">
-                <table className="responsive-table highlight incidentsTbl">
-                  <thead>
-                    <tr className="header" data-target="blue">
-                      <th>Title</th>
-                      <th>Description</th>
-                      <th>Assigned TO</th>
-                      <th>Created By</th>
-                      <th>Created Date</th>
-                      <th>Due Date</th>
-                      <th>Status</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                  {
-                      props.Incidents.map(incident=>{
-                          return (
-                            <Incident key={incident.Id} incident= {incident} getUserNameById={getUserNameById} />                          )
-                      })
-                  }           
-                  </tbody>
-                </table>
-                <Pages  TotalRecords={props.TotalIncidents} PostsPerPage={PageSize} setPageNumber={setPageNumber} setPageSize={setPageSize} search={Search} />
+                  <div className="col s6 l6">
+                    <div className="input-field">
+                      <button className="btn green darken-4 right" onClick={() => addNewClick()} >
+                        <span>Add New</span>
+                        <i className="material-icons right">create</i>
+                      </button>
+                    </div>
+                  </div>
+
+                  <div className="col s12 l12">
+                    <table className="responsive-table highlight incidentsTbl">
+                      <thead>
+                        <tr className="header" data-target="blue">
+                          <th>Title</th>
+                          <th>Description</th>
+                          <th>Assigned TO</th>
+                          <th>Created By</th>
+                          <th>Created Date</th>
+                          <th>Due Date</th>
+                          <th>Status</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {
+                          props.Incidents.map(incident => {
+                            return (
+                              <Incident key={incident.Id} incident={incident} getUserNameById={getUserNameById} />)
+                          })
+                        }
+                      </tbody>
+                    </table>
+                    <Pages TotalRecords={props.TotalIncidents} PostsPerPage={PageSize} setPageNumber={setPageNumber} setPageSize={setPageSize} search={Search} />
+                  </div>
+                </div>
               </div>
             </div>
           </div>

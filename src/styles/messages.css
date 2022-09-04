@@ -1,17 +1,14 @@
 
 
 .user-toogle{
-
 width: fit-content;
+display: flex;
+align-items: center;
 text-align: start;
-padding: 20px 0;
-margin-top: 30vh;
 font-size: small;
-border:1px solid;
-border-radius: 15%;
 }
 .user-toogle span{
-    writing-mode: vertical-rl;
+    /* writing-mode: vertical-rl; */
     text-orientation: mixed;
     font-size: small;
     color: blue;
@@ -24,7 +21,7 @@ border-radius: 15%;
 
 
 .messages-window .users {
-    border-right: 0.5px solid slategray;
+    /* border-right: 0.5px solid slategray; */
     cursor: pointer;
 }
 

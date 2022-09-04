@@ -151,6 +151,8 @@ import { Redirect } from 'react-router-dom'
         <PageActions Title={"Add new Incident"} />
         <section>
           <div className="container">
+          <div className="card">
+        <div className="card-content">
             <div className="row">
               <div className="col s12 l10 offset-l1">
                 <form>
@@ -311,9 +313,9 @@ import { Redirect } from 'react-router-dom'
                   </div>
 
                   
-                  <div className="input-field ">
+                  <div className="input-field save-btns" >
                     <button
-                      className="btn green darken-2 left"
+                      className="btn green darken-2 left"                      
                       onClick={saveClick}
                     >
                       <span>Save</span>
@@ -321,7 +323,7 @@ import { Redirect } from 'react-router-dom'
                     </button>
 
                     <button
-                      className="btn yellow darken-4 left"
+                      className="btn yellow darken-4 left m-10"
                       onClick={cancelClick}
                     >
                       <span>Cancel</span>
@@ -330,6 +332,9 @@ import { Redirect } from 'react-router-dom'
                   </div>
                 </form>
               </div>
+            </div>
+            <br /><br/>
+            </div>
             </div>
           </div>
         </section>

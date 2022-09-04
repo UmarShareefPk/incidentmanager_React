@@ -83,7 +83,7 @@ function Comment({
   }
 
   return (
-    <div className="">
+    <div className="comment-box">
       <div className="darkslategrayText comment-header">
         <div>
         <a className="username">{getNameById(comment.UserId)}</a> 

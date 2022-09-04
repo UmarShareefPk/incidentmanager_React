@@ -44,6 +44,8 @@ function ComposeMessage({
     }
 
     return (
+        <div className="card">
+        <div className="card-content">
         <div className="compose-message-container">    
             <h5>Compose New Message</h5>
                     <form action="#">
@@ -77,6 +79,8 @@ function ComposeMessage({
                     </button>
                 </div>
                     </form>
+        </div>
+        </div>
         </div>
     )
 }

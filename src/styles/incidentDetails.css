@@ -108,18 +108,33 @@ span.im-createTime {
   color: slategray;
 }
 
+/**********  Fields  *********/
+
+.fields-table{
+  line-height: 3;
+}
+.fields-table .heading{
+  font-size: medium;
+  white-space: nowrap;
+}
+
 /************** Comment **************/
-.cooment-title {
+.comment-title {
   color: #1A237E;
   font-size: larger;
   font-weight: bold;
+  margin-bottom: 30px !important;
 }
 
 .all-comments-box {
   max-height: 70vh;
   overflow-y: scroll;
+  padding: 0px 10px;
 }
 
+.comment-box{
+  margin-bottom: 20px;
+}
 .comment-text {
   text-align: center;
 }
@@ -153,6 +168,7 @@ span.im-createTime {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 10px;
 }
 
 .comment-timestamp {
@@ -180,10 +196,15 @@ span.im-createTime {
   border-top: #efefef solid 1px;
 }
 
-
-
-
-
 .search-assignee-box {
   padding: 5px 10px;
+}
+
+.new-comment-box{
+text-align: left;
+  height: fit-content;
+}
+.new-comment-box button{
+  margin-top: 10px;
+text-align: right;
 }
