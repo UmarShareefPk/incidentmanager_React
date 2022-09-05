@@ -1,6 +1,7 @@
 import moment from "moment";
 
 export const setDateTime = (date) => {
+    return date;
     try{
         let newDate = moment(date).format("YYYY-MM-DD h:mm:ss A");
         newDate = new Date(newDate + " UTC");    
