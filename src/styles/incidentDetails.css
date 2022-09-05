@@ -172,7 +172,7 @@ span.im-createTime {
 }
 
 .comment-timestamp {
-  font-size: small;
+  font-size: x-small;
 }
 
 .comment-actions i {
@@ -187,7 +187,7 @@ span.im-createTime {
 .username {
   /* background-color: #1A237E; */
   color: #1A237E;
-  font-size: small;
+  font-size: x-small;
   font-weight: bold;
 }
 

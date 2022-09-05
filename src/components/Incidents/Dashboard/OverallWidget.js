@@ -45,38 +45,38 @@ function OverallWidget({overallWidgetData, getOverallWidgetData}) {
                     { name: 'New', y: overallWidgetData.New,   color: {
                         linearGradient:  [0, 0, 0, 300],
                         stops: [
-                            [0, 'rgba(245,124,0,1)'],
-                            [1, 'rgba(255,226,0,1)']
+                            [0, 'rgba(219,170,62,1)'],
+                            [1, 'rgba(228,184,117,1)']
                         ]
                     } },
                     //{ name: 'In Progress', y: overallWidgetData.InProgress, color: '#1976D2' },
                     { name: 'In Progress', y: overallWidgetData.InProgress, color: {
                         linearGradient:  [0, 0, 0, 300],
                         stops: [
-                            [0, 'rgba(25,118,210,1)'],
-                            [1, 'rgba(0,237,255,1)']
+                            [0, 'rgba(0,113,255,1)'],
+                            [1, 'rgba(85,182,224,1)']
                         ]
                     } },
                     { name: 'Closed', y: overallWidgetData.Closed,  color: {
                         linearGradient:  [0, 0, 0, 300],
                         stops: [
-                            [0, 'rgba(67,160,71,1)'],
-                            [1, 'rgba(0,255,187,1)']
+                            [0, 'rgba(69,138,25,1)'],
+                            [1, 'rgba(122,199,79,1)']
                         ]
                     } },
                    // { name: 'Closed', y: overallWidgetData.Closed, color: '#43A047' },
                     { name: 'Approved', y: overallWidgetData.Approved,  color: {
                         linearGradient:  [0, 0, 0, 300],
                         stops: [
-                            [0, 'rgba(27,94,32,1)'],
-                            [1, 'rgba(19,255,0,1)']
+                            [0, 'rgba(15,94,7,1)'],
+                            [1, 'rgba(79,196,124,1)']
                         ]
                     } },
                     { name: 'Late', y: overallWidgetData.Late,  color: {
                         linearGradient:  [0, 0, 0, 300],
                         stops: [
-                            [0, 'rgba(183,28,28,1)'],
-                            [1, 'rgba(255,140,0,1)']
+                            [0, 'rgba(94,12,7,1)'],
+                            [1, 'rgba(173,70,62,1)']
                         ]
                     } }
 

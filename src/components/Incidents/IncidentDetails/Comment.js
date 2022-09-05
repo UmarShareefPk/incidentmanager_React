@@ -87,7 +87,7 @@ function Comment({
       <div className="darkslategrayText comment-header">
         <div>
         <a className="username">{getNameById(comment.UserId)}</a> 
-        <small> added a comment - </small>        
+        <small> commented - </small>        
         <span className="comment-timestamp"
           title={moment(setDateTime(comment.CreateDate)).format("MMMM DD YYYY, h:mm:ss a")}
         >
