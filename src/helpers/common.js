@@ -8,7 +8,7 @@ export const setDateTime = (date) => {
     }
     catch(err){
             console.log("Error in dates", err);
-            return date.toString();
+            return date;
     }
    
 }
