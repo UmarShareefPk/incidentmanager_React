@@ -9,7 +9,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            background-color: #1A237E;
+            background: radial-gradient(circle, rgba(26,35,126,1) 0%, rgba(0,0,0,1) 100%);;
         }
 
         .row .col.login-logo-col {

@@ -3,8 +3,7 @@
 }
 
 .nav-wrapper{
-    background: rgb(26,35,126);
-background: radial-gradient(circle, rgba(26,35,126,1) 85%, rgba(70,221,252,1) 100%);
+  background: radial-gradient(circle, rgba(26,35,126,1) 0%, rgba(0,0,0,1) 100%);
 }
 
 nav ul li span.badge.notification-badge{
