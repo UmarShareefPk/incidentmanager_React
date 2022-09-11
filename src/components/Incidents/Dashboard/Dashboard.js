@@ -20,13 +20,14 @@ import FiveOldestOpenIncidents from './OldestOpen';
           <div className="row">
             <OverallWidget />
             <MostAssignedByUser />
+            <LastFive />
+           <FiveOldestOpenIncidents />
           </div>
 
-          <div className="row">          
-           <LastFive />
-           <FiveOldestOpenIncidents />
-           {/* <DayByDayCount /> */}
-          </div>
+          {/* <div className="row">          
+      
+           <DayByDayCount />
+          </div> */}
 
         </div>
       </div>

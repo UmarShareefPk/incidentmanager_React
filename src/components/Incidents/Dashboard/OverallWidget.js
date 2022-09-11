@@ -43,40 +43,40 @@ function OverallWidget({overallWidgetData, getOverallWidgetData}) {
                 data: [
                     //{ name: 'New', y: overallWidgetData.New, color: '#F57C00' },
                     { name: 'New', y: overallWidgetData.New,   color: {
-                        linearGradient:  [0, 0, 0, 300],
+                        radialGradient: [0, 0, 0, 300],
                         stops: [
-                            [0, 'rgba(219,170,62,1)'],
-                            [1, 'rgba(228,184,117,1)']
+                          [0, 'rgba(245,124,0,1)'],
+                          [1, 'rgba(255,226,0,1)']
                         ]
                     } },
                     //{ name: 'In Progress', y: overallWidgetData.InProgress, color: '#1976D2' },
                     { name: 'In Progress', y: overallWidgetData.InProgress, color: {
-                        linearGradient:  [0, 0, 0, 300],
+                        radialGradient: [0, 0, 0, 300],
                         stops: [
-                            [0, 'rgba(0,113,255,1)'],
-                            [1, 'rgba(85,182,224,1)']
+                            [0, 'rgba(113, 166, 247, 1)'],
+                            [1, 'rgba(48, 128, 204, 1)']
                         ]
                     } },
                     { name: 'Closed', y: overallWidgetData.Closed,  color: {
-                        linearGradient:  [0, 0, 0, 300],
+                        radialGradient: [0, 0, 0, 300],
                         stops: [
-                            [0, 'rgba(69,138,25,1)'],
-                            [1, 'rgba(122,199,79,1)']
+                            [0, 'rgba(66, 194, 56, 1)'],
+                            [1, 'rgba(113, 200, 120, 1)']
                         ]
                     } },
                    // { name: 'Closed', y: overallWidgetData.Closed, color: '#43A047' },
                     { name: 'Approved', y: overallWidgetData.Approved,  color: {
-                        linearGradient:  [0, 0, 0, 300],
+                        radialGradient:  [0, 0, 0, 300],
                         stops: [
-                            [0, 'rgba(15,94,7,1)'],
-                            [1, 'rgba(79,196,124,1)']
+                            [0, 'rgba(12, 99, 5, 1)'],
+                            [1, 'rgba(14, 131, 22, 1)']
                         ]
                     } },
                     { name: 'Late', y: overallWidgetData.Late,  color: {
-                        linearGradient:  [0, 0, 0, 300],
+                        radialGradient:  [0, 0, 0, 300],
                         stops: [
-                            [0, 'rgba(94,12,7,1)'],
-                            [1, 'rgba(173,70,62,1)']
+                            [0, 'rgba(218, 30, 28, 1)'],
+                            [1, 'rgba(131, 55, 14, 1)']
                         ]
                     } }
 

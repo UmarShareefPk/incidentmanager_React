@@ -50,7 +50,7 @@ function Incident({incident, dispatch, getUserNameById}) {
         >
           <div className="custom-dropdown">
             <span className="indigo-text darken-4" onClick={() => openIncident(incident.Id)} >
-              {incident.Title.length > 30 ? incident.Title.slice(0, 30) + " ..." : incident.Title}
+              {incident.Title.length > 20 ? incident.Title.slice(0, 20) + " ..." : incident.Title}
             </span>
             <div className="custom-dropdown-content">
               <p> {incident.Title}</p>
@@ -64,7 +64,7 @@ function Incident({incident, dispatch, getUserNameById}) {
         >
           <div className="custom-dropdown">
             <span >
-               {incident.Description.length > 30 ? incident.Description.slice(0,30) + " ..." : incident.Description }
+               {incident.Description.length > 20 ? incident.Description.slice(0,20) + " ..." : incident.Description }
             </span>
             <div className="custom-dropdown-content">
               <p> {incident.Description}</p>
@@ -76,7 +76,11 @@ function Incident({incident, dispatch, getUserNameById}) {
         <td>{getUserNameById(incident.CreatedBy)}</td>
         <td><span title= {moment(incident.CreatedAT).format("MMMM DD YYYY, h:mm:ss a")}>{moment(incident.CreatedAT).fromNow() } </span></td>
         <td><span className={dueDateClass} title= {moment(incident.DueDate).format("MMMM DD YYYY, h:mm:ss a")}>{moment(incident.DueDate).fromNow() } </span></td>
-        <td>{statusName(incident.Status)}</td>
+        <td >
+            <div class={"status " + statusName(incident.Status).replace(' ', '').toLowerCase() } >
+               {statusName(incident.Status)}
+            </div>
+        </td>
       </tr>
     );
 }

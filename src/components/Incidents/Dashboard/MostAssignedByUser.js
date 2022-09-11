@@ -14,6 +14,13 @@ function MostAssignedByUser({MostAssignedIncidentsData, getMostAssignedToUsers})
    return (<h3>loading..</h3>);
 
   let data = [];
+  let _color = {
+    linearGradient: [0, 0, 0, 300],
+    stops: [
+      [0, 'rgba(6,131,181,1)'],
+      [1, 'rgba(7,65,105,1)']
+    ]
+  }
 
   try{
     data =  [
@@ -23,41 +30,11 @@ function MostAssignedByUser({MostAssignedIncidentsData, getMostAssignedToUsers})
       // { name: MostAssignedIncidentsData[3].Name, y: parseInt(MostAssignedIncidentsData[3].Count), color:'#E57373' },
       // { name: MostAssignedIncidentsData[4].Name, y: parseInt(MostAssignedIncidentsData[4].Count), color:'#FFCDD2' }  
       
-      { name: MostAssignedIncidentsData[0].Name, y: parseInt(MostAssignedIncidentsData[0].Count),  color: {
-        linearGradient:  [0, 0, 0, 300],
-        stops: [
-            [0, 'rgba(0,113,255,1)'],
-            [1, 'rgba(85,182,224,1)']
-        ]
-      } },
-      { name: MostAssignedIncidentsData[1].Name, y: parseInt(MostAssignedIncidentsData[1].Count),color: {
-        linearGradient:  [0, 0, 0, 300],
-        stops: [
-            [0, 'rgba(0,113,255,1)'],
-            [1, 'rgba(85,182,224,1)']
-        ]
-      }  },
-      { name: MostAssignedIncidentsData[2].Name, y: parseInt(MostAssignedIncidentsData[2].Count), color: {
-        linearGradient:  [0, 0, 0, 300],
-        stops: [
-            [0, 'rgba(0,113,255,1)'],
-            [1, 'rgba(85,182,224,1)']
-        ]
-      }  },
-      { name: MostAssignedIncidentsData[3].Name, y: parseInt(MostAssignedIncidentsData[3].Count), color: {
-        linearGradient:  [0, 0, 0, 300],
-        stops: [
-            [0, 'rgba(0,113,255,1)'],
-            [1, 'rgba(85,182,224,1)']
-        ]
-      }  },
-      { name: MostAssignedIncidentsData[4].Name, y: parseInt(MostAssignedIncidentsData[4].Count), color: {
-        linearGradient:  [0, 0, 0, 300],
-        stops: [
-            [0, 'rgba(0,113,255,1)'],
-            [1, 'rgba(85,182,224,1)']
-        ]
-      }  }  
+      { name: MostAssignedIncidentsData[0].Name, y: parseInt(MostAssignedIncidentsData[0].Count),  color: _color },
+      { name: MostAssignedIncidentsData[1].Name, y: parseInt(MostAssignedIncidentsData[1].Count),color: _color },
+      { name: MostAssignedIncidentsData[2].Name, y: parseInt(MostAssignedIncidentsData[2].Count), color: _color  },
+      { name: MostAssignedIncidentsData[3].Name, y: parseInt(MostAssignedIncidentsData[3].Count), color:_color },
+      { name: MostAssignedIncidentsData[4].Name, y: parseInt(MostAssignedIncidentsData[4].Count), color: _color }  
   ];
 
   }

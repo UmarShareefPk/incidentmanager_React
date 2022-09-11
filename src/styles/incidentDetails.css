@@ -71,11 +71,13 @@ li>a,
 .title-container {
   text-align: left;
   font-size: larger;
+  font-weight: bold;
 }
 
 .actions-icon-title {
   cursor: pointer;
   font-size: large;
+
   margin-right: 3px;
   ;
 }

@@ -49,23 +49,19 @@
 
 .incident .status.new {
     /*  background-color: #ecc909;*/
-    background: rgb(255,165,0);
-    background: linear-gradient(90deg, rgba(255,165,0,1) 0%, rgba(212,212,26,1) 100%);
+    background: var( --new-bg-color);
 }
 
 .incident .status.inprogress {
-    background: rgb(0,113,255);
-    background: linear-gradient(90deg, rgba(0,113,255,1) 0%, rgba(85,182,224,1) 100%);
+    background: var(--inprogress-bg-color);
 }
 
 .incident .status.closed {
-    background: rgb(69,138,25);
-    background: linear-gradient(90deg, rgba(69,138,25,1) 0%, rgba(122,199,79,1) 100%);;
+    background: var(--closed-bg-color);
 }
 
 .incident .status.approved {
-    background: rgb(15,94,7);
-    background: linear-gradient(90deg, rgba(15,94,7,1) 0%, rgba(79,196,124,1) 100%);
+    background: var(--approved-bg-color);
 }
 .incident .title {
    display: inline-block;

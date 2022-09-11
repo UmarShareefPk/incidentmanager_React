@@ -24,36 +24,30 @@
     
 }
 
-.new-color{
-    background: rgb(219,170,62);
-    background: linear-gradient(90deg, rgba(219,170,62,1) 0%, rgba(228,184,117,1) 100%);
-}
-
-.inprogress-color{
-    background: rgb(0,113,255);
-    background: linear-gradient(90deg, rgba(0,113,255,1) 0%, rgba(85,182,224,1) 100%);
-}
-
-.closed-color{
-    background: rgb(69,138,25);
-    background: linear-gradient(90deg, rgba(69,138,25,1) 0%, rgba(122,199,79,1) 100%);;
-}
-
-.approved-color{
-    background: rgb(15,94,7);
-    background: linear-gradient(90deg, rgba(15,94,7,1) 0%, rgba(79,196,124,1) 100%);
-}
-
-.late-color{
-    background: rgb(94,12,7);
-    background: linear-gradient(90deg, rgba(94,12,7,1) 0%, rgba(173,70,62,1) 100%);
-}
-
-.assignedToMe-color{
-    background: rgb(7,7,94);
-    background: linear-gradient(90deg, rgba(7,7,94,1) 0%, rgba(65,69,185,1) 100%);
-}
-
+.new-color {
+    background: var( --new-bg-color);
+  }
+  
+  .inprogress-color {
+    background: var(--inprogress-bg-color);
+  }
+  
+  .closed-color {
+    background: var(--closed-bg-color);
+  }
+  
+  .approved-color {
+    background: var(--approved-bg-color);
+  }
+  
+  .late-color {
+    background: var(--late-bg-color);
+  }
+  
+  .assignedToMe-color {
+    background: var(--assignedToMe-bg-color);
+  }
+  
 
 
 /* Small devices  */

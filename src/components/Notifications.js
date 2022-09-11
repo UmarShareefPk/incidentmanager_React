@@ -66,7 +66,7 @@ import moment from "moment";
          <a
            ref={ddlNotiRef}
            href="#dropdown1"
-           className="btn-floating z-depth-0 indigo darken-4 dropdown-trigger badge-a"
+           className="btn-floating z-depth-0  dropdown-trigger badge-a"
            data-target="dropdownNotifications"
          >
            <i className="material-icons">notifications</i>

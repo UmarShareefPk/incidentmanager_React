@@ -6,6 +6,11 @@ nav .badge{
     z-index: 1;
     }
 
+    table tr td{
+        font-size: small;
+        white-space: nowrap;
+        
+    }
 
     .pagination li.active {
         background-color: #1A237E;
@@ -62,6 +67,33 @@ nav .badge{
 .tbl-title:hover {
    text-decoration: underline;
 }
+
+
+td .status{
+    white-space: nowrap;
+    font-size: small;
+    text-align: center;
+    padding: 5px;
+    min-width: 70px;
+    color: white;
+    border-radius: 7px;
+  }
+
+.status.new {
+    background: var( --new-bg-color);
+  }
+  
+   .status.inprogress {
+    background: var(--inprogress-bg-color);
+  }
+  
+   .status.closed {
+    background: var(--closed-bg-color);
+  }
+  
+   .status.approved {
+    background: var(--approved-bg-color);
+  }
 
 
 /* Small devices  */
