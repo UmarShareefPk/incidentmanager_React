@@ -1,10 +1,10 @@
 :root {
-  --new-bg-color: radial-gradient(circle, rgba(222,184,68,1) 38%, rgba(250,196,19,1) 100%);
-  --inprogress-bg-color: radial-gradient(circle, rgba(113,166,247,1) 0%, rgba(48,128,204,1) 100%);
-  --closed-bg-color: radial-gradient(circle, rgba(66,194,56,1) 39%, rgba(113,200,120,1) 100%);
-  --approved-bg-color: radial-gradient(circle, rgba(12,99,5,1) 0%, rgba(14,131,22,1) 100%);
-  --late-bg-color: radial-gradient(circle, rgba(218,30,28,1) 0%, rgba(131,55,14,1) 100%);
-  --assignedToMe-bg-color: radial-gradient(circle, rgba(28,55,218,1) 0%, rgba(17,24,112,1) 100%);
+  --new-bg-color: radial-gradient(circle, rgba(196,189,91,1) 0%, rgba(199,190,52,1) 99%);
+  --inprogress-bg-color: radial-gradient(circle, rgba(91,159,196,1) 0%, rgba(52,142,199,1) 99%);
+  --closed-bg-color: radial-gradient(circle, rgba(76,177,94,1) 0%, rgba(78,200,94,1) 99%);
+  --approved-bg-color: radial-gradient(circle, rgba(58,131,68,1) 0%, rgba(45,105,56,1) 100%);
+  --late-bg-color: radial-gradient(circle, rgba(199,69,65,1) 0%, rgba(153,47,55,1) 100%);
+  --assignedToMe-bg-color: radial-gradient(circle, rgba(42,68,156,1) 0%, rgba(28,35,125,1) 100%);
 }
 
 
@@ -13,9 +13,69 @@ body{
   min-height: 100vh;
 }
 
+
+::-webkit-scrollbar {
+  width: 5px;
+   height: 5px; 
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px white;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: black;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: darkslategray;
+}
+
+
+.custom-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.custom-dropdown-content {
+  display: none;
+  position: absolute;
+  /* background-color: #f9f9f9; */
+  background-color: #1A237E; 
+  color:white;
+  font-size: small;
+  min-width:300px;
+  max-width: 300px;
+  white-space:pre-wrap;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  padding: 25px 15px;
+  z-index: 2;
+  border-radius: 10px;
+}
+
+.custom-dropdown:hover .custom-dropdown-content {
+  display: block;
+}
+
 .card-content .row{
   margin-bottom: 0px;
 }
+
+
+.pagination li {
+  cursor: pointer;
+  border-radius: 5px;
+}
+.pagination li.active {
+  background-color: #1A237E;
+}
+
+
 
 .App {
   text-align: center;

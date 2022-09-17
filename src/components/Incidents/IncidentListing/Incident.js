@@ -77,7 +77,7 @@ function Incident({incident, dispatch, getUserNameById}) {
         <td><span title= {moment(incident.CreatedAT).format("MMMM DD YYYY, h:mm:ss a")}>{moment(incident.CreatedAT).fromNow() } </span></td>
         <td><span className={dueDateClass} title= {moment(incident.DueDate).format("MMMM DD YYYY, h:mm:ss a")}>{moment(incident.DueDate).fromNow() } </span></td>
         <td >
-            <div class={"status " + statusName(incident.Status).replace(' ', '').toLowerCase() } >
+            <div className={"status " + statusName(incident.Status).replace(' ', '').toLowerCase() } >
                {statusName(incident.Status)}
             </div>
         </td>

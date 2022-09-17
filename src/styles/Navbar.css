@@ -53,10 +53,7 @@ ul.sidenav li{
     color: #1A237E;
 }
 
-.pagination li {
-    cursor: pointer;
-    border-radius: 10px;
-}
+
 
 .pagesRow {
     /* display: flex;

@@ -15,7 +15,7 @@ export default function Pages({TotalRecords, PostsPerPage, setPageNumber, setPag
     let pageIndexes = [];
     for(let i = 1; i <= Math.ceil(TotalRecords / PostsPerPage) ; i++ )
     {
-        if(i > currentPage - 3 &&  i < currentPage + 3)
+        if(i > currentPage - 2 &&  i < currentPage + 2)
         pageIndexes.push(i);        
     }
 

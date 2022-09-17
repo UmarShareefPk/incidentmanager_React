@@ -15,27 +15,29 @@ function KPIBar({getKPIData, userId, kpiData}) {
     return (  
       <div className="card">
         <div className="card-content">
-          <div className="row">
-            <KPI value={kpiData.New} text="NEW" color="new-color" />
-            <KPI value={kpiData.InProgress} text="IN PROGRESS" color="inprogress-color" />
-            <KPI value={kpiData.Closed} text="CLOSED" color="closed-color" />
-            <KPI value={kpiData.Approved} text="APPROVED" color="approved-color" />
-            <KPI value={kpiData.Late} text="LATE" color="late-color" />
-            <KPI value={kpiData.AssignedToMe} text="ASSINGED TO YOU" color="assignedToMe-color" />
-          </div>
+          <div className="kpi-bar">
+            <div className="kpi-group">
+              <KPI value={kpiData.New} text="NEW" color="new-color" />
+              <KPI value={kpiData.InProgress} text="IN PROGRESS" color="inprogress-color" />
+            </div>
+            <div className="kpi-group">
+              <KPI value={kpiData.Closed} text="CLOSED" color="closed-color" />
+              <KPI value={kpiData.Approved} text="APPROVED" color="approved-color" />
+            </div><div className="kpi-group">
+              <KPI value={kpiData.Late} text="LATE" color="late-color" />
+              <KPI value={kpiData.AssignedToMe} text="ASSINGED TO YOU" color="assignedToMe-color" />
+            </div></div>
         </div>
       </div>
     );
 }
 
 function KPI({value, text, color}) {
-  return (
-    <div className="col l2 m6 s6">
+  return (   
       <div className={"kpi " + color}  >
         <div className="kpi-value">{value}</div>
         <div className="kpi-text">{text}</div>
-      </div>
-    </div>
+      </div>   
   );
 }
 
