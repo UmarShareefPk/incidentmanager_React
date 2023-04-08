@@ -9,6 +9,7 @@ export default function User({user}) {
         <td>{user.FirstName}</td>
         <td>{user.LastName}</td>
         <td>{user.Email}</td>
+        <td>{user.Phone}</td>
         <td>
           
           <span 

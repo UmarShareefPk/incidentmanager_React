@@ -38,7 +38,7 @@ function NavBar({user_Name, loginError, token, signOut, getAllUsers, allUsers, U
           </a>
           <ul className="navbar-ul right hide-on-med-and-down">
             <li class="nav-link">     
-              <NavLink to="/incidentListing"  > 
+              <NavLink to="/incidents"  > 
               <i class="material-icons">pest_control</i>            
                  <span>Incidents </span>
               </NavLink> 
@@ -79,7 +79,7 @@ function NavBar({user_Name, loginError, token, signOut, getAllUsers, allUsers, U
             </li>
 
             <li>
-              <NavLink to="/incidentListing" className="nav-link sidenav-close  white-text">
+              <NavLink to="/incidents" className="nav-link sidenav-close  white-text">
               <i class="material-icons white-text">pest_control</i>
                 <span>Incidents</span>
               </NavLink>

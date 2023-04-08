@@ -20,6 +20,7 @@ function MostAssignedByUser({MostAssignedIncidentsData, getMostAssignedToUsers})
       }
 }, [MostAssignedIncidentsData])
 
+
    if(MostAssignedIncidentsData.length ===0 || MostAssignedIncidentsData == null )
    return (<h3>loading..</h3>);
 
@@ -112,7 +113,8 @@ function MostAssignedByUser({MostAssignedIncidentsData, getMostAssignedToUsers})
 const mapStateToProps = (state) => {        
   return{   
       userId :state.userLogin.userId,  // logged in User Id  
-      MostAssignedIncidentsData: state.dashboard.MostAssignedIncidentsData
+      MostAssignedIncidentsData: state.dashboard.MostAssignedIncidentsData,
+      
   }
 }
 

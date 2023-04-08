@@ -7,14 +7,14 @@ import {  JsonHubProtocol,
 import { commentRecieved, getAllNotifications } from "../store/actions/notificationsActions";
 import { updateHubId } from '../store/actions/userLoginActions';
 import { conversationsByUser, messagesByConversations, receiveMessage, receiveConversation } from '../store/actions/messagesActions';
-import { baseUrl } from "../api/apiURLs";
+import { baseUrl,baseUrl2 } from "../api/apiURLs";
 
   function Receiver({commentRecieved, updateHubId, userId, refreshNotifications, Conversations, conversationsByUser, Messages, messagesByConversations, receiveMessage, receiveConversation}) {
 
     useEffect(() => {   
         
         const newConnection = new HubConnectionBuilder()
-        .withUrl(baseUrl +'hubs/notifications')
+        .withUrl(baseUrl2 +'hubs/notifications')
         .withAutomaticReconnect()
         .withHubProtocol(new JsonHubProtocol())
         .configureLogging(LogLevel.Information)

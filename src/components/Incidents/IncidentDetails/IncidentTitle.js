@@ -89,13 +89,13 @@ function IncidentTitle({
           
             <span
               className="im-createTime black-text "
-              title={moment(setDateTime(incidentData.CreatedAT)).format(
+              title={moment(incidentData.CreatedAT).format(
                 "MMMM DD YYYY, h:mm:ss a"
               )}
             >
               Created by{""}
               <a className="username"> {getNameById(incidentData.CreatedBy)} </a>
-               {moment(setDateTime(incidentData.CreatedAT)).fromNow()}
+               {moment(incidentData.CreatedAT).fromNow()}
             </span>
           
         </div>

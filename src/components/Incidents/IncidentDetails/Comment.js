@@ -89,9 +89,9 @@ function Comment({
         <a className="username">{getNameById(comment.UserId)}</a> 
         <small> commented - </small>        
         <span className="comment-timestamp"
-          title={moment(setDateTime(comment.CreateDate)).format("MMMM DD YYYY, h:mm:ss a")}
+          title={moment(comment.CreateDate).format("MMMM DD YYYY, h:mm:ss a")}
         >
-           {moment(setDateTime(comment.CreateDate)).fromNow()}
+           {moment(comment.CreateDate).fromNow()}
           {/* {moment(comment.CreateDate).fromNow()} */}
         </span>
         </div>

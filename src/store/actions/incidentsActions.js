@@ -21,13 +21,19 @@ export const incidentsWithPage = (parameters) => {
               dispatch({ type: 'INCIDENTS_WITH_PAGE', data });
           })
           .catch((err)=>{    
-                   console.log(err.message);
-                   if(err.message.toLowerCase()=="request failed with status code 401")
-                         dispatch({ type: 'SIGN_OUT', data:"token invalid" });
+            try{
+              console.log(err);
+              if(err.message.toLowerCase()=="request failed with status code 401")
+                    dispatch({ type: 'SIGN_OUT', data:"token invalid" });
 
-                   const data = err.message;
-                   console.log("error:", err)
-                   dispatch({ type: 'INCIDENTS_WITH_PAGE_ERROR', data });
+              const data = err.message;
+              console.log("error:", err)
+              dispatch({ type: 'INCIDENTS_WITH_PAGE_ERROR', data });
+            }
+            catch(e){
+
+            }
+                 
           });    
     }
   }

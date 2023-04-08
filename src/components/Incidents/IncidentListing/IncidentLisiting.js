@@ -71,7 +71,7 @@ import {  useHistory  } from 'react-router-dom';
     return (
       <>
         <PageActions Title={"Incidents"} /> 
-        { loading? <h1>Loading</h1> : null}
+        { loading? <p>Loading</p> : null}
         {/* { props.TotalIncidents === 0? <h1>Zero</h1> : null} */}
         <section>
           <div className="container">
@@ -101,9 +101,9 @@ import {  useHistory  } from 'react-router-dom';
                         <tr className="header" data-target="blue">
                           <th>Title</th>
                           <th>Description</th>
-                          <th>Assigned TO</th>
+                          <th>Assigned To</th>
                           <th>Created By</th>
-                          <th>Created Date</th>
+                          <th>Created On</th>
                           <th>Due Date</th>
                           <th>Status</th>
                         </tr>

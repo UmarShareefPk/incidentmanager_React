@@ -25,7 +25,7 @@ function App(props) {
         <Switch>
           <Route exact path="/" component={Login} /> 
           <Route exact path="/dashboard" component={Dashboard} />                
-          <Route exact path="/incidentListing" component={IncidentLisiting} />  
+          <Route exact path="/incidents" component={IncidentLisiting} />  
           <Route exact path="/UsersList" component={UsersList} />    
           <Route exact path="/AddNew" component={AddNew} />  
           <Route exact path="/Incident/:id" component={IncidentDetails} />   

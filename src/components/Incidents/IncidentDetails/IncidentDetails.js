@@ -206,8 +206,8 @@ function IncidentDetails({
           </div>
 
           <div className="row">
-            <div className="col s12 l6">
-              <div className="card">
+            <div className="col s12 l8">
+              <div className="card description-card">
                 <div className="card-content">
                   <IncidentDescription type="description" />
                   <IncidentDescription type="additionaldata" />
@@ -264,7 +264,7 @@ function IncidentDetails({
               </div>
             </div>
 
-            <div className="col s12 l6   ID-dropdowns">
+            <div className="col s12 l4   ID-dropdowns">
               <div className="card">
                 <div className="card-content">
                   <table className="fields-table">

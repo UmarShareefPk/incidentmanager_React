@@ -19,11 +19,25 @@ li>a,
   vertical-align: bottom;
   font-size: 15px !important;
   margin-bottom: 3px;
+  
+}
+
+.actions-icon-title{
+  color: lightgray;
 }
 
 .actions-icon {
   cursor: pointer;
   font-size: medium;
+  color: lightgray;
+  opacity: 1;
+}
+
+.file-container .actions-icon, button .actions-icon {
+  cursor: pointer;
+  font-size: medium;
+  color: inherit;
+  opacity: 1;
 }
 
 .bigTextScroll {
@@ -69,6 +83,11 @@ span.im-createTime {
   font-size: medium;
 }
 
+/************** Description *********/
+
+.description-card{
+  min-height: 355px;
+}
 
 /************** Attachments **************/
 
@@ -79,6 +98,7 @@ span.im-createTime {
 .incident-attachment-container div.file-container {
   display: flex;
   margin-bottom: 5px;
+  margin-top: 15px;
 }
 
 .incident-attachment-container div span.file-text {
@@ -168,7 +188,7 @@ span.im-createTime {
 .username {
   /* background-color: #1A237E; */
   color: #1A237E;
-  font-size: x-small;
+  font-size: small;
   font-weight: bold;
 }
 

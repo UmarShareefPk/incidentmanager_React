@@ -3,13 +3,13 @@ import {  JsonHubProtocol,
   LogLevel
 } from '@microsoft/signalr';  /*npm i --save @microsoft/signalr */
 
-import { baseUrl } from "../api/apiURLs";
+import { baseUrl, baseUrl2 } from "../api/apiURLs";
 
 
 export   const incidentUpdatedSignalR =  (incidentId, userId) => {
 const connection = new HubConnectionBuilder()
 //.withUrl('https://localhost:44310/hubs/notifications')
-.withUrl(baseUrl + 'hubs/notifications')
+.withUrl(baseUrl2 + 'hubs/notifications')
 .withAutomaticReconnect()
 .withHubProtocol(new JsonHubProtocol())
 .configureLogging(LogLevel.Information)
@@ -33,7 +33,7 @@ connection.start().then(()=>{
 export   const sendMessageSignalR =  (conversationId, userId, newMessage, isNewConversation) => {
   const connection = new HubConnectionBuilder()
   //.withUrl('https://localhost:44310/hubs/notifications')
-  .withUrl(baseUrl + 'hubs/notifications')
+  .withUrl(baseUrl2 + 'hubs/notifications')
   .withAutomaticReconnect()
   .withHubProtocol(new JsonHubProtocol())
   .configureLogging(LogLevel.Information)

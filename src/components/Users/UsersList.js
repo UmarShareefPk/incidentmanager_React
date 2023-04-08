@@ -84,7 +84,8 @@ import {  useHistory  } from 'react-router-dom'
                         <tr className="header" data-target="blue">
                           <th>First Name</th>
                           <th>Last Name</th>
-                          <th>Email</th>                      
+                          <th>Email</th>  
+                          <th>Phone</th>                      
                           <th>Created Date</th>                     
                         </tr>
                       </thead>
