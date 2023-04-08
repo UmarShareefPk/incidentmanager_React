@@ -82,12 +82,12 @@ import logoSmall from '../../images/logoColored.png'
         <form>
           <div className="input-field">
             <i className="material-icons prefix">person</i>
-            <input type="text" id="username" onChange={(e) => setUsername(e.target.value)} />
+            <input type="text" placeholder='Username' id="username" onChange={(e) => setUsername(e.target.value)} />
             
           </div>
           <div className="input-field">
             <i className="material-icons prefix">password</i>
-            <input type="password"  id="password" onChange={(e) => setPassword(e.target.value)} />
+            <input type="password"   placeholder='Password' id="password" onChange={(e) => setPassword(e.target.value)} />
          
           </div>
           <div className="input-field hide">
