@@ -31,8 +31,8 @@ import {  useHistory  } from 'react-router-dom';
             PageNumber : PageNumber,
             PageSize : PageSize,
             Search : Search,
-            SortBy: "createdat",
-            SortDir: "dsc"           
+            SortBy: sortBy,
+            SortDir: sortDir
         }        
         setLoading(true);
         props.incidentsWithPage(parameters);
