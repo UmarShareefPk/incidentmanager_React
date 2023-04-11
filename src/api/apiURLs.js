@@ -4,8 +4,8 @@
 //export const baseUrl = "https://localhost:44310/";
 export const baseUrl = "https://imwebapicore.azurewebsites.net/";
 
-export const baseUrl2 = "https://localhost:7248/";
-//export const baseUrl2 ="https://imnet7mongodbapi.azurewebsites.net/";
+//export const baseUrl2 = "https://localhost:7248/";
+export const baseUrl2 ="https://imnet7mongodbapi.azurewebsites.net/";
 
 export const usersUrls = {
     tokenUrl : baseUrl + "token",
