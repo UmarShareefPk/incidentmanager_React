@@ -5,6 +5,12 @@
         
     }
 
+
+    table.incidentsTbl tr th{
+       cursor: pointer;
+        white-space: nowrap;
+        
+    }
    
     
     .title{

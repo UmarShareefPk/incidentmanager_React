@@ -16,6 +16,10 @@ import {  useHistory  } from 'react-router-dom';
     const [loading, setLoading] = useState(true);
     const history = useHistory();
 
+    const [sortBy, setSortBy] = useState("createdAt");
+    const [sortDir, setSortDir] = useState("desc");
+    
+
     useEffect(() => {
       props.getAllAssignees();      
     }, []);
@@ -26,7 +30,9 @@ import {  useHistory  } from 'react-router-dom';
         const parameters = {
             PageNumber : PageNumber,
             PageSize : PageSize,
-            Search : Search            
+            Search : Search,
+            SortBy: "createdat",
+            SortDir: "dsc"           
         }        
         setLoading(true);
         props.incidentsWithPage(parameters);
@@ -57,6 +63,21 @@ import {  useHistory  } from 'react-router-dom';
       }
       return user.FirstName + " " + user.LastName
     }
+
+   const sortData = (col) => {
+     const parameters = {
+       PageNumber: PageNumber,
+       PageSize: PageSize,
+       Search: Search,
+       SortBy: col,
+       SortDir: sortDir == "asc"? "dsc" : "asc"
+     }
+     props.incidentsWithPage(parameters);
+
+     setSortBy(col);
+     setSortDir(sortDir == "asc"? "dsc" : "asc")
+
+   }
 
     if(props.Error!==""){
       return (
@@ -99,13 +120,13 @@ import {  useHistory  } from 'react-router-dom';
                     <table className="responsive-table highlight incidentsTbl">
                       <thead>
                         <tr className="header" data-target="blue">
-                          <th>Title</th>
-                          <th>Description</th>
-                          <th>Assigned To</th>
-                          <th>Created By</th>
-                          <th>Created On</th>
-                          <th>Due Date</th>
-                          <th>Status</th>
+                          <th onClick={() => sortData("title")}>Title</th>
+                          <th onClick={() => sortData("Description")}>Description</th>
+                          <th onClick={() => sortData("AssignedTo")}>Assigned To</th>
+                          <th onClick={() => sortData("CreatedBy")}>Created By</th>
+                          <th onClick={() => sortData("CreatedOn")}>Created On</th>
+                          <th onClick={() => sortData("DueDate")}>Due Date</th>
+                          <th onClick={() => sortData("Status")}>Status</th>
                         </tr>
                       </thead>
                       <tbody>

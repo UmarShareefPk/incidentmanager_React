@@ -10,7 +10,7 @@ export const incidentsWithPage = (parameters) => {
         axios.defaults.headers = {'Authorization': `Bearer ${getState().userLogin.token + ""}`};
         const url = incidentsUrls.incidentsWithPageUrl +
                     "PageSize=" + parameters.PageSize +"&PageNumber=" + parameters.PageNumber 
-                    + "&SortBy=q&SortDirection=q&Search=" + parameters.Search;     
+                    + "&SortBy=" + parameters.SortBy + "&SortDirection=" + parameters.SortDir +"&Search=" + parameters.Search;     
         axios({
           method: 'GET',
           url: url,         
