@@ -125,7 +125,7 @@ font-size: small;
     margin-bottom: 10px;
 
     max-width: 70%;
-    border-radius:5%;
+    border-radius:10px;
     padding:10px 10px;
     display: flex;
     align-items: center;
