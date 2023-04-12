@@ -243,14 +243,14 @@ font-size: small;
     }
 
     .container.messages-window{
-        width: 90%;
+        /* width: 90%;
         max-width:initial;
         > .row{
             margin: 0;
             > .col{
                 padding: 0;
             }
-        }
+        } */
     }
 }
 
@@ -262,14 +262,14 @@ font-size: small;
     }
 
     .container.messages-window{
-        width: 90%;
+        /* width: 90%;
         max-width:initial;
         > .row{
             margin: 0;
             > .col{
                 padding: 0;
             }
-        }
+        } */
     }
    
 }
