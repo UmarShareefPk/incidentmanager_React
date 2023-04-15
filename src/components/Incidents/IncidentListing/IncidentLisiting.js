@@ -25,6 +25,10 @@ import {  useHistory  } from 'react-router-dom';
     }, []);
 
 
+    useEffect(() => {
+      setLoading(false);
+    }, [props.Incidents]);
+
    
     useEffect(() => {
         const parameters = {
@@ -36,7 +40,7 @@ import {  useHistory  } from 'react-router-dom';
         }        
         setLoading(true);
         props.incidentsWithPage(parameters);
-        setLoading(false);
+       
         return () => {
           cancel();        // cancel axios  
         }
@@ -72,6 +76,7 @@ import {  useHistory  } from 'react-router-dom';
        SortBy: col,
        SortDir: sortDir == "asc"? "dsc" : "asc"
      }
+     setLoading(true);
      props.incidentsWithPage(parameters);
 
      setSortBy(col);
@@ -92,9 +97,9 @@ import {  useHistory  } from 'react-router-dom';
     return (
       <>
         <PageActions Title={"Incidents"} /> 
-        { loading? <p>Loading</p> : null}
+      
         {/* { props.TotalIncidents === 0? <h1>Zero</h1> : null} */}
-        <section>
+        <section className={loading? "" : ""}>
           <div className="container">
             <div className="card">
               <div className="card-content">
@@ -120,21 +125,29 @@ import {  useHistory  } from 'react-router-dom';
                     <table className="responsive-table highlight incidentsTbl">
                       <thead>
                         <tr className="header" data-target="blue">
-                          <th onClick={() => sortData("title")}>Title</th>
+                          <th onClick={() => sortData("Title")}>Title</th>
                           <th onClick={() => sortData("Description")}>Description</th>
                           <th onClick={() => sortData("AssignedTo")}>Assigned To</th>
                           <th onClick={() => sortData("CreatedBy")}>Created By</th>
-                          <th onClick={() => sortData("CreatedOn")}>Created On</th>
+                          <th onClick={() => sortData("CreatedAT")}>Created On</th>
                           <th onClick={() => sortData("DueDate")}>Due Date</th>
                           <th onClick={() => sortData("Status")}>Status</th>
                         </tr>
                       </thead>
                       <tbody>
                         {
-                          props.Incidents.map(incident => {
-                            return (
-                              <Incident key={incident.Id} incident={incident} getUserNameById={getUserNameById} />)
-                          })
+                          loading ?
+                          <tr>
+                            <td colSpan={7}>
+                            <h5 className='center green-text'>Loading</h5> 
+                            </td>
+                          </tr> 
+                       
+                          :
+                            props.Incidents.map(incident => {
+                              return (
+                                <Incident key={incident.Id} incident={incident} getUserNameById={getUserNameById} />)
+                            })
                         }
                       </tbody>
                     </table>
