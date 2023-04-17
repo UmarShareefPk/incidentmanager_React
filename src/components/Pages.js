@@ -15,7 +15,7 @@ export default function Pages({TotalRecords, PostsPerPage, setPageNumber, setPag
     let pageIndexes = [];
     for(let i = 1; i <= Math.ceil(TotalRecords / PostsPerPage) ; i++ )
     {
-        if(i > currentPage - 2 &&  i < currentPage + 2)
+        if(i > currentPage - 3 &&  i < currentPage + 3)
         pageIndexes.push(i);        
     }
 
@@ -95,6 +95,10 @@ export default function Pages({TotalRecords, PostsPerPage, setPageNumber, setPag
                         <option value="40">40</option>
                         <option value="45">45</option>
                         <option value="50">50</option>
+                        <option value="100">100</option>
+                        <option value="200">200</option>
+                        <option value="500">500</option>
+                        <option value="1000">1000</option>
                     </select>               					
         </div>
       
