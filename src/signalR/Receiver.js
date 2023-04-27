@@ -19,7 +19,7 @@ import { baseUrl,baseUrl2 } from "../api/apiURLs";
         .withHubProtocol(new JsonHubProtocol())
         .configureLogging(LogLevel.Information)
         .build();
-        console.log("newConnection",newConnection);
+        // console.log("newConnection",newConnection);
         newConnection.start()
         .then(result => {
             console.log('Connected!');
@@ -52,6 +52,8 @@ import { baseUrl,baseUrl2 } from "../api/apiURLs";
 
         })
         .catch(e => console.log('Connection failed: ', e));
+
+     newConnection.onclose(e =>  console.log("Hub Connection Closed.", e));
      
     }, [])
 

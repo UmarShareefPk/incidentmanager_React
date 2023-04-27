@@ -12,6 +12,9 @@
         
     }
    
+    table.incidentsTbl tr:nth-of-type(2n){
+        background-color: #f4f4f4;
+    }
     
     .title{
         color:#1A237E;
@@ -32,6 +35,8 @@
 
 .tbl-description{
     width:15%;
+    cursor: pointer;
+
 }
 
 .tbl-title {
