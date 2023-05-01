@@ -5,6 +5,11 @@
   --approved-bg-color: radial-gradient(circle, rgba(58,131,68,1) 0%, rgba(45,105,56,1) 100%);
   --late-bg-color: radial-gradient(circle, rgba(199,69,65,1) 0%, rgba(153,47,55,1) 100%);
   --assignedToMe-bg-color: radial-gradient(circle, rgba(42,68,156,1) 0%, rgba(28,35,125,1) 100%);
+
+  --nav-bg:radial-gradient(circle, rgba(26,35,126,1) 0%, rgba(0,0,0,1) 100%);
+  --nav-item:#fff;
+  --table-header:#1A237E;
+  --page-title:#1A237E;
 }
 
 

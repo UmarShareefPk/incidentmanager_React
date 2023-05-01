@@ -3,7 +3,11 @@
 }
 
 .nav-wrapper{
-  background: radial-gradient(circle, rgba(26,35,126,1) 0%, rgba(0,0,0,1) 100%);
+  background: var(--nav-bg);
+}
+
+nav ul li a{
+    color: var(--nav-item);
 }
 
 nav ul li span.badge.notification-badge{
@@ -50,7 +54,7 @@ ul.sidenav li{
     /* background: linear-gradient(0deg, rgba(26,35,126,1) 25%, rgba(253,187,45,1) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent; */
-    color: #1A237E;
+    color: var(--page-title);
 }
 
 

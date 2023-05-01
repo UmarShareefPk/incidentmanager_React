@@ -9,6 +9,7 @@
     table.incidentsTbl tr th{
        cursor: pointer;
         white-space: nowrap;
+        color:var(--table-header);
         
     }
    
@@ -94,7 +95,7 @@ td .status{
 /* Computer */
 @media (min-width: 1500px) {
        .incidentsTbl th{
-           color: #1A237E;
+        
            white-space: nowrap;
            width: 14%;
        }    
